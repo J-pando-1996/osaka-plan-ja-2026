@@ -59,7 +59,30 @@ body::before {
   background: var(--header-bg); backdrop-filter: var(--glass-blur); -webkit-backdrop-filter: var(--glass-blur);
   border-bottom: 1px solid var(--glass-border); position: sticky; top: 0; z-index: 100; margin-bottom: 4px;
 }
-.tabs { display: flex; overflow-x: auto; scrollbar-width: none; padding: 12px 16px; gap: 8px; }
+.tabs { display: flex; overflow-x: auto; scrollbar-width: none; padding: 12px 16px; gap: 8px; justify-content: center;} @media (min-width: 768px) {
+  .tabs-wrap {
+    /* ทำให้ container ของ tabs ไม่ชิดขอบจอด้านซ้าย-ขวา */
+    margin: 0 20px;
+    width: auto;
+    border-radius: 40px; /* เพิ่มความโค้งมนให้สวยงาม (optional) */
+  }
+  .tabs {
+    /* เวลาจอกว้าง กำหนดความกว้างสูงสุดและให้มี margin auto อีกชั้นเพื่อความแน่ใจ */
+    max-width: calc(100% - 20px);
+    justify-content: center;
+  }
+}
+
+/* ถ้าต้องการให้จอแคบ (มือถือ) คืนค่าชิดซ้ายตามเดิม */
+@media (max-width: 767px) {
+  .tabs-wrap {
+    margin: 0; /* ชิดซ้าย */
+    border-radius: 0;
+  }
+  .tabs {
+    justify-content: flex-start; /* ให้เริ่มจากซ้าย */
+  }
+}
 .tabs::-webkit-scrollbar { display: none; }
 .tab { 
   flex-shrink: 0; padding: 10px 20px; font-size: 14px; font-weight: 600; color: var(--ink-main); cursor: pointer; border: none; 
@@ -693,6 +716,16 @@ function switchDay(idx){
   currentDay=idx; window.scrollTo({top:0,behavior:'smooth'});
   //localStorage.setItem('osaka_day',idx);
 }
+
+// ใน DOMContentLoaded:
+document.addEventListener('DOMContentLoaded', () => {
+  // ... (ส่วนอื่นๆ เหมือนเดิม)
+  
+  // แทนที่การอ่าน savedDay ด้วยการเรียก switchDay(0) เสมอ
+  switchDay(0);
+  
+  // ... (ส่วนอื่นๆ)
+});
 function scrollToTop(){ window.scrollTo({top:0,behavior:'smooth'}); }
 function toggleCheck(el){ el.classList.toggle('done'); el.querySelector('.check-box').textContent=el.classList.contains('done')?'✓':''; saveChecks(); }
 function saveChecks(){ try{ const checks=[]; document.querySelectorAll('.check-item').forEach(el=>checks.push(el.classList.contains('done'))); localStorage.setItem('osaka_checks',JSON.stringify(checks)); }catch(e){} }
@@ -720,7 +753,7 @@ document.addEventListener('touchend', e => {
     const savedTheme = localStorage.getItem('osaka_theme');
     if (savedTheme === 'dark' || (!savedTheme && window.matchMedia('(prefers-color-scheme: dark)').matches)) isDark = true;
     applyTheme();
-    const day = parseInt(localStorage.getItem('osaka_day')||'0');
+    const day = 0;
     if (day>=0 && day<TOTAL_DAYS) switchDay(day);
     const checks = JSON.parse(localStorage.getItem('osaka_checks')||'[]');
     document.querySelectorAll('.check-item').forEach((el,i)=>{ if(checks[i]){ el.classList.add('done'); el.querySelector('.check-box').textContent='✓'; } });

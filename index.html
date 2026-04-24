@@ -735,15 +735,32 @@ let ticking=false;
 document.addEventListener('scroll',()=>{ if(!ticking){ requestAnimationFrame(()=>{ document.body.style.setProperty('--parallax-y',`${-window.scrollY*0.3}px`); ticking=false; }); ticking=true; }});
 
 // Swipe Gesture
-let touchStartX=0, touchStartY=0;
-document.addEventListener('touchstart', e => { touchStartX = e.touches[0].clientX; touchStartY = e.touches[0].clientY; }, {passive: true});
+let touchStartX = 0, touchStartY = 0;
+let swipeEnabled = true;
+
+document.addEventListener('touchstart', e => {
+  // ปิด swipe ถ้า popup เปิดอยู่
+  if (document.getElementById('overlay').classList.contains('open')) {
+    swipeEnabled = false;
+    return;
+  }
+  // อนุญาตให้ swipe เฉพาะเมื่อเริ่มสัมผัสภายใน .main (บริเวณรายละเอียด plan)
+  if (e.target.closest('.main')) {
+    swipeEnabled = true;
+    touchStartX = e.touches[0].clientX;
+    touchStartY = e.touches[0].clientY;
+  } else {
+    swipeEnabled = false;
+  }
+}, {passive: true});
+
 document.addEventListener('touchend', e => {
-  if (document.getElementById('overlay').classList.contains('open')) return;
+  if (!swipeEnabled || document.getElementById('overlay').classList.contains('open')) return;
   const diffX = touchStartX - e.changedTouches[0].clientX;
   const diffY = Math.abs(touchStartY - e.changedTouches[0].clientY);
   if (Math.abs(diffX) > 50 && diffY < 30) {
-    if (diffX > 0 && currentDay < TOTAL_DAYS-1) switchDay(currentDay+1);
-    else if (diffX < 0 && currentDay > 0) switchDay(currentDay-1);
+    if (diffX > 0 && currentDay < TOTAL_DAYS-1) switchDay(currentDay + 1);
+    else if (diffX < 0 && currentDay > 0) switchDay(currentDay - 1);
   }
 }, {passive: true});
 

@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
-<title>🇯🇵 โอซาก้า 2026 · Liquid Glass</title>
+<title>🇯🇵 OSAKA 2026 · Liquid Glass</title>
 <style>
 /* --- ฟอนต์และตัวแปร --- */
 @import url('https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap');
@@ -172,8 +172,8 @@ body::before {
 
 <div class="hero">
   <div class="hero-flag">🇯🇵</div>
-  <div class="hero-title">โอซาก้า <span>2026</span></div>
-  <div class="hero-sub">16 – 21 ตุลาคม · 5 คืน 6 วัน</div>
+  <div class="hero-title">OSAKA <span>2026</span></div>
+  <div class="hero-sub">16 – 21 ตุลาคม 2026 (6 วัน 5 คืน)</div>
   <div class="info-strip">
     <div class="info-chip">✈️ Peach Aviation</div>
     <div class="info-chip">🏨 Hokke Club Osaka</div>
@@ -197,9 +197,13 @@ body::before {
 
 <!-- ================= DAY 1 ================= -->
 <div class="day-panel active" id="panel-0">
-  <div class="day-header"><div class="day-num">Day 1 🛬</div><div class="day-date">ศุกร์ 16 ตุลาคม 2026</div><div class="day-theme">KIX → Namba → Shinsaibashi → Umeda</div></div>
+  <div class="day-header"><div class="day-num">Day 1 ✈️🛬</div><div class="day-date">ศุกร์ 16 ตุลาคม 2026</div><div class="day-theme">BKK → KIX → Namba → Shinsaibashi → Umeda</div></div>
   <div class="schedule">
-    <div class="sdivider">เดินทางถึง</div>
+    <div class="sdivider">ออกเดินทางจากสุวรรณภูมิ (คืน 15 ต.ค.)</div>
+    <div class="sitem highlight" onclick="openPopup('bkk_depart')"><div class="sitem-left"><div class="sitem-icon">🏛️</div><div class="sitem-time">22:30</div></div><div class="sitem-body"><div class="sitem-main">คืน 15 ต.ค. ณ สนามบินสุวรรณภูมิ (BKK)</div><div class="sitem-sub">เช็คอินเคาน์เตอร์ Peach · Terminal อาคารผู้โดยสารหลัก</div></div><div class="sitem-right"><div class="sitem-map-icon">📍</div></div></div>
+    <div class="sitem highlight"><div class="sitem-left"><div class="sitem-icon">🛫</div><div class="sitem-time">01:15</div></div><div class="sitem-body"><div class="sitem-main">Peach MM092 ออกเดินทาง</div><div class="sitem-sub">BKK → KIX · ระยะเวลาบิน ~6 ชั่วโมง</div></div></div>
+
+    <div class="sdivider">เดินทางถึง KIX T2</div>
     <div class="sitem" onclick="openPopup('kix_arrive')"><div class="sitem-left"><div class="sitem-icon">🛬</div><div class="sitem-time">09:20</div></div><div class="sitem-body"><div class="sitem-main">KIX Terminal 2</div><div class="sitem-sub">ผ่าน ตม. และรับกระเป๋า</div></div><div class="sitem-right"><div class="sitem-map-icon">📍</div></div></div>
     <div class="sitem" onclick="openPopup('kix_shuttle')"><div class="sitem-left"><div class="sitem-icon">🚌</div><div class="sitem-time">09:35</div></div><div class="sitem-body"><div class="sitem-main">Shuttle Bus ฟรีไป T1</div><div class="sitem-sub">~10-15 นาที</div></div><div class="sitem-right"><div class="sitem-cost">ฟรี</div></div></div>
     <div class="sitem highlight" onclick="openPopup('rapit')"><div class="sitem-left"><div class="sitem-icon">🚆</div><div class="sitem-time">10:28</div></div><div class="sitem-body"><div class="sitem-main">Nankai Rapi:t → Namba</div><div class="sitem-sub">ด่วนพิเศษเข้าเมือง ~38 นาที</div></div><div class="sitem-right"><div class="sitem-cost">¥1,490</div></div></div>
@@ -269,7 +273,7 @@ body::before {
     <div class="sdivider">เข้าสวนสนุก</div>
     <div class="sitem highlight" onclick="openPopup('usj_open')"><div class="sitem-left"><div class="sitem-icon">🚪</div><div class="sitem-time">08:00</div></div><div class="sitem-body"><div class="sitem-main">ประตูเปิด (รีบวิ่ง!)</div><div class="sitem-sub">กดจอง Area Timed Entry ในแอปทันที</div></div><div class="sitem-right"><div class="sitem-map-icon">📍</div></div></div>
     
-    <div class="sitem highlight" onclick="openPopup('usj_rides')"><div class="sitem-left"><div class="sitem-icon">🎢</div><div class="sitem-time">•</div></div><div class="sitem-body"><div class="sitem-main">รายการเครื่องเล่นสุดฮิต</div><div class="sitem-sub">Mario, Harry Potter, Minions ฯลฯ</div></div><div class="sitem-right"><div class="sitem-map-icon">📄</div></div></div>
+    <div class="sitem highlight" onclick="openPopup('usj_rides')"><div class="sitem-left"><div class="sitem-icon">🎢</div><div class="sitem-time">ทั้งวัน</div></div><div class="sitem-body"><div class="sitem-main">รายการเครื่องเล่นสุดฮิต</div><div class="sitem-sub">Mario, Harry Potter, Minions ฯลฯ</div></div><div class="sitem-right"><div class="sitem-map-icon">📄</div></div></div>
     
     <div class="sitem highlight" onclick="openPopup('halloween')"><div class="sitem-left"><div class="sitem-icon">🧟</div><div class="sitem-time">18:00</div></div><div class="sitem-body"><div class="sitem-main">Halloween Horror Nights</div><div class="sitem-sub">เทศกาลซอมบี้ (รวมอยู่ในตั๋วแล้ว)</div></div></div>
     <div class="sdivider">เดินทางกลับ</div>
@@ -304,8 +308,8 @@ body::before {
   <div class="schedule">
     <div class="sdivider">ช่วงเช้า</div>
     <div class="sitem" onclick="openPopup('hotel')"><div class="sitem-left"><div class="sitem-icon">🧳</div><div class="sitem-time">08:30</div></div><div class="sitem-body"><div class="sitem-main">เช็คเอาท์ & ย้ายไป Namba</div><div class="sitem-sub">ฝากกระเป๋าที่ Nankai Namba Station</div></div></div>
-    <div class="sitem highlight" onclick="openPopup('yasaka')"><div class="sitem-left"><div class="sitem-icon">🦁</div><div class="sitem-time">09:30</div></div><div class="sitem-body"><div class="sitem-main">Namba Yasaka Shrine</div><div class="sitem-sub">ศาลเจ้าหน้าสิงโตยักษ์ ถ่ายรูปสวยมาก</div></div><div class="sitem-right"><div class="sitem-map-icon">📍</div></div></div>
-    <div class="sitem highlight" onclick="openPopup('kuromon')"><div class="sitem-left"><div class="sitem-icon">🐟</div><div class="sitem-time">10:30</div></div><div class="sitem-body"><div class="sitem-main">ตลาดคุโรมง (Kuromon)</div><div class="sitem-sub">เดินชิมอาหารทะเลสดๆ หอยเชลล์ เนื้อย่าง</div></div><div class="sitem-right"><div class="sitem-map-icon">📍</div></div></div>
+    <div class="sitem highlight" onclick="openPopup('kuromon')"><div class="sitem-left"><div class="sitem-icon">🍣</div><div class="sitem-time">09:00</div></div><div class="sitem-body"><div class="sitem-main">ตลาดคุโรมง (Kuromon)</div><div class="sitem-sub">ตลาดเปิดเช้า เดินชิมอาหารทะเลสดๆ หอยเชลล์ เนื้อย่าง</div></div><div class="sitem-right"><div class="sitem-map-icon">📍</div></div></div>
+    <div class="sitem highlight" onclick="openPopup('yasaka')"><div class="sitem-left"><div class="sitem-icon">🦁</div><div class="sitem-time">10:30</div></div><div class="sitem-body"><div class="sitem-main">Namba Yasaka Shrine</div><div class="sitem-sub">ศาลเจ้าหน้าสิงโตยักษ์ ถ่ายรูปสวยมาก</div></div><div class="sitem-right"><div class="sitem-map-icon">📍</div></div></div>
     
     <div class="sdivider">เก็บตกช้อปปิ้ง</div>
     <div class="sitem highlight" onclick="openPopup('dotonbori_last')"><div class="sitem-left"><div class="sitem-icon">🛍️</div><div class="sitem-time">13:00</div></div><div class="sitem-body"><div class="sitem-main">Dotonbori & Shinsaibashi</div><div class="sitem-sub">แวะ Don Quijote, ซื้อเครื่องสำอาง, ของฝาก</div></div><div class="sitem-right"><div class="sitem-map-icon">📍</div></div></div>
@@ -346,12 +350,11 @@ body::before {
       <div class="info-card-icon" style="background:var(--tag-gold-bg); border-color:transparent; font-size:32px;">💰</div>
       <div class="info-card-label" style="font-size: 14px;">งบประมาณโดยประมาณ (ต่อ 1 ท่าน)</div>
       <div style="margin-top:12px;">
-        <div class="budget-row"><span>ตั๋วเครื่องบิน (ไป-กลับ)</span><span>~12,000 ฿</span></div>
-        <div class="budget-row"><span>ที่พัก (5 คืน)</span><span>~7,500 ฿</span></div>
-        <div class="budget-row"><span>ค่าเดินทางรถไฟ/บัส/แท็กซี่</span><span>~3,500 ฿</span></div>
-        <div class="budget-row"><span>ค่าเข้าชม (USJ, Kaiyukan, etc.)</span><span>~6,000 ฿</span></div>
-        <div class="budget-row"><span>ค่าอาหาร 6 วัน</span><span>~7,000 ฿</span></div>
-        <div class="budget-row"><span>รวมประมาณการ (ไม่รวมช้อปปิ้ง)</span><span>~36,000 ฿</span></div>
+        <div class="budget-row" style="font-size:12px;font-weight:700;color:var(--ink-sub);text-transform:uppercase;letter-spacing:0.05em;padding-bottom:10px;"><span>รายการ</span><span style="display:flex;gap:12px;flex-shrink:0;"><span style="min-width:58px;text-align:right;">เยน (¥)</span><span style="min-width:58px;text-align:right;">บาท (฿)</span></span></div>
+        <div class="budget-row"><span>ค่าเข้าสถานที่ต่างๆ</span><span style="display:flex;gap:12px;flex-shrink:0;"><span style="min-width:58px;text-align:right;">~¥17,000</span><span style="min-width:58px;text-align:right;">~6,000</span></span></div>
+        <div class="budget-row"><span>ค่าเดินทาง</span><span style="display:flex;gap:12px;flex-shrink:0;"><span style="min-width:58px;text-align:right;">~¥10,000</span><span style="min-width:58px;text-align:right;">~3,500</span></span></div>
+        <div class="budget-row"><span>ค่ากิน / อาหาร</span><span style="display:flex;gap:12px;flex-shrink:0;"><span style="min-width:58px;text-align:right;">~¥20,000</span><span style="min-width:58px;text-align:right;">~7,000</span></span></div>
+        <div class="budget-row"><span>รวมประมาณการ</span><span style="display:flex;gap:12px;flex-shrink:0;"><span style="min-width:58px;text-align:right;">~¥47,000</span><span style="min-width:58px;text-align:right;">~16,500</span></span></div>
       </div>
     </div>
   </div>
@@ -383,6 +386,19 @@ body::before {
 <script>
 // ================= POPUP DATA (ละเอียด + ประวัติศาสตร์ + ลิงก์ Maps) =================
 const POPUPS = {
+bkk_depart: {
+  icon:"🏛️", title:"สนามบินสุวรรณภูมิ (BKK)", time:"คืน 15 ต.ค. · ถึงก่อน 23:00 น.",
+  mapUrl:"https://www.google.com/maps/search/?api=1&query=Suvarnabhumi+Airport",
+  sections:[
+    {title:"⏰ ควรถึงสนามบินกี่โมง?", type:"text", body:"เที่ยวบิน Peach MM092 ออก <strong>01:15 น. ของวันที่ 16 ต.ค.</strong> (ตีหนึ่งกว่า)<br><br>แนะนำให้ถึงสนามบินสุวรรณภูมิ <strong>ภายใน 23:00 น. ของคืน 15 ต.ค.</strong> (ก่อนออกประมาณ 2 ชั่วโมง 15 นาที) เพื่อให้มีเวลาเช็คอิน โหลดกระเป๋า และผ่านตรวจรักษาความปลอดภัยอย่างสบายใจ<br><br>⚠️ เคาน์เตอร์เช็คอิน Peach ปิดก่อนออกเดินทาง <strong>40 นาที</strong> (คือ 00:35 น.) — อย่ามาถึงดึกเกินไป!"},
+    {title:"เคาน์เตอร์ Peach ที่ไหน?", type:"text", body:"Peach Aviation ใช้ <strong>Row M</strong> ชั้น 4 อาคารผู้โดยสารระหว่างประเทศ (ประตู 6 หรือ 7) โซน Check-in สายการบิน LCC แนะนำเดินตามป้าย 'M' จากทางเข้าหลักได้เลย"},
+    {title:"สิ่งที่ต้องเตรียม", type:"lockers", items:[
+      {name:"หนังสือเดินทาง (Passport)", desc:"ตรวจสอบอายุให้มีอย่างน้อย 6 เดือน นับจากวันเดินทาง (ถึง เม.ย. 2027 อย่างน้อย)"},
+      {name:"ใบจอง E-Ticket Peach", desc:"แสดงในมือถือหรือปริ้นออกมาก็ได้ มี Booking Reference พร้อม"},
+      {name:"บัตรเครดิต/เงินสดเยน", desc:"เตรียมเงินเยนสดสักส่วนสำหรับค่ารถไฟวันแรก ¥1,490 (Rapi:t) + ค่าอื่นๆ"}
+    ]}
+  ]
+},
 kix_arrive: {
   icon:"🛬", title:"Kansai Airport (KIX)", time:"09:20 – ถึง Terminal 2",
   mapUrl:"https://www.google.com/maps/search/?api=1&query=Kansai+International+Airport+Terminal+2",
@@ -585,14 +601,14 @@ ferris: {
   ]
 },
 yasaka: {
-  icon:"🦁", title:"Namba Yasaka Shrine", time:"~09:30",
+  icon:"🦁", title:"Namba Yasaka Shrine", time:"~10:30",
   mapUrl:"https://www.google.com/maps/search/?api=1&query=Namba+Yasaka+Shrine",
   sections:[
     {title:"สิงโตกลืนกินความโชคร้าย", type:"text", body:"ศาลเจ้าชินโตขนาดเล็กที่ซ่อนตัวอยู่ในย่านที่พักอาศัย โดดเด่นด้วย <strong>เวทีรูปหัวสิงโตยักษ์ (Ema-den)</strong> สูงถึง 12 เมตร กว้าง 11 เมตร สร้างขึ้นในปี 1974 <br><br>มีความเชื่อว่าปากที่อ้ากว้างของสิงโตตัวนี้ จะช่วยกลืนกินวิญญาณชั่วร้ายและความโชคร้ายต่างๆ และดึงดูดโชคลาภด้านความสำเร็จในการสอบและชัยชนะทางธุรกิจเข้ามาแทน เป็นจุดถ่ายรูปที่ทรงพลังมาก"}
   ]
 },
 kuromon: {
-  icon:"🐟", title:"ตลาด Kuromon", time:"~10:30",
+  icon:"🐟", title:"ตลาด Kuromon", time:"~09:00",
   mapUrl:"https://www.google.com/maps/search/?api=1&query=Kuromon+Ichiba+Market",
   sections:[
     {title:"ครัวของโอซาก้า", type:"text", body:"ตลาดคุโรมง หรือ <strong>'ตลาดประตูสีดำ'</strong> มีประวัติยาวนานตั้งแต่ยุคเมจิ (ปี 1902) ชื่อตลาดมาจากประตูไม้สีดำของวัดเอ็นเมียวจิที่เคยตั้งอยู่ใกล้เคียง ที่นี่เป็นแหล่งวัตถุดิบชั้นยอดที่เชฟภัตตาคารในโอซาก้าต้องมาจับจ่ายซื้อของ"},
@@ -664,7 +680,8 @@ function switchDay(idx){
   localStorage.setItem('osaka_day',idx);
 }
 function scrollToTop(){ window.scrollTo({top:0,behavior:'smooth'}); }
-function toggleCheck(el){ el.classList.toggle('done'); el.querySelector('.check-box').textContent=el.classList.contains('done')?'✓':''; }
+function toggleCheck(el){ el.classList.toggle('done'); el.querySelector('.check-box').textContent=el.classList.contains('done')?'✓':''; saveChecks(); }
+function saveChecks(){ try{ const checks=[]; document.querySelectorAll('.check-item').forEach(el=>checks.push(el.classList.contains('done'))); localStorage.setItem('osaka_checks',JSON.stringify(checks)); }catch(e){} }
 
 // Parallax
 let ticking=false;

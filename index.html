@@ -164,8 +164,8 @@ body::before {
 .info-card-val { font-size: 15px; font-weight: 500; color: var(--ink-main); line-height: 1.5; }
 .budget-row { display: flex; justify-content: space-between; align-items: center; padding: 8px 0; border-bottom: 1px dashed var(--border); font-size: 14px;}
 .budget-row:last-child { border-bottom: none; font-weight: 600; font-size: 16px; padding-top: 12px; color: var(--ink-main);}
-.floating-ctrl { position: fixed; bottom: calc(24px + env(safe-area-inset-bottom)); right: 20px; z-index: 200; display: flex; flex-direction: column; gap: 12px; }
-.ctrl-btn { width: 52px; height: 52px; border-radius: 30px; border: 1px solid var(--glass-border); cursor: pointer; font-size: 22px; display: flex; align-items: center; justify-content: center; box-shadow: var(--glass-shadow); background: var(--glass-bg); backdrop-filter: blur(12px); color: var(--ink-main); }
+#themeBtn { position: fixed; top: 14px; right: 14px; z-index: 300; width: 44px; height: 44px; border-radius: 50%; border: 1px solid var(--glass-border); cursor: pointer; font-size: 20px; display: flex; align-items: center; justify-content: center; box-shadow: var(--glass-shadow); background: var(--glass-bg); backdrop-filter: blur(12px); color: var(--ink-main); }
+.top-btn { position: fixed; bottom: calc(20px + env(safe-area-inset-bottom)); left: 50%; transform: translateX(-50%); z-index: 200; height: 44px; padding: 0 22px; border-radius: 30px; border: 1px solid var(--glass-border); cursor: pointer; font-size: 14px; font-weight: 600; display: flex; align-items: center; gap: 6px; box-shadow: var(--glass-shadow); background: var(--glass-bg); backdrop-filter: blur(12px); color: var(--ink-main); font-family: 'Outfit','Kanit',sans-serif; white-space: nowrap; }
 </style>
 </head>
 <body>
@@ -177,6 +177,7 @@ body::before {
   <div class="info-strip">
     <div class="info-chip">✈️ Peach Aviation</div>
     <div class="info-chip">🏨 Hokke Club Osaka</div>
+    <button id="themeBtn" onclick="toggleTheme()">☀️</button>
   </div>
 </div>
 
@@ -239,6 +240,9 @@ body::before {
     
     <div class="sdivider">ช่วงบ่าย – อุเมดะ</div>
     <div class="sitem" onclick="openPopup('umeda_shop')"><div class="sitem-left"><div class="sitem-icon">🛍️</div><div class="sitem-time">14:00</div></div><div class="sitem-body"><div class="sitem-main">ช้อปปิ้งย่าน Umeda</div><div class="sitem-sub">Grand Front / LINKS / HEP Five</div></div><div class="sitem-right"><div class="sitem-map-icon">📍</div></div></div>
+
+    <div class="sdivider">เดินทางกลับ</div>
+    <div class="sitem"><div class="sitem-left"><div class="sitem-icon">🚇</div><div class="sitem-time">21:00</div></div><div class="sitem-body"><div class="sitem-main">เดินทางกลับโรงแรม</div><div class="sitem-sub">แช่ออนเซ็นคลายปวดขากัน!</div></div></div>
   </div>
 </div>
 
@@ -261,6 +265,8 @@ body::before {
     <div class="sitem"><div class="sitem-left"><div class="sitem-icon">🚆</div><div class="sitem-time">16:30</div></div><div class="sitem-body"><div class="sitem-main">Keihan → Midosuji Line</div><div class="sitem-sub">ไปลงสถานี Dobutsuen-mae</div></div><div class="sitem-right"><div class="sitem-cost">¥660</div></div></div>
     <div class="sitem highlight" onclick="openPopup('tsutenkaku')"><div class="sitem-left"><div class="sitem-icon">🗼</div><div class="sitem-time">18:00</div></div><div class="sitem-body"><div class="sitem-main">Shinsekai / Tsutenkaku</div><div class="sitem-sub">เปิดไฟนีออนยามค่ำสวยมาก</div></div><div class="sitem-right"><div class="sitem-map-icon">📍</div></div></div>
     <div class="sitem" onclick="openPopup('kushikatsu')"><div class="sitem-left"><div class="sitem-icon">🍢</div><div class="sitem-time">19:00</div></div><div class="sitem-body"><div class="sitem-main">Kushikatsu Daruma</div><div class="sitem-sub">คุชิคัตสึต้นตำรับ</div></div><div class="sitem-right"><div class="sitem-map-icon">📍</div></div></div>
+    <div class="sdivider">เดินทางกลับ</div>
+    <div class="sitem"><div class="sitem-left"><div class="sitem-icon">🚇</div><div class="sitem-time">21:00</div></div><div class="sitem-body"><div class="sitem-main">เดินทางกลับโรงแรม</div><div class="sitem-sub">แช่ออนเซ็นคลายปวดขากัน!</div></div></div>
   </div>
 </div>
 
@@ -298,6 +304,9 @@ body::before {
     <div class="sitem highlight" onclick="openPopup('kaiyukan')"><div class="sitem-left"><div class="sitem-icon">🐋</div><div class="sitem-time">13:30</div></div><div class="sitem-body"><div class="sitem-main">Osaka Aquarium Kaiyukan</div><div class="sitem-sub">ชมฉลามวาฬยักษ์ใหญ่ใจดี</div></div><div class="sitem-right"><div class="sitem-map-icon">📍</div></div></div>
     <div class="sitem highlight" onclick="openPopup('ferris')"><div class="sitem-left"><div class="sitem-icon">🎡</div><div class="sitem-time">16:30</div></div><div class="sitem-body"><div class="sitem-main">Tempozan Ferris Wheel</div><div class="sitem-sub">ชมวิวมุมสูงก่อนและหลังพระอาทิตย์ตก</div></div><div class="sitem-right"><div class="sitem-map-icon">📍</div></div></div>
     <div class="sitem"><div class="sitem-left"><div class="sitem-icon">🚇</div><div class="sitem-time">17:30</div></div><div class="sitem-body"><div class="sitem-main">กลับ Umeda / ช้อปปิ้งค่ำคืน</div></div></div>
+
+    <div class="sdivider">เดินทางกลับ</div>
+    <div class="sitem"><div class="sitem-left"><div class="sitem-icon">🚇</div><div class="sitem-time">20:00</div></div><div class="sitem-body"><div class="sitem-main">เดินทางกลับโรงแรม</div><div class="sitem-sub">แช่ออนเซ็นคลายปวดขากัน!</div></div></div>
   </div>
 </div>
 
@@ -317,7 +326,7 @@ body::before {
     <div class="sdivider">เดินทางสู่สนามบิน</div>
     <div class="sitem"><div class="sitem-left"><div class="sitem-icon">🧳</div><div class="sitem-time">15:30</div></div><div class="sitem-body"><div class="sitem-main">รับกระเป๋าคืน</div><div class="sitem-sub">สถานี Nankai Namba</div></div></div>
     <div class="sitem highlight" onclick="openPopup('rapit')"><div class="sitem-left"><div class="sitem-icon">🚆</div><div class="sitem-time">16:00</div></div><div class="sitem-body"><div class="sitem-main">Nankai Rapi:t → KIX</div><div class="sitem-sub">ตรงดิ่งสู่สนามบิน (ประมาณ 38 นาที)</div></div><div class="sitem-right"><div class="sitem-cost">¥1,490</div></div></div>
-    <div class="sitem"><div class="sitem-left"><div class="sitem-icon">🚌</div><div class="sitem-time">16:40</div></div><div class="sitem-body"><div class="sitem-main">ถึงสนามบิน KIX T1 → T2</div><div class="sitem-sub">นั่ง Shuttle Bus ข้ามไปเตรียมโหลดกระเป๋า</div></div></div>
+    <div class="sitem highlight" onclick="openPopup('kix_shuttle')"><div class="sitem-left"><div class="sitem-icon">🚌</div><div class="sitem-time">16:40</div></div><div class="sitem-body"><div class="sitem-main">ถึงสนามบิน KIX T1 → T2</div><div class="sitem-sub">นั่ง Shuttle Bus ข้ามไปเตรียมโหลดกระเป๋า</div></div><div class="sitem-right"><div class="sitem-map-icon">📍</div></div></div>
     <div class="sitem"><div class="sitem-left"><div class="sitem-icon">🛫</div><div class="sitem-time">19:30</div></div><div class="sitem-body"><div class="sitem-main">Flight MM091 Departs</div><div class="sitem-sub">เดินทางกลับไทยโดยสวัสดิภาพ ✈️</div></div></div>
   </div>
 </div>
@@ -359,8 +368,7 @@ body::before {
     </div>
   </div>
 </div>
-
-</div><!-- end main -->
+</div>
 
 <!-- POPUP BOTTOM SHEET -->
 <div class="popup-overlay" id="overlay" onclick="closeOnOverlay(event)">
@@ -378,10 +386,7 @@ body::before {
   </div>
 </div>
 
-<div class="floating-ctrl">
-  <button class="ctrl-btn" id="themeBtn" onclick="toggleTheme()">☀️</button>
-  <button class="ctrl-btn" onclick="scrollToTop()">↑</button>
-</div>
+<button class="top-btn" onclick="scrollToTop()">↑ กลับด้านบน</button>
 
 <script>
 // ================= POPUP DATA (ละเอียด + ประวัติศาสตร์ + ลิงก์ Maps) =================
@@ -408,8 +413,17 @@ kix_arrive: {
   ]
 },
 kix_shuttle: {
-  icon:"🚌", title:"Shuttle Bus T2 → Aeroplaza", time:"09:35 · ฟรี",
-  sections:[{title:"วิธีใช้", type:"text", body:"รถบัสรับส่งฟรีระหว่าง Terminal 2 และ Terminal 1 (Aeroplaza) วิ่งตลอด 24 ชั่วโมง ใช้เวลาประมาณ 10-15 นาที ลงที่ Aeroplaza แล้วเดินเชื่อมต่อไปยังสถานี Nankai Railway ได้เลยโดยไม่ต้องออกไปเจอแดดฝนภายนอก"}]
+  icon:"🚌", title:"Shuttle Bus KIX T1 ↔ T2", time:"ฟรี · ทุก 5-10 นาที",
+  sections:[
+    {title:"📍 จุดขึ้นบัส อยู่ที่ไหน?", type:"text", body:"<strong>ขาไป (T2 → T1 วันแรก):</strong> หลังออกจากโซน Arrival ของ T2 เดินออกประตูอาคาร จะเห็นป้าย <strong>Free Shuttle Bus to T1</strong> ทันที ป้ายรถอยู่ฝั่งขวามือ เดินประมาณ 1-2 นาที ไม่ต้องข้ามถนน<br><br><strong>ขากลับ (T1 → T2 วันสุดท้าย):</strong> จากสถานี Nankai ลงมาชั้น 1 ของ Aeroplaza แล้วเดินออกประตูด้านนอก จะเห็นป้าย Shuttle Bus ไปยัง T2 อยู่บริเวณ Bus Stop ด้านหน้าอาคาร"},
+    {title:"🚌 รายละเอียดรถบัส", type:"lockers", items:[
+      {name:"ลักษณะรถ", desc:"รถบัสสีขาว-ส้ม ป้ายหน้ารถเขียนว่า T1 Aeroplaza หรือ T2 ชัดเจน"},
+      {name:"ความถี่และเวลา", desc:"วิ่งทุก 5-10 นาที ตลอด 24 ชั่วโมง ไม่ต้องจองล่วงหน้า รอที่ป้ายได้เลย"},
+      {name:"ระยะเวลาเดินทาง", desc:"ประมาณ 10-15 นาที ขึ้นอยู่กับสภาพจราจรในสนามบิน"},
+      {name:"ค่าใช้จ่าย", desc:"ฟรี 100% ไม่ต้องแสดงบัตรโดยสาร ขึ้น-ลงได้เลย"}
+    ]},
+    {title:"🏢 Aeroplaza คืออะไร?", type:"text", body:"อาคารเชื่อมระหว่าง T1 กับสถานีรถไฟ Nankai เมื่อลงจากบัสให้เดินเข้าอาคาร Aeroplaza แล้วขึ้นบันไดเลื่อนไปชั้น 2 จะเชื่อมต่อกับสถานี <strong>Nankai Airport Line</strong> โดยตรง ไม่ต้องออกเจอแดดฝนเลย"}
+  ]
 },
 rapit: {
   icon:"🚆", title:"Nankai Rapi:t", time:"KIX ↔ Namba",
@@ -677,7 +691,7 @@ function switchDay(idx){
   document.querySelectorAll('.tab').forEach((t,i)=>t.classList.toggle('active',i===idx));
   document.querySelectorAll('.tab')[idx]?.scrollIntoView({behavior:'smooth',block:'nearest',inline:'center'});
   currentDay=idx; window.scrollTo({top:0,behavior:'smooth'});
-  localStorage.setItem('osaka_day',idx);
+  //localStorage.setItem('osaka_day',idx);
 }
 function scrollToTop(){ window.scrollTo({top:0,behavior:'smooth'}); }
 function toggleCheck(el){ el.classList.toggle('done'); el.querySelector('.check-box').textContent=el.classList.contains('done')?'✓':''; saveChecks(); }

@@ -566,15 +566,15 @@ bkk_depart: {
   sections:[
     {title:"⏰ ควรถึงสนามบินกี่โมง?", type:"text", body:"เที่ยวบิน Peach MM092 ออก <strong>01:15 น. ของวันที่ 16 ต.ค.</strong> (ตีหนึ่งกว่า)<br><br>แนะนำให้ถึงสนามบินสุวรรณภูมิ <strong>ภายใน 23:00 น. ของคืน 15 ต.ค.</strong> (ก่อนออกประมาณ 2 ชั่วโมง 15 นาที) เพื่อให้มีเวลาเช็คอิน โหลดกระเป๋า และผ่านตรวจรักษาความปลอดภัยอย่างสบายใจ<br><br>⚠️ เคาน์เตอร์เช็คอิน Peach ปิดก่อนออกเดินทาง <strong>40 นาที</strong> (คือ 00:35 น.) — อย่ามาถึงดึกเกินไป!"},
     {title:"🗂️ เวลาเปิด-ปิดเคาน์เตอร์ Peach MM092", type:"text", body:"เคาน์เตอร์เช็คอินเปิดก่อนออก <strong>3 ชั่วโมง</strong> คือประมาณ <strong>22:15 น. ของคืน 15 ต.ค.</strong><br>เคาน์เตอร์ปิด <strong>00:35 น.</strong> (ก่อนออก 40 นาที)<br>แนะนำไปถึงช่วง <strong>22:15–23:00 น.</strong> เพื่อหลีกเลี่ยงคิวยาว"},
-    {title:"📍 เคาน์เตอร์ Peach อยู่ที่ไหน?", type:"text", body:"สายการบิน Peach ใช้ <strong>เคาน์เตอร์แถว M หรือ N</strong> ชั้น 4 (Departure Level) อาคารผู้โดยสารระหว่างประเทศ<br><br>วิธีไปถึง: เข้าทางประตู 3–7 → ขึ้นบันไดเลื่อนหรือลิฟต์ไปชั้น 4 → เดินตามป้าย Check-in ไปทางฝั่ง <strong>Row M / N</strong> (โซน LCC ฝั่งทิศตะวันตก)"},
+    {title:"📍 เคาน์เตอร์ Peach อยู่ที่ไหน?", type:"text", body:"สายการบิน Peach ใช้ <strong>เคาน์เตอร์แถว G</strong> ชั้น 4 (Departure Level) อาคารผู้โดยสารระหว่างประเทศ<br><br>วิธีไปถึง: เข้าทางประตู 4 → เดินตามป้าย Check-in ไปทางฝั่ง <strong>Row G</strong>"},
     {title:"🛍️ ร้านน่าแวะในสนามบิน", type:"lockers", items:[
       {name:"King Power Duty Free (ชั้น 4)", desc:"ร้านใหญ่ที่สุด ขายน้ำหอม เครื่องสำอาง สุรา ช็อคโกแลต เปิดตลอด 24 ชั่วโมง แวะเลือกของฝากหลังผ่าน Immigration ได้เลย"},
       {name:"After You Dessert Café / MK / S&P", desc:"ร้านอาหารฝั่ง Airside (หลัง Security) เปิดถึงดึก เหมาะนั่งรอขึ้นเครื่องช่วง 23:00–01:00 น."},
-      {name:"7-Eleven Airside", desc:"เติมน้ำ ขนม หรือซื้อ SIM Card ได้ มีทั้งโซน Check-in และหลัง Security"}
+      {name:"7-Eleven Airside", desc:"เติมน้ำ ขนม มีทั้งโซน Check-in และหลัง Security"}
     ]},
     {title:"สิ่งที่ต้องเตรียม", type:"lockers", items:[
       {name:"หนังสือเดินทาง (Passport)", desc:"ตรวจสอบอายุให้มีอย่างน้อย 6 เดือน นับจากวันเดินทาง (ถึง เม.ย. 2027 อย่างน้อย)"},
-      {name:"E-Ticket Peach MM092", desc:"แสดงในมือถือหรือปริ้นออกมา มี Booking Reference พร้อม"},
+      {name:"Ticket Peach MM092", desc:"แสดงตั๋วรหัสการจอง 5VE7P7 ที่ได้ทำการจองมาจาก Application Peach air"},
       {name:"เงินเยนสด", desc:"เตรียมไว้สำหรับค่ารถไฟวันแรก ¥1,490 (Rapi:t) + ค่าอื่นๆ ยังซื้อเยนที่สนามบินได้ก่อนออกเดินทาง"}
     ]}
   ]
@@ -951,7 +951,7 @@ function openPopup(key) {
     btn.href = d.mapUrl;
     btn.target = '_blank';
     btn.className = 'btn-map';
-    btn.innerHTML = '🗺️ เปิด Google Maps';
+    btn.innerHTML = '🗺️ Google Maps';
     body.appendChild(btn);
   }
 

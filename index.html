@@ -275,9 +275,12 @@ body::before {
 <div class="day-panel active" id="panel-0">
   <div class="day-header"><div class="day-num">Day 1 🛬</div><div class="day-date">ศุกร์ 16 ตุลาคม 2026</div><div class="day-theme">KIX → Namba → Shinsaibashi → Umeda</div></div>
   <div class="schedule">
-    <div class="sdivider">เดินทางถึง</div>
+    <div class="sdivider">ออกเดินทางจากสุวรรณภูมิ (คืน 15 ต.ค.)</div>
+    <div class="sitem highlight" onclick="openPopup('bkk_depart')"><div class="sitem-left"><div class="sitem-icon">🏛️</div><div class="sitem-time">22:30</div></div><div class="sitem-body"><div class="sitem-main">คืน 15 ต.ค. ณ สนามบินสุวรรณภูมิ (BKK)</div><div class="sitem-sub">เช็คอินเคาน์เตอร์ Peach · Terminal อาคารผู้โดยสารหลัก</div></div><div class="sitem-right"><div class="sitem-map-icon">📍</div></div></div>
+    <div class="sitem highlight"><div class="sitem-left"><div class="sitem-icon">🛫</div><div class="sitem-time">01:15</div></div><div class="sitem-body"><div class="sitem-main">Peach MM092 ออกเดินทาง</div><div class="sitem-sub">BKK → KIX · ระยะเวลาบิน ~6 ชั่วโมง</div></div></div>
+    <div class="sdivider">เดินทางถึง KIX T2</div>
     <div class="sitem" onclick="openPopup('kix_arrive')"><div class="sitem-left"><div class="sitem-icon">🛬</div><div class="sitem-time">09:20</div></div><div class="sitem-body"><div class="sitem-main">KIX Terminal 2</div><div class="sitem-sub">ผ่าน ตม. และรับกระเป๋า</div></div><div class="sitem-right"><div class="sitem-map-icon">📍</div></div></div>
-    <div class="sitem" onclick="openPopup('kix_shuttle')"><div class="sitem-left"><div class="sitem-icon">🚌</div><div class="sitem-time">10:10</div></div><div class="sitem-body"><div class="sitem-main">Shuttle Bus ฟรีไป T1</div><div class="sitem-sub">ข้ามไป Terminal 1 เพื่อขึ้นรถไฟ</div></div><div class="sitem-right"><div class="sitem-cost">ฟรี</div></div></div>
+    <div class="sitem" onclick="openPopup('kix_shuttle_in')"><div class="sitem-left"><div class="sitem-icon">🚌</div><div class="sitem-time">10:10</div></div><div class="sitem-body"><div class="sitem-main">Shuttle Bus ฟรีไป T1</div><div class="sitem-sub">ข้ามไป Terminal 1 เพื่อขึ้นรถไฟ</div></div><div class="sitem-right"><div class="sitem-cost">ฟรี</div></div></div>
     <div class="sitem highlight" onclick="openPopup('rapit')"><div class="sitem-left"><div class="sitem-icon">🚆</div><div class="sitem-time">10:45</div></div><div class="sitem-body"><div class="sitem-main">Nankai Rapi:t → Namba</div><div class="sitem-sub">ด่วนพิเศษเข้าเมือง</div></div><div class="sitem-right"><div class="sitem-cost">¥1,490</div></div></div>
     <div class="sdivider">เที่ยง - ย่าน Namba</div>
     <div class="sitem"><div class="sitem-left"><div class="sitem-icon">🚉</div><div class="sitem-time">11:25</div></div><div class="sitem-body"><div class="sitem-main">ถึง Namba</div><div class="sitem-sub">เตรียมเที่ยวใจกลางเมือง</div></div></div>
@@ -395,8 +398,8 @@ body::before {
     <div class="sitem highlight" onclick="openPopup('haruka')"><div class="sitem-left"><div class="sitem-icon">🚆</div><div class="sitem-time">14:30</div></div><div class="sitem-body"><div class="sitem-main">JR Haruka Ltd. Express</div><div class="sitem-sub">นั่งตรงจาก Osaka Sta. ถึงสนามบินเลย!</div></div><div class="sitem-right"><div class="sitem-map-icon">📍</div></div></div>
     <div class="sdivider">สนามบินคันไซ</div>
     <div class="sitem"><div class="sitem-left"><div class="sitem-icon">🛬</div><div class="sitem-time">15:20</div></div><div class="sitem-body"><div class="sitem-main">ถึงสนามบินคันไซ</div><div class="sitem-sub">นั่งรถบัสเชื่อมไป Terminal 2</div></div></div>
-    <div class="sitem"><div class="sitem-left"><div class="sitem-icon">✅</div><div class="sitem-time">15:40</div></div><div class="sitem-body"><div class="sitem-main">เช็คอินสบาย ๆ</div><div class="sitem-sub">ยังมีเวลาเหลือเดินเล่นในสนามบิน</div></div></div>
-    <div class="sitem highlight" onclick="openPopup('bkk_depart')"><div class="sitem-left"><div class="sitem-icon">🛫</div><div class="sitem-time">19:30</div></div><div class="sitem-body"><div class="sitem-main">บินกลับไทย (Peach MM091)</div><div class="sitem-sub">ถึงสุวรรณภูมิเวลา 23:55 น.</div></div></div>
+    <div class="sitem highlight" onclick="openPopup('kix_shuttle_out')"><div class="sitem-left"><div class="sitem-icon">🚌</div><div class="sitem-time">16:40</div></div><div class="sitem-body"><div class="sitem-main">ถึงสนามบิน KIX T1 → T2</div><div class="sitem-sub">นั่ง Shuttle Bus ข้ามไปเตรียมโหลดกระเป๋า</div></div><div class="sitem-right"><div class="sitem-map-icon">📍</div></div></div>
+    <div class="sitem"><div class="sitem-left"><div class="sitem-icon">🛫</div><div class="sitem-time">19:30</div></div><div class="sitem-body"><div class="sitem-main">Flight MM091 Departs</div><div class="sitem-sub">เดินทางกลับไทยโดยสวัสดิภาพ ✈️</div></div></div>
   </div>
 </div>
 
@@ -493,7 +496,7 @@ const POPUPS = {
     ]
   },
 
-  kix_shuttle: {
+  kix_shuttle_in: {
     icon:"🚌", title:"Shuttle Bus ฟรี · T2 → T1", time:"ฟรี · ทุก 5-10 นาที",
     sections:[
       {title:"📍 จุดขึ้นบัส", type:"text", body:"หลังออกจากโซน Arrival ของ T2 เดินออกประตูอาคารฝั่งนอก จะเห็นป้าย <strong>Free Shuttle Bus to T1</strong> ทันที อยู่ <strong>ฝั่งขวามือ</strong> เดินประมาณ 1-2 นาที"},
@@ -505,6 +508,22 @@ const POPUPS = {
       {title:"🏢 ปลายทาง: Aeroplaza", type:"text", body:"อาคารเชื่อมระหว่าง T1 กับสถานีรถไฟ Nankai เมื่อลงจากบัสให้เดินเข้าอาคาร Aeroplaza แล้วขึ้นบันไดเลื่อนไปชั้น 2 จะเชื่อมต่อกับสถานี <strong>Nankai Airport Line</strong> โดยตรง"}
     ]
   },
+  kix_shuttle_out: {
+  icon:"🚌", title:"Shuttle Bus ขาออก · T1 → T2", time:"Day 6 · ฟรี · ทุก 5-10 นาที",
+  sections:[
+    {title:"📍 จุดขึ้นบัส (T1 → T2)", type:"text", body:"จากสถานี Nankai ที่ Aeroplaza ให้ลงมาชั้น 1 แล้วเดินออกประตูด้านนอกอาคาร จะเห็นป้าย <strong>Shuttle Bus to T2</strong> อยู่บริเวณ Bus Stop ด้านหน้าอาคาร<br><br>⚠️ เที่ยวบิน MM091 ออก <strong>19:30 น.</strong> — ควรถึง T2 ก่อน <strong>17:30 น.</strong> เพื่อเช็คอินและโหลดกระเป๋าอย่างสบายใจ"},
+    {title:"🚌 รายละเอียดรถบัส", type:"lockers", items:[
+      {name:"ลักษณะรถ", desc:"รถบัสสีขาว-ส้ม ป้ายหน้ารถเขียนว่า T2 ชัดเจน"},
+      {name:"ความถี่", desc:"วิ่งทุก 5-10 นาที ตลอด 24 ชั่วโมง ไม่ต้องจองล่วงหน้า"},
+      {name:"ระยะเวลา / ค่าใช้จ่าย", desc:"ประมาณ 10-15 นาที · ฟรี 100%"}
+    ]},
+    {title:"✅ Checklist ก่อนโหลดกระเป๋า", type:"lockers", items:[
+      {name:"ของเหลว / aerosol", desc:"ต้องอยู่ใน checked baggage ทั้งหมด หากเกิน 100ml ไม่สามารถนำขึ้นเครื่องได้"},
+      {name:"Tax Refund", desc:"ทำคืนภาษีที่เคาน์เตอร์ Tax Refund ใน T2 ก่อนผ่าน Immigration"},
+      {name:"Peach Counter T2", desc:"เคาน์เตอร์ Peach ปิดก่อนออก 40 นาที (18:50 น.) — อย่ามาช้า!"}
+    ]}
+  ]
+},
 
   rapit: {
     icon:"🚆", title:"Nankai Rapi:t", time:"KIX ↔ Namba · ~38 นาที",

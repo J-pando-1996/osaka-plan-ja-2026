@@ -2,1159 +2,938 @@
 <html lang="th">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-<title>Geneus DNA — Event POS</title>
-<link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@300;400;600;700;800&family=Montserrat:wght@700;900&display=swap" rel="stylesheet">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
-<script src="https://unpkg.com/html5-qrcode" type="text/javascript"></script>
-
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+<title>🇯🇵 OSAKA 2026 Trip Planning</title>
 <style>
+@import url('https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap');
 :root {
-  --bg: #f4f7f6;
-  --card: #ffffff;
-  --card2: #f8fafc;
-  --border: #e2e8f0;
-  --accent: #059669;
-  --accent2: #2563eb;
-  --gold: #d97706;
-  --danger: #dc2626;
-  --text: #1e293b;
-  --muted: #64748b;
-  --tag-dog-bg: #e0f2fe; --tag-dog: #0284c7;
-  --tag-std-bg: #dcfce7; --tag-std: #15803d;
-  --tag-prem-bg: #fae8ff; --tag-prem: #a21caf;
-  --tag-premex-bg: #fef3c7; --tag-premex: #b45309;
-  --tag-plus-bg: #ffedd5; --tag-plus: #c2410c;
+  --bg-main: #f5f5fa; --bg-card: rgba(255,255,255,0.55); --ink-main: #1c1c1e; --ink-sub: #6c6c70;
+  --border: rgba(255,255,255,0.7); --overlay: rgba(0,0,0,0.3); --header-bg: rgba(245,245,250,0.72);
+  --jp-red: #ff3b30; --jp-blue: #007aff; --jp-green: #34c759; --jp-gold: #ff9500;
+  --tag-red-bg: rgba(255,59,48,0.12);   --tag-red-text: #c41e1a;
+  --tag-gold-bg: rgba(255,149,0,0.12);  --tag-gold-text: #b25f00;
+  --tag-blue-bg: rgba(0,122,255,0.12);  --tag-blue-text: #004ea8;
+  --tag-green-bg: rgba(52,199,89,0.12); --tag-green-text: #1f7b3e;
+  --glass-bg: rgba(255,255,255,0.45); --glass-border: rgba(255,255,255,0.6);
+  --glass-blur: blur(24px) saturate(180%); --glass-shadow: 0 12px 32px -8px rgba(0,0,0,0.12);
+  --radius-sm: 18px; --radius-md: 24px; --radius-lg: 32px;
 }
-* { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
-body { background: var(--bg); color: var(--text); font-family: 'Sarabun', sans-serif; font-size: clamp(14px, 2vw, 16px); padding-bottom: 80px; }
+[data-theme="dark"] {
+  --bg-main: #0b0c0e; --bg-card: rgba(28,28,30,0.55); --ink-main: #f5f5f7; --ink-sub: #98989d;
+  --border: rgba(255,255,255,0.12); --overlay: rgba(0,0,0,0.65); --header-bg: rgba(11,12,14,0.72);
+  --jp-red: #ff453a; --jp-blue: #0a84ff; --jp-green: #32d74b; --jp-gold: #ffd60a;
+  --tag-red-bg: rgba(255,69,58,0.16);   --tag-red-text: #ff6961;
+  --tag-gold-bg: rgba(255,214,10,0.16); --tag-gold-text: #ffd60a;
+  --tag-blue-bg: rgba(10,132,255,0.16); --tag-blue-text: #64d2ff;
+  --tag-green-bg: rgba(50,215,75,0.16); --tag-green-text: #30d158;
+  --glass-bg: rgba(28,28,30,0.55); --glass-border: rgba(255,255,255,0.08);
+  --glass-blur: blur(24px) saturate(140%); --glass-shadow: 0 12px 32px -8px rgba(0,0,0,0.5);
+}
 
-.header { text-align: center; padding: 12px 16px; background: var(--card); position: sticky; top: 0; z-index: 10; border-bottom: 1px solid var(--border); box-shadow: 0 2px 10px rgba(0,0,0,0.03); }
-.header img.logo { max-height: 45px; width: auto; display: block; margin: 0 auto; }
-.header p { color: var(--muted); margin-top: 6px; font-size: 11px; font-weight: 700; }
+* { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent;
+    transition: background-color 0.3s, color 0.2s, border-color 0.2s; }
+body {
+  font-family: 'Outfit', 'Kanit', sans-serif; background: var(--bg-main); color: var(--ink-main);
+  min-height: 100vh; font-size: 15px; line-height: 1.5; -webkit-font-smoothing: antialiased;
+  padding-bottom: env(safe-area-inset-bottom); position: relative; overflow-x: hidden;
+}
+body::before {
+  content: ''; position: fixed; inset: 0; z-index: -1;
+  background: radial-gradient(circle at 30% 20%, #f0e6ff, #e2d9ff, #d9e6ff);
+  opacity: 0.7; transform: translateY(var(--parallax-y, 0));
+  filter: var(--dynamic-blur, blur(14px)); transition: filter 0.1s; pointer-events: none;
+}
+[data-theme="dark"] body::before {
+  background: radial-gradient(circle at 30% 20%, #2a1e3c, #1a1a2e, #0b0c1a); opacity: 0.8;
+}
 
-.tab-container { display: flex; background: var(--card); border-bottom: 1px solid var(--border); overflow-x: auto; white-space: nowrap; scrollbar-width: none; }
-.tab-container::-webkit-scrollbar { display: none; }
-.tab-btn { flex: 1; min-width: 100px; padding: 14px 8px; background: transparent; border: none; color: var(--muted); font-family: 'Sarabun', sans-serif; font-size: clamp(13px, 2.5vw, 15px); font-weight: 700; cursor: pointer; transition: 0.2s; border-bottom: 3px solid transparent; }
-.tab-btn.active { color: var(--accent); border-bottom: 3px solid var(--accent); background: rgba(5, 150, 105, 0.05); }
+.hero {
+  background: var(--glass-bg); backdrop-filter: var(--glass-blur); -webkit-backdrop-filter: var(--glass-blur);
+  padding: calc(44px + env(safe-area-inset-top)) 24px 28px;
+  border-bottom: 1px solid var(--glass-border); text-align: center; margin-bottom: 4px;
+  transform-origin: top;
+  transition: opacity 0.3s ease, max-height 0.4s ease, padding 0.3s ease;
+  overflow: hidden;
+}
+.hero.hidden { transform: scaleY(0); opacity: 0; padding-top: 0; padding-bottom: 0; pointer-events: none; }
+.hero-flag { font-size: 44px; margin-bottom: 12px; filter: drop-shadow(0 4px 8px rgba(0,0,0,0.1)); }
+.hero-title { font-family: 'Outfit', 'Kanit', sans-serif; font-size: 38px; font-weight: 800;
+  letter-spacing: -0.02em; line-height: 1.1; margin-bottom: 8px; color: var(--ink-main); }
+.hero-title span { color: var(--jp-red); }
+.hero-sub { font-size: 16px; color: var(--ink-sub); margin-bottom: 20px; font-weight: 500; }
+.info-strip { display: flex; gap: 8px; flex-wrap: wrap; justify-content: center; }
+.info-chip {
+  background: var(--glass-bg); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
+  border-radius: 30px; padding: 8px 18px; font-size: 13px; font-weight: 500; color: var(--ink-main);
+  display: flex; align-items: center; gap: 6px; border: 1px solid var(--glass-border);
+}
 
-.content { padding: 16px; display: none; }
-.content.active { display: block; animation: fadeIn 0.3s ease; }
-@keyframes fadeIn { from { opacity: 0; transform: translateY(5px); } to { opacity: 1; transform: translateY(0); } }
+.tabs-wrap {
+  background: var(--header-bg); backdrop-filter: var(--glass-blur); -webkit-backdrop-filter: var(--glass-blur);
+  border-bottom: 1px solid var(--glass-border);
+  position: sticky; top: 0; z-index: 100; margin-bottom: 4px;
+}
+@media (min-width: 768px) {
+  .tabs-wrap { margin: 0 20px; width: auto; border-radius: 40px; }
+  .tabs { max-width: calc(100% - 20px); justify-content: center; }
+}
+@media (max-width: 767px) {
+  .tabs-wrap { margin: 0; border-radius: 0; }
+  .tabs { justify-content: flex-start; }
+}
+.tabs-inner-wrap { overflow-x: auto; scrollbar-width: none; -webkit-overflow-scrolling: touch; }
+.tabs-inner-wrap::-webkit-scrollbar { display: none; }
+.tabs { display: flex; width: max-content; margin: 0 auto; padding: 12px 16px; gap: 8px; }
+.tabs::-webkit-scrollbar { display: none; }
+.tab {
+  flex-shrink: 0; padding: 10px 20px; font-size: 14px; font-weight: 600; color: var(--ink-main);
+  cursor: pointer; border: none; background: var(--glass-bg); backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px); border-radius: 30px; border: 1px solid var(--glass-border);
+  display: flex; flex-direction: column; align-items: center;
+  font-family: 'Outfit', 'Kanit', sans-serif; box-shadow: 0 4px 12px rgba(0,0,0,0.04);
+}
+.tab.active { background: var(--ink-main); color: var(--bg-main); border-color: transparent; box-shadow: 0 8px 20px rgba(0,0,0,0.2); }
+.tab-day { font-size: 11px; opacity: 0.9; font-weight: 400; margin-top: 2px; }
 
-.pkg-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 10px; margin-bottom: 16px; }
-.pkg-btn { border-radius: 12px; padding: 12px 8px; cursor: pointer; font-family: 'Sarabun', sans-serif; border: 2px solid; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4px; transition: all 0.1s; position: relative; background: var(--card); text-align: center; min-height: 90px; box-shadow: 0 2px 5px rgba(0,0,0,0.02); }
-.pkg-btn:active { transform: scale(0.97); }
-.pkg-btn .btn-name { font-size: clamp(13px, 2vw, 16px); font-weight: 800; }
-.pkg-btn .btn-reg { font-size: 11px; text-decoration: line-through; opacity: 0.6; }
-.pkg-btn .btn-price { font-size: clamp(15px, 2.5vw, 18px); font-weight: 800; }
-.pkg-qty-ctrl { position: absolute; bottom: -14px; left: 50%; transform: translateX(-50%); display: flex; align-items: center; background: var(--card); border: 1px solid var(--accent); border-radius: 20px; padding: 2px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); z-index: 10; }
-.pkg-qty-ctrl div { width: 28px; height: 28px; display: flex; align-items: center; justify-content: center; font-weight: 900; cursor: pointer; border-radius: 50%; user-select: none; }
-.pkg-qty-ctrl .ctrl-minus { background: #fee2e2; color: var(--danger); font-size: 18px; }
-.pkg-qty-ctrl .ctrl-plus { background: var(--accent); color: #ffffff; font-size: 18px; }
-.pkg-qty-ctrl .ctrl-val { width: 32px; font-size: 15px; color: var(--text); cursor: default; }
+.main { max-width: 600px; margin: 0 auto; padding: 20px 20px 120px; -webkit-overflow-scrolling: touch; }
+.day-panel { display: none; }
+.day-panel.active { display: block; animation: slideUp 0.3s cubic-bezier(0.16, 1, 0.3, 1); }
+@keyframes slideUp { from { opacity: 0; transform: translateY(18px); } to { opacity: 1; transform: translateY(0); } }
 
-.pkg-btn[data-id="dog"]    { color: var(--tag-dog);    border-color: rgba(2, 132, 199, 0.2); }
-.pkg-btn[data-id="std"]    { color: var(--tag-std);    border-color: rgba(21, 128, 61, 0.2); }
-.pkg-btn[data-id="prem"]   { color: var(--tag-prem);   border-color: rgba(162, 28, 175, 0.2); }
-.pkg-btn[data-id="premex"] { color: var(--tag-premex); border-color: rgba(180, 83, 9, 0.2); }
-.pkg-btn[data-id="plus"]   { color: var(--tag-plus);   border-color: rgba(194, 65, 12, 0.2); }
+.day-header { margin-bottom: 20px; padding: 0 4px; }
+.day-num { font-family: 'Outfit', sans-serif; font-size: 15px; font-weight: 800; color: var(--ink-sub);
+  text-transform: uppercase; margin-bottom: 4px; letter-spacing: 0.05em; }
+.day-date { font-size: 22px; font-weight: 600; color: var(--ink-main); line-height: 1.3; }
+.day-theme { font-size: 14px; color: var(--ink-sub); margin-top: 4px; }
 
-.pkg-btn.selected[data-id="dog"]    { background: var(--tag-dog-bg);    border-color: var(--tag-dog); }
-.pkg-btn.selected[data-id="std"]    { background: var(--tag-std-bg);    border-color: var(--tag-std); }
-.pkg-btn.selected[data-id="prem"]   { background: var(--tag-prem-bg);   border-color: var(--tag-prem); }
-.pkg-btn.selected[data-id="premex"] { background: var(--tag-premex-bg); border-color: var(--tag-premex); }
-.pkg-btn.selected[data-id="plus"]   { background: var(--tag-plus-bg);   border-color: var(--tag-plus); }
+.notice {
+  display: flex; gap: 12px; align-items: flex-start; padding: 16px 18px;
+  border-radius: var(--radius-md); font-size: 14px; margin-bottom: 20px; line-height: 1.5;
+  background: var(--glass-bg); backdrop-filter: var(--glass-blur); -webkit-backdrop-filter: var(--glass-blur);
+  border: 1px solid var(--glass-border); box-shadow: var(--glass-shadow);
+}
+.notice-icon { font-size: 20px; }
 
-.switch { position: relative; display: inline-block; width: 36px; height: 20px; margin-right: 8px; flex-shrink: 0; }
-.switch input { opacity: 0; width: 0; height: 0; }
-.slider { position: absolute; cursor: pointer; top: 0; left: 0; right: 0; bottom: 0; background-color: #cbd5e1; transition: .4s; border-radius: 20px; }
-.slider:before { position: absolute; content: ""; height: 14px; width: 14px; left: 3px; bottom: 3px; background-color: white; transition: .4s; border-radius: 50%; }
-input:checked + .slider { background-color: var(--accent); }
-input:checked + .slider:before { transform: translateX(16px); }
+.schedule { display: flex; flex-direction: column; gap: 12px; }
+.sitem {
+  display: flex; align-items: center; background: var(--bg-card);
+  backdrop-filter: var(--glass-blur); -webkit-backdrop-filter: var(--glass-blur);
+  border-radius: var(--radius-md); border: 1px solid var(--glass-border);
+  box-shadow: var(--glass-shadow); padding: 16px; gap: 14px; cursor: pointer;
+  transition: transform 0.2s, box-shadow 0.3s, background 0.3s; will-change: transform;
+}
+.sitem.highlight { background: rgba(255,255,255,0.7); }
+[data-theme="dark"] .sitem.highlight { background: rgba(50,50,55,0.6); }
+.sitem:active { transition: transform 0.05s; transform: scale(0.97); }
 
-.calc-result { background: var(--card); border: 1px solid var(--border); border-radius: 14px; padding: 16px; box-shadow: 0 4px 20px rgba(0,0,0,0.04); margin-bottom: 20px; }
-.calc-empty { color: var(--muted); font-size: 14px; text-align: center; padding: 20px 0; }
+.sitem-left { display: flex; flex-direction: column; align-items: center; justify-content: center; width: 52px; flex-shrink: 0; }
+.sitem-time { font-family: 'Outfit', sans-serif; font-size: 14px; font-weight: 700; color: var(--ink-main); margin-bottom: 4px; text-align: center; }
+.sitem-icon { font-size: 24px; background: var(--glass-bg); width: 44px; height: 44px; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center; border: 1px solid var(--glass-border); backdrop-filter: blur(4px); }
+.sitem-body { flex: 1; display: flex; flex-direction: column; gap: 2px; }
+.sitem-main { font-size: 16px; font-weight: 500; color: var(--ink-main); line-height: 1.4; }
+.sitem-sub { font-size: 13px; color: var(--ink-sub); line-height: 1.4; }
+.sitem-right { display: flex; flex-direction: column; align-items: flex-end; gap: 6px; flex-shrink: 0; }
+.sitem-cost { font-size: 12px; font-weight: 600; font-family: 'Outfit', sans-serif; color: var(--ink-main);
+  background: var(--glass-bg); border: 1px solid var(--glass-border); padding: 5px 10px; border-radius: 20px; }
+.sitem-map-icon { font-size: 18px; opacity: 0.6; padding: 4px; }
 
-.summary-row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; font-size: 14px; }
-.summary-row.reg { color: var(--muted); }
-.summary-row.reg .val { text-decoration: line-through; }
-.summary-row.event { color: var(--text); font-weight: 600; }
-.summary-row.discount { color: var(--gold); font-weight: 700; background: #fffbeb; padding: 6px 10px; border-radius: 8px; margin: 10px 0; }
-.summary-row.gift { color: var(--accent); font-weight: 700; background: #ecfdf5; padding: 8px 10px; border-radius: 8px; margin: 10px 0; border: 1px solid #a7f3d0; }
-.summary-row.final { border-top: 1px dashed var(--border); padding-top: 14px; margin-top: 6px; font-size: 20px; color: var(--accent); font-weight: 900; }
+.sdivider { display: flex; align-items: center; gap: 12px; margin: 24px 0 10px;
+  font-size: 12px; font-weight: 600; color: var(--ink-sub); text-transform: uppercase; letter-spacing: 0.06em; }
+.sdivider::before, .sdivider::after { content: ''; flex: 1; height: 1px; background: var(--border); }
 
-.checkout-form { border-top: 2px solid var(--border); margin-top: 16px; padding-top: 16px; }
-.form-group { margin-bottom: 12px; }
-.form-row-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
-.form-group label { display: block; font-size: 13px; font-weight: 700; color: var(--muted); margin-bottom: 6px; }
-.form-input { width: 100%; padding: 12px; border-radius: 8px; border: 1px solid var(--border); background: var(--bg); color: var(--text); font-family: 'Sarabun', sans-serif; font-size: 14px; outline: none; transition: 0.2s; color-scheme: light; }
-.form-input:focus { border-color: var(--accent); box-shadow: 0 0 0 2px rgba(5,150,105,0.2); }
+.popup-overlay { position: fixed; inset: 0; background: var(--overlay); z-index: 500;
+  display: flex; align-items: flex-end; justify-content: center;
+  opacity: 0; pointer-events: none; backdrop-filter: blur(8px); }
+.popup-overlay.open { opacity: 1; pointer-events: all; }
+.popup {
+  background: rgba(255,255,255,0.96); border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+  width: 100%; max-width: 600px; max-height: 85vh;
+  overflow-y: auto; -webkit-overflow-scrolling: touch;
+  transform: translateY(100%); transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  padding-bottom: calc(24px + env(safe-area-inset-bottom));
+  box-shadow: 0 -10px 40px rgba(0,0,0,0.2); border: 1px solid var(--glass-border); border-bottom: none;
+}
+[data-theme="dark"] .popup { background: rgba(20,20,22,0.96); }
+.popup-overlay.open .popup { transform: translateY(0); }
+.popup-handle { width: 40px; height: 5px; background: var(--ink-sub); opacity: 0.4; border-radius: 3px; margin: 12px auto 16px; }
+.popup-header { padding: 0 24px 20px; border-bottom: 1px solid var(--border); display: flex; align-items: flex-start; gap: 16px; }
+.popup-icon { font-size: 34px; background: var(--glass-bg); width: 60px; height: 60px; border-radius: 20px;
+  display: flex; align-items: center; justify-content: center; border: 1px solid var(--glass-border); }
+.popup-title-wrap { flex: 1; align-self: center; }
+.popup-title { font-size: 20px; font-weight: 600; color: var(--ink-main); }
+.popup-time { font-family: 'Outfit', 'Kanit', sans-serif; font-size: 15px; color: var(--ink-sub); margin-top: 4px; font-weight: 500; }
+.popup-close { background: var(--glass-bg); border: 1px solid var(--glass-border); color: var(--ink-main);
+  width: 36px; height: 36px; border-radius: 50%; cursor: pointer; font-size: 16px;
+  display: flex; align-items: center; justify-content: center; }
+.popup-body { padding: 24px; display: flex; flex-direction: column; gap: 24px; }
+.popup-section-title { font-size: 14px; font-weight: 600; color: var(--ink-sub); text-transform: uppercase;
+  letter-spacing: 0.06em; margin-bottom: 10px; }
+.popup-section-body { font-size: 15px; color: var(--ink-main); line-height: 1.7; font-weight: 300; }
+.popup-section-body strong { font-weight: 500; color: var(--ink-main); }
+.btn-map { display: flex; align-items: center; justify-content: center; gap: 8px;
+  background: var(--ink-main); color: var(--bg-main); text-decoration: none;
+  padding: 14px; border-radius: 16px; font-weight: 600; font-size: 15px;
+  margin-top: 8px; transition: transform 0.2s; box-shadow: 0 4px 12px rgba(0,0,0,0.1); }
+.btn-map:active { transform: scale(0.98); opacity: 0.9; }
+.popup-tags { display: flex; flex-wrap: wrap; gap: 8px; }
+.popup-tag { padding: 6px 16px; border-radius: 24px; font-size: 13px; font-weight: 500;
+  background: var(--glass-bg); color: var(--ink-main); border: 1px solid var(--glass-border); }
+.popup-tag.red   { background: var(--tag-red-bg);   color: var(--tag-red-text);   border: none; }
+.popup-tag.gold  { background: var(--tag-gold-bg);  color: var(--tag-gold-text);  border: none; }
+.popup-tag.blue  { background: var(--tag-blue-bg);  color: var(--tag-blue-text);  border: none; }
+.popup-tag.green { background: var(--tag-green-bg); color: var(--tag-green-text); border: none; }
 
-.btn-checkout { width: 100%; background: var(--accent); color: #ffffff; padding: 14px; border-radius: 10px; cursor: pointer; font-family: 'Sarabun', sans-serif; font-size: 16px; font-weight: 900; border: none; box-shadow: 0 4px 15px rgba(5,150,105,0.25); transition: 0.2s; margin-top: 16px; }
-.btn-checkout:disabled { background: var(--muted); cursor: not-allowed; }
-.btn-clear { width: 100%; background: transparent; border: 1px solid var(--danger); color: var(--danger); padding: 10px; border-radius: 10px; cursor: pointer; font-family: 'Sarabun', sans-serif; font-size: 13px; font-weight: 700; margin-top: 10px; }
-.btn-scan { background: var(--accent); color: #ffffff; border: none; padding: 0 12px; border-radius: 8px; font-family: 'Sarabun', sans-serif; font-weight: 700; font-size: 12px; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 4px; }
+.locker-item, .food-item, .ride-row {
+  background: var(--glass-bg); border-radius: var(--radius-sm); padding: 16px;
+  margin-bottom: 10px; border: 1px solid var(--glass-border);
+}
+.ride-row { display: flex; align-items: flex-start; gap: 12px; }
+.ride-badge { font-family: 'Outfit', sans-serif; font-size: 11px; font-weight: 700; padding: 4px 10px; border-radius: 20px; }
+.ride-badge.express { background: var(--tag-gold-bg); color: var(--tag-gold-text); }
+.ride-badge.free    { background: var(--tag-green-bg); color: var(--tag-green-text); }
+.locker-name, .food-item-name { font-size: 15px; font-weight: 600; color: var(--ink-main); margin-bottom: 4px; }
+.locker-detail, .food-item-desc { font-size: 13px; color: var(--ink-sub); line-height: 1.5; }
 
-/* ── BT STATUS BADGE ── */
-.bt-badge { display: inline-flex; align-items: center; gap: 6px; padding: 6px 12px; border-radius: 20px; font-size: 12px; font-weight: 700; border: 1px solid; }
-.bt-badge.disconnected { background: #fef2f2; color: var(--danger); border-color: var(--danger); }
-.bt-badge.connected    { background: #ecfdf5; color: var(--accent); border-color: var(--accent); }
+.checklist-panel { display: flex; flex-direction: column; gap: 12px; }
+.check-item { display: flex; gap: 16px; align-items: center; background: var(--bg-card);
+  backdrop-filter: var(--glass-blur); border-radius: var(--radius-md);
+  padding: 16px 18px; border: 1px solid var(--glass-border);
+  box-shadow: var(--glass-shadow); cursor: pointer; transition: transform 0.2s; }
+.check-item.done { opacity: 0.5; background: var(--glass-bg); box-shadow: none; }
+.check-box { width: 28px; height: 28px; border-radius: 10px; border: 2px solid var(--border);
+  display: flex; align-items: center; justify-content: center; background: var(--glass-bg); color: transparent; }
+.check-item.done .check-box { background: var(--ink-main); border-color: var(--ink-main); color: var(--bg-main); }
+.check-text { font-size: 15px; color: var(--ink-main); }
 
-.table-wrap { overflow-x: auto; border-radius: 12px; border: 1px solid var(--border); background: var(--card); margin-bottom: 16px; box-shadow: 0 2px 8px rgba(0,0,0,0.02); }
-table { width: 100%; border-collapse: collapse; font-size: 13px; min-width: 600px; }
-thead tr { background: #f1f5f9; }
-th { padding: 12px; text-align: left; color: var(--muted); font-weight: 700; font-size: 11px; text-transform: uppercase; border-bottom: 1px solid var(--border); white-space: nowrap; }
-tbody tr { border-bottom: 1px solid var(--border); }
-td { padding: 12px; vertical-align: middle; }
-.h-date { font-size: 11px; color: var(--muted); }
-.h-name { font-weight: 700; color: var(--text); }
-.h-price { font-weight: 800; color: var(--accent); }
-.btn-view-slip { background: var(--card); border: 1px solid var(--border); color: var(--text); padding: 4px 8px; border-radius: 6px; font-size: 11px; cursor: pointer; display: block; width: 100%; margin-bottom: 4px; }
+.info-cards { display: grid; gap: 12px; grid-template-columns: 1fr 1fr; }
+.info-card { background: var(--bg-card); backdrop-filter: var(--glass-blur); border-radius: var(--radius-md);
+  padding: 20px; border: 1px solid var(--glass-border); box-shadow: var(--glass-shadow); }
+.info-card.full { grid-column: 1 / -1; }
+.info-card-icon { font-size: 28px; margin-bottom: 12px; background: var(--glass-bg); width: 52px; height: 52px;
+  border-radius: 50%; display: flex; align-items: center; justify-content: center; border: 1px solid var(--glass-border); }
+.info-card-label { font-size: 12px; font-weight: 600; color: var(--ink-sub); text-transform: uppercase; margin-bottom: 4px; }
+.info-card-val { font-size: 15px; font-weight: 500; color: var(--ink-main); line-height: 1.5; }
+.budget-row { display: flex; justify-content: space-between; align-items: center;
+  padding: 8px 0; border-bottom: 1px dashed var(--border); font-size: 14px; }
+.budget-row:last-child { border-bottom: none; font-weight: 600; font-size: 16px; padding-top: 12px; color: var(--ink-main); }
 
-.modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.4); z-index: 100; align-items: center; justify-content: center; padding: 16px; backdrop-filter: blur(2px); overflow-y: auto; }
-.modal-content { background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 16px; max-width: 400px; width: 100%; text-align: left; box-shadow: 0 10px 25px rgba(0,0,0,0.1); margin: auto; }
-.btn-close-modal { background: var(--danger); color: #fff; border: none; padding: 8px 16px; border-radius: 6px; font-weight: 700; cursor: pointer; width: 100%; margin-top: 12px; }
+#themeBtn {
+  position: fixed; top: 14px; right: 14px; z-index: 300;
+  width: 44px; height: 44px; border-radius: 50%;
+  border: 1px solid var(--glass-border); cursor: pointer; font-size: 20px;
+  display: flex; align-items: center; justify-content: center;
+  box-shadow: var(--glass-shadow); background: var(--glass-bg);
+  backdrop-filter: blur(12px); color: var(--ink-main);
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+#themeBtn.hidden { opacity: 0; transform: scale(0.8); pointer-events: none; }
 
-#globalLoader { display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(255,255,255,0.8); z-index:9999; flex-direction:column; align-items:center; justify-content:center; }
-.spinner { border: 4px solid rgba(0,0,0,0.1); border-left-color: var(--accent); border-radius: 50%; width: 40px; height: 40px; animation: spin 1s linear infinite; margin-bottom:12px; }
-@keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
-
-.pres-container { background: linear-gradient(145deg, #ffffff, #f8fafc); border-radius: 16px; padding: clamp(20px, 4vw, 32px); border: 1px solid var(--border); box-shadow: 0 10px 40px rgba(0,0,0,0.06); margin-top: 16px; }
-.pres-title { color: var(--text); font-size: clamp(18px, 3.5vw, 22px); font-weight: 900; margin-bottom: 20px; text-align: center; text-transform: uppercase; }
-
-.pkg-tag { font-size: 10px; font-weight: 700; padding: 2px 6px; border-radius: 4px; border: 1px solid; display: inline-block; margin: 2px; }
-.tag-dog    { background: var(--tag-dog-bg);    color: var(--tag-dog);    border-color: var(--tag-dog); }
-.tag-std    { background: var(--tag-std-bg);    color: var(--tag-std);    border-color: var(--tag-std); }
-.tag-prem   { background: var(--tag-prem-bg);   color: var(--tag-prem);   border-color: var(--tag-prem); }
-.tag-premex { background: var(--tag-premex-bg); color: var(--tag-premex); border-color: var(--tag-premex); }
-.tag-plus   { background: var(--tag-plus-bg);   color: var(--tag-plus);   border-color: var(--tag-plus); }
-
-@media print {
-  .header, .tab-container, .content, .print-hide { display: none !important; }
-  #receiptModal { position: absolute; left: 0; top: 0; display: block !important; width: 100%; padding: 0; }
+.top-btn {
+  position: fixed; bottom: calc(20px + env(safe-area-inset-bottom));
+  left: 50%; transform: translateX(-50%); z-index: 200;
+  height: 44px; padding: 0 22px; border-radius: 30px;
+  border: 1px solid var(--glass-border); cursor: pointer;
+  font-size: 14px; font-weight: 600;
+  display: flex; align-items: center; gap: 6px;
+  box-shadow: var(--glass-shadow); background: var(--glass-bg);
+  backdrop-filter: blur(12px); color: var(--ink-main);
+  font-family: 'Outfit','Kanit',sans-serif; white-space: nowrap;
 }
 </style>
 </head>
 <body>
 
-<div id="globalLoader">
-   <div class="spinner"></div>
-   <div style="font-weight:700; color:var(--accent);" id="loaderText">กำลังโหลดข้อมูล...</div>
-</div>
-
-<div class="header">
-  <img src="Logo_Geneus DNA Unlock-the-power_Horizontal.png" alt="Geneus DNA Logo" class="logo">
-  <p>Cloud Synchronized POS</p>
-</div>
-
-<div class="tab-container">
-  <button class="tab-btn active" onclick="switchTab('presentation')" id="btn-presentation">🛒 จัดตะกร้า</button>
-  <button class="tab-btn" onclick="switchTab('pos')" id="btn-pos">💳 เปิดออเดอร์</button>
-  <button class="tab-btn" onclick="switchTab('history')" id="btn-history">📋 ประวัติ</button>
-  <button class="tab-btn" onclick="switchTab('settings')" id="btn-settings">⚙️ ตั้งค่า</button>
-</div>
-
-<div id="tab-presentation" class="content active">
-  <div id="presentationWrap"></div>
-</div>
-
-<div id="tab-pos" class="content">
-  <div class="checkout-form" style="border-top: none; margin-top: 0; padding-top: 0;">
-    <div class="form-group" style="margin-bottom: 20px; background: #fff; padding: 16px; border-radius: 12px; border: 1px solid var(--border); box-shadow: 0 2px 10px rgba(0,0,0,0.02);">
-      <label style="color:var(--accent); font-size:15px; margin-bottom:10px;">👥 จำนวนผู้ชำระเงิน (รวมบิลเพื่อรับโปรฯ)</label>
-      <select id="splitCount" class="form-input" style="border-color:var(--accent); font-weight:bold; font-size:16px;" onchange="setSplitCount(this.value)">
-        <option value="1">1 ท่าน (จ่ายก้อนเดียว)</option>
-        <option value="2">2 ท่าน (แยกจ่าย)</option>
-        <option value="3">3 ท่าน (แยกจ่าย)</option>
-        <option value="4">4 ท่าน (แยกจ่าย)</option>
-        <option value="5">5 ท่าน (แยกจ่าย)</option>
-        <option value="6">6 ท่าน (แยกจ่าย)</option>
-      </select>
-    </div>
-    <div id="payersContainer"></div>
-    <div class="calc-result" id="calcResult" style="margin-bottom: 16px;"></div>
-    <button class="btn-checkout" onclick="processCheckout()">✅ ยืนยันออเดอร์ (Checkout)</button>
-    <button class="btn-clear" onclick="clearCalc()">✕ ยกเลิกออเดอร์นี้ (เริ่มใหม่)</button>
+<div class="hero" id="hero">
+  <div class="hero-flag">🇯🇵</div>
+  <div class="hero-title">OSAKA <span>2026</span></div>
+  <div class="hero-sub">16 – 21 ตุลาคม 2026 (6 วัน 5 คืน)</div>
+  <div class="info-strip">
+    <div class="info-chip">✈️ Peach Aviation</div>
+    <div class="info-chip">🏨 Hokke Club Osaka</div>
   </div>
 </div>
 
-<div id="tab-history" class="content">
-  <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
-    <h3 style="color:var(--accent);">ประวัติการขายล่าสุด (Cloud)</h3>
-    <div>
-      <button onclick="fetchHistoryFromCloud()" style="background:#10b981; border:none; color:#fff; font-size:12px; font-family:'Sarabun'; padding:6px 12px; border-radius:6px; cursor:pointer; margin-right: 8px;">🔄 โหลดข้อมูลใหม่</button>
-      <button onclick="exportCSV()" style="background:var(--accent2); border:none; color:#fff; font-size:12px; font-family:'Sarabun'; padding:6px 12px; border-radius:6px; cursor:pointer;">📥 Export CSV</button>
+<div class="tabs-wrap">
+  <div class="tabs-inner-wrap">
+    <div class="tabs">
+      <button class="tab active" onclick="switchDay(0)"><span>Day 1</span><span class="tab-day">ศ. 16</span></button>
+      <button class="tab" onclick="switchDay(1)"><span>Day 2</span><span class="tab-day">ส. 17</span></button>
+      <button class="tab" onclick="switchDay(2)"><span>Day 3</span><span class="tab-day">อา. 18</span></button>
+      <button class="tab" onclick="switchDay(3)"><span>Day 4</span><span class="tab-day">จ. 19</span></button>
+      <button class="tab" onclick="switchDay(4)"><span>Day 5</span><span class="tab-day">อ. 20</span></button>
+      <button class="tab" onclick="switchDay(5)"><span>Day 6</span><span class="tab-day">พ. 21</span></button>
+      <button class="tab" onclick="switchDay(6)"><span>✓</span><span class="tab-day">Check</span></button>
+      <button class="tab" onclick="switchDay(7)"><span>ℹ</span><span class="tab-day">Info</span></button>
     </div>
   </div>
-  <p style="font-size: 11px; color: var(--muted); margin-bottom: 12px;">หมายเหตุ: ดึงข้อมูลจากฐานข้อมูลส่วนกลางผ่าน Google Sheets</p>
-  <div class="table-wrap">
-    <table>
-      <thead>
-        <tr>
-          <th>วันที่ / ลูกค้า</th>
-          <th>รายการ</th>
-          <th>ยอดสุทธิ / เลขบิล</th>
-          <th style="text-align:center;">จัดการ</th>
-        </tr>
-      </thead>
-      <tbody id="historyBody">
-        <tr><td colspan="4" style="text-align:center; color:var(--muted); padding:20px;">กำลังโหลดประวัติ...</td></tr>
-      </tbody>
-    </table>
+</div>
+
+<div class="main">
+
+<!-- ================= DAY 1 ================= -->
+<div class="day-panel active" id="panel-0">
+  <div class="day-header"><div class="day-num">Day 1 🛬</div><div class="day-date">ศุกร์ 16 ตุลาคม 2026</div><div class="day-theme">KIX → Namba → Shinsaibashi → Umeda</div></div>
+  <div class="schedule">
+    <div class="sdivider">ออกเดินทางจากสุวรรณภูมิ (คืน 15 ต.ค.)</div>
+    <div class="sitem highlight" onclick="openPopup('bkk_depart')"><div class="sitem-left"><div class="sitem-icon">🏛️</div><div class="sitem-time">22:30</div></div><div class="sitem-body"><div class="sitem-main">คืน 15 ต.ค. ณ สนามบินสุวรรณภูมิ (BKK)</div><div class="sitem-sub">เช็คอินเคาน์เตอร์ Peach · Terminal อาคารผู้โดยสารหลัก</div></div><div class="sitem-right"><div class="sitem-map-icon">📍</div></div></div>
+    <div class="sitem highlight"><div class="sitem-left"><div class="sitem-icon">🛫</div><div class="sitem-time">01:15</div></div><div class="sitem-body"><div class="sitem-main">Peach MM092 ออกเดินทาง</div><div class="sitem-sub">BKK → KIX · ระยะเวลาบิน ~6 ชั่วโมง</div></div></div>
+    <div class="sdivider">เดินทางถึง KIX T2</div>
+    <div class="sitem" onclick="openPopup('kix_arrive')"><div class="sitem-left"><div class="sitem-icon">🛬</div><div class="sitem-time">09:20</div></div><div class="sitem-body"><div class="sitem-main">KIX Terminal 2</div><div class="sitem-sub">ผ่าน ตม. และรับกระเป๋า</div></div><div class="sitem-right"><div class="sitem-map-icon">📍</div></div></div>
+    <div class="sitem" onclick="openPopup('kix_shuttle_in')"><div class="sitem-left"><div class="sitem-icon">🚌</div><div class="sitem-time">10:10</div></div><div class="sitem-body"><div class="sitem-main">Shuttle Bus ฟรีไป T1</div><div class="sitem-sub">ข้ามไป Terminal 1 เพื่อขึ้นรถไฟ</div></div><div class="sitem-right"><div class="sitem-cost">ฟรี</div></div></div>
+    <div class="sitem highlight" onclick="openPopup('rapit')"><div class="sitem-left"><div class="sitem-icon">🚆</div><div class="sitem-time">10:45</div></div><div class="sitem-body"><div class="sitem-main">Nankai Rapi:t → Namba</div><div class="sitem-sub">ด่วนพิเศษเข้าเมือง</div></div><div class="sitem-right"><div class="sitem-cost">¥1,490</div></div></div>
+    <div class="sdivider">เที่ยง - ย่าน Namba</div>
+    <div class="sitem"><div class="sitem-left"><div class="sitem-icon">🚉</div><div class="sitem-time">11:25</div></div><div class="sitem-body"><div class="sitem-main">ถึง Namba</div><div class="sitem-sub">เตรียมเที่ยวใจกลางเมือง</div></div></div>
+    <div class="sitem" onclick="openPopup('locker_namba')"><div class="sitem-left"><div class="sitem-icon">🧳</div><div class="sitem-time">11:35</div></div><div class="sitem-body"><div class="sitem-main">ฝากกระเป๋าแถว Namba</div><div class="sitem-sub">ตู้ Locker หรือร้านรับฝาก</div></div><div class="sitem-right"><div class="sitem-map-icon">📍</div></div></div>
+    <div class="sitem highlight" onclick="openPopup('yasaka')"><div class="sitem-left"><div class="sitem-icon">🦁</div><div class="sitem-time">12:00</div></div><div class="sitem-body"><div class="sitem-main">Namba Yasaka Shrine</div><div class="sitem-sub">ศาลเจ้าหัวสิงโตยักษ์</div></div><div class="sitem-right"><div class="sitem-map-icon">📍</div></div></div>
+    <div class="sitem" onclick="openPopup('namba_food')"><div class="sitem-left"><div class="sitem-icon">🍜</div><div class="sitem-time">13:00</div></div><div class="sitem-body"><div class="sitem-main">มื้อกลางวัน Namba</div><div class="sitem-sub">หาของกินตามอัธยาศัย</div></div></div>
+    <div class="sdivider">บ่าย - ช้อปปิ้ง</div>
+    <div class="sitem highlight" onclick="openPopup('ghibli')"><div class="sitem-left"><div class="sitem-icon">🛍️</div><div class="sitem-time">14:15</div></div><div class="sitem-body"><div class="sitem-main">Shinsaibashi-suji / PARCO</div><div class="sitem-sub">ช้อปปิ้ง แวะ Nintendo / Ghibli Store</div></div><div class="sitem-right"><div class="sitem-map-icon">📍</div></div></div>
+    <div class="sitem" onclick="openPopup('dotonbori')"><div class="sitem-left"><div class="sitem-icon">🐙</div><div class="sitem-time">17:15</div></div><div class="sitem-body"><div class="sitem-main">Dotonbori มื้อเย็น</div><div class="sitem-sub">กินมื้อเย็น + ถ่ายรูปป้าย Glico</div></div><div class="sitem-right"><div class="sitem-map-icon">📍</div></div></div>
+    <div class="sdivider">กลับโรงแรม</div>
+    <div class="sitem"><div class="sitem-left"><div class="sitem-icon">🧳</div><div class="sitem-time">20:15</div></div><div class="sitem-body"><div class="sitem-main">รับกระเป๋าคืนที่ Namba</div></div></div>
+    <div class="sitem"><div class="sitem-left"><div class="sitem-icon">🚇</div><div class="sitem-time">20:40</div></div><div class="sitem-body"><div class="sitem-main">Midosuji Line → Umeda</div><div class="sitem-sub">ไปสถานี Umeda</div></div><div class="sitem-right"><div class="sitem-cost">¥240</div></div></div>
+    <div class="sitem highlight" onclick="openPopup('hotel')"><div class="sitem-left"><div class="sitem-icon">🏨</div><div class="sitem-time">21:00</div></div><div class="sitem-body"><div class="sitem-main">เช็คอิน Hotel Hokke Club</div><div class="sitem-sub">เข้าที่พัก</div></div><div class="sitem-right"><div class="sitem-map-icon">📍</div></div></div>
+    <div class="sitem"><div class="sitem-left"><div class="sitem-icon">♨️</div><div class="sitem-time">21:30</div></div><div class="sitem-body"><div class="sitem-main">แช่ออนเซ็น</div><div class="sitem-sub">ผ่อนคลายหลังเดินทาง</div></div></div>
   </div>
 </div>
 
-<div id="tab-settings" class="content">
-
-  <!-- ══ [เพิ่มใหม่] BLUETOOTH PRINTER SETTINGS ══ -->
-  <div style="background:var(--card2); border:2px solid var(--accent); border-radius:12px; padding:16px; margin-bottom:20px;">
-    <h3 style="font-size:16px; color:var(--accent); margin-bottom:4px; border-bottom:1px dashed var(--border); padding-bottom:8px;">🖨️ เครื่องปริ้น Bluetooth (58mm)</h3>
-    <div style="margin-bottom:12px;">
-      <div id="btStatusBadge" class="bt-badge disconnected">● ยังไม่ได้เชื่อมต่อ</div>
-    </div>
-    <button onclick="connectBluetoothPrinter()" class="btn-checkout" style="margin-top:0; font-size:14px; padding:12px;">
-      📡 จับคู่ / เชื่อมต่อ Bluetooth Printer
-    </button>
-    <button onclick="testBluetoothPrint()" style="width:100%; margin-top:8px; background:var(--accent2); color:#fff; border:none; padding:12px; border-radius:10px; font-family:'Sarabun'; font-weight:700; font-size:14px; cursor:pointer;">
-      🧪 ทดสอบปริ้น
-    </button>
-    <p style="font-size:11px; color:var(--muted); margin-top:10px; line-height:1.6;">
-      * ใช้ได้กับ <strong>Android + Chrome</strong> เท่านั้น<br>
-      * เปิด Bluetooth บน Android ก่อน แล้วกดจับคู่<br>
-      * จับคู่ครั้งเดียว ครั้งต่อไปเชื่อมต่อได้เลย<br>
-      * รองรับ Printer ขนาด <strong>58mm</strong> ที่ใช้ ESC/POS
-    </p>
-  </div>
-
-  <div style="background:var(--card2); border:1px solid var(--border); border-radius:12px; padding:16px; margin-bottom:20px;">
-    <h3 style="font-size:16px; color:var(--accent); margin-bottom:12px; border-bottom:1px dashed var(--border); padding-bottom:8px;">🔗 เชื่อมต่อ Google Sheets (บันทึกออเดอร์)</h3>
-    <div>
-      <label style="font-size:12px; color:var(--muted); font-weight:700;">Google Apps Script Web App URL</label>
-      <input type="text" id="cfg-sheet-url" class="form-input" placeholder="https://script.google.com/macros/s/..." style="font-size:12px;">
-    </div>
-    <p style="font-size:11px; color:var(--muted); margin-top:8px; line-height:1.4;">
-      * แนะนำให้นำ URL ไปใส่ไว้ในไฟล์ <b>config.json</b> ระบบจะดึง URL มาเติมให้อัตโนมัติทุกครั้งที่เปิดเว็บ<br>
-      * ข้อมูลการขายจะถูกส่งไปบันทึกลง Sheet ทันทีที่กดยืนยันรับออเดอร์
-    </p>
-  </div>
-
-  <div style="background:var(--card2); border:1px solid var(--border); border-radius:12px; padding:16px; margin-bottom:20px;">
-    <h3 style="font-size:16px; color:var(--accent); margin-bottom:12px; border-bottom:1px dashed var(--border); padding-bottom:8px;">📝 ข้อมูลงานอีเวนต์</h3>
-    <div style="display:grid; gap:10px;">
-      <div><label>ชื่องาน (Event Name)</label><input type="text" id="cfg-event-name" class="form-input"></div>
-      <div><label>ตัวย่อรหัสบิล (Prefix)</label><input type="text" id="cfg-event-prefix" class="form-input" maxlength="5"></div>
-    </div>
-  </div>
-
-  <div style="background:var(--card2); border:1px solid var(--border); border-radius:12px; padding:16px; margin-bottom:20px;">
-    <h3 style="font-size:16px; color:var(--accent); margin-bottom:12px; border-bottom:1px dashed var(--border); padding-bottom:8px;">🎯 ตั้งค่าโปรโมชัน</h3>
-    <div id="settings-promo-wrap">
-       <div class="form-group">
-         <label class="switch"><input type="checkbox" id="cfg-amt-active" onchange="togglePromoFields('amt')"><span class="slider"></span></label>
-         ลดตามยอดซื้อ (On-top)
-       </div>
-       <div id="cfg-amt-fields" style="display:none; grid-template-columns: 1fr 1fr; gap:10px; margin-bottom:10px;">
-          <div><label>ครบ (บาท)</label><input type="number" id="cfg-amt-req" class="form-input"></div>
-          <div><label>ลด (บาท)</label><input type="number" id="cfg-amt-disc" class="form-input"></div>
-       </div>
-    </div>
-    <div id="settings-promo-wrap-qty">
-       <div class="form-group">
-         <label class="switch"><input type="checkbox" id="cfg-qty-active" onchange="togglePromoFields('qty')"><span class="slider"></span></label>
-         ลดตามจำนวนชุด (ซื้อหลายชุดลดเพิ่ม)
-       </div>
-       <div id="cfg-qty-fields" style="display:none; grid-template-columns: 1fr 1fr; gap:10px; margin-bottom:10px;">
-          <div><label>ครบ (ชุด)</label><input type="number" id="cfg-qty-req" class="form-input"></div>
-          <div><label>ลด (บาท)</label><input type="number" id="cfg-qty-disc" class="form-input"></div>
-       </div>
-    </div>
-    <div id="settings-promo-wrap-gift">
-       <div class="form-group">
-         <label class="switch"><input type="checkbox" id="cfg-gift-active" onchange="togglePromoFields('gift')"><span class="slider"></span></label>
-         โปรโมชันของแถม
-       </div>
-       <div id="cfg-gift-fields" style="display:none; grid-template-columns: 1fr 2fr; gap:10px; margin-bottom:10px;">
-          <div><label>ครบ (ชุด)</label><input type="number" id="cfg-gift-req" class="form-input"></div>
-          <div><label>ชื่อของแถม</label><input type="text" id="cfg-gift-name" class="form-input"></div>
-       </div>
-    </div>
-  </div>
-
-  <div style="background:var(--card2); border:1px solid var(--border); border-radius:12px; padding:16px; margin-bottom:20px;">
-    <h3 style="font-size:16px; color:var(--accent); margin-bottom:12px; border-bottom:1px dashed var(--border); padding-bottom:8px;">ราคาแพ็กเกจ</h3>
-    <div id="settings-packages"></div>
-  </div>
-  <button class="btn-checkout" onclick="saveSettings(false)">💾 บันทึกการตั้งค่าลงอุปกรณ์</button>
-</div>
-
-<!-- MODALS -->
-<div id="slipModal" class="modal">
-  <div class="modal-content" style="text-align:center;">
-    <h3 style="margin-bottom: 10px; color:var(--accent);">หลักฐานการโอนเงิน</h3>
-    <div id="modalImageContainer" style="max-height:60vh; overflow-y:auto; margin-bottom:12px;"></div>
-    <button class="btn-close-modal" onclick="closeModal()">ปิดหน้าต่าง</button>
+<!-- ================= DAY 2 ================= -->
+<div class="day-panel" id="panel-1">
+  <div class="day-header"><div class="day-num">Day 2 ⛩️</div><div class="day-date">เสาร์ 17 ตุลาคม 2026</div><div class="day-theme">Katsuoji + Minoh + Umeda Fun Day</div></div>
+  <div class="schedule">
+    <div class="sdivider">ช่วงเช้า - วัดดารุมะ</div>
+    <div class="sitem"><div class="sitem-left"><div class="sitem-icon">🏨</div><div class="sitem-time">08:40</div></div><div class="sitem-body"><div class="sitem-main">ออกจากโรงแรม</div></div></div>
+    <div class="sitem"><div class="sitem-left"><div class="sitem-icon">🚇</div><div class="sitem-time">08:55</div></div><div class="sitem-body"><div class="sitem-main">ไป Minoh-Kayano</div><div class="sitem-sub">นั่ง Midosuji Line ไปสุดสาย</div></div><div class="sitem-right"><div class="sitem-cost">¥430</div></div></div>
+    <div class="sitem"><div class="sitem-left"><div class="sitem-icon">🚌</div><div class="sitem-time">09:30</div></div><div class="sitem-body"><div class="sitem-main">รถบัสไป Katsuo-ji</div><div class="sitem-sub">ใช้ IC Card แตะจ่าย</div></div><div class="sitem-right"><div class="sitem-cost">¥800</div></div></div>
+    <div class="sitem highlight" onclick="openPopup('katsuo_ji')"><div class="sitem-left"><div class="sitem-icon">⛩️</div><div class="sitem-time">10:00</div></div><div class="sitem-body"><div class="sitem-main">เที่ยววัด Katsuo-ji</div><div class="sitem-sub">ถ่ายรูปกับตุ๊กตาดารุมะ</div></div><div class="sitem-right"><div class="sitem-map-icon">📍</div></div></div>
+    <div class="sdivider">เที่ยง - น้ำตกมิโน</div>
+    <div class="sitem" onclick="openPopup('taxi_minoh')"><div class="sitem-left"><div class="sitem-icon">🚕</div><div class="sitem-time">11:30</div></div><div class="sitem-body"><div class="sitem-main">Taxi ไปน้ำตกมิโน</div><div class="sitem-sub">ให้ไปส่งจุดจอดรถบนเขา</div></div><div class="sitem-right"><div class="sitem-cost">~¥1500</div></div></div>
+    <div class="sitem highlight" onclick="openPopup('minoh_falls')"><div class="sitem-left"><div class="sitem-icon">💦</div><div class="sitem-time">11:45</div></div><div class="sitem-body"><div class="sitem-main">Minoh Falls</div><div class="sitem-sub">ชมน้ำตกสวยงาม</div></div><div class="sitem-right"><div class="sitem-map-icon">📍</div></div></div>
+    <div class="sitem"><div class="sitem-left"><div class="sitem-icon">🚶</div><div class="sitem-time">12:20</div></div><div class="sitem-body"><div class="sitem-main">เดินลงเขา + Momiji Tempura</div><div class="sitem-sub">ชิมใบเมเปิ้ลทอด เดินลงชิลๆ</div></div></div>
+    <div class="sitem"><div class="sitem-left"><div class="sitem-icon">🚆</div><div class="sitem-time">13:35</div></div><div class="sitem-body"><div class="sitem-main">Hankyu กลับ Umeda</div><div class="sitem-sub">นั่งรถไฟกลับเข้าเมือง</div></div><div class="sitem-right"><div class="sitem-cost">¥280</div></div></div>
+    <div class="sdivider">บ่ายถึงค่ำ - สนุกใน Umeda</div>
+    <div class="sitem"><div class="sitem-left"><div class="sitem-icon">☕</div><div class="sitem-time">14:20</div></div><div class="sitem-body"><div class="sitem-main">คาเฟ่พักขา</div><div class="sitem-sub">พักเหนื่อยหลังเดินเขา</div></div></div>
+    <div class="sitem highlight" onclick="openPopup('gacha')"><div class="sitem-left"><div class="sitem-icon">🎰</div><div class="sitem-time">15:15</div></div><div class="sitem-body"><div class="sitem-main">Gachagacha no Mori</div><div class="sitem-sub">หมุนตู้กาชาปองที่ Chayamachi</div></div><div class="sitem-right"><div class="sitem-map-icon">📍</div></div></div>
+    <div class="sitem highlight" onclick="openPopup('yodobashi')"><div class="sitem-left"><div class="sitem-icon">📷</div><div class="sitem-time">16:10</div></div><div class="sitem-body"><div class="sitem-main">Yodobashi + LINKS UMEDA</div><div class="sitem-sub">ช้อปปิ้งของเล่น กล้อง เครื่องสำอาง</div></div><div class="sitem-right"><div class="sitem-map-icon">📍</div></div></div>
+    <div class="sitem highlight" onclick="openPopup('okoppe')"><div class="sitem-left"><div class="sitem-icon">🥛</div><div class="sitem-time">18:00</div></div><div class="sitem-body"><div class="sitem-main">Okoppe Milk Stand</div><div class="sitem-sub">ซอฟต์เสิร์ฟนมฮอกไกโดที่ Hanshin</div></div><div class="sitem-right"><div class="sitem-map-icon">📍</div></div></div>
+    <div class="sitem highlight" onclick="openPopup('ramen_zen')"><div class="sitem-left"><div class="sitem-icon">🍜</div><div class="sitem-time">18:40</div></div><div class="sitem-body"><div class="sitem-main">Naniwa Menjiro ZEN</div><div class="sitem-sub">ราเมนมิชลิน มื้อค่ำ</div></div><div class="sitem-right"><div class="sitem-map-icon">📍</div></div></div>
+    <div class="sitem"><div class="sitem-left"><div class="sitem-icon">🌃</div><div class="sitem-time">20:00</div></div><div class="sitem-body"><div class="sitem-main">Grand Front / LUCUA</div><div class="sitem-sub">เดินย่อย ชมวิวยามค่ำคืน</div></div></div>
+    <div class="sitem"><div class="sitem-left"><div class="sitem-icon">♨️</div><div class="sitem-time">21:00+</div></div><div class="sitem-body"><div class="sitem-main">กลับโรงแรม + ออนเซ็น</div></div></div>
   </div>
 </div>
 
-<div id="scannerModal" class="modal" style="z-index: 9999;">
-  <div class="modal-content" style="text-align: center;">
-    <h3 style="margin-bottom: 10px; color:var(--accent);">📷 สแกนบาร์โค้ด</h3>
-    <div id="reader"></div>
-    <button class="btn-close-modal" onclick="closeScanner()">✕ ยกเลิก</button>
+<!-- ================= DAY 3 ================= -->
+<div class="day-panel" id="panel-2">
+  <div class="day-header"><div class="day-num">Day 3 🍵</div><div class="day-date">อาทิตย์ 18 ตุลาคม 2026</div><div class="day-theme">Kyoto Day: Uji → Fushimi Inari → Higashiyama</div></div>
+  <div class="schedule">
+    <div class="sdivider">เช้า - เมืองชาเขียว Uji</div>
+    <div class="sitem"><div class="sitem-left"><div class="sitem-icon">🚆</div><div class="sitem-time">08:45</div></div><div class="sitem-body"><div class="sitem-main">ออกจาก Umeda</div><div class="sitem-sub">มุ่งหน้าสู่เกียวโตตอนใต้</div></div></div>
+    <div class="sitem highlight" onclick="openPopup('byodoin')"><div class="sitem-left"><div class="sitem-icon">🍵</div><div class="sitem-time">10:00</div></div><div class="sitem-body"><div class="sitem-main">เที่ยวเมือง Uji</div><div class="sitem-sub">Byodo-in, ร้านมัทฉะ, ถนนชา</div></div><div class="sitem-right"><div class="sitem-map-icon">📍</div></div></div>
+    <div class="sdivider">บ่าย - เสาโทริอิหมื่นต้น</div>
+    <div class="sitem"><div class="sitem-left"><div class="sitem-icon">🚆</div><div class="sitem-time">13:00</div></div><div class="sitem-body"><div class="sitem-main">เดินทางไป Fushimi Inari</div></div></div>
+    <div class="sitem highlight" onclick="openPopup('fushimi')"><div class="sitem-left"><div class="sitem-icon">🦊</div><div class="sitem-time">13:40</div></div><div class="sitem-body"><div class="sitem-main">Fushimi Inari Taisha</div><div class="sitem-sub">เดินลอดอุโมงค์เสาโทริอิสีแดง</div></div><div class="sitem-right"><div class="sitem-map-icon">📍</div></div></div>
+    <div class="sdivider">เย็น - ย่านเมืองเก่า Higashiyama</div>
+    <div class="sitem"><div class="sitem-left"><div class="sitem-icon">🚆</div><div class="sitem-time">15:40</div></div><div class="sitem-body"><div class="sitem-main">เดินทางไป Higashiyama</div></div></div>
+    <div class="sitem highlight" onclick="openPopup('kiyomizu')"><div class="sitem-left"><div class="sitem-icon">🛕</div><div class="sitem-time">16:30</div></div><div class="sitem-body"><div class="sitem-main">Kiyomizu-dera</div><div class="sitem-sub">วัดน้ำใสยามเย็น</div></div><div class="sitem-right"><div class="sitem-map-icon">📍</div></div></div>
+    <div class="sitem highlight" onclick="openPopup('sannenzaka')"><div class="sitem-left"><div class="sitem-icon">📸</div><div class="sitem-time">18:00</div></div><div class="sitem-body"><div class="sitem-main">Sannenzaka / Yasaka Pagoda</div><div class="sitem-sub">ถ่ายรูปมุมมหาชนยามค่ำคืน</div></div><div class="sitem-right"><div class="sitem-map-icon">📍</div></div></div>
+    <div class="sitem"><div class="sitem-left"><div class="sitem-icon">🍽️</div><div class="sitem-time">19:00</div></div><div class="sitem-body"><div class="sitem-main">มื้อเย็น Kyoto</div><div class="sitem-sub">หาของอร่อยทานก่อนกลับ</div></div></div>
+    <div class="sdivider">กลับโอซาก้า</div>
+    <div class="sitem"><div class="sitem-left"><div class="sitem-icon">🚆</div><div class="sitem-time">20:15</div></div><div class="sitem-body"><div class="sitem-main">นั่งรถไฟกลับ Osaka</div></div></div>
+    <div class="sitem"><div class="sitem-left"><div class="sitem-icon">🏨</div><div class="sitem-time">21:15</div></div><div class="sitem-body"><div class="sitem-main">ถึงโรงแรม พักผ่อน</div></div></div>
   </div>
 </div>
 
-<div id="editModal" class="modal">
-  <div class="modal-content" style="text-align: left; max-height: 90vh; overflow-y: auto;">
-    <h3 style="margin-bottom: 16px; color:var(--accent); text-align: center;">✏️ แก้ไขข้อมูลออเดอร์</h3>
-    <div id="editFormContainer"></div>
-    <button class="btn-checkout" onclick="saveEditedOrder()" id="btn-save-edit">💾 บันทึกการแก้ไข (อัปเดต Cloud)</button>
-    <button class="btn-clear" onclick="closeEditModal()">✕ ยกเลิก</button>
+<!-- ================= DAY 4 ================= -->
+<div class="day-panel" id="panel-3">
+  <div class="day-header"><div class="day-num">Day 4 🎢</div><div class="day-date">จันทร์ 19 ตุลาคม 2026</div><div class="day-theme">Universal Studios Japan เต็มวัน</div></div>
+  <div class="schedule">
+    <div class="sdivider">เข้าสวนสนุก</div>
+    <div class="sitem"><div class="sitem-left"><div class="sitem-icon">🚆</div><div class="sitem-time">07:00</div></div><div class="sitem-body"><div class="sitem-main">ออกจากโรงแรม</div><div class="sitem-sub">เริ่มต้นวันแต่เช้า! ไปจองคิวหน้าประตู</div></div></div>
+    <div class="sitem"><div class="sitem-left"><div class="sitem-icon">🚉</div><div class="sitem-time">07:35</div></div><div class="sitem-body"><div class="sitem-main">ถึงหน้า Universal Studios</div><div class="sitem-sub">รอประตูเปิด</div></div></div>
+    <div class="sitem highlight" onclick="openPopup('usj_open')"><div class="sitem-left"><div class="sitem-icon">🎟️</div><div class="sitem-time">08:30</div></div><div class="sitem-body"><div class="sitem-main">เข้า Park!</div><div class="sitem-sub">กดจอง Area Timed Entry ทันที</div></div><div class="sitem-right"><div class="sitem-map-icon">📍</div></div></div>
+    <div class="sdivider">เครื่องเล่นแนะนำตลอดวัน</div>
+    <div class="sitem highlight" onclick="openPopup('usj_rides')"><div class="sitem-left"><div class="sitem-icon">🎢</div><div class="sitem-time">All day</div></div><div class="sitem-body"><div class="sitem-main">โซนและเครื่องเล่นห้ามพลาด</div><div class="sitem-sub">Nintendo, Harry Potter ฯลฯ</div></div><div class="sitem-right"><div class="sitem-map-icon">📄</div></div></div>
+    <div class="sitem highlight" onclick="openPopup('halloween')"><div class="sitem-left"><div class="sitem-icon">🧟</div><div class="sitem-time">18:00</div></div><div class="sitem-body"><div class="sitem-main">Halloween Horror Nights</div><div class="sitem-sub">อยู่ยาวถึง 20:30 น.</div></div></div>
+    <div class="sdivider">กลับโรงแรม</div>
+    <div class="sitem"><div class="sitem-left"><div class="sitem-icon">🚆</div><div class="sitem-time">20:30</div></div><div class="sitem-body"><div class="sitem-main">กลับถึงโรงแรม</div></div></div>
+    <div class="sitem"><div class="sitem-left"><div class="sitem-icon">♨️</div><div class="sitem-time">21:00</div></div><div class="sitem-body"><div class="sitem-main">ออนเซ็น</div><div class="sitem-sub">คลายปวดขากันแบบเต็มที่!</div></div></div>
   </div>
 </div>
 
-<div id="receiptModal" class="modal">
-  <div class="modal-content" style="background: transparent; border: none; box-shadow: none; padding: 0;">
+<!-- ================= DAY 5 ================= -->
+<div class="day-panel" id="panel-4">
+  <div class="day-header"><div class="day-num">Day 5 🏯🐠</div><div class="day-date">อังคาร 20 ตุลาคม 2026</div><div class="day-theme">Recovery Day: Osaka Castle + Kaiyukan</div></div>
+  <div class="schedule">
+    <div class="sdivider">เช้าสบายๆ</div>
+    <div class="sitem"><div class="sitem-left"><div class="sitem-icon">😋</div><div class="sitem-time">08:00</div></div><div class="sitem-body"><div class="sitem-main">รับประทานอาหารเช้า ณ โรงแรม</div></div></div>
+    <div class="sitem"><div class="sitem-left"><div class="sitem-icon">☕</div><div class="sitem-time">09:15</div></div><div class="sitem-body"><div class="sitem-main">Cafe ใกล้โรงแรม</div></div></div>
+    <div class="sitem"><div class="sitem-left"><div class="sitem-icon">🚇</div><div class="sitem-time">10:00</div></div><div class="sitem-body"><div class="sitem-main">ออกจากโรงแรม</div></div></div>
+    <div class="sdivider">ปราสาทโอซาก้า</div>
+    <div class="sitem highlight" onclick="openPopup('osaka_castle')"><div class="sitem-left"><div class="sitem-icon">🏯</div><div class="sitem-time">10:25</div></div><div class="sitem-body"><div class="sitem-main">Osaka Castle Park</div><div class="sitem-sub">ถ่ายรูปสวน + ปราสาทด้านนอก</div></div><div class="sitem-right"><div class="sitem-map-icon">📍</div></div></div>
+    <div class="sitem"><div class="sitem-left"><div class="sitem-icon">🍱</div><div class="sitem-time">12:00</div></div><div class="sitem-body"><div class="sitem-main">มื้อกลางวัน</div></div></div>
+    <div class="sdivider">อ่าวโอซาก้า</div>
+    <div class="sitem"><div class="sitem-left"><div class="sitem-icon">🚇</div><div class="sitem-time">13:00</div></div><div class="sitem-body"><div class="sitem-main">เดินทางไป Kaiyukan</div></div></div>
+    <div class="sitem highlight" onclick="openPopup('kaiyukan')"><div class="sitem-left"><div class="sitem-icon">🐋</div><div class="sitem-time">14:00</div></div><div class="sitem-body"><div class="sitem-main">Osaka Aquarium Kaiyukan</div><div class="sitem-sub">เดินดูสัตว์น้ำเพลินๆ ถึง 16:30</div></div><div class="sitem-right"><div class="sitem-map-icon">📍</div></div></div>
+    <div class="sitem highlight" onclick="openPopup('ferris')"><div class="sitem-left"><div class="sitem-icon">🌅</div><div class="sitem-time">16:45</div></div><div class="sitem-body"><div class="sitem-main">Tempozan Marketplace</div><div class="sitem-sub">กินมื้อเย็น + เดินเล่น</div></div><div class="sitem-right"><div class="sitem-map-icon">📍</div></div></div>
+    <div class="sdivider">กลับโรงแรม</div>
+    <div class="sitem"><div class="sitem-left"><div class="sitem-icon">🚇</div><div class="sitem-time">19:15</div></div><div class="sitem-body"><div class="sitem-main">กลับ Umeda</div></div></div>
+    <div class="sitem"><div class="sitem-left"><div class="sitem-icon">♨️</div><div class="sitem-time">20:30</div></div><div class="sitem-body"><div class="sitem-main">ออนเซ็นครั้งสุดท้าย</div></div></div>
+  </div>
+</div>
 
-    <div id="rcptPayerSelectorWrap" class="print-hide" style="background:#fff; padding:12px; border-radius:12px; margin-bottom:12px; box-shadow:0 4px 10px rgba(0,0,0,0.1); display:none;">
-      <label style="font-size:12px; font-weight:700; color:var(--muted); display:block; margin-bottom:4px;">🧾 เลือกใบเสร็จของผู้ชำระเงิน:</label>
-      <select id="rcptPayerSelector" class="form-input" onchange="renderReceiptForPayer(this.value)"></select>
+<!-- ================= DAY 6 ================= -->
+<div class="day-panel" id="panel-5">
+  <div class="day-header"><div class="day-num">Day 6 🛫</div><div class="day-date">พุธ 21 ตุลาคม 2026</div><div class="day-theme">Umeda Last Day → KIX (Direct Route)</div></div>
+  <div class="schedule">
+    <div class="sdivider">เช้าในอุเมดะ</div>
+    <div class="sitem" onclick="openPopup('hotel')"><div class="sitem-left"><div class="sitem-icon">🧳</div><div class="sitem-time">08:30</div></div><div class="sitem-body"><div class="sitem-main">Check-out</div><div class="sitem-sub">ฝากกระเป๋าไว้ที่โรงแรมก่อน</div></div></div>
+    <div class="sitem"><div class="sitem-left"><div class="sitem-icon">☕</div><div class="sitem-time">09:00</div></div><div class="sitem-body"><div class="sitem-main">คาเฟ่เช้า</div><div class="sitem-sub">กินกาแฟชิลๆ ส่งท้าย</div></div></div>
+    <div class="sdivider">ช้อปปิ้งส่งท้าย & มื้อเที่ยง</div>
+    <div class="sitem highlight"><div class="sitem-left"><div class="sitem-icon">🛍️</div><div class="sitem-time">10:00</div></div><div class="sitem-body"><div class="sitem-main">ช้อปรอบสุดท้าย Umeda</div><div class="sitem-sub">LUCUA / Daimaru / Hands / Donki</div></div></div>
+    <div class="sitem"><div class="sitem-left"><div class="sitem-icon">🍱</div><div class="sitem-time">12:30</div></div><div class="sitem-body"><div class="sitem-main">มื้อกลางวัน</div></div></div>
+    <div class="sdivider">เดินทางสู่สนามบิน (ยิงยาว)</div>
+    <div class="sitem"><div class="sitem-left"><div class="sitem-icon">🧳</div><div class="sitem-time">13:45</div></div><div class="sitem-body"><div class="sitem-main">รับกระเป๋าที่โรงแรม</div></div></div>
+    <div class="sitem"><div class="sitem-left"><div class="sitem-icon">🚶</div><div class="sitem-time">14:00</div></div><div class="sitem-body"><div class="sitem-main">เดินไป Osaka Station</div></div></div>
+    <div class="sitem highlight" onclick="openPopup('haruka')"><div class="sitem-left"><div class="sitem-icon">🚆</div><div class="sitem-time">14:30</div></div><div class="sitem-body"><div class="sitem-main">JR Haruka Ltd. Express</div><div class="sitem-sub">นั่งตรงจาก Osaka Sta. ถึงสนามบินเลย!</div></div><div class="sitem-right"><div class="sitem-map-icon">📍</div></div></div>
+    <div class="sdivider">สนามบินคันไซ</div>
+    <div class="sitem"><div class="sitem-left"><div class="sitem-icon">🛬</div><div class="sitem-time">15:20</div></div><div class="sitem-body"><div class="sitem-main">ถึงสนามบินคันไซ</div><div class="sitem-sub">นั่งรถบัสเชื่อมไป Terminal 2</div></div></div>
+    <div class="sitem highlight" onclick="openPopup('kix_shuttle_out')"><div class="sitem-left"><div class="sitem-icon">🚌</div><div class="sitem-time">16:40</div></div><div class="sitem-body"><div class="sitem-main">ถึงสนามบิน KIX T1 → T2</div><div class="sitem-sub">นั่ง Shuttle Bus ข้ามไปเตรียมโหลดกระเป๋า</div></div><div class="sitem-right"><div class="sitem-map-icon">📍</div></div></div>
+    <div class="sitem"><div class="sitem-left"><div class="sitem-icon">🛫</div><div class="sitem-time">19:30</div></div><div class="sitem-body"><div class="sitem-main">Flight MM091 Departs</div><div class="sitem-sub">เดินทางกลับไทยโดยสวัสดิภาพ ✈️</div></div></div>
+  </div>
+</div>
+
+<!-- ─────────── CHECKLIST ─────────── -->
+<div class="day-panel" id="panel-6">
+  <div class="day-header"><div class="day-num">✓ Checklist</div><div class="day-date">ก่อนออกเดินทาง</div></div>
+  <div class="checklist-panel" id="checklist">
+    <div class="check-item" onclick="toggleCheck(this)"><div class="check-box"></div><div class="check-text">โหลด USJ App + สร้างบัญชี</div></div>
+    <div class="check-item" onclick="toggleCheck(this)"><div class="check-box"></div><div class="check-text">ซื้อ USJ Express Pass ล่วงหน้า</div></div>
+    <div class="check-item" onclick="toggleCheck(this)"><div class="check-box"></div><div class="check-text">ซื้อตั๋ว Kaiyukan / Osaka Castle ออนไลน์</div></div>
+    <div class="check-item" onclick="toggleCheck(this)"><div class="check-box"></div><div class="check-text">โหลดแอป GO (สำหรับเรียกแท็กซี่ไปน้ำตก)</div></div>
+    <div class="check-item" onclick="toggleCheck(this)"><div class="check-box"></div><div class="check-text">เตรียมบัตร PASMO / ICOCA (ใช้ขึ้นบัส)</div></div>
+    <div class="check-item" onclick="toggleCheck(this)"><div class="check-box"></div><div class="check-text">สำรองห้องพัก Hotel Hokke Club Osaka</div></div>
+    <div class="check-item" onclick="toggleCheck(this)"><div class="check-box"></div><div class="check-text">ตั๋วเครื่องบิน Peach Aviation ไป-กลับ</div></div>
+    <div class="check-item" onclick="toggleCheck(this)"><div class="check-box"></div><div class="check-text">Pocket Wi-Fi หรือ SIM Card ญี่ปุ่น</div></div>
+  </div>
+</div>
+
+<!-- ─────────── INFO & BUDGET ─────────── -->
+<div class="day-panel" id="panel-7">
+  <div class="day-header"><div class="day-num">ℹ Info</div><div class="day-date">ข้อมูลสำคัญ & งบประมาณ</div></div>
+  <div style="display:flex;flex-direction:column;gap:12px">
+    <div class="info-cards">
+      <div class="info-card"><div class="info-card-icon">✈️</div><div class="info-card-label">ขาไป</div><div class="info-card-val">Peach MM092<br>ศ. 16 ต.ค.<br>01:15 → 09:20<br>KIX Terminal 2</div></div>
+      <div class="info-card"><div class="info-card-icon">✈️</div><div class="info-card-label">ขากลับ</div><div class="info-card-val">Peach MM091<br>พ. 21 ต.ค.<br>19:30 → 23:55<br>ปิดเช็คอิน 18:40</div></div>
+      <div class="info-card full"><div class="info-card-icon">🏨</div><div class="info-card-label">โรงแรม</div><div class="info-card-val">Hotel Hokke Club Osaka (Umeda)<br>ออนเซ็นชั้น 12 เปิดถึงตีสอง ฟรี</div></div>
     </div>
-
-    <div id="receiptContent" style="background: #ffffff; padding: 16px; color: #000000; font-family: 'Sarabun', sans-serif; width: 80mm; margin: 0 auto; box-sizing: border-box; position: relative; overflow: hidden;">
-      <div style="text-align:center; margin-bottom: 12px;">
-         <img src="Logo_Geneus DNA Unlock the power_Vertical.png" alt="GENEUS DNA" style="width: 100px; height: auto;">
-      </div>
-      <div style="text-align:center; font-size: 10px; color: #333333; line-height: 1.4; margin-bottom: 12px;">
-        <strong>บริษัท จีเนียส เจเนติกส์ จำกัด (สำนักงานใหญ่)</strong><br>
-        เลขที่ 22/5 ชั้น 4 ซอยชิดลม แขวงลุมพินี<br>เขตปทุมวัน กรุงเทพมหานคร 10330<br>
-        ทะเบียนนิติบุคคล 0105561207945
-      </div>
-      <div style="text-align:center; font-size: 11px; color: #333333; border-bottom: 1px dashed #000000; padding-bottom: 8px; margin-bottom: 12px; font-weight: 600;">
-         ใบสรุปรายการสั่งซื้อ / Order Summary
-      </div>
-      <div style="font-size: 12px; margin-bottom: 12px; line-height: 1.5; color: #000000;">
-         <div id="rcptEventWrap" style="display:none; color:#059669; font-weight:700; border-bottom:1px solid #f1f5f9; padding-bottom:4px; margin-bottom:4px;">
-            <span>ชื่องาน:</span> <span id="rcptEventName" style="float: right;"></span>
-         </div>
-         <div><span>รหัสออเดอร์:</span> <strong id="rcptId" style="float: right;"></strong></div>
-         <div id="rcptBillWrap" style="display:none;"><span>เลขที่ใบเสร็จ:</span> <strong id="rcptBill" style="float: right;"></strong></div>
-         <div><span>วันที่-เวลา:</span> <strong id="rcptDate" style="float: right;"></strong></div>
-         <div><span>ชื่อผู้ชำระ:</span> <strong id="rcptName" style="float: right;"></strong></div>
-      </div>
-      <table style="width: 100%; min-width: 0; font-size: 12px; border-collapse: collapse; margin-bottom: 12px; color: #000000;">
-         <thead>
-           <tr style="border-bottom: 1px solid #000000; background: transparent;">
-             <th style="text-align:left; padding-bottom: 4px; width: 50%; color: #000000;">รายการ</th>
-             <th style="text-align:center; padding-bottom: 4px; width: 20%; color: #000000;">จำนวน</th>
-             <th style="text-align:right; padding-bottom: 4px; width: 30%; color: #000000;">รวม</th>
-           </tr>
-         </thead>
-         <tbody id="rcptItems"></tbody>
-      </table>
-      <div style="font-size: 12px; text-align: right; border-top: 1px dashed #000000; padding-top: 8px; color: #000000;">
-         <div id="rcptTotal" style="margin-bottom: 4px;"></div>
-         <div id="rcptDiscount" style="margin-bottom: 4px; font-weight: 700;"></div>
-         <div id="rcptNet" style="font-size: 16px; font-weight: 900; margin-top: 8px;"></div>
-      </div>
-      <div style="text-align:center; margin-top: 20px; font-size: 10px; color: #333333;">
-         ขอบคุณที่ไว้วางใจ Geneus DNA<br>
-         <span style="font-family:'Montserrat', sans-serif;">www.geneusdna.com</span>
+    <div class="info-card" style="margin-top:10px;">
+      <div class="info-card-icon" style="background:var(--tag-gold-bg);border-color:transparent;font-size:32px;">💰</div>
+      <div class="info-card-label" style="font-size:14px;">งบประมาณโดยประมาณ (ต่อ 1 ท่าน)</div>
+      <div style="margin-top:12px;">
+        <div class="budget-row" style="font-size:12px;font-weight:700;color:var(--ink-sub);text-transform:uppercase;letter-spacing:0.05em;padding-bottom:10px;"><span>รายการ</span><span style="display:flex;gap:12px;flex-shrink:0;"><span style="min-width:58px;text-align:right;">เยน (¥)</span><span style="min-width:58px;text-align:right;">บาท (฿)</span></span></div>
+        <div class="budget-row"><span>ค่าเข้าสถานที่ต่างๆ</span><span style="display:flex;gap:12px;flex-shrink:0;"><span style="min-width:58px;text-align:right;">~¥17,000</span><span style="min-width:58px;text-align:right;">~6,000</span></span></div>
+        <div class="budget-row"><span>ค่าเดินทาง</span><span style="display:flex;gap:12px;flex-shrink:0;"><span style="min-width:58px;text-align:right;">~¥10,000</span><span style="min-width:58px;text-align:right;">~3,500</span></span></div>
+        <div class="budget-row"><span>ค่ากิน / อาหาร</span><span style="display:flex;gap:12px;flex-shrink:0;"><span style="min-width:58px;text-align:right;">~¥20,000</span><span style="min-width:58px;text-align:right;">~7,000</span></span></div>
+        <div class="budget-row"><span>รวมประมาณการ</span><span style="display:flex;gap:12px;flex-shrink:0;"><span style="min-width:58px;text-align:right;">~¥47,000</span><span style="min-width:58px;text-align:right;">~16,500</span></span></div>
       </div>
     </div>
-
-    <!-- ══ ปุ่มด้านล่าง Receipt Modal ══ -->
-    <div style="margin-top: 16px; display: flex; flex-wrap: wrap; gap: 8px;" class="print-hide">
-      <!-- [เพิ่มใหม่] ปุ่มปริ้น Bluetooth -->
-      <button onclick="printViaBluetooth()" id="btnBtPrint"
-        style="flex: 1; min-width: 120px; background: #1d4ed8; color: #fff; border: none; padding: 12px; border-radius: 8px; font-family: 'Sarabun'; font-weight: 700; cursor: pointer; box-shadow: 0 4px 10px rgba(29,78,216,0.3);">
-        🖨️ ปริ้น Bluetooth
-      </button>
-      <button onclick="downloadReceipt()"
-        style="flex: 1; min-width: 100px; background: #2563eb; color: #fff; border: none; padding: 12px; border-radius: 8px; font-family: 'Sarabun'; font-weight: 700; cursor: pointer; box-shadow: 0 4px 10px rgba(37,99,235,0.3);">
-        📥 บันทึกรูป
-      </button>
-      <button onclick="closeReceiptModal()"
-        style="flex: 1; min-width: 100px; background: #dc2626; color: #fff; border: none; padding: 12px; border-radius: 8px; font-family: 'Sarabun'; font-weight: 700; cursor: pointer;">
-        ✕ ปิด
-      </button>
-    </div>
   </div>
 </div>
+
+</div><!-- /main -->
+
+<div class="popup-overlay" id="overlay" onclick="closeOnOverlay(event)">
+  <div class="popup" id="popup">
+    <div class="popup-handle"></div>
+    <div class="popup-header">
+      <div class="popup-icon" id="p-icon">🗾</div>
+      <div class="popup-title-wrap">
+        <div class="popup-title" id="p-title">ชื่อสถานที่</div>
+        <div class="popup-time" id="p-time"></div>
+      </div>
+      <button class="popup-close" onclick="closePopup()">✕</button>
+    </div>
+    <div class="popup-body" id="p-body"></div>
+  </div>
+</div>
+
+<button id="themeBtn" onclick="toggleTheme()">☀️</button>
+<button class="top-btn" onclick="scrollToTop()">↑ กลับด้านบน</button>
 
 <script>
-// ════════════════════════════════════════════════
-// ── [เพิ่มใหม่] BLUETOOTH THERMAL PRINTER (58mm)
-// ════════════════════════════════════════════════
+// ══════════════════════════════════════════════
+// 📦 POPUP DATA
+// ══════════════════════════════════════════════
+const POPUPS = {
 
-// Bluetooth GATT Service/Characteristic UUID สำหรับ thermal printer ทั่วไป
-const BT_SERVICE_UUID  = '000018f0-0000-1000-8000-00805f9b34fb';
-const BT_CHAR_UUID     = '00002af1-0000-1000-8000-00805f9b34fb';
-
-// ถ้าตัวแรกไม่ได้ผล ลอง fallback UUID เหล่านี้
-const BT_SERVICE_FALLBACKS = [
-  '0000ff00-0000-1000-8000-00805f9b34fb',
-  '000018f0-0000-1000-8000-00805f9b34fb',
-  '00001101-0000-1000-8000-00805f9b34fb',
-];
-const BT_CHAR_FALLBACKS = [
-  '0000ff02-0000-1000-8000-00805f9b34fb',
-  '00002af1-0000-1000-8000-00805f9b34fb',
-];
-
-let btDevice = null;
-let btCharacteristic = null;
-
-// อัปเดต badge สถานะ
-function updateBtBadge() {
-  const badge = document.getElementById('btStatusBadge');
-  if (!badge) return;
-  if (btDevice && btCharacteristic) {
-    badge.className = 'bt-badge connected';
-    badge.innerHTML = `● เชื่อมต่อแล้ว: <strong>${btDevice.name || 'Printer'}</strong>`;
-  } else {
-    badge.className = 'bt-badge disconnected';
-    badge.innerHTML = '● ยังไม่ได้เชื่อมต่อ';
-  }
-  // อัปเดตปุ่มปริ้นใน receipt modal
-  const btnBt = document.getElementById('btnBtPrint');
-  if (btnBt) {
-    btnBt.style.opacity = (btCharacteristic) ? '1' : '0.5';
-    btnBt.title = (btCharacteristic) ? '' : 'กรุณาเชื่อมต่อ Bluetooth Printer ที่ ⚙️ ตั้งค่า ก่อนครับ';
-  }
-}
-
-// จับคู่และเชื่อมต่อ Bluetooth Printer
-async function connectBluetoothPrinter() {
-  if (!navigator.bluetooth) {
-    alert('❌ Browser นี้ไม่รองรับ Web Bluetooth\n\nกรุณาใช้ Chrome บน Android ครับ');
-    return;
-  }
-
-  try {
-    // แสดง device picker ให้เลือก printer
-    btDevice = await navigator.bluetooth.requestDevice({
-      acceptAllDevices: true,
-      optionalServices: BT_SERVICE_FALLBACKS
-    });
-
-    btDevice.addEventListener('gattserverdisconnected', () => {
-      btCharacteristic = null;
-      updateBtBadge();
-      console.log('Printer disconnected');
-    });
-
-    const server  = await btDevice.gatt.connect();
-
-    // ลองหา service จาก UUID list
-    let service = null;
-    for (const uuid of BT_SERVICE_FALLBACKS) {
-      try { service = await server.getPrimaryService(uuid); break; }
-      catch (e) { /* ลอง uuid ถัดไป */ }
-    }
-
-    if (!service) {
-      // ลอง list services ทั้งหมด แล้วเอาตัวแรก
-      const services = await server.getPrimaryServices();
-      if (services.length > 0) service = services[0];
-    }
-
-    if (!service) throw new Error('ไม่พบ Service ที่รองรับบน Printer นี้');
-
-    // ลองหา characteristic ที่ write ได้
-    let char = null;
-    const chars = await service.getCharacteristics();
-    for (const c of chars) {
-      if (c.properties.write || c.properties.writeWithoutResponse) {
-        char = c; break;
-      }
-    }
-
-    if (!char) throw new Error('ไม่พบ Characteristic ที่ write ได้บน Printer นี้');
-
-    btCharacteristic = char;
-    updateBtBadge();
-    alert(`✅ เชื่อมต่อสำเร็จ!\nPrinter: ${btDevice.name || 'Unknown'}`);
-
-  } catch (err) {
-    btDevice = null;
-    btCharacteristic = null;
-    updateBtBadge();
-    if (err.name !== 'NotFoundError') {
-      alert(`❌ เชื่อมต่อไม่สำเร็จ\n${err.message}`);
-    }
-  }
-}
-
-// ส่ง bytes ไปยัง Bluetooth printer (แบ่งเป็น chunk เพราะ BLE จำกัด 512 bytes/ครั้ง)
-async function sendBytesToPrinter(data) {
-  if (!btCharacteristic) throw new Error('ยังไม่ได้เชื่อมต่อ Printer');
-
-  // reconnect ถ้าหลุด
-  if (btDevice && !btDevice.gatt.connected) {
-    await btDevice.gatt.connect();
-  }
-
-  const CHUNK = 512;
-  for (let i = 0; i < data.length; i += CHUNK) {
-    const chunk = data.slice(i, i + CHUNK);
-    if (btCharacteristic.properties.writeWithoutResponse) {
-      await btCharacteristic.writeValueWithoutResponse(chunk);
-    } else {
-      await btCharacteristic.writeValue(chunk);
-    }
-    // หน่วงเล็กน้อยระหว่าง chunk
-    await new Promise(r => setTimeout(r, 30));
-  }
-}
-
-// สร้าง ESC/POS command สำหรับ 58mm (384 dots = 32 chars)
-function buildEscPos58mm(order, payerIdx) {
-  const W = 32; // ความกว้าง 58mm ≈ 32 ตัวอักษร
-
-  // helper: pad right
-  const padR = (s, len) => { s = String(s); return s.length >= len ? s.substring(0,len) : s + ' '.repeat(len - s.length); };
-  // helper: pad left
-  const padL = (s, len) => { s = String(s); return s.length >= len ? s.substring(0,len) : ' '.repeat(len - s.length) + s; };
-  // helper: 2-column row
-  const row2 = (left, right) => { const space = W - left.length - right.length; return left + (space > 0 ? ' '.repeat(space) : ' ') + right + '\n'; };
-  // helper: center
-  const center = (s) => { const pad = Math.max(0, Math.floor((W - s.length) / 2)); return ' '.repeat(pad) + s + '\n'; };
-  // helper: divider
-  const divider = () => '-'.repeat(W) + '\n';
-
-  // ตรวจสอบ payer
-  const isAll = payerIdx === 'all';
-  const payer = isAll
-    ? { name: order.payers[0].name, date: order.date || order.payers[0].date,
-        total: order.payers.reduce((s,p)=>s+p.total,0),
-        discount: order.payers.reduce((s,p)=>s+p.discount,0),
-        net: order.payers.reduce((s,p)=>s+p.net,0) }
-    : order.payers[parseInt(payerIdx)];
-
-  let billNo = order.billNumber || order.id;
-  if (!isAll && order.payers.length > 1) billNo += `-${parseInt(payerIdx)+1}`;
-
-  // รวมรายการ
-  const items = isAll ? order.itemsData : order.itemsData.filter(i => i.payerIdx == parseInt(payerIdx));
-  const grouped = {};
-  items.forEach(item => {
-    grouped[item.pkgId] = grouped[item.pkgId] || { label: item.label, price: item.price, cnt: 0 };
-    grouped[item.pkgId].cnt += 1;
-  });
-
-  // สร้าง bytes array
-  const ESC = 0x1B, GS = 0x1D;
-  const parts = [];
-  const enc = new TextEncoder();
-  const txt = (s) => parts.push(enc.encode(s));
-  const cmd = (...bytes) => parts.push(new Uint8Array(bytes));
-
-  // Initialize
-  cmd(ESC, 0x40);
-  // ฟอนต์เล็ก (Font B) เพื่อให้พอดีกับ 58mm
-  cmd(ESC, 0x4D, 0x01);
-
-  // Header
-  cmd(ESC, 0x61, 0x01); // center
-  txt('Geneus DNA\n');
-  txt('บ.จีเนียส เจเนติกส์ จก.\n');
-  txt(divider());
-
-  cmd(ESC, 0x61, 0x00); // left
-  if (order.eventName) txt(row2('งาน:', order.eventName.substring(0,20)));
-  txt(row2('บิล:', billNo));
-  txt(row2('วันที่:', (payer.date||'').substring(0,18)));
-  txt(row2('ลูกค้า:', (payer.name||'').substring(0,18)));
-  txt(divider());
-
-  // รายการสินค้า
-  Object.values(grouped).forEach(item => {
-    txt(`${item.label}\n`);
-    txt(row2(`  @${fmt(item.price)} x${item.cnt}`, `${fmt(item.price * item.cnt)} B`));
-  });
-
-  txt(divider());
-
-  // ยอดเงิน
-  txt(row2('รวม:', `${fmt(payer.total)} B`));
-  if (payer.discount > 0) txt(row2('ส่วนลด:', `-${fmt(payer.discount)} B`));
-
-  // ยอดสุทธิ bold
-  cmd(ESC, 0x45, 0x01); // bold on
-  txt(row2('ยอดสุทธิ:', `${fmt(payer.net)} B`));
-  cmd(ESC, 0x45, 0x00); // bold off
-
-  txt(divider());
-  cmd(ESC, 0x61, 0x01); // center
-  txt('ขอบคุณที่ไว้วางใจ\n');
-  txt('Geneus DNA\n');
-  txt('www.geneusdna.com\n');
-
-  // Feed + Cut
-  cmd(ESC, 0x64, 0x04); // feed 4 lines
-  cmd(GS, 0x56, 0x41, 0x03); // cut
-
-  // รวม parts ทั้งหมด
-  const totalLen = parts.reduce((s, p) => s + p.length, 0);
-  const result = new Uint8Array(totalLen);
-  let offset = 0;
-  parts.forEach(p => { result.set(p, offset); offset += p.length; });
-  return result;
-}
-
-// ปริ้นจาก Receipt Modal
-async function printViaBluetooth() {
-  if (!btCharacteristic) {
-    const goSettings = confirm('ยังไม่ได้เชื่อมต่อ Bluetooth Printer\n\nไปที่ ⚙️ ตั้งค่า เพื่อจับคู่ก่อนไหมครับ?');
-    if (goSettings) { closeReceiptModal(); switchTab('settings'); }
-    return;
-  }
-
-  const btn = document.getElementById('btnBtPrint');
-  const orig = btn.innerHTML;
-  btn.innerHTML = '⏳ กำลังส่ง...';
-  btn.disabled = true;
-
-  try {
-    const sel = document.getElementById('rcptPayerSelector');
-    const payerIdx = sel ? sel.value : 0;
-    const data = buildEscPos58mm(currentReceiptOrder, payerIdx);
-    await sendBytesToPrinter(data);
-    // ปิด modal หลังปริ้นสำเร็จ
-    setTimeout(() => closeReceiptModal(), 500);
-  } catch (err) {
-    if (err.message.includes('disconnected') || err.message.includes('GATT')) {
-      btCharacteristic = null; updateBtBadge();
-      alert('❌ Printer หลุดการเชื่อมต่อ\nกรุณาเชื่อมต่อใหม่ที่ ⚙️ ตั้งค่า');
-    } else {
-      alert('❌ ปริ้นไม่สำเร็จ: ' + err.message);
-    }
-  } finally {
-    btn.innerHTML = orig;
-    btn.disabled = false;
-  }
-}
-
-// ทดสอบปริ้น
-async function testBluetoothPrint() {
-  if (!btCharacteristic) {
-    alert('กรุณากดจับคู่ Bluetooth Printer ก่อนครับ');
-    return;
-  }
-  try {
-    const ESC = 0x1B, GS = 0x1D;
-    const enc = new TextEncoder();
-    const parts = [
-      new Uint8Array([ESC, 0x40]),
-      new Uint8Array([ESC, 0x61, 0x01]),
-      enc.encode('Geneus DNA POS\n'),
-      enc.encode('Bluetooth Test OK!\n'),
-      enc.encode('58mm Thermal Printer\n'),
-      enc.encode('------------------------\n'),
-      new Uint8Array([ESC, 0x64, 0x04]),
-      new Uint8Array([GS, 0x56, 0x41, 0x03]),
-    ];
-    const total = parts.reduce((s,p)=>s+p.length,0);
-    const data = new Uint8Array(total);
-    let off = 0; parts.forEach(p=>{data.set(p,off);off+=p.length;});
-    await sendBytesToPrinter(data);
-    alert('✅ ส่งคำสั่งทดสอบแล้ว ตรวจสอบที่เครื่องปริ้นครับ');
-  } catch (err) {
-    alert('❌ ทดสอบไม่สำเร็จ: ' + err.message);
-  }
-}
-
-// ════════════════════════════════════════════════
-// ── CONFIG & STATE (เดิม)
-// ════════════════════════════════════════════════
-const DEFAULT_CONFIG = {
-  googleSheetUrl: '',
-  event: { name: '', prefix: 'INV' },
-  promo: {
-    amtActive: false, amtStepReq: 15000, amtStepDisc: 1000,
-    qtyActive: false, qtyStepReq: 0, qtyStepDisc: 0,
-    giftActive: false, giftReq: 3, giftName: 'Standard 1 ชุด'
+  bkk_depart: {
+    icon:"🏛️", title:"สนามบินสุวรรณภูมิ (BKK)", time:"คืน 15 ต.ค. · ถึงก่อน 23:00 น.",
+    mapUrl:"https://www.google.com/maps/search/?api=1&query=Suvarnabhumi+Airport",
+    sections:[
+      {title:"⏰ ควรถึงสนามบินกี่โมง?", type:"text", body:"เที่ยวบิน Peach MM092 ออก <strong>01:15 น. ของวันที่ 16 ต.ค.</strong> (ตีหนึ่งกว่า)<br><br>แนะนำให้ถึงสนามบินสุวรรณภูมิ <strong>ภายใน 23:00 น. ของคืน 15 ต.ค.</strong> เพื่อให้มีเวลาเช็คอิน โหลดกระเป๋า และผ่านตรวจรักษาความปลอดภัยอย่างสบายใจ<br><br>⚠️ เคาน์เตอร์เช็คอิน Peach ปิดก่อนออกเดินทาง <strong>40 นาที</strong> (คือ 00:35 น.) — อย่ามาถึงดึกเกินไป!"},
+      {title:"🗂️ เวลาเปิด-ปิดเคาน์เตอร์ Peach MM092", type:"text", body:"เคาน์เตอร์เช็คอินเปิดก่อนออก <strong>3 ชั่วโมง</strong> คือประมาณ <strong>22:15 น. ของคืน 15 ต.ค.</strong><br>เคาน์เตอร์ปิด <strong>00:35 น.</strong> (ก่อนออก 40 นาที)<br>แนะนำไปถึงช่วง <strong>22:15–23:00 น.</strong>"},
+      {title:"📍 เคาน์เตอร์ Peach อยู่ที่ไหน?", type:"text", body:"สายการบิน Peach ใช้ <strong>เคาน์เตอร์แถว G</strong> ชั้น 4 (Departure Level) อาคารผู้โดยสารระหว่างประเทศ"},
+      {title:"🛍️ ร้านน่าแวะในสนามบิน", type:"lockers", items:[
+        {name:"King Power Duty Free (ชั้น 4)", desc:"ร้านใหญ่ที่สุด ขายน้ำหอม เครื่องสำอาง สุรา ช็อคโกแลต เปิดตลอด 24 ชั่วโมง"},
+        {name:"After You / MK / S&P", desc:"ร้านอาหารฝั่ง Airside เปิดถึงดึก เหมาะนั่งรอขึ้นเครื่องช่วง 23:00–01:00 น."},
+        {name:"7-Eleven Airside", desc:"เติมน้ำ ขนม มีทั้งโซน Check-in และหลัง Security"}
+      ]},
+      {title:"สิ่งที่ต้องเตรียม", type:"lockers", items:[
+        {name:"หนังสือเดินทาง", desc:"ตรวจสอบอายุให้มีอย่างน้อย 6 เดือน นับจากวันเดินทาง"},
+        {name:"Ticket Peach MM092", desc:"แสดง Booking reference รหัสการจอง"},
+        {name:"เงินเยนสด", desc:"เตรียมไว้สำหรับค่ารถไฟวันแรก ¥1,490 (Rapi:t) + ค่าอื่นๆ"}
+      ]}
+    ]
   },
-  packages: [
-    { id:'dog',    label:'Dog DNA',      price:5500, regPrice:6500,  cls:'tag-dog' },
-    { id:'std',    label:'Standard',     price:4500, regPrice:5900,  cls:'tag-std' },
-    { id:'prem',   label:'Premium',      price:6900, regPrice:8900,  cls:'tag-prem' },
-    { id:'plus',   label:'Premium Plus', price:9500, regPrice:11900, cls:'tag-plus' },
-    { id:'premex', label:'Exclusive',    price:8900, regPrice:11900, cls:'tag-premex' }
+
+  kix_arrive: {
+    icon:"🛬", title:"Kansai Airport (KIX)", time:"09:20 – ถึง Terminal 2",
+    mapUrl:"https://www.google.com/maps/search/?api=1&query=Kansai+International+Airport+Terminal+2",
+    sections:[
+      {title:"ประวัติและข้อมูล", type:"text", body:"สนามบินนานาชาติคันไซ เปิดใช้งานในปี 1994 สร้างอยู่บนเกาะเทียมกลางอ่าวโอซาก้า ออกแบบโดย เรนโซ เปียโน Terminal 2 เป็นอาคารสำหรับสายการบินโลว์คอสต์ (LCC) โดยเฉพาะ"},
+      {title:"Flow หลังลงเครื่อง", type:"text", body:"1. ผ่านตรวจคนเข้าเมือง (เตรียม Arrival Card ไว้ล่วงหน้า)<br>2. รับกระเป๋าสัมภาระ<br>3. เดินออกจากอาคารไปขึ้น Shuttle Bus ฟรีไป Terminal 1 เพื่อต่อรถไฟเข้าเมือง"}
+    ]
+  },
+
+  kix_shuttle_in: {
+    icon:"🚌", title:"Shuttle Bus ฟรี · T2 → T1", time:"ฟรี · ทุก 5-10 นาที",
+    sections:[
+      {title:"📍 จุดขึ้นบัส", type:"text", body:"หลังออกจากโซน Arrival ของ T2 เดินออกประตูอาคารฝั่งนอก จะเห็นป้าย <strong>Free Shuttle Bus to T1</strong> ทันที อยู่ <strong>ฝั่งขวามือ</strong> เดินประมาณ 1-2 นาที"},
+      {title:"🚌 รายละเอียดรถบัส", type:"lockers", items:[
+        {name:"ลักษณะรถ", desc:"รถบัสสีขาว-ส้ม ป้ายหน้ารถเขียนว่า T1 / Aeroplaza ชัดเจน"},
+        {name:"ความถี่", desc:"วิ่งทุก 5-10 นาที ตลอด 24 ชั่วโมง ไม่ต้องจองล่วงหน้า"},
+        {name:"ระยะเวลา / ค่าใช้จ่าย", desc:"ประมาณ 10-15 นาที · ฟรี 100%"}
+      ]},
+      {title:"🏢 ปลายทาง: Aeroplaza", type:"text", body:"อาคารเชื่อมระหว่าง T1 กับสถานีรถไฟ Nankai เมื่อลงจากบัสให้เดินเข้าอาคาร Aeroplaza แล้วขึ้นบันไดเลื่อนไปชั้น 2 จะเชื่อมต่อกับสถานี <strong>Nankai Airport Line</strong> โดยตรง"}
+    ]
+  },
+  kix_shuttle_out: {
+  icon:"🚌", title:"Shuttle Bus ขาออก · T1 → T2", time:"Day 6 · ฟรี · ทุก 5-10 นาที",
+  sections:[
+    {title:"📍 จุดขึ้นบัส (T1 → T2)", type:"text", body:"จากสถานี Nankai ที่ Aeroplaza ให้ลงมาชั้น 1 แล้วเดินออกประตูด้านนอกอาคาร จะเห็นป้าย <strong>Shuttle Bus to T2</strong> อยู่บริเวณ Bus Stop ด้านหน้าอาคาร<br><br>⚠️ เที่ยวบิน MM091 ออก <strong>19:30 น.</strong> — ควรถึง T2 ก่อน <strong>17:30 น.</strong> เพื่อเช็คอินและโหลดกระเป๋าอย่างสบายใจ"},
+    {title:"🚌 รายละเอียดรถบัส", type:"lockers", items:[
+      {name:"ลักษณะรถ", desc:"รถบัสสีขาว-ส้ม ป้ายหน้ารถเขียนว่า T2 ชัดเจน"},
+      {name:"ความถี่", desc:"วิ่งทุก 5-10 นาที ตลอด 24 ชั่วโมง ไม่ต้องจองล่วงหน้า"},
+      {name:"ระยะเวลา / ค่าใช้จ่าย", desc:"ประมาณ 10-15 นาที · ฟรี 100%"}
+    ]},
+    {title:"✅ Checklist ก่อนโหลดกระเป๋า", type:"lockers", items:[
+      {name:"ของเหลว / aerosol", desc:"ต้องอยู่ใน checked baggage ทั้งหมด หากเกิน 100ml ไม่สามารถนำขึ้นเครื่องได้"},
+      {name:"Tax Refund", desc:"ทำคืนภาษีที่เคาน์เตอร์ Tax Refund ใน T2 ก่อนผ่าน Immigration"},
+      {name:"Peach Counter T2", desc:"เคาน์เตอร์ Peach ปิดก่อนออก 40 นาที (18:50 น.) — อย่ามาช้า!"}
+    ]}
   ]
-};
+},
 
-let CONFIG = JSON.parse(JSON.stringify(DEFAULT_CONFIG));
-let cartByPayer = [{}, {}, {}, {}, {}, {}];
-let currentSlips = {};
-let salesHistory = [];
-let currentSplitCount = 1;
-let html5QrcodeScanner = null;
-let currentScanTarget = null;
+  rapit: {
+    icon:"🚆", title:"Nankai Rapi:t", time:"KIX ↔ Namba · ~38 นาที",
+    sections:[
+      {title:"รถไฟด่วนสุดเท่", type:"text", body:"Rapi:t (ราปิโต) เป็นรถไฟด่วนพิเศษดีไซน์เรโทร-ฟิวเจอร์ริสติก เปิดตัวพร้อมกับสนามบินคันไซในปี 1994 คำว่า 'Rapi:t' มาจากภาษาเยอรมันที่แปลว่าความรวดเร็ว วิ่งตรงจากสนามบินเข้าสู่ Namba ใช้เวลาเพียง 38 นาที"},
+      {title:"ข้อมูลสำคัญ", type:"tags", tags:[{text:"~38 นาที", cls:"blue"},{text:"¥1,490", cls:"red"},{text:"มีที่วางกระเป๋าเดินทาง", cls:"gold"}]}
+    ]
+  },
 
-const fmt = n => Math.round(n).toLocaleString('th-TH');
+  locker_namba: {
+    icon:"🧳", title:"ฝากกระเป๋าแถว Namba", time:"",
+    mapUrl:"https://www.google.com/maps/search/?api=1&query=Namba+Station+Coin+Lockers",
+    sections:[
+      {title:"ตัวเลือกจุดฝากกระเป๋า", type:"lockers", items:[
+        {name:"Coin Locker Namba Station", desc:"มีหลายจุดในสถานี Small ¥300 / Medium ¥500 / Large ¥700 ต่อวัน ใช้บัตร IC Card จ่ายได้เลย (ชั้น B1 ทางออก 11, 14)"},
+        {name:"ecbo cloak (แอปพลิเคชัน)", desc:"โหลดแอปล่วงหน้า จองที่ฝากกระเป๋าตามร้านค้าและคาเฟ่รอบสถานี ราคาเฉลี่ย ¥800/วัน"}
+      ]}
+    ]
+  },
 
-function showLoader(text) { document.getElementById('loaderText').innerText = text || 'กำลังโหลด...'; document.getElementById('globalLoader').style.display = 'flex'; }
-function hideLoader() { document.getElementById('globalLoader').style.display = 'none'; }
+  yasaka: {
+    icon:"🦁", title:"Namba Yasaka Shrine", time:"12:00 - 12:40",
+    mapUrl:"https://www.google.com/maps/search/?api=1&query=Namba+Yasaka+Shrine",
+    sections:[
+      {title:"สิงโตกลืนกินความโชคร้าย", type:"text", body:"ศาลเจ้าชินโตที่โดดเด่นด้วย <strong>เวทีรูปหัวสิงโตยักษ์ (Ema-den)</strong> สูงถึง 12 เมตร กว้าง 11 เมตร สร้างขึ้นในปี 1974 ฟันของสิงโตทำจากทองเหลือง<br><br>มีความเชื่อมาแต่โบราณว่าปากที่อ้ากว้างของสิงโตตัวนี้ จะช่วยกลืนกินวิญญาณชั่วร้ายและความโชคร้ายต่างๆ และดึงดูดโชคลาภด้านความสำเร็จและชัยชนะทางธุรกิจเข้ามาแทน"}
+    ]
+  },
 
-async function init() {
+  namba_food: {
+    icon:"🍜", title:"มื้อเที่ยงแถว Namba", time:"~13:00",
+    sections:[
+      {title:"โซนแนะนำ", type:"lockers", items:[
+        {name:"Namba City B1", desc:"ห้างใต้ดินติดสถานี มีร้านอาหารญี่ปุ่นทุกรูปแบบตั้งแต่ อุด้ง ราเมน ซูชิ ราคาเข้าถึงง่าย (¥800-1,500)"},
+        {name:"Dotonbori", desc:"เดินขึ้นไปทางเหนือ 5 นาที แหล่งสตรีทฟู้ดที่มีชีวิตชีวาที่สุดในโอซาก้า ทาโกะยากิและโอโคโนมิยากิร้อนๆ"}
+      ]}
+    ]
+  },
+
+  ghibli: {
+    icon:"🎎", title:"Ghibli Store PARCO Shinsaibashi", time:"~14:15",
+    mapUrl:"https://www.google.com/maps/search/?api=1&query=Donguri+Kyowakoku+Shinsaibashi+PARCO",
+    sections:[
+      {title:"โลกแห่งจิบลิ", type:"text", body:"Donguri Kyowakoku สาขา Shinsaibashi PARCO (ชั้น 6) เป็นหนึ่งในสาขาที่ใหญ่ที่สุดในคันไซ ทันทีที่ก้าวเข้าไปจะพบกับ <strong>โตโตโร่</strong> ขนาดยักษ์คอยต้อนรับ<br><br>อย่าลืมไปถ่ายรูปกับมุม <strong>ผีไร้หน้า (No-Face)</strong> สุดฮิตที่ด้านในร้าน!"}
+    ]
+  },
+
+  dotonbori: {
+    icon:"🐙", title:"Dotonbori", time:"~17:15",
+    mapUrl:"https://www.google.com/maps/search/?api=1&query=Dotonbori+Glico+Sign",
+    sections:[
+      {title:"ประวัติย่านแห่งความบันเทิง", type:"text", body:"คลองโดทงโบริขุดขึ้นเมื่อปี ค.ศ. 1612 โดย 'โดทง ยาสุอิ' พ่อค้าผู้มั่งคั่ง ในอดีตเต็มไปด้วยโรงละครคาบูกิ จนเกิดคำว่า <strong>'คุอิดาโอเระ (Kuidaore)' — กินจนกว่าจะล้มละลาย</strong> ซึ่งเป็นปรัชญาของชาวโอซาก้ามาจนถึงทุกวันนี้"},
+      {title:"Must Eat", type:"lockers", items:[
+        {name:"Takoyaki (ทาโกะยากิ)", desc:"ร้าน Kukuru หรือ Aizu Honten ลูกใหญ่ ไส้ปลาหมึกเด้ง · ¥700-900"},
+        {name:"Okonomiyaki (พิซซ่าญี่ปุ่น)", desc:"ร้าน Mizuno ยอดฮิตที่คนต่อคิวตลอด หรือ Fukutaro · ¥1,200-1,800"}
+      ]}
+    ]
+  },
+
+  hotel: {
+    icon:"🏨", title:"Hotel Hokke Club Osaka", time:"ย่าน Umeda",
+    mapUrl:"https://www.google.com/maps/search/?api=1&query=Hotel+Hokke+Club+Osaka",
+    sections:[
+      {title:"พักผ่อนสไตล์ญี่ปุ่น", type:"text", body:"โรงแรมตั้งอยู่ทำเลทอง เดินเพียง 5 นาทีจากสถานี Higashi-Umeda จุดเด่นที่สุดคือ <strong>ออนเซ็นรวม (Public Bath) บนชั้น 12</strong> ที่เปิดให้ผู้เข้าพักแช่ได้ฟรีตั้งแต่เช้าตรู่ไปจนถึงตีสอง!"}
+    ]
+  },
+
+  katsuo_ji: {
+    icon:"⛩️", title:"วัดคัตสึโอจิ (วัดดารุมะ)", time:"~10:00 · ¥500",
+    mapUrl:"https://www.google.com/maps/search/?api=1&query=Katsuoji+Temple",
+    sections:[
+      {title:"วัดแห่งชัยชนะ (Temple of Winner)", type:"text", body:"ก่อตั้งขึ้นตั้งแต่สมัยนารา (ค.ศ. 727) ครั้งหนึ่งจักรพรรดิเซวะได้มาสวดมนต์ขอให้ทรงหายประชวร และเมื่อพระองค์หายเป็นปกติ จึงพระราชทานชื่อวัดแปลว่า 'วัดที่ชนะพระราชา'<br><br>ปัจจุบันโด่งดังเรื่องตุ๊กตา <strong>ดารุมะสีแดง</strong> ที่คนนำมาขอพรเรื่องการสอบ ธุรกิจ หรือความรัก เมื่อสัมฤทธิ์ผลก็จะนำกลับมาถวายจนวางเต็มวัด"}
+    ]
+  },
+
+  taxi_minoh: {
+    icon:"🚕", title:"Taxi ไป Dainichi Parking", time:"~11:30",
+    mapUrl:"https://www.google.com/maps/search/?api=1&query=Minoh+Dainichi+Parking",
+    sections:[
+      {title:"แจ้งคนขับแท็กซี่", type:"text", body:"ยื่นประโยคด้านล่างนี้ให้คนขับ เพื่อไปจุดเริ่มเดินลงน้ำตกแบบไม่ต้องเดินสวนทางขึ้นเขาให้เหนื่อย!<br><br><strong style='color:var(--jp-red); font-size:18px;'>箕面大日駐車場までお願いします</strong><br><span style='color:#888'>(Minoo Dainichi Chushajo made onegaishimasu)</span>"}
+    ]
+  },
+
+  minoh_falls: {
+    icon:"💦", title:"น้ำตกมิโน (Minoh Falls)", time:"~11:45",
+    mapUrl:"https://www.google.com/maps/search/?api=1&query=Minoh+Falls",
+    sections:[
+      {title:"ธรรมชาติชานเมือง", type:"text", body:"น้ำตกมิโนะมีความสูง 33 เมตร ตั้งอยู่ในอุทยานแห่งชาติเมจิโนะโมะริ เป็นสถานที่ฝึกตนของนักบวชลัทธิชูเกนโดมาตั้งแต่ศตวรรษที่ 8 ในช่วงปลายเดือนตุลาคม ป่ารอบๆ จะเริ่มเปลี่ยนสีเป็นโทนเหลืองส้มสวยงามมาก"},
+      {title:"ขนมใบเมเปิ้ลทอด", type:"text", body:"ของกินห้ามพลาดคือ <strong>Momiji Tempura (โมมิจิ เทมปุระ)</strong> ทำจากใบเมเปิ้ลแท้ที่หมักเกลือ 1 ปีเต็มก่อนนำมาชุบแป้งทอดงา หวานมันกรุบกรอบ มีขายตามทางเดินลงเขา"}
+    ]
+  },
+
+  gacha: {
+    icon:"🎰", title:"Gachagacha no Mori", time:"15:15 - 16:00",
+    mapUrl:"https://www.google.com/maps/search/?api=1&query=Gachagacha+no+Mori+Osaka+Umeda+Chayamachi",
+    sections:[
+      {title:"ป่ากาชาปอง", type:"text", body:"ร้านตู้หมุนกาชาปองสุดอลังการในย่านชะยะมาจิ (Chayamachi) มีตู้ให้เลือกหมุนหลายร้อยตู้ ทั้งโมเดล ของจิ๋ว อนิเมะ สัตว์แปลกๆ แลกเหรียญรัวๆ ได้เลย!"}
+    ]
+  },
+
+  yodobashi: {
+    icon:"📷", title:"Yodobashi Camera & LINKS UMEDA", time:"16:10 - 17:45",
+    mapUrl:"https://www.google.com/maps/search/?api=1&query=Yodobashi+Camera+Multimedia+Umeda",
+    sections:[
+      {title:"สวรรค์นักช้อป", type:"text", body:"Yodobashi เป็นตึกขายเครื่องใช้ไฟฟ้า กล้อง ของเล่น เกม โทรศัพท์มือถือที่ใหญ่มาก ส่วน LINKS UMEDA ที่อยู่ติดกันจะมีร้าน Uniqlo, Muji และร้านอาหารเยอะแยะมากมาย"}
+    ]
+  },
+
+  okoppe: {
+    icon:"🥛", title:"Okoppe Milk Stand", time:"18:00 - 18:20",
+    mapUrl:"https://www.google.com/maps/search/?api=1&query=Hanshin+Umeda+Okoppe+Milk",
+    sections:[
+      {title:"ซอฟต์เสิร์ฟนมฮอกไกโด", type:"text", body:"ร้านตั้งอยู่ในชั้นใต้ดินของห้าง Hanshin Umeda ขายนมและไอศกรีมซอฟต์เสิร์ฟที่ใช้นมสดแท้จากฟาร์มในเมือง Okoppe ฮอกไกโด หอมมันนมเน้นๆ สายหวานห้ามพลาด"}
+    ]
+  },
+
+  ramen_zen: {
+    icon:"🍜", title:"Naniwa Menjiro ZEN", time:"18:40 - 19:40",
+    mapUrl:"https://www.google.com/maps/search/?api=1&query=Naniwa+Menjiro+ZEN",
+    sections:[
+      {title:"ราเมนมิชลินไกด์", type:"text", body:"ร้านราเมนที่ได้รับรางวัล Michelin Bib Gourmand น้ำซุปใสที่เคี่ยวอย่างพิถีพิถัน เส้นเหนียวนุ่ม มีให้เลือกทั้งแบบซุปโชยุ และซุปหอยลาย (Clam) แนะนำให้ลองมากๆ!"}
+    ]
+  },
+
+  byodoin: {
+    icon:"⛩️", title:"Byodo-in Temple & Uji", time:"~10:00 · ¥700",
+    mapUrl:"https://www.google.com/maps/search/?api=1&query=Byodoin+Temple",
+    sections:[
+      {title:"สวรรค์บนดินยุคเฮอัน", type:"text", body:"สร้างขึ้นในปี ค.ศ. 998 เดิมเป็นคฤหาสน์ตากอากาศของฟุจิวาระ โนะ มิจินางะ ต่อมาถูกเปลี่ยนเป็นวัดพุทธนิกายสุขาวดี อาคาร <strong>ศาลาฟีนิกซ์ (Phoenix Hall)</strong> สร้างขึ้นเพื่อจำลองพระราชวังในสรวงสวรรค์ รอดพ้นจากสงครามและอัคคีภัยมาเป็นพันปี"},
+      {title:"เกร็ดความรู้", type:"text", body:"ความงดงามของศาลาฟีนิกซ์ทำให้รัฐบาลญี่ปุ่นเลือกภาพนี้ไปตีพิมพ์บนด้านหลังของ <strong>เหรียญ 10 เยน</strong>!<br><br>ย่านเมือง Uji รอบๆ ยังเต็มไปด้วยร้านชาเขียวมัทฉะดั้งเดิม แนะนำแวะ <strong>Nakamura Tokichi</strong> สาขาริมแม่น้ำ"}
+    ]
+  },
+
+  fushimi: {
+    icon:"🦊", title:"Fushimi Inari Taisha", time:"~13:40",
+    mapUrl:"https://www.google.com/maps/search/?api=1&query=Fushimi+Inari+Taisha",
+    sections:[
+      {title:"เสาโทริอิหมื่นต้น", type:"text", body:"ศาลเจ้าชินโตเก่าแก่ที่ก่อตั้งมาตั้งแต่ปี ค.ศ. 711 อุทิศให้กับเทพอินาริ เทพเจ้าแห่งข้าว ความอุดมสมบูรณ์ และธุรกิจ มีเส้นทาง <strong>เสาโทริอิสีแดง (Senbon Torii)</strong> กว่าหมื่นต้นวางซ้อนกันต่อเนื่องขึ้นสู่ยอดเขาอินาริซัง"},
+      {title:"เคล็ดลับการเที่ยว", type:"text", body:"เส้นทางเดินครบรอบเขาใช้เวลาประมาณ 2-3 ชั่วโมง แต่สำหรับถ่ายรูป แค่เดินขึ้นไปถึงจุด <strong>Yotsutsuji (สี่แยกบนเขา)</strong> ก็ได้วิวและมุมสวยแล้ว ใช้เวลาประมาณ 30-40 นาที<br><br>⏰ ยิ่งเช้ายิ่งดี! ช่วง 14:00-16:00 คือช่วงที่คนมากที่สุด"}
+    ]
+  },
+
+  kiyomizu: {
+    icon:"🛕", title:"Kiyomizu-dera (วัดน้ำใส)", time:"~16:30 · ¥500",
+    mapUrl:"https://www.google.com/maps/search/?api=1&query=Kiyomizudera",
+    sections:[
+      {title:"สถาปัตยกรรมไร้ตะปู", type:"text", body:"ก่อตั้งเมื่อปี ค.ศ. 778 ก่อนที่เกียวโตจะเป็นเมืองหลวงเสียอีก ศาลาหลักมี <strong>ระเบียงไม้ (Kiyomizu Stage)</strong> ที่สร้างยื่นออกไปบนหน้าผาสูง 13 เมตร โดยไม่ใช้ตะปูแม้แต่ตัวเดียว"},
+      {title:"น้ำตก 3 สาย (Otowa Waterfall)", type:"text", body:"ด้านล่างของวัดมีน้ำตกไหลเป็น 3 สาย แต่ละสายให้พรต่างกัน: <strong>ความรัก · ความสำเร็จด้านการเรียน · อายุยืน</strong><br>กฎคือควรเลือกดื่มเพียงสายเดียว หากดื่มทั้ง 3 สายจะถือว่าโลภ"}
+    ]
+  },
+
+  sannenzaka: {
+    icon:"📸", title:"Sannenzaka / Yasaka Pagoda", time:"18:00 - 19:00",
+    mapUrl:"https://www.google.com/maps/search/?api=1&query=Sannenzaka+Kyoto",
+    sections:[
+      {title:"มนต์เสน่ห์เกียวโตยามค่ำ", type:"text", body:"ซันเน็นซากะและนิเน็นซากะ เป็นเส้นทางแสวงบุญโบราณที่ปูด้วยหิน อนุรักษ์บ้านเรือนไม้สไตล์ Machiya ของเกียวโตไว้ได้อย่างสมบูรณ์แบบ"},
+      {title:"จุดถ่ายรูปไฮไลท์", type:"text", body:"ทิวทัศน์ถนนหินที่มี <strong>เจดีย์ยาซากะ (Yasaka Pagoda)</strong> เจดีย์ 5 ชั้นสุดคลาสสิกเป็นฉากหลัง ถ่ายรูปตอนเปิดไฟยามค่ำคืนคือจุดเช็คอินที่ดีที่สุดของทริป<br><br>⚠️ ตำนาน: หากใครสะดุดล้มที่เนินนี้ จะโชคร้ายไป 3 ปี — ระวังสะดุดหินด้วยนะ!"}
+    ]
+  },
+
+  usj_open: {
+    icon:"🚪", title:"USJ Gate Open", time:"08:00-08:30",
+    mapUrl:"https://www.google.com/maps/search/?api=1&query=Universal+Studios+Japan",
+    sections:[
+      {title:"เคล็ดลับตอนเปิดประตู", type:"text", body:"USJ มักเปิดประตูก่อนเวลาทางการประมาณ 30-45 นาที เมื่อสแกนตั๋วผ่านประตูแล้ว สิ่งแรกที่ควรทำคือเปิดแอป USJ เพื่อกดจอง <strong>Area Timed Entry Ticket</strong> เข้าโซน Super Nintendo World ทันที (หากไม่ได้ซื้อ Express Pass)"}
+    ]
+  },
+
+  usj_rides: {
+    icon:"🎢", title:"รายการเครื่องเล่นห้ามพลาด", time:"ตลอดวัน",
+    sections:[
+      {title:"Super Nintendo World 🍄", type:"rides", items:[
+        {name:"Mario Kart: Koopa's Challenge", badge:"Express", desc:"สวมแว่น AR ขับรถแข่งมาริโอ้คาร์ทปาเต่าใส่ศัตรู"},
+        {name:"Mine Cart Madness™", badge:"Express", desc:"โซนใหม่ล่าสุด! นั่งรถรางตะลุยเหมืองป่าดงดิบ Donkey Kong Country"},
+        {name:"Yoshi's Adventure", badge:"Free", desc:"นั่งรถคุณโยชิชมวิวรอบโซน ถ่ายรูปสวยมาก"}
+      ]},
+      {title:"Wizarding World of Harry Potter 🧙", type:"rides", items:[
+        {name:"Harry Potter and the Forbidden Journey", badge:"Express", desc:"สุดยอดเครื่องเล่น 4D บินตามแฮร์รี่ไปในปราสาทฮอกวอตส์"},
+        {name:"Flight of the Hippogriff", badge:"Free", desc:"รถไฟเหาะกลางแจ้ง สนุกแบบไม่เวียนหัว"}
+      ]},
+      {title:"โซนคลาสสิค 🦕", type:"rides", items:[
+        {name:"Jurassic Park - The Ride", badge:"Free", desc:"ล่องเรือหนีทีเร็กซ์ เตรียมตัวเปียกได้เลย"},
+        {name:"JAWS", badge:"Free", desc:"เรือฉลามยักษ์สุดคลาสสิค พนักงานบิ๊วอารมณ์เก่งมาก"},
+        {name:"Hollywood Dream / Backdrop", badge:"Express", desc:"รถไฟเหาะสุดเสียว เลือกเพลงฟังชิลๆ ตอนดิ่งลงได้"}
+      ]}
+    ]
+  },
+
+  halloween: {
+    icon:"🧟", title:"Halloween Horror Nights", time:"18:00 เป็นต้นไป",
+    sections:[
+      {title:"เทศกาลฮาโลวีนระดับโลก", type:"text", body:"เมื่อถึงเวลา 18:00 น. บรรยากาศสวนสนุกจะเปลี่ยนไปทันที! นักแสดงที่แต่งตัวเป็นซอมบี้และสัตว์ประหลาดสุดสมจริงนับร้อยจะออกมาเดินเพ่นพ่านตามถนน (Street Zombies) แสงไฟจะหรี่ลง มีเสียงเลื่อยไฟฟ้าและเสียงกรีดร้อง<br><br>อีเวนต์นี้รวมอยู่ในตั๋วเข้าปกติแล้ว ถ้าใจกล้าพอห้ามพลาดเด็ดขาด!"}
+    ]
+  },
+
+  osaka_castle: {
+    icon:"🏯", title:"Osaka Castle", time:"~10:25 · ¥600",
+    mapUrl:"https://www.google.com/maps/search/?api=1&query=Osaka+Castle",
+    sections:[
+      {title:"ป้อมปราการแห่งโชกุน", type:"text", body:"สร้างขึ้นในปี 1583 โดย โทโยโทมิ ฮิเดโยชิ ไดเมียวผู้ยิ่งใหญ่ที่รวบรวมแผ่นดินญี่ปุ่นเป็นหนึ่งเดียว อย่างไรก็ตาม ปราสาทถูกเผาทำลายลงในสงครามกับตระกูลโทคุกาวะ (Siege of Osaka)"},
+      {title:"โครงสร้างปัจจุบัน", type:"text", body:"หอคอยปราสาทที่เห็นปัจจุบัน เป็นการสร้างขึ้นใหม่ด้วยโครงสร้างคอนกรีตในปี 1931 แต่ความยิ่งใหญ่ที่แท้จริงคือ <strong>กำแพงหินยักษ์ (Kiguseki)</strong> และคูน้ำลึกรอบปราสาท ที่ยังคงเป็นของแท้ดั้งเดิม"}
+    ]
+  },
+
+  kaiyukan: {
+    icon:"🐋", title:"Osaka Aquarium Kaiyukan", time:"~14:00 · ¥2,700",
+    mapUrl:"https://www.google.com/maps/search/?api=1&query=Osaka+Aquarium+Kaiyukan",
+    sections:[
+      {title:"วงแหวนแห่งไฟ", type:"text", body:"ไคยูคังเปิดตัวในปี 1990 ด้วยแนวคิดการออกแบบ 'วงแหวนแห่งไฟ' (Ring of Fire) ของมหาสมุทรแปซิฟิก ผู้เยี่ยมชมจะเริ่มเดินจากป่าดิบชื้นชั้นบนสุด แล้วค่อยๆ วนลาดลงมาสู่ใต้ท้องทะเลลึก"},
+      {title:"ราชาแห่งมหาสมุทร", type:"text", body:"ไฮไลท์คือแทงก์น้ำหลักที่จุน้ำถึง 5,400 ตัน เป็นบ้านของ <strong>ฉลามวาฬ (Whale Shark)</strong> ยักษ์ใจดี นอกจากนี้ยังมีโซนเพนกวิน โซนแมวน้ำ และโซนแมงกะพรุนที่จัดแสงสีไว้อย่างน่าพิศวง"}
+    ]
+  },
+
+  ferris: {
+    icon:"🎡", title:"Tempozan Giant Ferris Wheel", time:"~16:45 · ¥900",
+    mapUrl:"https://www.google.com/maps/search/?api=1&query=Tempozan+Ferris+Wheel",
+    sections:[
+      {title:"วิวอ่าวโอซาก้า", type:"text", body:"ชิงช้าสวรรค์เทมโปซาน ความสูง 112.5 เมตร (เคยเป็นชิงช้าสวรรค์ที่สูงที่สุดในโลกตอนสร้างเสร็จปี 1997) หมุนรอบละประมาณ 15 นาที<br><br>มาในช่วงบ่ายแก่ๆ จะได้เห็นวิวพระอาทิตย์ตกดินเหนืออ่าวโอซาก้า มี <strong>กระเช้าแบบใส (Transparent floor)</strong> สำหรับคนชอบความตื่นเต้น"}
+    ]
+  },
+
+  haruka: {
+    icon:"🚆", title:"JR Haruka Limited Express", time:"14:30 · ~47 นาที",
+    mapUrl:"https://www.google.com/maps/search/?api=1&query=Osaka+Station",
+    sections:[
+      {title:"นั่งตรงสู่สนามบิน", type:"text", body:"รถไฟด่วนพิเศษ Haruka ของ JR ปัจจุบันจอดที่สถานี <strong>Osaka Station (ชานชาลาใต้ดิน Umekita)</strong> แล้ว! สามารถขึ้นรถไฟจากอุเมดะตรงดิ่งเข้าสนามบินคันไซได้เลย ไม่ต้องไปต่อรถไฟที่อื่น ใช้เวลาประมาณ 47 นาที"}
+    ]
+  }
+
+}; // ── จบ POPUPS ──
+
+
+// ══════════════════════════════════════════════
+// 💬 POPUP ENGINE
+// ══════════════════════════════════════════════
+function openPopup(key) {
+  const d = POPUPS[key];
+  if (!d) return;
+
+  document.getElementById('p-icon').textContent = d.icon;
+  document.getElementById('p-title').textContent = d.title;
+  document.getElementById('p-time').textContent = d.time || '';
+
+  const body = document.getElementById('p-body');
+  body.innerHTML = '';
+
+  d.sections.forEach(sec => {
+    const wrap = document.createElement('div');
+    wrap.innerHTML = `<div class="popup-section-title">${sec.title}</div>`;
+
+    if (sec.type === 'text') {
+      const p = document.createElement('div');
+      p.className = 'popup-section-body';
+      p.innerHTML = sec.body;
+      wrap.appendChild(p);
+    }
+    else if (sec.type === 'tags') {
+      const tags = document.createElement('div');
+      tags.className = 'popup-tags';
+      sec.tags.forEach(t => {
+        const tag = document.createElement('span');
+        tag.className = `popup-tag ${t.cls || ''}`;
+        tag.textContent = t.text;
+        tags.appendChild(tag);
+      });
+      wrap.appendChild(tags);
+    }
+    else if (sec.type === 'lockers' || sec.type === 'food' || sec.type === 'rides') {
+      sec.items.forEach(item => {
+        const el = document.createElement('div');
+        el.className = 'locker-item';
+        if (sec.type === 'rides') {
+          el.innerHTML = `<div class="ride-row"><span class="ride-badge ${item.badge === 'Express' ? 'express' : 'free'}">${item.badge}</span><div><div class="locker-name">${item.name}</div><div class="locker-detail">${item.desc}</div></div></div>`;
+        } else {
+          el.innerHTML = `<div class="locker-name">${item.name}</div><div class="locker-detail">${item.desc}</div>`;
+        }
+        wrap.appendChild(el);
+      });
+    }
+
+    body.appendChild(wrap);
+  });
+
+  if (d.mapUrl) {
+    const btn = document.createElement('a');
+    btn.href = d.mapUrl;
+    btn.target = '_blank';
+    btn.className = 'btn-map';
+    btn.innerHTML = '🗺️ Google Maps';
+    body.appendChild(btn);
+  }
+
+  document.getElementById('overlay').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+
+function closePopup() {
+  document.getElementById('overlay').classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+function closeOnOverlay(e) {
+  if (e.target === document.getElementById('overlay')) closePopup();
+}
+
+
+// ══════════════════════════════════════════════
+// 🎨 THEME TOGGLE
+// ══════════════════════════════════════════════
+let isDark = false;
+
+function toggleTheme() {
+  isDark = !isDark;
+  applyTheme();
+  localStorage.setItem('osaka_theme', isDark ? 'dark' : 'light');
+}
+
+function applyTheme() {
+  document.documentElement.setAttribute('data-theme', isDark ? 'dark' : '');
+  document.getElementById('themeBtn').textContent = isDark ? '🌙' : '☀️';
+}
+
+
+// ══════════════════════════════════════════════
+// 🗂️ DAY NAVIGATION
+// ══════════════════════════════════════════════
+let currentDay = 0;
+const TOTAL_DAYS = 8;
+
+function switchDay(idx) {
+  document.querySelectorAll('.day-panel').forEach((p, i) => p.classList.toggle('active', i === idx));
+  document.querySelectorAll('.tab').forEach((t, i) => t.classList.toggle('active', i === idx));
+  document.querySelectorAll('.tab')[idx]?.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+  currentDay = idx;
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+  localStorage.setItem('osaka_day', idx);
+}
+
+
+// ══════════════════════════════════════════════
+// ✅ CHECKLIST
+// ══════════════════════════════════════════════
+function toggleCheck(el) {
+  el.classList.toggle('done');
+  el.querySelector('.check-box').textContent = el.classList.contains('done') ? '✓' : '';
+  saveChecks();
+}
+
+function saveChecks() {
   try {
-    const res = await fetch('config.json?v=' + new Date().getTime());
-    if (res.ok) {
-      const fetchedConfig = await res.json();
-      CONFIG = { ...DEFAULT_CONFIG, ...fetchedConfig };
-      localStorage.setItem('geneus_pos_config', JSON.stringify(CONFIG));
-    } else { loadLocalConfig(); }
-  } catch (err) { loadLocalConfig(); }
+    const checks = [];
+    document.querySelectorAll('.check-item').forEach(el => checks.push(el.classList.contains('done')));
+    localStorage.setItem('osaka_checks', JSON.stringify(checks));
+  } catch(e) {}
+}
 
-  populateSettingsUI();
-  buildPOSUI();
-  applyConfig();
-  updateBtBadge();
 
-  if(CONFIG.googleSheetUrl && CONFIG.googleSheetUrl !== "") {
-     fetchHistoryFromCloud();
-  } else {
-     const savedHistory = localStorage.getItem('geneus_pos_history');
-     if (savedHistory) { try { salesHistory = JSON.parse(savedHistory); } catch(e){} }
-     renderHistory();
+// ══════════════════════════════════════════════
+// 🔝 SCROLL TO TOP
+// ══════════════════════════════════════════════
+function scrollToTop() {
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+
+// ══════════════════════════════════════════════
+// 🏔️ HERO HIDE + PARALLAX ON SCROLL
+// ══════════════════════════════════════════════
+let ticking = false;
+
+document.addEventListener('scroll', () => {
+  if (!ticking) {
+    requestAnimationFrame(() => {
+      const scrollY = window.scrollY;
+      const hero = document.getElementById('hero');
+      const themeBtn = document.getElementById('themeBtn');
+
+      document.body.style.setProperty('--parallax-y', `${-scrollY * 0.3}px`);
+
+      const isScrolledPastHero = scrollY > 60;
+      hero.classList.toggle('hidden', isScrolledPastHero);
+      themeBtn.classList.toggle('hidden', isScrolledPastHero);
+
+      ticking = false;
+    });
+    ticking = true;
   }
-}
+});
 
-function loadLocalConfig() {
-  const savedConfig = localStorage.getItem('geneus_pos_config');
-  if (savedConfig) {
-    try {
-      const parsed = JSON.parse(savedConfig);
-      CONFIG = { ...DEFAULT_CONFIG, ...parsed };
-      if(!parsed.event) CONFIG.event = DEFAULT_CONFIG.event;
-      if(typeof parsed.googleSheetUrl !== 'undefined') CONFIG.googleSheetUrl = parsed.googleSheetUrl;
-      if (parsed.promo) {
-         if (typeof parsed.promo.amtActive === 'undefined') CONFIG.promo.amtActive = parsed.promo.amtStepReq > 0;
-         if (typeof parsed.promo.qtyActive === 'undefined') CONFIG.promo.qtyActive = parsed.promo.qtyStepReq > 0;
-         if (typeof parsed.promo.giftActive === 'undefined') CONFIG.promo.giftActive = parsed.promo.giftReq > 0;
-      }
-    } catch(e){}
-  }
-}
-
-function switchTab(tabId) {
-  document.querySelectorAll('.content').forEach(c => c.classList.remove('active'));
-  document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
-  document.getElementById(`tab-${tabId}`).classList.add('active');
-  document.getElementById(`btn-${tabId}`).classList.add('active');
-  if(tabId === 'presentation') renderPresentation();
-  if(tabId === 'settings') updateBtBadge();
-}
-
-async function fetchHistoryFromCloud(silent = false) {
-   if (!CONFIG.googleSheetUrl) return;
-   if(!silent) showLoader('กำลังดึงประวัติออเดอร์จาก Cloud...');
-   try {
-      const res = await fetch(CONFIG.googleSheetUrl + '?action=get_history');
-      if(res.ok) {
-         const data = await res.json();
-         if(Array.isArray(data)) { salesHistory = data; localStorage.setItem('geneus_pos_history', JSON.stringify(salesHistory)); renderHistory(); }
-      }
-   } catch(e) {
-      if(!silent) alert('ไม่สามารถดึงข้อมูลประวัติจาก Cloud ได้ จะใช้ข้อมูลล่าสุดในเครื่องแทน');
-      const savedHistory = localStorage.getItem('geneus_pos_history');
-      if (savedHistory) { try { salesHistory = JSON.parse(savedHistory); renderHistory(); } catch(err){} }
-   } finally { if(!silent) hideLoader(); }
-}
-
-function openScanner(targetKey) {
-  currentScanTarget = targetKey;
-  document.getElementById('scannerModal').style.display = 'flex';
-  if(!html5QrcodeScanner) html5QrcodeScanner = new Html5Qrcode("reader");
-  html5QrcodeScanner.start(
-    { facingMode: "environment" },
-    { fps: 30, qrbox: function(w,h){ var m=Math.min(w,h); return {width:Math.floor(m*0.8),height:Math.floor(m*0.8)}; }, aspectRatio: 1.0 },
-    (decodedText) => { const input = document.querySelector(`input[data-key="${currentScanTarget}"]`); if(input) input.value = decodedText; closeScanner(); },
-    () => {}
-  ).catch((err) => { alert("ไม่สามารถเข้าถึงกล้องได้: " + err); closeScanner(); });
-}
-
-function closeScanner() {
-  if(html5QrcodeScanner) { html5QrcodeScanner.stop().then(() => html5QrcodeScanner.clear()).catch(()=>{}); }
-  document.getElementById('scannerModal').style.display = 'none';
-}
-
-function calculatePromo(totalEvent, qty) {
-  let disc = 0, gifts = 0, giftText = '';
-  if (CONFIG.promo.amtActive && CONFIG.promo.amtStepReq > 0) disc += Math.floor(totalEvent / CONFIG.promo.amtStepReq) * CONFIG.promo.amtStepDisc;
-  if (CONFIG.promo.qtyActive && CONFIG.promo.qtyStepReq > 0) disc += Math.floor(qty / CONFIG.promo.qtyStepReq) * CONFIG.promo.qtyStepDisc;
-  if (CONFIG.promo.giftActive && CONFIG.promo.giftReq > 0) { gifts = Math.floor(qty / CONFIG.promo.giftReq); if (gifts > 0) giftText = `แถม ${CONFIG.promo.giftName} ${gifts > 1 ? '(x'+gifts+')' : ''}`; }
-  return { disc, gifts, giftText };
-}
-
-function applyConfig() { for(let i=0;i<6;i++) updatePayerCartUI(i); updateGlobalTotals(); renderPresentation(); }
-
-function changeItemQtyGlobal(id, delta, e) {
-  if (e) e.stopPropagation();
-  let totalQty = 0; for(let i=0;i<6;i++) Object.values(cartByPayer[i]).forEach(c=>totalQty+=c);
-  if (delta > 0 && totalQty >= 6) { alert('จำกัดสูงสุด 6 ชุดต่อ 1 บิลครับ'); return; }
-  if (delta > 0) { changeItemQty(0, id, 1, null); }
-  else { for(let i=5;i>=0;i--) { if(cartByPayer[i][id]>0) { changeItemQty(i,id,-1,null); break; } } }
-}
-
-function changeItemQty(payerIdx, id, delta, e) {
-  if (e) e.stopPropagation();
-  let totalQty = 0; for(let i=0;i<6;i++) Object.values(cartByPayer[i]).forEach(c=>totalQty+=c);
-  if (delta > 0 && totalQty >= 6) { alert('จำกัดสูงสุด 6 ชุดต่อ 1 บิลครับ'); return; }
-  const current = cartByPayer[payerIdx][id] || 0; const newVal = current + delta;
-  if (newVal <= 0) delete cartByPayer[payerIdx][id]; else cartByPayer[payerIdx][id] = newVal;
-  updatePayerCartUI(payerIdx); updateGlobalTotals(); renderPresentation();
-}
-
-function clearCalc() {
-  cartByPayer = [{},{},{},{},{},{}]; currentSlips = {}; setSplitCount(1);
-  const now = new Date();
-  const defaultDate = now.toLocaleDateString('en-CA');
-  const defaultTime = now.toLocaleTimeString('en-GB', { hour: '2-digit', minute: '2-digit' });
-  for(let i=0;i<6;i++) {
-    if(document.getElementById(`payerName_${i}`)) document.getElementById(`payerName_${i}`).value = '';
-    if(document.getElementById(`payerContact_${i}`)) document.getElementById(`payerContact_${i}`).value = '';
-    if(document.getElementById(`payerDate_${i}`)) document.getElementById(`payerDate_${i}`).value = defaultDate;
-    if(document.getElementById(`payerTime_${i}`)) document.getElementById(`payerTime_${i}`).value = defaultTime;
-    if(document.getElementById(`payerMethod_${i}`)) document.getElementById(`payerMethod_${i}`).value = 'Bank Transfer';
-    const fileInput = document.getElementById(`payerSlip_${i}`); if(fileInput) fileInput.value = '';
-    const preview = document.getElementById(`slipPreview_${i}`); if(preview){preview.src='';preview.style.display='none';}
-    updatePayerCartUI(i);
-  }
-  updateGlobalTotals(); renderPresentation();
-}
-
-function buildPOSUI() {
-   const container = document.getElementById('payersContainer'); let html = '';
-   const now = new Date(); const defaultDate = now.toLocaleDateString('en-CA'); const defaultTime = now.toLocaleTimeString('en-GB', { hour: '2-digit', minute: '2-digit' });
-   for(let i=0;i<6;i++) {
-     html += `<div class="payer-block" id="payerBlock_${i}" style="display:${i===0?'block':'none'}; border:1px solid var(--border); padding:16px; border-radius:12px; margin-bottom:16px; background:var(--card2); box-shadow: 0 2px 8px rgba(0,0,0,0.02);">
-       <h4 style="margin-bottom:16px; color:var(--accent); display:flex; justify-content:space-between; align-items:center;"><span style="font-size:16px;">👤 ลูกค้าท่านที่ ${i+1}</span><span id="payerSubtotal_${i}" style="color:var(--text); font-size:14px; font-weight:800;">0 ฿</span></h4>
-       <div style="margin-bottom:16px; border-bottom:1px dashed var(--border); padding-bottom:16px;"><label style="display:block; font-size:13px; font-weight:700; color:var(--muted); margin-bottom:10px;">📦 1. เลือกแพ็กเกจชุดตรวจให้ท่านที่ ${i+1}</label><div class="pkg-grid" id="pkgButtons_${i}"></div></div>
-       <div style="margin-bottom:16px; border-bottom:1px dashed var(--border); padding-bottom:16px;"><label style="display:block; font-size:13px; font-weight:700; color:var(--muted); margin-bottom:8px;">📝 2. ข้อมูลและการชำระเงินของท่านที่ ${i+1}</label>
-         <div class="form-row-2"><div class="form-group"><label>ชื่อลูกค้า</label><input type="text" id="payerName_${i}" class="form-input" placeholder="ชื่อ-นามสกุล"></div><div class="form-group"><label>เบอร์โทรศัพท์</label><input type="tel" id="payerContact_${i}" class="form-input" placeholder="08X-XXX-XXXX"></div></div>
-         <div class="form-row-2"><div class="form-group"><label>วันที่ชำระ</label><input type="date" id="payerDate_${i}" class="form-input" value="${defaultDate}"></div><div class="form-group"><label>เวลา</label><input type="time" id="payerTime_${i}" class="form-input" value="${defaultTime}"></div></div>
-         <div class="form-group" style="margin-top:8px;"><label>วิธีชำระเงิน</label><select id="payerMethod_${i}" class="form-input"><option value="Bank Transfer">โอนเงิน (Bank Transfer)</option><option value="Credit Card">บัตรเครดิต (Credit Card)</option><option value="Cash">เงินสด (Cash)</option><option value="Installment">ผ่อนชำระ (Installment)</option></select></div>
-         <div class="form-group" style="margin-top:8px;"><label>แนบสลิป/หลักฐาน</label><input type="file" id="payerSlip_${i}" accept="image/*" class="form-input" onchange="handleMultiUpload(event, ${i})" style="padding:6px; font-size:12px;"><img id="slipPreview_${i}" style="display:none; max-width:100px; margin-top:8px; border-radius:4px; border:1px solid var(--border);"></div></div>
-       <div class="form-group" style="margin-top:8px;"><label style="display:block; font-size:13px; font-weight:700; color:var(--muted); margin-bottom:8px;">📸 3. สแกนบาร์โค้ดของท่านที่ ${i+1}</label><div id="barcodesContainer_${i}"></div></div>
-     </div>`;
-   }
-   container.innerHTML = html;
-}
-
-function updatePayerCartUI(payerIdx) {
-  const cart = cartByPayer[payerIdx]; const wrap = document.getElementById('pkgButtons_'+payerIdx); if(!wrap) return;
-  wrap.innerHTML = ''; wrap.style.gap = '16px 8px';
-  CONFIG.packages.forEach(p => {
-    const cnt = cart[p.id] || 0; const b = document.createElement('div');
-    b.className = 'pkg-btn' + (cnt > 0 ? ' selected' : ''); b.dataset.id = p.id;
-    let inner = `<span class="btn-name">${p.label}</span><span class="btn-reg">${fmt(p.regPrice)} ฿</span><span class="btn-price">${fmt(p.price)} ฿</span>`;
-    if (cnt > 0) inner += `<div class="pkg-qty-ctrl"><div class="ctrl-minus" onclick="changeItemQty(${payerIdx}, '${p.id}', -1, event)">−</div><div class="ctrl-val">${cnt}</div><div class="ctrl-plus" onclick="changeItemQty(${payerIdx}, '${p.id}', 1, event)">+</div></div>`;
-    b.innerHTML = inner; if(cnt === 0) b.addEventListener('click', (e) => changeItemQty(payerIdx, p.id, 1, e));
-    wrap.appendChild(b);
-  });
-  const bcWrap = document.getElementById('barcodesContainer_'+payerIdx); let saved = {};
-  bcWrap.querySelectorAll('.barcode-row').forEach(row => { const input = row.querySelector('.pos-barcode'); if(input) saved[input.dataset.key] = input.value; });
-  let bcHtml = '';
-  Object.entries(cart).forEach(([id, cnt]) => {
-     const p = CONFIG.packages.find(x => x.id === id);
-     for(let i=0;i<cnt;i++) {
-        const key = `pos_${payerIdx}_${id}_${i}`; const val = saved[key] || '';
-        bcHtml += `<div class="barcode-row" style="background:#fff; padding:12px; border-radius:8px; margin-bottom:8px; border:1px dashed var(--border);"><div style="font-weight:700; color:var(--accent2); margin-bottom:8px; font-size:13px;">${p.label} (กล่องที่ ${i+1})</div><div style="display:flex; gap:8px;"><input type="text" class="form-input pos-barcode" style="flex:1;" placeholder="สแกน หรือ พิมพ์บาร์โค้ด" data-key="${key}" value="${val}"><button type="button" class="btn-scan" onclick="openScanner('${key}')">📷 สแกน</button></div></div>`;
-     }
-  });
-  if(Object.keys(cart).length === 0) bcHtml = `<div style="text-align:center; color:var(--muted); font-size:12px; padding:10px;">โปรดเลือกแพ็กเกจด้านบนเพื่อแสดงช่องสแกนบาร์โค้ด</div>`;
-  bcWrap.innerHTML = bcHtml;
-}
-
-function updateGlobalTotals() {
-  let totalQty=0,totalEventPrice=0,payerSubtotals=[0,0,0,0,0,0],mergedCart={};
-  for(let i=0;i<6;i++) { Object.entries(cartByPayer[i]).forEach(([id,cnt])=>{ const p=CONFIG.packages.find(x=>x.id===id); if(p){totalQty+=cnt;totalEventPrice+=p.price*cnt;payerSubtotals[i]+=p.price*cnt;mergedCart[id]=(mergedCart[id]||0)+cnt;} }); }
-  const promo=calculatePromo(totalEventPrice,totalQty); const finalAmt=totalEventPrice-promo.disc; const exactDiscPerItem=totalQty>0?(promo.disc/totalQty):0;
-  const res=document.getElementById('calcResult');
-  if(totalQty===0){res.innerHTML='<div class="calc-empty">👆 กรุณาเลือกจำนวนผู้ชำระเงิน และเลือกแพ็กเกจด้านบนครับ</div>';}
-  else {
-    let breakdownHtml='';
-    if(currentSplitCount>1||promo.disc>0){breakdownHtml=`<div style="background:var(--card2);border-radius:12px;padding:12px;margin-bottom:12px;border:1px dashed var(--border);"><div style="font-size:13px;font-weight:700;color:var(--accent);margin-bottom:8px;">💡 สรุปยอดแยกตามแพ็กเกจ (หลังหักส่วนลดเฉลี่ย)</div>${Object.entries(mergedCart).map(([id,cnt])=>{const p=CONFIG.packages.find(x=>x.id===id);const netPerItem=p.price-exactDiscPerItem;const showNet=netPerItem%1===0?fmt(netPerItem):netPerItem.toLocaleString('th-TH',{minimumFractionDigits:2,maximumFractionDigits:2});return`<div style="display:flex;justify-content:space-between;align-items:center;font-size:14px;margin-bottom:4px;padding-bottom:4px;border-bottom:1px solid #f1f5f9;"><span style="color:var(--text);">${p.label} <span style="font-size:11px;color:var(--muted);">(x${cnt})</span></span><span style="font-weight:800;color:var(--accent2);">${showNet} ฿/ชุด</span></div>`;}).join('')}</div>`;}
-    res.innerHTML=`${breakdownHtml}<div class="summary-row event"><span>รวมราคาชุดตรวจทั้งหมด (${totalQty} ชุด):</span><span>${fmt(totalEventPrice)} ฿</span></div>${promo.disc>0?`<div class="summary-row discount"><span>ส่วนลด On-Top รวม:</span><span>-${fmt(promo.disc)} ฿</span></div>`:''} ${promo.gifts>0?`<div class="summary-row gift"><span>🎉 ได้รับของแถม:</span><span>${promo.giftText}</span></div>`:''}<div class="summary-row final"><span>ยอดรวมสุทธิทั้งบิล:</span><span>${fmt(finalAmt)} ฿</span></div>`;
-  }
-  for(let i=0;i<6;i++){const subLabel=document.getElementById('payerSubtotal_'+i);if(subLabel){let pQty=0;Object.values(cartByPayer[i]).forEach(c=>pQty+=c);let pNet=payerSubtotals[i]-(exactDiscPerItem*pQty);let showPNet=pNet%1===0?fmt(pNet):pNet.toLocaleString('th-TH',{minimumFractionDigits:2,maximumFractionDigits:2});subLabel.innerHTML=`รวม <span style="color:var(--accent);">${showPNet} ฿</span>`;}}
-}
-
-function setSplitCount(val) {
-   currentSplitCount=parseInt(val);
-   for(let i=0;i<6;i++){if(i>=currentSplitCount){let hasItems=false;for(let pkgId in cartByPayer[i]){cartByPayer[0][pkgId]=(cartByPayer[0][pkgId]||0)+cartByPayer[i][pkgId];hasItems=true;}if(hasItems)cartByPayer[i]={};}}
-   const pSel=document.getElementById('presSplitCount');if(pSel)pSel.value=currentSplitCount;
-   const posSel=document.getElementById('splitCount');if(posSel)posSel.value=currentSplitCount;
-   for(let i=0;i<6;i++){const block=document.getElementById('payerBlock_'+i);if(block)block.style.display=i<currentSplitCount?'block':'none';updatePayerCartUI(i);}
-   updateGlobalTotals(); renderPresentation();
-}
-
-function handleMultiUpload(e,idx){const file=e.target.files[0];if(!file)return;const reader=new FileReader();reader.onload=function(event){const img=new Image();img.onload=function(){const canvas=document.createElement('canvas');let width=img.width,height=img.height;if(width>600){height*=600/width;width=600;}canvas.width=width;canvas.height=height;const ctx=canvas.getContext('2d');ctx.drawImage(img,0,0,width,height);currentSlips[idx]=canvas.toDataURL('image/jpeg',0.5);const preview=document.getElementById('slipPreview_'+idx);preview.src=currentSlips[idx];preview.style.display='block';};img.src=event.target.result;};reader.readAsDataURL(file);}
-
-function renderPresentation() {
-  const presWrap=document.getElementById('presentationWrap');if(!presWrap)return;
-  let mergedCart={},totalQty=0;
-  for(let i=0;i<6;i++){Object.entries(cartByPayer[i]).forEach(([id,cnt])=>{mergedCart[id]=(mergedCart[id]||0)+cnt;totalQty+=cnt;});}
-  let html=`<div class="form-group" style="margin-bottom:20px;background:#fff;padding:16px;border-radius:12px;border:1px solid var(--border);box-shadow:0 4px 15px rgba(0,0,0,0.05);text-align:center;"><label style="color:var(--accent);font-size:16px;font-weight:900;margin-bottom:12px;display:block;">👥 จำนวนผู้ชำระเงิน (รวมบิลเพื่อรับโปรฯ)</label><select id="presSplitCount" class="form-input" style="border-color:var(--accent);font-weight:bold;font-size:16px;text-align:center;" onchange="setSplitCount(this.value)">${[1,2,3,4,5,6].map(n=>`<option value="${n}" ${currentSplitCount===n?'selected':''}>${n} ท่าน ${n===1?'(จ่ายก้อนเดียว)':'(แยกจ่าย)'}</option>`).join('')}</select></div>`;
-
-  const totalRegPrice=Object.entries(mergedCart).reduce((s,[id,cnt])=>s+CONFIG.packages.find(x=>x.id===id).regPrice*cnt,0);
-  const totalEventPrice=Object.entries(mergedCart).reduce((s,[id,cnt])=>s+CONFIG.packages.find(x=>x.id===id).price*cnt,0);
-  const promo=calculatePromo(totalEventPrice,totalQty);
-  const finalAmt=totalEventPrice-promo.disc;
-  const totalSaved=totalRegPrice-finalAmt;
-  const savedPerc=totalRegPrice>0?Math.round((totalSaved/totalRegPrice)*100):0;
-  const exactDiscPerItem=totalQty>0?(promo.disc/totalQty):0;
-
-  for(let i=0;i<currentSplitCount;i++){
-     let payerTotal=0,payerQty=0,pkgButtonsHtml='';
-     CONFIG.packages.forEach(p=>{
-        const cnt=cartByPayer[i][p.id]||0;
-        if(cnt>0){payerTotal+=p.price*cnt;payerQty+=cnt;}
-        const selectedCls=cnt>0?'selected':'';
-        let badge=cnt>0?`<div class="pkg-qty-ctrl"><div class="ctrl-minus" onclick="changeItemQty(${i},'${p.id}',-1,event)">−</div><div class="ctrl-val">${cnt}</div><div class="ctrl-plus" onclick="changeItemQty(${i},'${p.id}',1,event)">+</div></div>`:'';
-        let clickAttr=cnt===0?`onclick="changeItemQty(${i},'${p.id}',1,event)"`:'';
-        pkgButtonsHtml+=`<div class="pkg-btn ${selectedCls}" data-id="${p.id}" ${clickAttr} style="min-height:100px;margin-bottom:8px;"><span class="btn-name">${p.label}</span><span class="btn-reg">${fmt(p.regPrice)} ฿</span><span class="btn-price" style="font-size:clamp(14px,2.5vw,18px);">${fmt(p.price)} ฿</span>${badge}</div>`;
-     });
-     let payerDisc=exactDiscPerItem*payerQty;let payerNet=payerTotal-payerDisc;
-     let showPayerNet=payerNet%1===0?fmt(payerNet):payerNet.toLocaleString('th-TH',{minimumFractionDigits:2,maximumFractionDigits:2});
-     let titleText=currentSplitCount>1?`👤 ลูกค้าท่านที่ ${i+1}`:'💡 เลือกลองจัดแพ็กเกจด้วยตัวคุณเอง';
-     html+=`<div style="background:#fff;border-radius:16px;padding:16px;margin-bottom:16px;border:1px solid var(--border);box-shadow:0 4px 10px rgba(0,0,0,0.03);"><h3 style="color:var(--accent2);margin-bottom:12px;border-bottom:1px dashed var(--border);padding-bottom:8px;text-align:center;">${titleText}</h3><div class="pkg-grid">${pkgButtonsHtml}</div>${payerQty>0&&currentSplitCount>1?`<div style="background:var(--card2);border-radius:12px;padding:12px;margin-top:12px;border:1px solid #cbd5e1;"><div style="display:flex;justify-content:space-between;margin-bottom:4px;font-size:14px;color:var(--muted);"><span>รวมราคาหน้างาน:</span><span>${fmt(payerTotal)} ฿</span></div>${payerDisc>0?`<div style="display:flex;justify-content:space-between;margin-bottom:4px;font-size:14px;color:var(--gold);font-weight:700;"><span>ส่วนลด On-top หารเฉลี่ย:</span><span>-${fmt(payerDisc)} ฿</span></div>`:''}<div style="display:flex;justify-content:space-between;font-weight:900;font-size:18px;color:var(--accent);margin-top:8px;border-top:1px dashed var(--border);padding-top:8px;"><span>ยอดโอนของท่านที่ ${i+1}:</span><span>${showPayerNet} ฿</span></div></div>`:''}</div>`;
-  }
-
-  if(totalQty===0){html+=`<div class="calc-empty" style="margin-top:20px;font-size:16px;">👆 แตะเลือกแพ็กเกจด้านบนเพื่อดูสรุปความคุ้มค่าครับ</div>`;presWrap.innerHTML=html;return;}
-
-  let giftHtml=promo.gifts>0?`<div style="background:var(--tag-std-bg);border:1px solid var(--tag-std);color:var(--accent);padding:16px;border-radius:12px;margin-top:16px;font-weight:800;text-align:center;font-size:clamp(16px,2.5vw,20px);">🎁 รับของแถมฟรี! ${promo.giftText}</div>`:'';
-  let breakdownHtml=`<div style="background:#fff;border-radius:12px;padding:16px;margin:16px 0;border:1px solid var(--accent);box-shadow:0 4px 10px rgba(5,150,105,0.05);"><h4 style="color:var(--accent);margin-bottom:12px;text-align:center;font-size:16px;">💰 ยอดโอนสำหรับแยกจ่าย (ต่อชุด)</h4>${Object.entries(mergedCart).map(([id,cnt])=>{const p=CONFIG.packages.find(x=>x.id===id);const netPerItem=p.price-exactDiscPerItem;const showNet=netPerItem%1===0?fmt(netPerItem):netPerItem.toLocaleString('th-TH',{minimumFractionDigits:2,maximumFractionDigits:2});return`<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;font-size:15px;border-bottom:1px dashed var(--border);padding-bottom:8px;"><span style="color:var(--text);">${p.label} <span style="color:var(--muted);font-size:12px;">(x${cnt})</span></span><span style="font-weight:900;color:var(--accent);font-size:18px;">${showNet} <span style="font-size:14px;">฿</span></span></div>`;}).join('')}<div style="text-align:center;font-size:11px;color:var(--muted);margin-top:8px;">*ยอดสุทธิหลังหักส่วนลด On-Top เรียบร้อยแล้ว</div></div>`;
-
-  html += `
-    <div class="pres-container">
-      <div class="pres-title">✨ สรุปยอดรวมทั้งบิล ✨</div>
-      
-      <div class="pres-row" style="display:flex; justify-content:space-between; width:100%; align-items:center;">
-        <span style="text-align:left;">รวมราคาปกติหน้าร้าน:</span>
-        <span style="text-decoration:line-through; text-align:right;">${fmt(totalRegPrice)} ฿</span>
-      </div>
-      
-      <div class="pres-row" style="display:flex; justify-content:space-between; width:100%; align-items:center;">
-        <span style="text-align:left;">รวมราคาโปรหน้างาน:</span>
-        <span style="color:var(--text); font-weight:700; text-align:right;">${fmt(totalEventPrice)} ฿</span>
-      </div>
-      
-      ${promo.disc > 0 ? `
-      <div class="pres-row" style="display:flex; justify-content:space-between; width:100%; align-items:center; color:var(--gold); font-weight:800;">
-        <span style="text-align:left;">ส่วนลดพิเศษ On-Top:</span>
-        <span style="text-align:right;">-${fmt(promo.disc)} ฿</span>
-      </div>` : ''}
-      
-      <div class="pres-row net" style="display:flex; justify-content:space-between; width:100%; align-items:center;">
-        <span style="text-align:left;">ยอดสุทธิรวมทั้งหมด:</span>
-        <span style="text-align:right;">${fmt(finalAmt)} ฿</span>
-      </div>
-      
-      <div style="background:#fffbeb; border:1px solid #fde68a; border-radius:12px; padding:12px; text-align:center; margin-top:16px;">
-          <div style="font-size:14px; color:var(--muted); margin-bottom:4px; font-weight:600;">บิลนี้ประหยัดไปทั้งหมด</div>
-          <div style="font-size:24px; font-weight:900; color:var(--gold); line-height:1.1;">${fmt(totalSaved)} ฿ <span class="pres-badge">ลด ${savedPerc}%</span></div>
-      </div>
-      ${giftHtml}
-      ${breakdownHtml}
-      
-      <div style="margin-top:24px; padding:16px; background:var(--card); border:1px dashed var(--accent); border-radius:12px; text-align:center;">
-        <p style="font-size:14px; color:var(--accent); font-weight:bold; margin-bottom:12px;">สแกน QR Code โอนจ่ายตามยอดของแต่ละท่านได้เลยครับ 👇</p>
-        <img src="6. QR payment.jpg" alt="QR Payment" style="max-width: 200px; border-radius: 8px; border: 1px solid var(--border); margin: 0 auto; box-shadow: 0 4px 12px rgba(0,0,0,0.05);">
-      </div>
-
-      <button class="btn-checkout" onclick="proceedToPOS()" style="margin-top: 24px; font-size: 18px; padding: 16px;">✅ ไปหน้าเปิดออเดอร์</button>
-      <button class="btn-clear" onclick="clearCalc()" style="margin-top: 12px; padding: 14px; font-size: 16px; border: 1px solid var(--danger);">✕ ล้างรายการ (เริ่มใหม่)</button>
-    </div>
-  `;
-
-  presWrap.innerHTML = html;
-}
-
-function proceedToPOS() { switchTab('pos'); window.scrollTo({top:0,behavior:'smooth'}); }
-
-function normalizeOrder(order) {
-   if(order.itemsData&&order.payers&&order.payers[0]&&order.payers[0].date)return order;
-   let payers=order.payers||[{name:order.name||'ลูกค้า',contact:'',method:order.paymentMethod||'Bank Transfer',date:order.date,slip:order.slip||order.slipBase64||null,total:0,discount:0,net:order.amount}];
-   payers.forEach(p=>{if(!p.date)p.date=order.date;if(!p.contact)p.contact="";});
-   let itemsData=order.itemsData||[];
-   if(itemsData.length===0){Object.entries(order.items||{}).forEach(([id,cnt])=>{const p=CONFIG.packages.find(x=>x.id===id);if(!p)return;for(let i=0;i<cnt;i++)itemsData.push({payerIdx:0,pkgId:p.id,label:p.label,price:p.price,barcode:'',recipient:'',discount:0,net:p.price});});if(order.barcodes){order.barcodes.forEach((bc,idx)=>{if(itemsData[idx]){const colIdx=bc.indexOf(':');let rest=colIdx>-1?bc.substring(colIdx+1).trim():bc;let rec='';if(rest.includes('[')&&rest.endsWith(']')){const match=rest.match(/\[(.*?)\]$/);if(match){rec=match[1].trim();rest=rest.replace(/\[.*?\]$/,'').trim();}}itemsData[idx].barcode=rest;}});}}
-   let totalOriginal=0;itemsData.forEach(item=>totalOriginal+=item.price);let totalDisc=totalOriginal-(order.amount||0);let avgDisc=itemsData.length>0?totalDisc/itemsData.length:0;let usedDisc=0;
-   itemsData.forEach((item,idx)=>{let d=(idx===itemsData.length-1)?totalDisc-usedDisc:Math.round(avgDisc*100)/100;item.discount=d;item.net=item.price-d;usedDisc+=d;});
-   if(!order.payers){payers[0].total=totalOriginal;payers[0].discount=totalDisc;payers[0].net=order.amount||0;}
-   return{...order,payers,itemsData};
-}
-
-function buildExportRows(order) {
-  const rows=[]; const saleChannel=order.eventName?`Event POS - ${order.eventName}`:"Event POS";
-  const groupedItems={};
-  order.itemsData.forEach(item=>{const key=`${item.payerIdx}_${item.pkgId}`;if(!groupedItems[key])groupedItems[key]={payerIdx:item.payerIdx,label:item.label,qty:0,totalPrice:0,totalDiscount:0,totalNet:0,barcodes:[]};groupedItems[key].qty+=1;groupedItems[key].totalPrice=Math.round((groupedItems[key].totalPrice+item.price)*100)/100;groupedItems[key].totalDiscount=Math.round((groupedItems[key].totalDiscount+item.discount)*100)/100;groupedItems[key].totalNet=Math.round((groupedItems[key].totalNet+item.net)*100)/100;if(item.barcode)groupedItems[key].barcodes.push(item.barcode);});
-  Object.values(groupedItems).forEach(gItem=>{const payer=order.payers[gItem.payerIdx];let bNo=order.billNumber;if(order.payers.length>1)bNo+=`-${gItem.payerIdx+1}`;const dateOnly=payer.date?payer.date.split(' ')[0]:'';rows.push([bNo||order.id,payer.date,payer.name,"","","",saleChannel,payer.method,gItem.label,gItem.qty,gItem.totalPrice,gItem.totalDiscount>0?"Event On-Top":"",gItem.totalDiscount,0,gItem.totalNet,"THB",0,gItem.totalNet,payer.name,"รับหน้างาน","",payer.contact,dateOnly,"รับหน้างาน",gItem.barcodes.join(", ")]);});
-  return rows;
-}
-
-async function processCheckout() {
-  let splitCount=parseInt(document.getElementById('splitCount').value);
-  let payers=[],itemsData=[],barcodes=[],allScanned=true;
-  for(let i=0;i<splitCount;i++){
-     let name=document.getElementById(`payerName_${i}`).value.trim()||`ลูกค้าท่านที่ ${i+1}`;
-     let contact=document.getElementById(`payerContact_${i}`).value.trim();
-     let method=document.getElementById(`payerMethod_${i}`).value;
-     let dateStr=document.getElementById(`payerDate_${i}`).value;
-     let timeStr=document.getElementById(`payerTime_${i}`).value;
-     let slip=currentSlips[i]||null;
-     if(!dateStr||!timeStr){alert(`กรุณาระบุวันที่และเวลาให้ ลูกค้าท่านที่ ${i+1}`);return;}
-     const [y,m,d]=dateStr.split('-');const formattedDate=`${d}/${m}/${y} ${timeStr}`;
-     payers.push({name,contact,method,date:formattedDate,slip,total:0,discount:0,net:0});
-     const rows=document.querySelectorAll(`#barcodesContainer_${i} .barcode-row`);let rowIdx=0;
-     Object.entries(cartByPayer[i]).forEach(([pkgId,cnt])=>{const p=CONFIG.packages.find(x=>x.id===pkgId);for(let k=0;k<cnt;k++){const row=rows[rowIdx++];if(!row)continue;const code=row.querySelector('.pos-barcode').value.trim();if(!code)allScanned=false;itemsData.push({payerIdx:i,pkgId:p.id,label:p.label,price:p.price,barcode:code,recipient:'',discount:0,net:0});barcodes.push(`${p.label}: ${code}`);}});
-  }
-  if(itemsData.length===0){alert('กรุณาเลือกแพ็กเกจก่อนครับ');return;}
-  if(!allScanned){if(!confirm('สแกนบาร์โค้ดไม่ครบทุกชุด ต้องการดำเนินการต่อหรือไม่?'))return;}
-  const btn=document.querySelector('.btn-checkout');const originalText=btn.innerHTML;btn.innerHTML='กำลังบันทึกข้อมูล... ⏳';btn.disabled=true;
-  const orderId='ORD'+Date.now().toString().slice(-6);const globalDateObj=new Date();const globalDateStr=`${String(globalDateObj.getDate()).padStart(2,'0')}/${String(globalDateObj.getMonth()+1).padStart(2,'0')}/${globalDateObj.getFullYear()} ${String(globalDateObj.getHours()).padStart(2,'0')}:${String(globalDateObj.getMinutes()).padStart(2,'0')}`;
-  const prefix=(CONFIG.event&&CONFIG.event.prefix)?CONFIG.event.prefix.toUpperCase().substring(0,5):'INV';const yyyy=String(globalDateObj.getFullYear());const mm=String(globalDateObj.getMonth()+1).padStart(2,'0');const dd=String(globalDateObj.getDate()).padStart(2,'0');const todayPrefix=`${prefix}${yyyy.slice(-2)}${mm}${dd}`;
-  const todaysOrders=salesHistory.filter(o=>o.billNumber&&o.billNumber.startsWith(todayPrefix));const runNum=String(todaysOrders.length+1).padStart(3,'0');const autoBillNumber=`${todayPrefix}-${runNum}`;
-  let totalEventPrice=itemsData.reduce((s,item)=>s+item.price,0);const promo=calculatePromo(totalEventPrice,itemsData.length);const finalAmt=totalEventPrice-promo.disc;
-  let avgDisc=itemsData.length>0?promo.disc/itemsData.length:0;let usedDisc=0;
-  itemsData.forEach((item,idx)=>{let d=(idx===itemsData.length-1)?promo.disc-usedDisc:Math.round(avgDisc*100)/100;item.discount=d;item.net=item.price-d;usedDisc+=d;payers[item.payerIdx].total+=item.price;payers[item.payerIdx].discount+=item.discount;payers[item.payerIdx].net+=item.net;});
-  const payload={id:orderId,date:globalDateStr,payerCount:splitCount,payers,itemsData,amount:finalAmt,barcodes,billNumber:autoBillNumber,eventName:CONFIG.event?CONFIG.event.name:''};
+// ══════════════════════════════════════════════
+// 🚀 INIT
+// ══════════════════════════════════════════════
+(function init() {
   try {
-    salesHistory.unshift(payload);
-    try{localStorage.setItem('geneus_pos_history',JSON.stringify(salesHistory));}catch(lsError){while(salesHistory.length>20){salesHistory.pop();try{localStorage.setItem('geneus_pos_history',JSON.stringify(salesHistory));break;}catch(e){}}}
-    payers.forEach((p,i)=>{if(p.slip){let bNo=autoBillNumber;if(splitCount>1)bNo+=`-${i+1}`;const link=document.createElement('a');link.download=`${bNo}.jpg`;link.href=p.slip;document.body.appendChild(link);link.click();document.body.removeChild(link);}});
-    if(CONFIG.googleSheetUrl){try{const syncData={action:'insert_order',id:orderId,orderData:payload,exportRows:buildExportRows(payload)};await fetch(CONFIG.googleSheetUrl,{method:'POST',mode:'no-cors',headers:{'Content-Type':'text/plain'},body:JSON.stringify(syncData)});}catch(e){console.log(e);}}
-    alert(`✅ บันทึกออเดอร์สำเร็จ!`);
-  } catch(error){alert('❌ ข้อมูลเครื่องเต็ม ไม่สามารถบันทึกลงประวัติเครื่องนี้ได้ โปรดล้างประวัติเก่า');}
-  finally{clearCalc();renderHistory();btn.innerHTML=originalText;btn.disabled=false;}
-}
+    const savedTheme = localStorage.getItem('osaka_theme');
+    if (savedTheme === 'dark' || (!savedTheme && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+      isDark = true;
+    }
+    applyTheme();
 
-function renderHistory() {
-  const tbody=document.getElementById('historyBody');
-  if(salesHistory.length===0){tbody.innerHTML='<tr><td colspan="4" style="text-align:center;color:var(--muted);padding:20px;">กำลังโหลด... หรือยังไม่มีประวัติการขาย</td></tr>';return;}
-  tbody.innerHTML='';
-  salesHistory.forEach(rawOrder=>{
-    const order=normalizeOrder(rawOrder);
-    let pkgCount={};order.itemsData.forEach(item=>{pkgCount[item.pkgId]=(pkgCount[item.pkgId]||0)+1;});
-    const itemTags=Object.entries(pkgCount).map(([id,cnt])=>{const p=CONFIG.packages.find(x=>x.id===id)||{label:id,cls:''};return`<span class="pkg-tag ${p.cls}">${p.label} x${cnt}</span>`;}).join('');
-    const hasAnySlip=order.payers.some(p=>p.slip);
-    const slipBtn=hasAnySlip?`<button class="btn-view-slip" onclick="viewMultiSlip('${order.id}')">ดูสลิป</button>`:'';
-    const rcptBtn=`<button class="btn-view-slip" onclick="openReceiptModal('${order.id}')" style="border-color:var(--accent2);color:var(--accent2);">📄 ใบเสร็จ</button>`;
-    const editBtn=`<button class="btn-view-slip" onclick="openEditModal('${order.id}')" style="background:transparent;border:1px solid var(--accent);color:var(--accent);">✏️ แก้ไข</button>`;
-    const billDisp=order.billNumber?`<div style="font-size:11px;color:var(--accent);font-weight:700;margin-top:4px;">🧾 ${order.billNumber}</div>`:`<div style="font-size:11px;color:var(--muted);margin-top:4px;font-style:italic;">(ยังไม่ระบุบิล)</div>`;
-    const names=order.payers.map(p=>p.name).join(', ');const totalAmt=order.payers.reduce((s,p)=>s+p.net,0);
-    tbody.innerHTML+=`<tr><td><div class="h-date">${order.payers[0].date}</div><div class="h-name">${names}</div><div style="font-size:9px;color:var(--muted)">${order.id}</div>${billDisp}</td><td>${itemTags}</td><td class="h-price">${fmt(totalAmt)} ฿</td><td style="text-align:center;min-width:80px;vertical-align:top;">${slipBtn}${rcptBtn}${editBtn}</td></tr>`;
-  });
-}
+    switchDay(0);
 
-function viewMultiSlip(orderId){const raw=salesHistory.find(o=>o.id===orderId);if(!raw)return;const order=normalizeOrder(raw);let html='';order.payers.forEach((p,i)=>{if(p.slip){let bNo=order.billNumber;if(order.payers.length>1)bNo+=`-${i+1}`;html+=`<div style="margin-bottom:12px;"><div style="font-size:12px;font-weight:700;color:var(--accent);text-align:left;margin-bottom:4px;display:flex;justify-content:space-between;align-items:center;"><span>สลิปของ: ${p.name}</span><a href="${p.slip}" download="${bNo}.jpg" style="background:var(--accent2);color:#fff;padding:4px 8px;border-radius:4px;text-decoration:none;font-size:11px;display:inline-block;">📥 โหลด JPG</a></div><img src="${p.slip}" style="max-width:100%;border-radius:8px;border:1px solid var(--border);"></div>`;} });document.getElementById('modalImageContainer').innerHTML=html;document.getElementById('slipModal').style.display='flex';}
-function closeModal(){document.getElementById('slipModal').style.display='none';}
-
-let currentReceiptOrder=null;
-function openReceiptModal(orderId){
-  const rawOrder=salesHistory.find(o=>o.id===orderId);if(!rawOrder)return;
-  currentReceiptOrder=normalizeOrder(rawOrder);
-  const selWrap=document.getElementById('rcptPayerSelectorWrap');const sel=document.getElementById('rcptPayerSelector');
-  if(currentReceiptOrder.payers.length>1){selWrap.style.display='block';let optionsHtml=`<option value="all">รวมทุกบิลเข้าด้วยกัน</option>`;optionsHtml+=currentReceiptOrder.payers.map((p,i)=>`<option value="${i}">บิลของ: ${p.name}</option>`).join('');sel.innerHTML=optionsHtml;}
-  else{selWrap.style.display='none';sel.innerHTML=`<option value="0"></option>`;}
-  renderReceiptForPayer(currentReceiptOrder.payers.length>1?'all':0);
-  document.getElementById('receiptModal').style.display='flex';
-  updateBtBadge();
-}
-
-function renderReceiptForPayer(payerIdx){
-  const order=currentReceiptOrder;const isAll=payerIdx==='all';
-  const payer=isAll?{name:order.payers[0].name,date:order.date||order.payers[0].date}:order.payers[parseInt(payerIdx)];
-  document.getElementById('rcptId').innerText=order.id;
-  document.getElementById('rcptDate').innerText=payer.date;
-  document.getElementById('rcptName').innerText=payer.name;
-  if(order.eventName){document.getElementById('rcptEventName').innerText=order.eventName;document.getElementById('rcptEventWrap').style.display='block';}else{document.getElementById('rcptEventWrap').style.display='none';}
-  if(order.billNumber){let bNo=order.billNumber;if(!isAll&&order.payers.length>1)bNo+=`-${parseInt(payerIdx)+1}`;document.getElementById('rcptBill').innerText=bNo;document.getElementById('rcptBillWrap').style.display='block';}else{document.getElementById('rcptBillWrap').style.display='none';}
-  let itemsHtml='';
-  if(isAll){const combinedItems={};order.itemsData.forEach(item=>{if(!combinedItems[item.pkgId])combinedItems[item.pkgId]={label:item.label,price:item.price,cnt:0};combinedItems[item.pkgId].cnt+=1;});Object.values(combinedItems).forEach(item=>{itemsHtml+=`<tr style="border-bottom:1px dashed #cccccc;background:transparent;"><td style="padding:6px 0;color:#000000;text-align:left;"><strong>${item.label}</strong><br><span style="font-size:10px;color:#555;">(@${fmt(item.price)} ฿)</span></td><td style="text-align:center;padding:6px 0;color:#000000;">${item.cnt}</td><td style="text-align:right;padding:6px 0;color:#000000;">${fmt(item.price*item.cnt)} ฿</td></tr>`;});}
-  else{order.itemsData.forEach(item=>{if(item.payerIdx==parseInt(payerIdx))itemsHtml+=`<tr style="border-bottom:1px dashed #cccccc;background:transparent;"><td style="padding:6px 0;color:#000000;text-align:left;"><strong>${item.label}</strong><br><span style="font-size:10px;color:#555;">(@${fmt(item.price)} ฿)</span></td><td style="text-align:center;padding:6px 0;color:#000000;">1</td><td style="text-align:right;padding:6px 0;color:#000000;">${fmt(item.price)} ฿</td></tr>`;});}
-  document.getElementById('rcptItems').innerHTML=itemsHtml;
-  if(isAll){let gTotal=order.payers.reduce((s,p)=>s+p.total,0);let gDisc=order.payers.reduce((s,p)=>s+p.discount,0);let gNet=order.payers.reduce((s,p)=>s+p.net,0);document.getElementById('rcptTotal').innerHTML=`ยอดรวม (Subtotal): <strong>${fmt(gTotal)} ฿</strong>`;document.getElementById('rcptDiscount').innerHTML=gDisc>0?`ส่วนลดรวม (Discount): <strong>-${fmt(gDisc)} ฿</strong>`:'';document.getElementById('rcptNet').innerHTML=`ยอดชำระสุทธิ (Net): <strong style="font-size:16px;">${fmt(gNet)} ฿</strong>`;}
-  else{const p=order.payers[parseInt(payerIdx)];document.getElementById('rcptTotal').innerHTML=`ยอดรวม (Subtotal): <strong>${fmt(p.total)} ฿</strong>`;document.getElementById('rcptDiscount').innerHTML=p.discount>0?`ส่วนลดงานเฉลี่ย (Discount): <strong>-${fmt(p.discount)} ฿</strong>`:'';document.getElementById('rcptNet').innerHTML=`ยอดชำระสุทธิ (Net): <strong style="font-size:16px;">${fmt(p.net)} ฿</strong>`;}
-}
-
-function closeReceiptModal(){document.getElementById('receiptModal').style.display='none';}
-function printReceipt(){window.print();}
-function downloadReceipt(){
-  const receiptElement=document.getElementById('receiptContent');const btnText=event.target;const origText=btnText.innerHTML;btnText.innerHTML='กำลังประมวลผล... ⏳';
-  html2canvas(receiptElement,{scale:2,backgroundColor:null}).then(canvas=>{const link=document.createElement('a');link.download=`Geneus_Receipt_${document.getElementById('rcptBill').innerText||Date.now()}.png`;link.href=canvas.toDataURL('image/png');link.click();btnText.innerHTML=origText;}).catch(err=>{alert('เกิดข้อผิดพลาดในการสร้างรูปภาพครับ');btnText.innerHTML=origText;});
-}
-
-function exportCSV(){
-  if(salesHistory.length===0){alert('ยังไม่มีประวัติการขายให้ Export ครับ');return;}
-  const headers=["Tax Invoice/Order","Date/Time Paid","Customer Name","Contact Channel","Lead Channel","Lead Nation","Sale Channel","Payment Method","Package","Quantity","Original Price","Coupon Code","Coupon Discount","Coin Discount","Paid Amount","Currency","Shipping Fee","Total Amount","Recipient Name","Shipping Address","Shipping Province","Phone No","วันที่ส่งชุดตรวจ","Tracking No","Kit IDs"];
-  let csvContent="\uFEFF"+headers.join(",")+"\n";
-  salesHistory.forEach(rawOrder=>{const rows=buildExportRows(normalizeOrder(rawOrder));rows.forEach(row=>{const escapedRow=row.map(val=>{const str=String(val);if(str.includes(',')||str.includes('"')||str.includes('\n'))return`"${str.replace(/"/g,'""')}"`;return str;});csvContent+=escapedRow.join(",")+"\n";});});
-  const blob=new Blob([csvContent],{type:'text/csv;charset=utf-8;'});const link=document.createElement("a");const url=URL.createObjectURL(blob);link.setAttribute("href",url);link.setAttribute("download",`Geneus_POS_Export_${new Date().getTime()}.csv`);document.body.appendChild(link);link.click();document.body.removeChild(link);
-}
-
-let editingOrderId=null;
-function openEditModal(orderId){
-  const rawOrder=salesHistory.find(o=>o.id===orderId);if(!rawOrder)return;const order=normalizeOrder(rawOrder);editingOrderId=order.id;
-  let html='';
-  order.payers.forEach((payer,pIdx)=>{let dateVal='',timeVal='';if(payer.date){const parts=payer.date.split(' ');const dmy=parts[0].split('/');if(dmy.length===3)dateVal=`${dmy[2]}-${dmy[1]}-${dmy[0]}`;timeVal=parts[1]||'';}
-  html+=`<div style="background:var(--card2);padding:12px;border-radius:8px;margin-bottom:16px;border:1px solid var(--border);"><h4 style="font-size:14px;color:var(--accent);margin-bottom:12px;border-bottom:1px dashed var(--border);padding-bottom:8px;">👤 ข้อมูลลูกค้าท่านที่ ${pIdx+1}</h4><div class="form-row-2"><div class="form-group"><label>ชื่อลูกค้า</label><input type="text" class="form-input edit-p-name" data-pidx="${pIdx}" value="${payer.name}"></div><div class="form-group"><label>เบอร์โทร</label><input type="text" class="form-input edit-p-contact" data-pidx="${pIdx}" value="${payer.contact}"></div></div><div class="form-row-2"><div class="form-group"><label>วันที่ชำระ</label><input type="date" class="form-input edit-p-date" data-pidx="${pIdx}" value="${dateVal}"></div><div class="form-group"><label>เวลา</label><input type="time" class="form-input edit-p-time" data-pidx="${pIdx}" value="${timeVal}"></div></div><div class="form-group"><label>วิธีชำระเงิน</label><select class="form-input edit-p-method" data-pidx="${pIdx}"><option value="Bank Transfer" ${payer.method==='Bank Transfer'?'selected':''}>โอนเงิน</option><option value="Credit Card" ${payer.method==='Credit Card'?'selected':''}>บัตรเครดิต</option><option value="Cash" ${payer.method==='Cash'?'selected':''}>เงินสด</option><option value="Installment" ${payer.method==='Installment'?'selected':''}>ผ่อนชำระ</option></select></div></div>`;});
-  html+=`<h4 style="font-size:14px;color:var(--text);margin-bottom:8px;">📸 แก้ไขบาร์โค้ดชุดตรวจ</h4>`;
-  order.itemsData.forEach((item,idx)=>{const key=`edit_${idx}`;html+=`<div class="barcode-row" style="display:flex;flex-wrap:wrap;gap:8px;margin-bottom:12px;padding-bottom:12px;border-bottom:1px dashed var(--border);"><div class="b-label" style="width:100%;color:var(--accent2);font-size:13px;">${item.label} <span style="color:var(--muted);font-weight:normal;">(กล่องของท่านที่ ${item.payerIdx+1})</span></div><div style="display:flex;gap:8px;width:100%;"><input type="text" class="form-input edit-barcode" style="flex:1;" value="${item.barcode}" data-key="${key}" data-idx="${idx}"><button type="button" class="btn-scan" onclick="openScanner('${key}')">📷 สแกน</button></div></div>`;});
-  document.getElementById('editFormContainer').innerHTML=html;document.getElementById('editModal').style.display='flex';
-}
-
-function closeEditModal(){document.getElementById('editModal').style.display='none';editingOrderId=null;}
-
-async function saveEditedOrder(){
-  const idxOrder=salesHistory.findIndex(o=>o.id===editingOrderId);if(idxOrder===-1)return;
-  let order=normalizeOrder(salesHistory[idxOrder]);
-  document.querySelectorAll('.edit-p-name').forEach(input=>{order.payers[input.dataset.pidx].name=input.value.trim();});
-  document.querySelectorAll('.edit-p-contact').forEach(input=>{order.payers[input.dataset.pidx].contact=input.value.trim();});
-  document.querySelectorAll('.edit-p-method').forEach(input=>{order.payers[input.dataset.pidx].method=input.value;});
-  const dates={},times={};
-  document.querySelectorAll('.edit-p-date').forEach(input=>{dates[input.dataset.pidx]=input.value;});
-  document.querySelectorAll('.edit-p-time').forEach(input=>{times[input.dataset.pidx]=input.value;});
-  order.payers.forEach((payer,pIdx)=>{if(dates[pIdx]&&times[pIdx]){const [y,m,d]=dates[pIdx].split('-');payer.date=`${d}/${m}/${y} ${times[pIdx]}`;}});
-  document.querySelectorAll('.edit-barcode').forEach(input=>{order.itemsData[input.dataset.idx].barcode=input.value.trim();});
-  const btn=document.getElementById('btn-save-edit');const origText=btn.innerHTML;btn.innerHTML='กำลังบันทึก... ⏳';btn.disabled=true;
-  try{salesHistory[idxOrder]=order;localStorage.setItem('geneus_pos_history',JSON.stringify(salesHistory));
-    if(CONFIG.googleSheetUrl){try{await fetch(CONFIG.googleSheetUrl,{method:'POST',mode:'no-cors',headers:{'Content-Type':'text/plain'},body:JSON.stringify({action:'update_order',id:order.id,orderData:order,exportRows:buildExportRows(order)})});}catch(e){}}
-    alert('✅ บันทึกการแก้ไขเรียบร้อย');closeEditModal();renderHistory();
-  }catch(e){alert('❌ เกิดข้อผิดพลาดในการบันทึกข้อมูล');closeEditModal();}
-  finally{btn.innerHTML=origText;btn.disabled=false;}
-}
-
-function togglePromoFields(type){const cb=document.getElementById(`cfg-${type}-active`);const fields=document.getElementById(`cfg-${type}-fields`);if(fields)fields.style.display=cb.checked?'grid':'none';}
-
-function populateSettingsUI(){
-  document.getElementById('cfg-sheet-url').value=CONFIG.googleSheetUrl||'';
-  document.getElementById('cfg-event-name').value=CONFIG.event?CONFIG.event.name:'';
-  document.getElementById('cfg-event-prefix').value=CONFIG.event?CONFIG.event.prefix:'INV';
-  document.getElementById('cfg-amt-active').checked=CONFIG.promo.amtActive;document.getElementById('cfg-amt-req').value=CONFIG.promo.amtStepReq;document.getElementById('cfg-amt-disc').value=CONFIG.promo.amtStepDisc;
-  document.getElementById('cfg-qty-active').checked=CONFIG.promo.qtyActive;document.getElementById('cfg-qty-req').value=CONFIG.promo.qtyStepReq;document.getElementById('cfg-qty-disc').value=CONFIG.promo.qtyStepDisc;
-  document.getElementById('cfg-gift-active').checked=CONFIG.promo.giftActive;document.getElementById('cfg-gift-req').value=CONFIG.promo.giftReq;document.getElementById('cfg-gift-name').value=CONFIG.promo.giftName;
-  togglePromoFields('amt');togglePromoFields('qty');togglePromoFields('gift');
-  const wrap=document.getElementById('settings-packages');wrap.innerHTML='';
-  CONFIG.packages.forEach((p,idx)=>{wrap.innerHTML+=`<div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:12px;border-bottom:1px solid rgba(42,58,85,0.4);padding-bottom:8px;"><label style="grid-column:span 2;color:var(--accent2);font-weight:700;">${p.label}</label><div><span style="font-size:11px;color:var(--muted)">ราคาโปร</span><input type="number" id="cfg-p-${idx}-price" class="form-input" value="${p.price}"></div><div><span style="font-size:11px;color:var(--muted)">ราคาปกติ</span><input type="number" id="cfg-p-${idx}-reg" class="form-input" value="${p.regPrice}"></div></div>`;});
-}
-
-function saveSettings(silent=false){
-  CONFIG.googleSheetUrl=document.getElementById('cfg-sheet-url').value.trim();
-  if(!CONFIG.event)CONFIG.event={};CONFIG.event.name=document.getElementById('cfg-event-name').value;CONFIG.event.prefix=document.getElementById('cfg-event-prefix').value||'INV';
-  CONFIG.promo.amtActive=document.getElementById('cfg-amt-active').checked;CONFIG.promo.amtStepReq=Number(document.getElementById('cfg-amt-req').value)||0;CONFIG.promo.amtStepDisc=Number(document.getElementById('cfg-amt-disc').value)||0;
-  CONFIG.promo.qtyActive=document.getElementById('cfg-qty-active').checked;CONFIG.promo.qtyStepReq=Number(document.getElementById('cfg-qty-req').value)||0;CONFIG.promo.qtyStepDisc=Number(document.getElementById('cfg-qty-disc').value)||0;
-  CONFIG.promo.giftActive=document.getElementById('cfg-gift-active').checked;CONFIG.promo.giftReq=Number(document.getElementById('cfg-gift-req').value)||0;CONFIG.promo.giftName=document.getElementById('cfg-gift-name').value||'';
-  CONFIG.packages.forEach((p,idx)=>{p.price=Number(document.getElementById(`cfg-p-${idx}-price`).value)||0;p.regPrice=Number(document.getElementById(`cfg-p-${idx}-reg`).value)||0;});
-  localStorage.setItem('geneus_pos_config',JSON.stringify(CONFIG));
-  if(!silent){alert('บันทึกการตั้งค่าลงอุปกรณ์เรียบร้อย!');clearCalc();applyConfig();switchTab('presentation');}
-}
-
-if(document.readyState==='loading'){document.addEventListener('DOMContentLoaded',init);}else{init();}
+    const checks = JSON.parse(localStorage.getItem('osaka_checks') || '[]');
+    document.querySelectorAll('.check-item').forEach((el, i) => {
+      if (checks[i]) {
+        el.classList.add('done');
+        el.querySelector('.check-box').textContent = '✓';
+      }
+    });
+  } catch(e) {}
+})();
 </script>
 </body>
 </html>

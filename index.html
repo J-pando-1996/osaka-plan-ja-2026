@@ -31,11 +31,9 @@
 /* 🌙 HIGH CONTRAST & VISIBILITY DARK MODE OPTIMIZATION */
 [data-theme="dark"] {
   --bg-main: #0c0d10; 
-  /* ปรับความสว่างของ Card ใน Dark Mode เพื่อยกแผ่นกระดาษขึ้นมาให้ลอยเด่นขึ้นจากพื้นหลัง */
   --bg-card: rgba(36, 37, 44, 0.75); 
   --bg-card-hover: rgba(48, 50, 60, 0.9);
   --ink-main: #ffffff; 
-  /* ดึงความสว่างของสีรองให้มีค่า Contrast Ratio ที่อ่านง่ายขึ้น ไม่จืดกลืนกับสีดำ */
   --ink-sub: #b0b0b8;
   --border: rgba(255, 255, 255, 0.12); 
   --overlay: rgba(0, 0, 0, 0.75); 
@@ -45,7 +43,6 @@
   --tag-gold-bg: rgba(255, 214, 10, 0.2); --tag-gold-text: #ffe04d;
   --tag-blue-bg: rgba(10, 132, 255, 0.2); --tag-blue-text: #80c4ff;
   --tag-green-bg: rgba(48, 209, 88, 0.2); --tag-green-text: #80f098;
-  /* เพิ่มดีกรีความกระจกแบบพรีเมียมให้ส่วนพื้นหลังเบลอเรืองแสงนิด ๆ */
   --glass-bg: rgba(30, 31, 37, 0.65); 
   --glass-border: rgba(255, 255, 255, 0.15);
   --glass-blur: blur(24px) saturate(140%); 
@@ -353,7 +350,7 @@ body::before {
 
 [data-theme="dark"] .sitem.highlight { 
   background: rgba(45, 48, 58, 0.9); 
-  border-color: rgba(10, 132, 255, 0.3); /* โดดเด่นขึ้นด้วยขอบไฟเรืองแสงอุ่น ๆ */
+  border-color: rgba(10, 132, 255, 0.3); 
 }
 
 .sitem:hover {
@@ -412,7 +409,7 @@ body::before {
 
 .sitem-main { 
   font-size: 16px; 
-  font-weight: 600; /* ดึงความหนาขึ้นมาเล็กน้อยให้อ่านคมชัดขึ้น */
+  font-weight: 600; 
   color: var(--ink-main); 
   line-height: 1.4; 
 }
@@ -877,7 +874,6 @@ body::before {
 </head>
 <body>
 
-<!-- กล่องหัวข้อเด่นที่รองรับ Dark mode / Light mode สวย ๆ -->
 <div class="hero" id="hero">
   <button id="themeBtn" onclick="toggleTheme()">☀️</button>
   <div class="hero-flag">🇯🇵</div>
@@ -885,7 +881,7 @@ body::before {
   <div class="hero-sub">16 – 21 ตุลาคม 2026 (6 วัน 5 คืน)</div>
   <div class="info-strip">
     <div class="info-chip">✈️ Peach Aviation</div>
-    <div class="info-chip">🏨 Hokke Club Osaka</div>
+    <div class="info-chip">🏨 BRACKETS HOTEL Osaka</div>
   </div>
 </div>
 
@@ -908,7 +904,7 @@ body::before {
 
 <!-- ================= DAY 1 ================= -->
 <div class="day-panel active" id="panel-0">
-  <div class="day-header"><div class="day-num">Day 1 🛬</div><div class="day-date">ศุกร์ 16 ตุลาคม 2026</div><div class="day-theme">KIX → Umeda (ฝากกระเป๋า) → Umeda Fun Day</div></div>
+  <div class="day-header"><div class="day-num">Day 1 🛬</div><div class="day-date">ศุกร์ 16 ตุลาคม 2026</div><div class="day-theme">KIX → Namba → Hommachi (ฝากกระเป๋า) → Umeda</div></div>
   <div class="schedule">
     <div class="sdivider">ออกเดินทางจากสุวรรณภูมิ (คืน 15 ต.ค.)</div>
     <div class="sitem highlight" onclick="openPopup('bkk_depart')"><div class="sitem-left"><div class="sitem-icon">🏛️</div><div class="sitem-time">22:30</div></div><div class="sitem-body"><div class="sitem-main">คืน 15 ต.ค. ณ สนามบินสุวรรณภูมิ (BKK)</div><div class="sitem-sub">เช็คอินเคาน์เตอร์ Peach · Terminal อาคารผู้โดยสารหลัก</div></div><div class="sitem-right"><div class="sitem-map-icon">📍</div></div></div>
@@ -916,9 +912,11 @@ body::before {
     <div class="sdivider">เดินทางถึง KIX T2</div>
     <div class="sitem" onclick="openPopup('kix_arrive')"><div class="sitem-left"><div class="sitem-icon">🛬</div><div class="sitem-time">09:20</div></div><div class="sitem-body"><div class="sitem-main">KIX Terminal 2</div><div class="sitem-sub">ผ่าน ตม. และรับกระเป๋า</div></div><div class="sitem-right"><div class="sitem-map-icon">📍</div></div></div>
     <div class="sitem" onclick="openPopup('kix_shuttle_in')"><div class="sitem-left"><div class="sitem-icon">🚌</div><div class="sitem-time">10:10</div></div><div class="sitem-body"><div class="sitem-main">Shuttle Bus ฟรีไป T1</div><div class="sitem-sub">ข้ามไป Terminal 1 เพื่อขึ้นรถไฟ</div></div><div class="sitem-right"><div class="sitem-cost">ฟรี</div></div></div>
-    <div class="sitem highlight" onclick="openPopup('haruka')"><div class="sitem-left"><div class="sitem-icon">🚆</div><div class="sitem-time">10:45</div></div><div class="sitem-body"><div class="sitem-main">JR Haruka → Osaka Station</div><div class="sitem-sub">นั่งตรงเข้า Umeda สบายๆ</div></div><div class="sitem-right"><div class="sitem-cost">¥1,800</div></div></div>
-    <div class="sdivider">เช้าถึงเที่ยง - ฝากกระเป๋า</div>
-    <div class="sitem highlight" onclick="openPopup('hotel')"><div class="sitem-left"><div class="sitem-icon">🏨</div><div class="sitem-time">11:45</div></div><div class="sitem-body"><div class="sitem-main">ฝากกระเป๋า Hotel Hokke Club</div><div class="sitem-sub">แวะฝากสัมภาระก่อนเที่ยวให้ตัวปลิว</div></div><div class="sitem-right"><div class="sitem-map-icon">📍</div></div></div>
+    <div class="sitem highlight" onclick="openPopup('rapit')"><div class="sitem-left"><div class="sitem-icon">🚆</div><div class="sitem-time">10:45</div></div><div class="sitem-body"><div class="sitem-main">Nankai Rapi:t → Namba</div><div class="sitem-sub">นั่งรถไฟด่วนเข้าเมืองม้วนเดียวจบ</div></div><div class="sitem-right"><div class="sitem-cost">¥1,490</div></div></div>
+    <div class="sdivider">เข้าโรงแรมย่าน Hommachi</div>
+    <div class="sitem"><div class="sitem-left"><div class="sitem-icon">🚇</div><div class="sitem-time">11:30</div></div><div class="sitem-body"><div class="sitem-main">Midosuji Line → Hommachi</div><div class="sitem-sub">นั่งรถไฟใต้ดินสายสีแดงแค่ 2 สถานี</div></div><div class="sitem-right"><div class="sitem-cost">¥240</div></div></div>
+    <div class="sitem highlight" onclick="openPopup('hotel')"><div class="sitem-left"><div class="sitem-icon">🏨</div><div class="sitem-time">11:45</div></div><div class="sitem-body"><div class="sitem-main">ฝากกระเป๋า BRACKETS HOTEL</div><div class="sitem-sub">เอาสัมภาระไปดรอปให้เดินตัวปลิว</div></div><div class="sitem-right"><div class="sitem-map-icon">📍</div></div></div>
+    <div class="sitem"><div class="sitem-left"><div class="sitem-icon">🚇</div><div class="sitem-time">12:15</div></div><div class="sitem-body"><div class="sitem-main">Midosuji Line → Umeda</div><div class="sitem-sub">เดินทางไปหาของกินย่านอุเมดะ</div></div><div class="sitem-right"><div class="sitem-cost">¥240</div></div></div>
     <div class="sitem"><div class="sitem-left"><div class="sitem-icon">🍜</div><div class="sitem-time">12:30</div></div><div class="sitem-body"><div class="sitem-main">มื้อกลางวัน Umeda</div><div class="sitem-sub">หาของอร่อยย่านสถานีโอซาก้า</div></div></div>
     <div class="sdivider">บ่ายถึงค่ำ - สนุกใน Umeda</div>
     <div class="sitem highlight" onclick="openPopup('gacha')"><div class="sitem-left"><div class="sitem-icon">🎰</div><div class="sitem-time">14:00</div></div><div class="sitem-body"><div class="sitem-main">Gachagacha no Mori</div><div class="sitem-sub">หมุนตู้กาชาปองที่ Chayamachi</div></div><div class="sitem-right"><div class="sitem-map-icon">📍</div></div></div>
@@ -927,8 +925,8 @@ body::before {
     <div class="sitem highlight" onclick="openPopup('ramen_zen')"><div class="sitem-left"><div class="sitem-icon">🍜</div><div class="sitem-time">18:15</div></div><div class="sitem-body"><div class="sitem-main">Naniwa Menjiro ZEN</div><div class="sitem-sub">ราเมนมิชลิน มื้อค่ำ</div></div><div class="sitem-right"><div class="sitem-map-icon">📍</div></div></div>
     <div class="sitem"><div class="sitem-left"><div class="sitem-icon">🌃</div><div class="sitem-time">19:30</div></div><div class="sitem-body"><div class="sitem-main">Grand Front / LUCUA</div><div class="sitem-sub">เดินย่อย ชมวิวยามค่ำคืน</div></div></div>
     <div class="sdivider">กลับเข้าโรงแรม</div>
-    <div class="sitem"><div class="sitem-left"><div class="sitem-icon">🧳</div><div class="sitem-time">20:45</div></div><div class="sitem-body"><div class="sitem-main">เช็คอินเข้าห้องพัก</div><div class="sitem-sub">พักผ่อนร่างกายนอนเตียงนุ่มๆ</div></div></div>
-    <div class="sitem"><div class="sitem-left"><div class="sitem-icon">♨️</div><div class="sitem-time">21:30</div></div><div class="sitem-body"><div class="sitem-main">แช่ออนเซ็น</div><div class="sitem-sub">ผ่อนคลายหลังเดินทาง</div></div></div>
+    <div class="sitem"><div class="sitem-left"><div class="sitem-icon">🚇</div><div class="sitem-time">20:30</div></div><div class="sitem-body"><div class="sitem-main">Midosuji Line → Hommachi</div><div class="sitem-sub">นั่งกลับที่พักแค่ 2 สถานี</div></div><div class="sitem-right"><div class="sitem-cost">¥240</div></div></div>
+    <div class="sitem highlight" onclick="openPopup('hotel')"><div class="sitem-left"><div class="sitem-icon">🛌</div><div class="sitem-time">20:45</div></div><div class="sitem-body"><div class="sitem-main">เช็คอินเข้าห้องพักสุดชิค</div><div class="sitem-sub">ทิ้งตัวลงนอนเตียงนุ่มๆ ชาร์จแบต</div></div></div>
   </div>
 </div>
 
@@ -937,23 +935,23 @@ body::before {
   <div class="day-header"><div class="day-num">Day 2 ⛩️</div><div class="day-date">เสาร์ 17 ตุลาคม 2026</div><div class="day-theme">Katsuo-ji + Minoh → Namba → Shinsaibashi</div></div>
   <div class="schedule">
     <div class="sdivider">ช่วงเช้า - วัดดารุมะ</div>
-    <div class="sitem"><div class="sitem-left"><div class="sitem-icon">🏨</div><div class="sitem-time">08:40</div></div><div class="sitem-body"><div class="sitem-main">ออกจากโรงแรม</div></div></div>
-    <div class="sitem"><div class="sitem-left"><div class="sitem-icon">🚇</div><div class="sitem-time">08:55</div></div><div class="sitem-body"><div class="sitem-main">ไป Minoh-Kayano</div><div class="sitem-sub">นั่ง Midosuji Line ไปสุดสาย</div></div><div class="sitem-right"><div class="sitem-cost">¥430</div></div></div>
+    <div class="sitem"><div class="sitem-left"><div class="sitem-icon">🏨</div><div class="sitem-time">08:40</div></div><div class="sitem-body"><div class="sitem-main">ออกจากโรงแรม (Hommachi)</div></div></div>
+    <div class="sitem"><div class="sitem-left"><div class="sitem-icon">🚇</div><div class="sitem-time">08:50</div></div><div class="sitem-body"><div class="sitem-main">Midosuji Line → Minoh-Kayano</div><div class="sitem-sub">นั่งยาวรวดเดียวสุดสายไปขึ้นเขา</div></div><div class="sitem-right"><div class="sitem-cost">¥490</div></div></div>
     <div class="sitem"><div class="sitem-left"><div class="sitem-icon">🚌</div><div class="sitem-time">09:30</div></div><div class="sitem-body"><div class="sitem-main">รถบัสไป Katsuo-ji</div><div class="sitem-sub">ใช้ IC Card แตะจ่าย</div></div><div class="sitem-right"><div class="sitem-cost">¥800</div></div></div>
-    <div class="sitem highlight" onclick="openPopup('katsuo_ji')"><div class="sitem-left"><div class="sitem-icon">⛩️</div><div class="sitem-time">10:00</div></div><div class="sitem-body"><div class="sitem-main">เที่ยววัด Katsuo-ji</div><div class="sitem-sub">ถ่ายรูปกับตุ๊กตาดารุมะ</div></div><div class="sitem-right"><div class="sitem-map-icon">📍</div></div></div>
+    <div class="sitem highlight" onclick="openPopup('katsuo_ji')"><div class="sitem-left"><div class="sitem-icon">⛩️</div><div class="sitem-time">10:00</div></div><div class="sitem-body"><div class="sitem-main">เที่ยววัด Katsuo-ji</div><div class="sitem-sub">ขอพรความรักกับตุ๊กตาดารุมะ</div></div><div class="sitem-right"><div class="sitem-map-icon">📍</div></div></div>
     <div class="sdivider">เที่ยง - น้ำตกมิโน</div>
     <div class="sitem" onclick="openPopup('taxi_minoh')"><div class="sitem-left"><div class="sitem-icon">🚕</div><div class="sitem-time">11:30</div></div><div class="sitem-body"><div class="sitem-main">Taxi ไปน้ำตกมิโน</div><div class="sitem-sub">ให้ไปส่งจุดจอดรถบนเขา</div></div><div class="sitem-right"><div class="sitem-cost">~¥1500</div></div></div>
     <div class="sitem highlight" onclick="openPopup('minoh_falls')"><div class="sitem-left"><div class="sitem-icon">💦</div><div class="sitem-time">11:45</div></div><div class="sitem-body"><div class="sitem-main">Minoh Falls</div><div class="sitem-sub">ชมน้ำตกสวยงาม</div></div><div class="sitem-right"><div class="sitem-map-icon">📍</div></div></div>
     <div class="sitem"><div class="sitem-left"><div class="sitem-icon">🚶</div><div class="sitem-time">12:20</div></div><div class="sitem-body"><div class="sitem-main">เดินลงเขา + Momiji Tempura</div><div class="sitem-sub">ชิมใบเมเปิ้ลทอด เดินลงชิลๆ</div></div></div>
-    <div class="sitem"><div class="sitem-left"><div class="sitem-icon">🚆</div><div class="sitem-time">13:35</div></div><div class="sitem-body"><div class="sitem-main">Hankyu กลับ Umeda</div><div class="sitem-sub">นั่งรถไฟกลับเข้าเมือง</div></div><div class="sitem-right"><div class="sitem-cost">¥280</div></div></div>
+    <div class="sitem"><div class="sitem-left"><div class="sitem-icon">🚆</div><div class="sitem-time">13:35</div></div><div class="sitem-body"><div class="sitem-main">Hankyu กลับมาที่ Umeda</div><div class="sitem-sub">เพื่อนั่งใต้ดินต่อลงไป Namba</div></div><div class="sitem-right"><div class="sitem-cost">¥280</div></div></div>
     <div class="sdivider">บ่าย - ย่าน Namba & ช้อปปิ้ง</div>
-    <div class="sitem"><div class="sitem-left"><div class="sitem-icon">🚇</div><div class="sitem-time">14:15</div></div><div class="sitem-body"><div class="sitem-main">Midosuji Line → Namba</div><div class="sitem-sub">นั่งรถไฟใต้ดินลงมาทางใต้</div></div><div class="sitem-right"><div class="sitem-cost">¥240</div></div></div>
+    <div class="sitem"><div class="sitem-left"><div class="sitem-icon">🚇</div><div class="sitem-time">14:15</div></div><div class="sitem-body"><div class="sitem-main">Midosuji Line → Namba</div><div class="sitem-sub">มุ่งหน้าลงโซนใต้</div></div><div class="sitem-right"><div class="sitem-cost">¥240</div></div></div>
     <div class="sitem highlight" onclick="openPopup('yasaka')"><div class="sitem-left"><div class="sitem-icon">🦁</div><div class="sitem-time">14:40</div></div><div class="sitem-body"><div class="sitem-main">Namba Yasaka Shrine</div><div class="sitem-sub">ศาลเจ้าหัวสิงโตยักษ์</div></div><div class="sitem-right"><div class="sitem-map-icon">📍</div></div></div>
     <div class="sitem highlight" onclick="openPopup('ghibli')"><div class="sitem-left"><div class="sitem-icon">🛍️</div><div class="sitem-time">15:40</div></div><div class="sitem-body"><div class="sitem-main">Shinsaibashi-suji / PARCO</div><div class="sitem-sub">ช้อปปิ้ง แวะ Nintendo / Ghibli Store</div></div><div class="sitem-right"><div class="sitem-map-icon">📍</div></div></div>
     <div class="sitem" onclick="openPopup('dotonbori')"><div class="sitem-left"><div class="sitem-icon">🐙</div><div class="sitem-time">18:00</div></div><div class="sitem-body"><div class="sitem-main">Dotonbori มื้อเย็น</div><div class="sitem-sub">กินมื้อเย็น + ถ่ายรูปป้าย Glico</div></div><div class="sitem-right"><div class="sitem-map-icon">📍</div></div></div>
     <div class="sdivider">กลับโรงแรม</div>
-    <div class="sitem"><div class="sitem-left"><div class="sitem-icon">🚇</div><div class="sitem-time">20:30</div></div><div class="sitem-body"><div class="sitem-main">Midosuji Line → Umeda</div><div class="sitem-sub">นั่งรถไฟใต้ดินกลับที่พัก</div></div><div class="sitem-right"><div class="sitem-cost">¥240</div></div></div>
-    <div class="sitem"><div class="sitem-left"><div class="sitem-icon">♨️</div><div class="sitem-time">21:00+</div></div><div class="sitem-body"><div class="sitem-main">กลับโรงแรม + ออนเซ็น</div></div></div>
+    <div class="sitem"><div class="sitem-left"><div class="sitem-icon">🚇</div><div class="sitem-time">20:30</div></div><div class="sitem-body"><div class="sitem-main">Midosuji Line → Hommachi</div><div class="sitem-sub">นั่งจาก Namba แค่ 2 สถานีเอง!</div></div><div class="sitem-right"><div class="sitem-cost">¥200</div></div></div>
+    <div class="sitem highlight" onclick="openPopup('hotel')"><div class="sitem-left"><div class="sitem-icon">🛌</div><div class="sitem-time">20:45</div></div><div class="sitem-body"><div class="sitem-main">ถึงโรงแรมพักผ่อน</div><div class="sitem-sub">ชาร์จพลังลุยเกียวโตพรุ่งนี้</div></div></div>
   </div>
 </div>
 
@@ -962,7 +960,7 @@ body::before {
   <div class="day-header"><div class="day-num">Day 3 🍵</div><div class="day-date">อาทิตย์ 18 ตุลาคม 2026</div><div class="day-theme">Kyoto Day: Uji → Fushimi Inari → Higashiyama</div></div>
   <div class="schedule">
     <div class="sdivider">เช้า - เมืองชาเขียว Uji</div>
-    <div class="sitem"><div class="sitem-left"><div class="sitem-icon">🚆</div><div class="sitem-time">08:45</div></div><div class="sitem-body"><div class="sitem-main">ออกจาก Umeda</div><div class="sitem-sub">มุ่งหน้าสู่เกียวโตตอนใต้</div></div></div>
+    <div class="sitem"><div class="sitem-left"><div class="sitem-icon">🚇</div><div class="sitem-time">08:45</div></div><div class="sitem-body"><div class="sitem-main">ออกจาก Hommachi</div><div class="sitem-sub">นั่ง Midosuji ไปต่อรถไฟสาย Keihan</div></div></div>
     <div class="sitem highlight" onclick="openPopup('byodoin')"><div class="sitem-left"><div class="sitem-icon">🍵</div><div class="sitem-time">10:00</div></div><div class="sitem-body"><div class="sitem-main">เที่ยวเมือง Uji</div><div class="sitem-sub">Byodo-in, ร้านมัทฉะ, ถนนชา</div></div><div class="sitem-right"><div class="sitem-map-icon">📍</div></div></div>
     <div class="sdivider">บ่าย - เสาโทริอิหมื่นต้น</div>
     <div class="sitem"><div class="sitem-left"><div class="sitem-icon">🚆</div><div class="sitem-time">13:00</div></div><div class="sitem-body"><div class="sitem-main">เดินทางไป Fushimi Inari</div></div></div>
@@ -973,8 +971,8 @@ body::before {
     <div class="sitem highlight" onclick="openPopup('sannenzaka')"><div class="sitem-left"><div class="sitem-icon">📸</div><div class="sitem-time">18:00</div></div><div class="sitem-body"><div class="sitem-main">Sannenzaka / Yasaka Pagoda</div><div class="sitem-sub">ถ่ายรูปมุมมหาชนยามค่ำคืน</div></div><div class="sitem-right"><div class="sitem-map-icon">📍</div></div></div>
     <div class="sitem"><div class="sitem-left"><div class="sitem-icon">🍽️</div><div class="sitem-time">19:00</div></div><div class="sitem-body"><div class="sitem-main">มื้อเย็น Kyoto</div><div class="sitem-sub">หาของอร่อยทานก่อนกลับ</div></div></div>
     <div class="sdivider">กลับโอซาก้า</div>
-    <div class="sitem"><div class="sitem-left"><div class="sitem-icon">🚆</div><div class="sitem-time">20:15</div></div><div class="sitem-body"><div class="sitem-main">นั่งรถไฟกลับ Osaka</div></div></div>
-    <div class="sitem"><div class="sitem-left"><div class="sitem-icon">🏨</div><div class="sitem-time">21:15</div></div><div class="sitem-body"><div class="sitem-main">ถึงโรงแรม พักผ่อน</div></div></div>
+    <div class="sitem"><div class="sitem-left"><div class="sitem-icon">🚆</div><div class="sitem-time">20:15</div></div><div class="sitem-body"><div class="sitem-main">นั่งรถไฟ Keihan กลับ Osaka</div><div class="sitem-sub">แล้วต่อ Midosuji มาลง Hommachi</div></div></div>
+    <div class="sitem highlight" onclick="openPopup('hotel')"><div class="sitem-left"><div class="sitem-icon">🏨</div><div class="sitem-time">21:15</div></div><div class="sitem-body"><div class="sitem-main">ถึงโรงแรม พักผ่อน</div></div></div>
   </div>
 </div>
 
@@ -982,57 +980,57 @@ body::before {
 <div class="day-panel" id="panel-3">
   <div class="day-header"><div class="day-num">Day 4 🎢</div><div class="day-date">จันทร์ 19 ตุลาคม 2026</div><div class="day-theme">Universal Studios Japan เต็มวัน</div></div>
   <div class="schedule">
-    <div class="sdivider">เข้าสวนสนุก</div>
-    <div class="sitem"><div class="sitem-left"><div class="sitem-icon">🚆</div><div class="sitem-time">07:00</div></div><div class="sitem-body"><div class="sitem-main">ออกจากโรงแรม</div><div class="sitem-sub">เริ่มต้นวันแต่เช้า! ไปจองคิวหน้าประตู</div></div></div>
-    <div class="sitem"><div class="sitem-left"><div class="sitem-icon">🚉</div><div class="sitem-time">07:35</div></div><div class="sitem-body"><div class="sitem-main">ถึงหน้า Universal Studios</div><div class="sitem-sub">รอประตูเปิด</div></div></div>
+    <div class="sdivider">เข้าสวนสนุก (จาก Hommachi เดินทางง่ายสุด!)</div>
+    <div class="sitem highlight"><div class="sitem-left"><div class="sitem-icon">🚆</div><div class="sitem-time">07:00</div></div><div class="sitem-body"><div class="sitem-main">ออกจากโรงแรม ขึ้น Chuo Line</div><div class="sitem-sub">นั่ง Chuo Line 2 ป้ายลง Kujo → ต่อ JR</div></div><div class="sitem-right"><div class="sitem-cost">¥360</div></div></div>
+    <div class="sitem"><div class="sitem-left"><div class="sitem-icon">🚉</div><div class="sitem-time">07:35</div></div><div class="sitem-body"><div class="sitem-main">ถึงหน้า Universal Studios</div><div class="sitem-sub">รอประตูเปิด (เดินทางไม่ถึงครึ่งชม.!)</div></div></div>
     <div class="sitem highlight" onclick="openPopup('usj_open')"><div class="sitem-left"><div class="sitem-icon">🎟️</div><div class="sitem-time">08:30</div></div><div class="sitem-body"><div class="sitem-main">เข้า Park!</div><div class="sitem-sub">กดจอง Area Timed Entry ทันที</div></div><div class="sitem-right"><div class="sitem-map-icon">📍</div></div></div>
     <div class="sdivider">เครื่องเล่นแนะนำตลอดวัน</div>
     <div class="sitem highlight" onclick="openPopup('usj_rides')"><div class="sitem-left"><div class="sitem-icon">🎢</div><div class="sitem-time">All day</div></div><div class="sitem-body"><div class="sitem-main">โซนและเครื่องเล่นห้ามพลาด</div><div class="sitem-sub">Nintendo, Harry Potter ฯลฯ</div></div><div class="sitem-right"><div class="sitem-map-icon">📄</div></div></div>
     <div class="sitem highlight" onclick="openPopup('halloween')"><div class="sitem-left"><div class="sitem-icon">🧟</div><div class="sitem-time">18:00</div></div><div class="sitem-body"><div class="sitem-main">Halloween Horror Nights</div><div class="sitem-sub">อยู่ยาวถึง 20:30 น.</div></div></div>
     <div class="sdivider">กลับโรงแรม</div>
-    <div class="sitem"><div class="sitem-left"><div class="sitem-icon">🚆</div><div class="sitem-time">20:30</div></div><div class="sitem-body"><div class="sitem-main">กลับถึงโรงแรม</div></div></div>
-    <div class="sitem"><div class="sitem-left"><div class="sitem-icon">♨️</div><div class="sitem-time">21:00</div></div><div class="sitem-body"><div class="sitem-main">ออนเซ็น</div><div class="sitem-sub">คลายปวดขากันแบบเต็มที่!</div></div></div>
+    <div class="sitem"><div class="sitem-left"><div class="sitem-icon">🚆</div><div class="sitem-time">20:30</div></div><div class="sitem-body"><div class="sitem-main">นั่งรถไฟกลับทางเดิม</div><div class="sitem-sub">ลงสถานี Hommachi เหมือนเดิม</div></div></div>
+    <div class="sitem"><div class="sitem-left"><div class="sitem-icon">🛌</div><div class="sitem-time">21:00</div></div><div class="sitem-body"><div class="sitem-main">กลับถึงห้องพัก</div><div class="sitem-sub">คลายปวดขากันแบบเต็มที่!</div></div></div>
   </div>
 </div>
 
 <!-- ================= DAY 5 ================= -->
 <div class="day-panel" id="panel-4">
-  <div class="day-header"><div class="day-num">Day 5 🏯🐠</div><div class="day-date">อังคาร 20 ตุลาคม 2026</div><div class="day-theme">Recovery Day: Osaka Castle + Kaiyukan</div></div>
+  <div class="day-header"><div class="day-num">Day 5 🏯🐠</div><div class="day-date">อังคาร 20 ตุลาคม 2026</div><div class="day-theme">Chuo Line Trip: Osaka Castle + Kaiyukan</div></div>
   <div class="schedule">
     <div class="sdivider">เช้าสบายๆ</div>
-    <div class="sitem"><div class="sitem-left"><div class="sitem-icon">😋</div><div class="sitem-time">08:00</div></div><div class="sitem-body"><div class="sitem-main">รับประทานอาหารเช้า ณ โรงแรม</div></div></div>
-    <div class="sitem"><div class="sitem-left"><div class="sitem-icon">☕</div><div class="sitem-time">09:15</div></div><div class="sitem-body"><div class="sitem-main">Cafe ใกล้โรงแรม</div></div></div>
-    <div class="sitem"><div class="sitem-left"><div class="sitem-icon">🚇</div><div class="sitem-time">10:00</div></div><div class="sitem-body"><div class="sitem-main">ออกจากโรงแรม</div></div></div>
+    <div class="sitem"><div class="sitem-left"><div class="sitem-icon">😋</div><div class="sitem-time">08:30</div></div><div class="sitem-body"><div class="sitem-main">รับประทานอาหารเช้า</div><div class="sitem-sub">Cafe แถวย่าน Hommachi</div></div></div>
+    <div class="sitem"><div class="sitem-left"><div class="sitem-icon">🚇</div><div class="sitem-time">10:00</div></div><div class="sitem-body"><div class="sitem-main">นั่งรถไฟใต้ดิน Chuo Line</div><div class="sitem-sub">ย่านเรานั่งสายนี้สายเดียวเก็บครบ 2 ที่เลย!</div></div></div>
     <div class="sdivider">ปราสาทโอซาก้า</div>
-    <div class="sitem highlight" onclick="openPopup('osaka_castle')"><div class="sitem-left"><div class="sitem-icon">🏯</div><div class="sitem-time">10:25</div></div><div class="sitem-body"><div class="sitem-main">Osaka Castle Park</div><div class="sitem-sub">ถ่ายรูปสวน + ปราสาทด้านนอก</div></div><div class="sitem-right"><div class="sitem-map-icon">📍</div></div></div>
+    <div class="sitem highlight" onclick="openPopup('osaka_castle')"><div class="sitem-left"><div class="sitem-icon">🏯</div><div class="sitem-time">10:25</div></div><div class="sitem-body"><div class="sitem-main">Osaka Castle Park</div><div class="sitem-sub">ลงสถานี Tanimachi 4-chrome (แค่ 2 ป้าย)</div></div><div class="sitem-right"><div class="sitem-map-icon">📍</div></div></div>
     <div class="sitem"><div class="sitem-left"><div class="sitem-icon">🍱</div><div class="sitem-time">12:00</div></div><div class="sitem-body"><div class="sitem-main">มื้อกลางวัน</div></div></div>
     <div class="sdivider">อ่าวโอซาก้า</div>
-    <div class="sitem"><div class="sitem-left"><div class="sitem-icon">🚇</div><div class="sitem-time">13:00</div></div><div class="sitem-body"><div class="sitem-main">เดินทางไป Kaiyukan</div></div></div>
+    <div class="sitem"><div class="sitem-left"><div class="sitem-icon">🚇</div><div class="sitem-time">13:00</div></div><div class="sitem-body"><div class="sitem-main">นั่ง Chuo Line ยิงยาวไปทะเล</div></div></div>
     <div class="sitem highlight" onclick="openPopup('kaiyukan')"><div class="sitem-left"><div class="sitem-icon">🐋</div><div class="sitem-time">14:00</div></div><div class="sitem-body"><div class="sitem-main">Osaka Aquarium Kaiyukan</div><div class="sitem-sub">เดินดูสัตว์น้ำเพลินๆ ถึง 16:30</div></div><div class="sitem-right"><div class="sitem-map-icon">📍</div></div></div>
     <div class="sitem highlight" onclick="openPopup('ferris')"><div class="sitem-left"><div class="sitem-icon">🌅</div><div class="sitem-time">16:45</div></div><div class="sitem-body"><div class="sitem-main">Tempozan Marketplace</div><div class="sitem-sub">กินมื้อเย็น + เดินเล่น</div></div><div class="sitem-right"><div class="sitem-map-icon">📍</div></div></div>
     <div class="sdivider">กลับโรงแรม</div>
-    <div class="sitem"><div class="sitem-left"><div class="sitem-icon">🚇</div><div class="sitem-time">19:15</div></div><div class="sitem-body"><div class="sitem-main">กลับ Umeda</div></div></div>
-    <div class="sitem"><div class="sitem-left"><div class="sitem-icon">♨️</div><div class="sitem-time">20:30</div></div><div class="sitem-body"><div class="sitem-main">ออนเซ็นครั้งสุดท้าย</div></div></div>
+    <div class="sitem"><div class="sitem-left"><div class="sitem-icon">🚇</div><div class="sitem-time">19:15</div></div><div class="sitem-body"><div class="sitem-main">นั่ง Chuo Line กลับ Hommachi</div><div class="sitem-sub">ม้วนเดียวจบ รวดเร็วสุดๆ</div></div><div class="sitem-right"><div class="sitem-cost">¥290</div></div></div>
+    <div class="sitem"><div class="sitem-left"><div class="sitem-icon">🛌</div><div class="sitem-time">19:45</div></div><div class="sitem-body"><div class="sitem-main">พักผ่อนแพ็คกระเป๋า</div></div></div>
   </div>
 </div>
 
 <!-- ================= DAY 6 ================= -->
 <div class="day-panel" id="panel-5">
-  <div class="day-header"><div class="day-num">Day 6 🛫</div><div class="day-date">พุธ 21 ตุลาคม 2026</div><div class="day-theme">Umeda Last Day → KIX (Direct Route)</div></div>
+  <div class="day-header"><div class="day-num">Day 6 🛫</div><div class="day-date">พุธ 21 ตุลาคม 2026</div><div class="day-theme">Kuromon Market & Namba → KIX (Nankai Rapi:t)</div></div>
   <div class="schedule">
-    <div class="sdivider">เช้าในอุเมดะ</div>
-    <div class="sitem" onclick="openPopup('hotel')"><div class="sitem-left"><div class="sitem-icon">🧳</div><div class="sitem-time">08:30</div></div><div class="sitem-body"><div class="sitem-main">Check-out</div><div class="sitem-sub">ฝากกระเป๋าไว้ที่โรงแรมก่อน</div></div></div>
-    <div class="sitem"><div class="sitem-left"><div class="sitem-icon">☕</div><div class="sitem-time">09:00</div></div><div class="sitem-body"><div class="sitem-main">คาเฟ่เช้า</div><div class="sitem-sub">กินกาแฟชิลๆ ส่งท้าย</div></div></div>
-    <div class="sdivider">ช้อปปิ้งส่งท้าย & มื้อเที่ยง</div>
-    <div class="sitem highlight"><div class="sitem-left"><div class="sitem-icon">🛍️</div><div class="sitem-time">10:00</div></div><div class="sitem-body"><div class="sitem-main">ช้อปรอบสุดท้าย Umeda</div><div class="sitem-sub">LUCUA / Daimaru / Hands / Donki</div></div></div>
-    <div class="sitem"><div class="sitem-left"><div class="sitem-icon">🍱</div><div class="sitem-time">12:30</div></div><div class="sitem-body"><div class="sitem-main">มื้อกลางวัน</div></div></div>
-    <div class="sdivider">เดินทางสู่สนามบิน (ยิงยาว)</div>
-    <div class="sitem"><div class="sitem-left"><div class="sitem-icon">🧳</div><div class="sitem-time">13:45</div></div><div class="sitem-body"><div class="sitem-main">รับกระเป๋าที่โรงแรม</div></div></div>
-    <div class="sitem"><div class="sitem-left"><div class="sitem-icon">🚶</div><div class="sitem-time">14:00</div></div><div class="sitem-body"><div class="sitem-main">เดินไป Osaka Station</div></div></div>
-    <div class="sitem highlight" onclick="openPopup('haruka')"><div class="sitem-left"><div class="sitem-icon">🚆</div><div class="sitem-time">14:30</div></div><div class="sitem-body"><div class="sitem-main">JR Haruka Ltd. Express</div><div class="sitem-sub">นั่งตรงจาก Osaka Sta. ถึงสนามบินเลย!</div></div><div class="sitem-right"><div class="sitem-map-icon">📍</div></div></div>
+    <div class="sdivider">เช้า - เช็คเอาท์และฝากกระเป๋าที่ Namba</div>
+    <div class="sitem"><div class="sitem-left"><div class="sitem-icon">🧳</div><div class="sitem-time">08:30</div></div><div class="sitem-body"><div class="sitem-main">Check-out BRACKETS HOTEL</div><div class="sitem-sub">ลากกระเป๋าเดินทางออกมาด้วยเลย</div></div></div>
+    <div class="sitem"><div class="sitem-left"><div class="sitem-icon">🚇</div><div class="sitem-time">08:45</div></div><div class="sitem-body"><div class="sitem-main">Midosuji Line → Namba</div><div class="sitem-sub">นั่งไป Namba แค่ 2 สถานี</div></div><div class="sitem-right"><div class="sitem-cost">¥200</div></div></div>
+    <div class="sitem highlight" onclick="openPopup('locker_namba_last')"><div class="sitem-left"><div class="sitem-icon">🔐</div><div class="sitem-time">09:15</div></div><div class="sitem-body"><div class="sitem-main">ฝากกระเป๋าที่ Nankai Namba</div><div class="sitem-sub">ฝากตู้ Locker ในสถานีรถไฟไปสนามบิน</div></div><div class="sitem-right"><div class="sitem-map-icon">📍</div></div></div>
+    <div class="sdivider">สายถึงเที่ยง - ตะลุยตลาดปลา & ช้อปปิ้ง</div>
+    <div class="sitem highlight" onclick="openPopup('kuromon')"><div class="sitem-left"><div class="sitem-icon">🍣</div><div class="sitem-time">09:45</div></div><div class="sitem-body"><div class="sitem-main">Kuromon Ichiba Market</div><div class="sitem-sub">ทานมื้อสาย ซูชิ เนื้อวากิว ผลไม้สดๆ</div></div><div class="sitem-right"><div class="sitem-map-icon">📍</div></div></div>
+    <div class="sitem"><div class="sitem-left"><div class="sitem-icon">🛍️</div><div class="sitem-time">11:30</div></div><div class="sitem-body"><div class="sitem-main">ช้อปปิ้งของฝาก Namba / PARCO</div><div class="sitem-sub">ซื้อขนม Donki หรือเครื่องสำอางก่อนกลับ</div></div></div>
+    <div class="sitem"><div class="sitem-left"><div class="sitem-icon">☕</div><div class="sitem-time">13:00</div></div><div class="sitem-body"><div class="sitem-main">คาเฟ่พักขา หรือมื้อเที่ยงเบาๆ</div></div></div>
+    <div class="sdivider">เดินทางสู่สนามบิน (เส้นทาง Rapi:t)</div>
+    <div class="sitem"><div class="sitem-left"><div class="sitem-icon">🧳</div><div class="sitem-time">14:00</div></div><div class="sitem-body"><div class="sitem-main">รับกระเป๋าที่ตู้ Locker</div><div class="sitem-sub">เดินขึ้นชานชาลา Nankai Namba ได้เลย</div></div></div>
+    <div class="sitem highlight" onclick="openPopup('rapit')"><div class="sitem-left"><div class="sitem-icon">🚆</div><div class="sitem-time">14:30</div></div><div class="sitem-body"><div class="sitem-main">Nankai Rapi:t ไปสนามบิน</div><div class="sitem-sub">นั่งหรูหราตรงยาวถึงสนามบิน (ระบุที่นั่ง)</div></div><div class="sitem-right"><div class="sitem-map-icon">📍</div></div></div>
     <div class="sdivider">สนามบินคันไซ</div>
-    <div class="sitem"><div class="sitem-left"><div class="sitem-icon">🛬</div><div class="sitem-time">15:20</div></div><div class="sitem-body"><div class="sitem-main">ถึงสนามบินคันไซ</div><div class="sitem-sub">นั่งรถบัสเชื่อมไป Terminal 2</div></div></div>
-    <div class="sitem highlight" onclick="openPopup('kix_shuttle_out')"><div class="sitem-left"><div class="sitem-icon">🚌</div><div class="sitem-time">16:40</div></div><div class="sitem-body"><div class="sitem-main">ถึงสนามบิน KIX T1 → T2</div><div class="sitem-sub">นั่ง Shuttle Bus ข้ามไปเตรียมโหลดกระเป๋า</div></div><div class="sitem-right"><div class="sitem-map-icon">📍</div></div></div>
+    <div class="sitem"><div class="sitem-left"><div class="sitem-icon">🛬</div><div class="sitem-time">15:10</div></div><div class="sitem-body"><div class="sitem-main">ถึงสนามบิน KIX T1</div></div></div>
+    <div class="sitem highlight" onclick="openPopup('kix_shuttle_out')"><div class="sitem-left"><div class="sitem-icon">🚌</div><div class="sitem-time">15:30</div></div><div class="sitem-body"><div class="sitem-main">นั่ง Shuttle Bus ข้ามไป T2</div><div class="sitem-sub">เตรียมโหลดกระเป๋าขึ้น Peach</div></div><div class="sitem-right"><div class="sitem-map-icon">📍</div></div></div>
     <div class="sitem"><div class="sitem-left"><div class="sitem-icon">🛫</div><div class="sitem-time">19:30</div></div><div class="sitem-body"><div class="sitem-main">Flight MM091 Departs</div><div class="sitem-sub">เดินทางกลับไทยโดยสวัสดิภาพ ✈️</div></div></div>
   </div>
 </div>
@@ -1046,7 +1044,7 @@ body::before {
     <div class="check-item" onclick="toggleCheck(this)"><div class="check-box"></div><div class="check-text">ซื้อตั๋ว Kaiyukan / Osaka Castle ออนไลน์</div></div>
     <div class="check-item" onclick="toggleCheck(this)"><div class="check-box"></div><div class="check-text">โหลดแอป GO (สำหรับเรียกแท็กซี่ไปน้ำตก)</div></div>
     <div class="check-item" onclick="toggleCheck(this)"><div class="check-box"></div><div class="check-text">เตรียมบัตร PASMO / ICOCA (ใช้ขึ้นบัส)</div></div>
-    <div class="check-item" onclick="toggleCheck(this)"><div class="check-box"></div><div class="check-text">สำรองห้องพัก Hotel Hokke Club Osaka</div></div>
+    <div class="check-item highlight" onclick="toggleCheck(this)"><div class="check-box"></div><div class="check-text" style="font-weight:600; color:var(--jp-blue);">สำรองห้องพัก BRACKETS HOTEL Osaka Hommachi</div></div>
     <div class="check-item" onclick="toggleCheck(this)"><div class="check-box"></div><div class="check-text">ตั๋วเครื่องบิน Peach Aviation ไป-กลับ</div></div>
     <div class="check-item" onclick="toggleCheck(this)"><div class="check-box"></div><div class="check-text">Pocket Wi-Fi หรือ SIM Card ญี่ปุ่น</div></div>
   </div>
@@ -1059,7 +1057,7 @@ body::before {
     <div class="info-cards">
       <div class="info-card"><div class="info-card-icon">✈️</div><div class="info-card-label">ขาไป</div><div class="info-card-val">Peach MM092<br>ศ. 16 ต.ค.<br>01:15 → 09:20<br>KIX Terminal 2</div></div>
       <div class="info-card"><div class="info-card-icon">✈️</div><div class="info-card-label">ขากลับ</div><div class="info-card-val">Peach MM091<br>พ. 21 ต.ค.<br>19:30 → 23:55<br>ปิดเช็คอิน 18:40</div></div>
-      <div class="info-card full"><div class="info-card-icon">🏨</div><div class="info-card-label">โรงแรม</div><div class="info-card-val">Hotel Hokke Club Osaka (Umeda)<br>ออนเซ็นชั้น 12 เปิดถึงตีสอง ฟรี</div></div>
+      <div class="info-card full" onclick="openPopup('hotel')" style="cursor:pointer; border-color:var(--jp-blue);"><div class="info-card-icon">🏨</div><div class="info-card-label">โรงแรม (คลิกเพื่อดูรายละเอียด)</div><div class="info-card-val"><strong>BRACKETS HOTEL Osaka Hommachi</strong><br>ใกล้สถานีรถไฟใต้ดิน 3 สาย เดินทางสะดวกสุดๆ!</div></div>
     </div>
     <div class="info-card" style="margin-top:10px;">
       <div class="info-card-icon" style="background:var(--tag-gold-bg);border-color:transparent;font-size:32px;">💰</div>
@@ -1144,42 +1142,29 @@ const POPUPS = {
   },
 
   rapit: {
-    icon:"🚆", title:"รถไฟด่วนพิเศษ Nankai Rapi:t", time:"KIX → Namba · ใช้เวลา ~38 นาที",
+    icon:"🚆", title:"รถไฟด่วนพิเศษ Nankai Rapi:t", time:"ใช้เวลาเพียง ~38 นาทีเข้าเมือง",
     sections:[
       {title:"📖 เรื่องเล่ารถไฟอัศวินย้อนยุค", type:"text", body:"เห็นหน้ารถไฟสีน้ำเงินเข้มโค้งมนนั่นไหมครับ? ตัวขบวนรถไฟ Rapi:t ถูกดีไซน์ขึ้นภายใต้แนวคิด <strong>'Retro-Futurism'</strong> (การผสมผสานอดีตและอนาคตเข้าด้วยกัน) หน้าตาของมันจึงดูเหมือนหน้ากากของอัศวินเหล็ก และหน้าต่างตู้โดยสารก็กลมโตเหมือนกระจกเครื่องบิน สวยเก๋มาก ถ่ายรูปคู่ออกมาสวยสุด ๆ แน่นอน!"},
-      {title:"🎫 วิธีการขึ้นรถไฟ (จากสถานีสนามบิน)", type:"text", body:"เมื่อเราเดินเข้ามาที่ชั้น 2 ของอาคารสถานีรถไฟสนามบินคันไซ:<br>1. นำตั๋ว E-Ticket ที่เราซื้อออนไลน์ไปกดรับตั๋วจริง (หรือสแกน QR Code) ที่เคาน์เตอร์ของ <strong>Nankai Electric Railway</strong> (ป้ายสีแดง-ส้ม)<br>2. เดินเข้าช่องเสียบตั๋วอัตโนมัติ<br>3. ลงไปที่ชานชาลาเพื่อขึ้นรถไฟตามระบุเลขที่นั่งข้างตั๋ว วิ่งตรงฉิว 38 นาทีถึงสถานี Namba เลย"},
+      {title:"🎫 วิธีการเดินทาง (สนามบิน ↔ Namba)", type:"text", body:"<strong>ขาเข้าเมือง:</strong> เราจะนั่งรวดเดียวจากสนามบินไปลงที่สถานีปลายทาง Namba แล้วค่อยต่อรถไฟใต้ดินสายสีแดง Midosuji Line ไปลงสถานี Hommachi หน้าโรงแรมเลย (แค่ 2 ป้ายง่ายสุดๆ!)<br><strong>ขากลับ:</strong> เราก็จะนั่งกลับจาก Namba มาสนามบินเช่นกันครับ นั่งสบาย ๆ ชมวิวก่อนบอกลาญี่ปุ่นกันนะ"},
       {title:"🧳 ความสะดวกสบาย", type:"tags", tags:[{text:"ตั๋วระบุที่นั่งชัดเจน ไม่ต้องแย่งใคร", cls:"blue"},{text:"มีตู้ล็อกคล้องกระเป๋าเดินทางตรงหัวตู้", cls:"gold"}]}
     ]
   },
 
-  locker_namba: {
-    icon:"🧳", title:"จุดฝากกระเป๋าเดินทางย่าน Namba", time:"ฝากพ้นภาระเดินช้อปตัวปลิว",
-    mapUrl:"https://www.google.com/maps/search/?api=1&query=Namba+Station+Coin+Lockers",
+  hotel: {
+    icon:"🏨", title:"BRACKETS HOTEL Osaka Hommachi", time:"ทำเลทองย่านใจกลางเมืองของทริปเรา",
+    mapUrl:"https://www.google.com/maps/search/?api=1&query=BRACKETS+HOTEL+Osaka+Hommachi",
     sections:[
-      {title:"🚶 ทางเดินไปตู้ล็อกเกอร์ที่หาเจอง่ายที่สุด", type:"text", body:"เพื่อที่เราสองคนจะได้เดินเที่ยวกันแบบตัวปลิว ไม่ต้องลากกระเป๋าหนัก ๆ บนพื้นถนน มีจุดฝาก 2 รูปแบบแนะนำดังนี้ครับ:"},
-      {title:"💡 ทางเลือกฝากกระเป๋า", type:"lockers", items:[
-        {name:"ตู้ฝากอัตโนมัติ (Coin Locker)", desc:"ภายในสถานี Nankai Namba จะมีตู้สีเหลืองและเขียวตั้งอยู่ทั่วไปรอบ ๆ ทางออกทิศเหนือ (North Exit ชั้น 1 และ 2) แนะนำให้ใช้บัตรท่องเที่ยว IC Card แตะจ่ายได้เลย สะดวกสุด ๆ"},
-        {name:"เคาน์เตอร์ฝากแบบมีพนักงานดูแล (ecbo cloak)", desc:"หากกระเป๋าใบใหญ่เกินหน้าตู้ สามารถเสิร์ชหาร้านค้ารอบ ๆ ที่เป็นพันธมิตรแล้วฝากไว้กับพนักงานได้เลย มีความปลอดภัยสูงมาก"}
-      ]}
+      {title:"📖 เรื่องเล่าที่พักแสนอบอุ่นของเรา", type:"text", body:"โรงแรมดีไซน์เก๋ไก๋และโมเดิร์นสุด ๆ ใจกลางย่าน <strong>Hommachi (ฮมมาชิ)</strong> ซึ่งเป็นทำเลทองที่เงียบสงบแต่เดินทางง่ายสุด ๆ เพราะเป็นจุดตัดของรถไฟใต้ดินถึง 3 สาย (Midosuji, Chuo, Yotsubashi)! ไปเที่ยวไหนก็ต่อรถสะดวกเวอร์!<br><br>การตกแต่งภายในสวยงามชิค ๆ แถมเตียงก็นุ่มฟู เหมาะกับการล้มตัวลงนอนกอดกันพักผ่อนหลังจากพาแฟนตะลุยเที่ยวมาทั้งวันครับ"},
+      {title:"🚶 การเดินทางไปโรงแรม", type:"text", body:"จากสถานี Hommachi (สายสีแดง Midosuji Line หรือสายสีเขียว Chuo Line) เดินขึ้นมาบนดินเพียงไม่กี่นาทีก็จะเจอตึกโรงแรมดีไซน์เท่ ๆ ของเราแล้วครับ รอบ ๆ มีร้านสะดวกซื้อเพียบ ไม่ต้องกลัวหิวรอบดึกเลย"}
     ]
   },
 
   yasaka: {
-    icon:"🦁", title:"ศาลเจ้าหัวสิงโตยักษ์ Namba Yasaka", time:"12:00 - 12:40",
+    icon:"🦁", title:"ศาลเจ้าหัวสิงโตยักษ์ Namba Yasaka", time:"14:40 - 15:30",
     mapUrl:"https://www.google.com/maps/search/?api=1&query=Namba+Yasaka+Shrine",
     sections:[
       {title:"📖 เรื่องเล่า 'กลืนสิ่งชั่วร้าย คลายความโชคดี'", type:"text", body:"ศาลเจ้านี้โด่งดังไปทั่วโลกจากวิหารหัวสิงโตยักษ์ สูงเด่นตระหง่านถึง 12 เมตร ที่ปากสิงโตอ้ากว้างเพราะมีความเชื่อเก่าแก่ว่า <strong>'ปากสิงโตยักษ์จะช่วยกลืนกินวิญญาณชั่วร้ายและสิ่งไม่ดีต่าง ๆ ในชีวิตเราออกไป'</strong> แล้วประทานโชคดี ความรัก และความสำเร็จเข้ามาแทน เป็นจุดเริ่มต้นทริปที่เราสองคนจะได้ปัดเป่าความทุกข์ใจออกไปให้หมดเลยนะ!"},
-      {title:"🚶 วิธีเดินจากสถานี Namba (ระยะทาง ~550 เมตร)", type:"text", body:"จากสถานี Nankai Namba ให้เดินออกทาง <strong>'ทางออกทิศใต้' (South Exit)</strong> จากนั้นเดินมุ่งหน้าไปทางทิศตะวันตกเฉียงใต้ ผ่านสี่แยกไฟแดงใหญ่ประมาณ 2 บล็อก เลี้ยวขวาเข้าซอยเล็ก ๆ จะเห็นหัวสิงโตยักษ์โผล่มาต้อนรับเราจากหลังกำแพงเลยครับ โดดเด่นสะดุดตาหาไม่ยากแน่นอน"}
-    ]
-  },
-
-  namba_food: {
-    icon:"🍜", title:"มื้อเที่ยงแสนอร่อยย่าน Namba", time:"เติมพลังกันหน่อยนะคุณแฟน",
-    sections:[
-      {title:"🤤 โซนของกินแนะนำที่เราต้องพากันไปลุย", type:"lockers", items:[
-        {name:"Namba Parks / Namba City (ชั้นใต้ดิน B1-B2)", desc:"เป็นห้างใหญ่ติดสถานีรถไฟ มีร้านทงคัตสึ ราเมนร้อน ๆ และซูชิจานหมุนรสชาติพรีเมียมราคาไม่แพง สะอาด และเดินง่ายแอร์เย็นฉ่ำ"},
-        {name:"ถนนสตรีทฟู้ด Dotonbori", desc:"หากอยากสัมผัสวิถีสตรีทฟู้ดแท้ ๆ เดินตรงขึ้นไปทางเหนือ 5 นาที จะเจอทาโกะยากิร้อน ๆ ควันฉุยให้เราเป่าแล้วป้อนกันพอน่ารักครบรสชาติ"}
-      ]}
+      {title:"🚶 วิธีเดินจากสถานี Namba (ระยะทาง ~550 เมตร)", type:"text", body:"จากสถานี Namba ให้เดินออกทางทิศใต้ จากนั้นเดินมุ่งหน้าไปทางทิศตะวันตกเฉียงใต้ ผ่านสี่แยกไฟแดงใหญ่ประมาณ 2 บล็อก เลี้ยวขวาเข้าซอยเล็ก ๆ จะเห็นหัวสิงโตยักษ์โผล่มาต้อนรับเราจากหลังกำแพงเลยครับ โดดเด่นสะดุดตาหาไม่ยากแน่นอน"}
     ]
   },
 
@@ -1188,7 +1173,7 @@ const POPUPS = {
     mapUrl:"https://www.google.com/maps/search/?api=1&query=Donguri+Kyowakoku+Shinsaibashi+PARCO",
     sections:[
       {title:"📖 เรื่องเล่าในมุมป่าต้องมนตร์", type:"text", body:"ร้าน <strong>Donguri Kyowakoku</strong> ชั้น 6 ของตึกห้าง Shinsaibashi PARCO นี้ คืออาณาจักรของหวานจากสตูดิโอจิบลิที่ใหญ่ที่สุดในแถบคันไซ! มีหุ่นโทโทโร่ขนาดยักษ์คอยยืนพิงร่มรอถ่ายรูปคู่กับเรา และมีรถบัสแมวคันโปรดตั้งเด่นอยู่ด้วยนะ เตรียมตัวพกจินตนาการวัยเด็กกลับมาเล่นสนุกด้วยกันได้เลยครับคุณแฟน"},
-      {title:"🚶 วิธีเดินทาง (รถไฟใต้ดิน)", type:"text", body:"จากย่าน Namba ให้ขึ้นรถไฟใต้ดินสายสีแดง <strong>Midosuji Line</strong> นั่งไปเพียงสถานีเดียว ลงที่สถานี <strong>Shinsaibashi Station (M19)</strong> เดินออกทางเชื่อมสถานีที่จะมุ่งหน้าทะลุตึกห้าง PARCO ได้โดยตรง ไม่ต้องกลัวร้อนกลัวแดดเลยสักนิดครับ"}
+      {title:"🚶 วิธีเดินทาง (รถไฟใต้ดิน)", type:"text", body:"เดินเที่ยวช้อปปิ้งเพลิน ๆ ตามถนน <strong>Shinsaibashi-suji</strong> ขึ้นมาเรื่อย ๆ ตึกห้าง PARCO จะอยู่ทางซ้ายมือ (ติดกับตึก Daimaru เลยครับ) เดินง่ายสุด ๆ"}
     ]
   },
 
@@ -1197,19 +1182,11 @@ const POPUPS = {
     mapUrl:"https://www.google.com/maps/search/?api=1&query=Dotonbori+Glico+Sign",
     sections:[
       {title:"📖 เรื่องเล่า 'กินจนพังพินาศ' สไตล์โอซาก้า", type:"text", body:"ที่โดทงโบริมีวัฒนธรรมคำว่า <strong>'คุอิดาโอเระ' (Kuidaore)</strong> แปลตรงตัวว่า <strong>'กินจนกว่าจะหมดตัวล้มละลาย'</strong> เพราะผู้คนแถวนี้ขึ้นชื่อเรื่องความหลงใหลในความอร่อยของอาหาร จุดถ่ายรูปที่ห้ามพลาดคือ 'ป้ายนักวิ่งกูลิโกะ' ริมสะพานเอบิสึที่เปิดไฟนีออนระยิบระยับ แฟนต้องทำท่ากางแขนยกขาสูงถ่ายรูปคู่กันเป็นที่ระลึกนะ!"},
-      {title:"🚶 เดินไปยังไง?", type:"text", body:"เดินต่อจากย่านช้อปปิ้ง Shinsaibashi-suji ลงมาทางใต้เรื่อย ๆ ข้ามสะพานข้ามคลองโดทงโบริ จะเจอแสงไฟนีออนสลัวและป้ายปูยักษ์ที่ขยับขาไปมาตั้งเด่นขนาบสองข้างทางเดินเท้า"},
+      {title:"🚶 เดินไปยังไง?", type:"text", body:"เดินย้อนลงมาจากย่านช้อปปิ้ง Shinsaibashi-suji ข้ามสะพานข้ามคลองโดทงโบริ จะเจอแสงไฟนีออนสลัวและป้ายปูยักษ์ที่ขยับขาไปมาตั้งเด่นขนาบสองข้างทางเดินเท้า"},
       {title:"😋 ร้านอร่อยที่ผมคัดสรรมาให้แฟน", type:"lockers", items:[
         {name:"Mizuno Okonomiyaki (มิซูโน่)", desc:"พิซซ่าญี่ปุ่นเจ้าดังดีกรีมิชลิน แป้งนุ่มหอมซอสฟุ้งไปทั้งร้าน แนะนำหน้าหอยเชลล์และหมูสามชั้นกรอบ"},
         {name:"Kukuru Takoyaki", desc:"ทาโกะยากิร้านดังที่มีปลาหมึกยักษ์สีแดงห้อยอยู่หน้าร้าน แป้งเยิ้มรสกลมกล่อมสูตรดั้งเดิมโอซาก้า"}
       ]}
-    ]
-  },
-
-  hotel: {
-    icon:"🏨", title:"Hotel Hokke Club Osaka", time:"ย่าน Umeda",
-    mapUrl:"https://www.google.com/maps/search/?api=1&query=Hotel+Hokke+Club+Osaka",
-    sections:[
-      {title:"พักผ่อนสไตล์ญี่ปุ่น", type:"text", body:"โรงแรมตั้งอยู่ทำเลทอง เดินเพียง 5 นาทีจากสถานี Higashi-Umeda จุดเด่นที่สุดคือ <strong>ออนเซ็นรวม (Public Bath) บนชั้น 12</strong> ที่เปิดให้ผู้เข้าพักแช่ได้ฟรีตั้งแต่เช้าตรู่ไปจนถึงตีสอง!"}
     ]
   },
 
@@ -1218,7 +1195,7 @@ const POPUPS = {
     mapUrl:"https://www.google.com/maps/search/?api=1&query=Katsuoji+Temple",
     sections:[
       {title:"📖 เรื่องเล่าดารุมะคู่รัก...เพื่อเป้าหมายร่วมกัน", type:"text", body:"วัดนี้เป็นวัดพุทธเก่าแก่กว่าพันปี โด่งดังจาก <strong>ตุ๊กตาดารุมะสีแดงไม่มีลูกตา</strong> ตัวแทนแห่งความเพียรพยายามและชัยชนะ<br><br>วิธีขอพรน่ารัก ๆ สำหรับเราคู่กันคือ <strong>'เราจะซื้อตุ๊กตาดารุมะด้วยกันคนละตัว เขียนความฝัน/เป้าหมายของคู่เราลงไป จากนั้นระบายสีลูกตาข้างซ้ายของดารุมะไว้ เมื่อความฝันนั้นสำเร็จเป็นจริงแล้ว เราสองคนจะบินกลับมาที่วัดนี้อีกครั้งเพื่อวาดลูกตาข้างขวาให้สมบูรณ์ด้วยกัน'</strong> โรแมนติกสุด ๆ ไปเลย!"},
-      {title:"🚌 วิธีนั่งรถบัสไปวัด (ละเอียดมากป้องกันหลง)", type:"text", body:"1. จากสถานีปลายทาง <strong>Minoh-Kayano Station</strong> ให้เดินออกจากสถานีไปที่ท่ารถบัสหน้าห้าง Q's Mall<br>2. มองหา <strong>ชานชาลารถบัสหมายเลข 4</strong> ขึ้นรถบัส <strong>Hankyu Bus สาย 20 หรือสายพิเศษ</strong><br>3. นั่งชิล ๆ ผ่านโค้งภูเขาชมธรรมชาติประมาณ 25-30 นาที ลงป้าย <strong>'Katsuoji'</strong> ทางเข้าวัดจะอยู่ตรงข้ามจุดจอดรถบัสทันทีครับ"},
+      {title:"🚌 วิธีนั่งรถไฟและรถบัสไปวัด (รวดเดียวจากหน้าโรงแรม)", type:"text", body:"1. จากสถานี <strong>Hommachi</strong> ให้ขึ้นรถไฟใต้ดินสายสีแดง <strong>Midosuji Line</strong> (ฝั่งมุ่งหน้าไป Senri-Chuo)<br>2. นั่งยาวสุดสายไปลงที่สถานีปลายทาง <strong>Minoh-Kayano Station</strong><br>3. เดินออกจากสถานีไปที่ท่ารถบัสหน้าห้าง Q's Mall มองหาชานชาลารถบัสหมายเลข 4 ขึ้นรถบัส <strong>Hankyu Bus สาย 20</strong> ไปลงหน้าวัด Katsuo-ji ได้เลยครับ"},
       {title:"💡 ทริกแนะนำเพิ่มเติม", type:"text", body:"ภายในวัดจะมีตุ๊กตาดารุมะตัวเล็ก ๆ ถูกซ่อนไว้ตามซอกหิน กิ่งไม้ หรือโคมไฟญี่ปุ่นนับพันตัว ลองชวนแฟนแข่งกันตามหาว่าใครจะมองเห็นเจ้าดารุมะจิ๋วเยอะกว่ากันดูนะ"}
     ]
   },
@@ -1233,11 +1210,11 @@ const POPUPS = {
   },
 
   gacha: {
-    icon:"🎰", title:"Gachagacha no Mori (ย่าน Chayamachi)", time:"15:15 - 16:00 · ลุ้นรักสุดตัว",
+    icon:"🎰", title:"Gachagacha no Mori (ย่าน Chayamachi)", time:"14:00 - 15:00 · ลุ้นรักสุดตัว",
     mapUrl:"https://www.google.com/maps/search/?api=1&query=Gachagacha+no+Mori+Osaka+Umeda+Chayamachi",
     sections:[
       {title:"📖 กิจกรรมน่ารักทายใจแฟน", type:"text", body:"ร้านตู้หมุนกาชาปองขนาดยักษ์ที่มีตู้ให้เลือกเล่นละลานตากว่าร้อยแบบ ลองเอาเงินเหรียญ 100 เยนให้แฟนหมุนชิ้นที่ชอบ หรือจะลองหมุนกาชาปองแบบสุ่มเพื่อนำมาเป็นของที่ระลึกแลกกันเก็บรักษาไว้ก็น่ารักไปอีกแบบนะ"},
-      {title:"🚶 การเดินทางไปร้าน", type:"text", body:"จากสถานี Hankyu Umeda ให้เดินออกทาง <strong>ทางออก Chayamachi (茶屋町口)</strong> เดินตรงไปทิศตะวันออกเลาะแนวตึกประมาณ 3 นาที ร้านจะตกแต่งในธีมป่าไม้ร่มรื่น สังเกตป้ายหน้าร้านสีเขียวสะดุดตาเด่นชัด"}
+      {title:"🚶 การเดินทางไปร้าน", type:"text", body:"จากย่าน Umeda (Osaka Station) เดินไปทิศตะวันออกเลาะแนวตึกประมาณ 5 นาทีสู่ย่าน Chayamachi ร้านจะตกแต่งในธีมป่าไม้ร่มรื่น สังเกตป้ายหน้าร้านสีเขียวสะดุดตาเด่นชัด"}
     ]
   },
 
@@ -1254,8 +1231,8 @@ const POPUPS = {
     icon:"🍜", title:"Naniwa Menjiro ZEN", time:"ราเมนหอยลายรสชาติรางวัลระดับโลก",
     mapUrl:"https://www.google.com/maps/search/?api=1&query=Naniwa+Menjiro+ZEN",
     sections:[
-      {title:"📖 ซดน้ำซุปหอมหวานกลมกล่อมมิชลินไกด์", type:"text", body:"ร้านราเมนที่ได้รับรางวัล Michelin Bib Gourmand น้ำซุปใสที่เคี่ยวอย่างพิถีพิถัน เส้นเหนียวนุ่ม มีให้เลือกทั้งแบบซุปโชยุ และซุปหอยลาย (Clam) แนะนำให้ลองมากๆ!"},
-      {title:"🚶 วิธีเดินหาตัวร้าน (สถานี Osaka-Umeda)", type:"text", body:"ร้านตั้งอยู่บริเวณ <strong>ชั้นใต้ดิน B2 ฝั่งสถานีรถไฟใต้ดิน Hanshin Osaka-Umeda Station</strong> (ทางเข้าสถานีฝั่งตะวันออก) เดินหาร้านที่มีม่านสีน้ำเงินเข้มหน้าร้านและมีคิวคนญี่ปุ่นยืนรอเรียงกันอยู่ รับรองทานแล้วแฟนยิ้มแก้มปริชัวร์"}
+      {title:"📖 ซดน้ำซุปหอมหวานกลมกล่อมมิชลินไกด์", type:"text", body:"ร้านราเมนยอดฮิตที่ได้รับเลือกให้อยู่ใน **Michelin Bib Gourmand** ไฮไลท์สำคัญคือ <strong>'ราเมนน้ำซุปหอยลายและซีอิ๊วญี่ปุ่นดั้งเดิม' (Ogon no Shio Ramen)</strong> ซุปสีเหลืองทองเคี่ยวจากหอยเชลล์และหอยลายสดหวานฉ่ำ ไร้กลิ่นคาว เส้นเหนียวนุ่มตัดกับหมูชาชูเนื้อนุ่มละลายในปาก คุ้มค่าการรอคอยแน่นอน!"},
+      {title:"🚶 วิธีเดินหาตัวร้าน", type:"text", body:"ร้านตั้งอยู่บริเวณ <strong>ชั้นใต้ดิน B2 ฝั่งสถานีรถไฟใต้ดิน Hanshin Osaka-Umeda Station</strong> (ทางเข้าสถานีฝั่งตะวันออก) เดินหาร้านที่มีม่านสีน้ำเงินเข้มหน้าร้านและมีคิวคนญี่ปุ่นยืนรอเรียงกันอยู่ รับรองทานแล้วแฟนยิ้มแก้มปริชัวร์"}
     ]
   },
 
@@ -1264,7 +1241,7 @@ const POPUPS = {
     mapUrl:"https://www.google.com/maps/search/?api=1&query=Byodoin+Temple",
     sections:[
       {title:"📖 เรื่องเล่า 'สรวงสวรรค์ที่สะท้อนเงาบนผืนน้ำ'", type:"text", body:"ศาลาสีชาดโบราณอายุกว่าพันปีแห่งนี้ ถูกออกแบบมาเพื่อจำลอง <strong>'ดินแดนสุขาวดีในสรวงสวรรค์'</strong> บนหลังคามีนกฟีนิกซ์สำริดคู่สง่างามคอยปกปักษ์รักษาวัด ความงดงามของศาลานี้เลื่องลือจนถูกนำไปพิมพ์ลงบน <strong>หลังเหรียญ 10 เยน</strong> และธนบัตร 10,000 เยนของญี่ปุ่น! ชวนแฟนหยิบเหรียญ 10 เยนขึ้นมาชูเทียบกับตัวศาลาจริงเพื่อถ่ายรูปไอเดียเก๋ ๆ เล่าเรื่องให้น่าเอ็นดูได้เลยครับ"},
-      {title:"🚶 วิธีเดินทางเมื่อถึงสถานี Uji", type:"text", body:"1. เมื่อเดินทางถึงสถานี <strong>JR Uji Station</strong> หรือ <strong>Keihan Uji Station</strong><br>2. เดินข้ามแม่น้ำอูจิสีมรกต ผ่านเส้นทางถนนคนเดินสายชาเขียว <strong>Byodoin Omotesando</strong> ที่เต็มไปด้วยกลิ่นหอมกรุ่นคั่วใบชา<br>3. เดินประมาณ 10 นาทีก็จะถึงประตูทางเข้าหลักวัดเบียวโดอินอย่างง่ายดาย"},
+      {title:"🚶 วิธีเดินทาง (จาก Hommachi -> Uji)", type:"text", body:"1. จากสถานี Hommachi ให้ขึ้นรถไฟสาย <strong>Midosuji Line</strong> ไปแค่ 1 ป้ายลง <strong>Yodoyabashi Station</strong><br>2. เปลี่ยนขบวนไปขึ้นรถไฟสาย <strong>Keihan Main Line</strong> นั่งยาวไปเปลี่ยนขบวนที่ <strong>Chushojima</strong> เป็นสาย <strong>Keihan Uji Line</strong><br>3. ลงสถานีปลายทาง <strong>Keihan Uji Station</strong> เดินข้ามแม่น้ำมาก็ถึงถนนคนเดินชาเขียวเลยครับ เดินทางง่ายกว่าที่คิดเยอะ!"},
       {title:"🍵 ของอร่อยเมืองอูจิ", type:"lockers", items:[
         {name:"Nakamura Tokichi (นากามูระ โทคิจิ)", desc:"ร้านมัทฉะระดับตำนานอายุกว่า 150 ปี แนะนำพาร์เฟต์ชาเขียวและโซบะมัทฉะเส้นสดจิ้มซีอิ๊วญี่ปุ่น หวานละมุนลิ้นมาก"}
       ]}
@@ -1276,7 +1253,7 @@ const POPUPS = {
     mapUrl:"https://www.google.com/maps/search/?api=1&query=Fushimi+Inari+Taisha",
     sections:[
       {title:"📖 เรื่องเล่าคุณสุนัขจิ้งจอกและเสาอธิษฐานสีส้มแดง", type:"text", body:"ศาลเจ้านี้อุทิศให้กับเทพอินาริ เทพแห่งการกสิกรรมและความเจริญรุ่งเรืองของธุรกิจ บริเวณรอบศาลเจ้าจึงมี <strong>รูปปั้นสุนัขจิ้งจอกสีขาว (ข้ารับใช้ของเทพเจ้า)</strong> คาบกุญแจโกดังข้าว หรือรวงข้าวทองคำคอยต้อนรับ อุโมงค์เสาโทริอิสีแดงสดหมื่นต้นเกิดจากการที่ผู้คนนำเสามาถวายแก้บนทีละต้นจนกลายเป็นเส้นทางยาวขึ้นสู่ยอดเขา โทนสีแดงสดใสเป็นฉากหลังตัดกับเสื้อผ้าถ่ายรูปคู่ออกมาสวยโดดเด่นน่าจดจำครับ"},
-      {title:"🚶 เดินทางสะดวกสบายจากสถานีรถไฟรถ", type:"text", body:"• <strong>เดินทางรถไฟสาย JR:</strong> ลงที่สถานี <strong>Inari Station</strong> (สาย JR Nara Line) ทันทีที่ก้าวออกจากสถานีจะเจอเสาโทริอิสีส้มขนาดยักษ์หน้าศาลเจ้าตั้งเด่นต้อนรับเลย เดินไม่ถึง 20 ก้าว!<br>• <strong>สายรถไฟ Keihan:</strong> ลงสถานี <strong>Fushimi-Inari Station</strong> แล้วเดินเท้าต่อมาทางทิศตะวันออก 5 นาทีตามป้ายบอกทาง"}
+      {title:"🚶 เดินทางสะดวกสบายจากสถานีรถไฟรถ", type:"text", body:"จากเมือง Uji เราก็นั่งรถไฟสาย <strong>Keihan Line</strong> กลับขึ้นมานิดเดียว มาลงสถานี <strong>Fushimi-Inari Station</strong> แล้วเดินเท้าต่อมาทางทิศตะวันออก 5 นาทีตามป้ายบอกทางครับ สะดวกและอยู่ในเส้นทางเดียวกันพอดี"}
     ]
   },
 
@@ -1285,7 +1262,7 @@ const POPUPS = {
     mapUrl:"https://www.google.com/maps/search/?api=1&query=Kiyomizudera",
     sections:[
       {title:"📖 เรื่องเล่าระเบียงไม้ไร้ตะปู และสายน้ำสามสายอธิษฐาน", type:"text", body:"ศาลาหลังใหญ่ของวัดสร้างยื่นออกไปจากหน้าผาสูงชัน ค้ำจุนด้วยเสาไม้ซุงขนาดใหญ่ร้อยกว่าต้นโดย <strong>'ไม่ใช้ตะปูแม้แต่ตัวเดียว'</strong> ทนทานแผ่นดินไหวมาหลายร้อยปี ด้านล่างศาลามีน้ำตกธรรมชาติไหลลงเป็นสามสายย่อย เชื่อกันว่าใครได้ดื่มจะสมหวังดังนี้:<br>• <strong>สายซ้าย:</strong> การเรียน/การทำงานสำเร็จ<br>• <strong>สายกลาง:</strong> ความรักราบรื่นมั่นคง<br>• <strong>สายขวา:</strong> อายุยืนยาวสุขภาพดี<br><br>💡 **เคล็ดลับความรัก:** ให้ชวนแฟนเลือกดื่มเฉพาะสายกลางร่วมกันเพียงสายเดียว เพื่อสื่อความหมายอธิษฐานจิตถึงความรักที่มั่นคงยั่งยืนยาวนานครับ"},
-      {title:"🚶 วิธีเดินเท้าขึ้นสู่วัดเพื่อหลีกเลี่ยงเนินสูงชันทรมานขา", type:"text", body:"จากจุดลงรถบัสที่ป้าย Gojozaka ให้พากันเดินเลี้ยวเข้าทางถนนเนินเขา <strong>Chawan-zaka</strong> ซึ่งจะมีร้านขายของเซรามิกและคนเดินน้อยกว่า ทัศนียภาพจะโปร่งโล่งสบายตาและเดินไต่ระดับความชันได้ดีกว่าเนินหลัก"}
+      {title:"🚶 วิธีเดินทางไปวัด", type:"text", body:"นั่งรถไฟ Keihan ขึ้นมาลงที่สถานี <strong>Kiyomizu-Gojo Station</strong> แล้วอาจจะต่อรถบัสหรือเรียกแท็กซี่ไปลงที่ป้าย Gojozaka จากนั้นเดินเท้าขึ้นไปทางถนนเนินเขา <strong>Chawan-zaka</strong> ซึ่งจะมีร้านขายของเซรามิกน่ารักๆ ให้แวะดูตลอดทาง"}
     ]
   },
 
@@ -1303,7 +1280,7 @@ const POPUPS = {
     mapUrl:"https://www.google.com/maps/search/?api=1&query=Universal+Studios+Japan",
     sections:[
       {title:"📖 ก้าวแรกเข้าสู่ป่าเวทมนตร์", type:"text", body:"เพื่อความสุขสูงสุดในวันนี้ แนะนำให้ทานมื้อเช้าให้เรียบร้อยตั้งแต่บนขบวนรถไฟ และแต่งตัวในชุดคลุมเวทมนตร์แฮร์รี่ หรือพกเครื่องแต่งกายมาริโอ้มาประดับตัวกันนะค้าบ"},
-      {title:"🚶 วิธีเดินทางด้วยรถไฟจากโรงแรม (Umeda → USJ)", type:"text", body:"1. จากสถานี JR Osaka Station ขึ้นรถไฟสาย <strong>Osaka Loop Line</strong> (ชานชาลาหมายเลข 1)<br>2. นั่งมาลงที่สถานี <strong>Nishikujo Station</strong> เพื่อเปลี่ยนขบวนรถไฟเป็นสาย <strong>JR Yumesaki Line</strong> (ป้ายบอกทางชัดเจนเดินทางสะดวก)<br>3. นั่งต่อมาลงที่สถานี <strong>Universal-City Station</strong> เดินออกจากสถานีเดินตรงเข้าประตูใหญ่สวนสนุกได้ทันทีครับ"}
+      {title:"🚇 วิธีเดินทางด้วยรถไฟจากโรงแรม (Hommachi → USJ)", type:"text", body:"ทำเลโรงแรมเราไป USJ ง่ายมากที่สุดเลยครับ!<br>1. เดินไปขึ้นรถไฟใต้ดินสายสีเขียว <strong>Chuo Line</strong> ที่สถานี Hommachi<br>2. นั่งไปแค่ 2 สถานี ลงที่สถานี <strong>Kujo Station</strong> เพื่อเดินเปลี่ยนขบวนเป็นสาย <strong>JR Yumesaki Line</strong><br>3. นั่งต่อมาลงที่สถานี <strong>Universal-City Station</strong> เดินออกจากสถานีเดินตรงเข้าประตูใหญ่สวนสนุกได้ทันทีครับ ใช้เวลาเบ็ดเสร็จแค่ 20-25 นาทีเท่านั้น ไวมาก ๆ!"}
     ]
   },
 
@@ -1339,7 +1316,7 @@ const POPUPS = {
     mapUrl:"https://www.google.com/maps/search/?api=1&query=Osaka+Castle",
     sections:[
       {title:"📖 เรื่องเล่าความรักและการสูญเสียป้อมกำแพงทองคำ", type:"text", body:"สร้างขึ้นโดยไดเมียวผู้ยิ่งใหญ่ **โทโยโทมิ ฮิเดโยชิ** ในปี 1583 เพื่อประกาศแสนยานุภาพความมั่งคั่ง หลังคาและลวดลายรอบปราสาทจึงประดับด้วยทองคำแท้ ๆ กำแพงหินขนาดยักษ์รอบคูน้ำเกิดจากการขนก้อนหินมหึมาจากเกาะชิโกกุมาประกอบเข้าด้วยกันอย่างพอดีโดยไม่ได้ใช้ปูนยาแนวแม้แต่น้อย ทนทานสงครามมาเนิ่นนาน ถ่ายรูปคู่ริมสะพานข้ามคูน้ำจะได้ทัศนียภาพกว้างขวางสวยงามสง่างามมากครับ"},
-      {title:"🚶 การเดินทางรถไฟใต้ดิน (เลี่ยงทางไกล)", type:"text", body:"ขึ้นรถไฟใต้ดินสายสีเขียว <strong>Chuo Line</strong> นั่งมาลงที่สถานี <strong>Tanimachi 4-chrome Station (C18/T23)</strong> เดินออกทางออกหมายเลข 1B หรือ 9 เดินตรงเข้าสู่สวนปราสาทผ่านทางประตูด้านตะวันตก (Otemon Gate) ซึ่งเป็นทางเดินเรียบกว้างหาเจอง่ายและร่มรื่นที่สุดครับ"}
+      {title:"🚶 การเดินทางที่แสนง่ายจากหน้าโรงแรม", type:"text", body:"จากสถานี Hommachi หน้าโรงแรม ให้ขึ้นรถไฟใต้ดินสายสีเขียว <strong>Chuo Line</strong> นั่งไปลงที่สถานี <strong>Tanimachi 4-chrome Station (C18)</strong> (นั่งไปแค่ 2 สถานีเท่านั้น!) เดินออกทางออกหมายเลข 1B หรือ 9 เดินตรงเข้าสู่สวนปราสาทผ่านทางประตูด้านตะวันตก (Otemon Gate) ซึ่งเป็นทางเดินเรียบกว้างหาเจอง่ายและร่มรื่นที่สุดครับ"}
     ]
   },
 
@@ -1347,8 +1324,8 @@ const POPUPS = {
     icon:"🐋", title:"พิพิธภัณฑ์สัตว์น้ำไคยูคัง (Osaka Aquarium Kaiyukan)", time:"14:00 - 16:30 · โลกใต้ทะเลลึกของเรา",
     mapUrl:"https://www.google.com/maps/search/?api=1&query=Osaka+Aquarium+Kaiyukan",
     sections:[
-      {title:"📖 เรื่องเล่าอัศจรรย์ 'วงแหวนแห่งไฟแปซิฟิก'", type:"text", body:"ไคยูคังออกแบบโดยจำลองโครงสร้างระบบนิสท์อันอุดมสมบูรณ์รอบมหาสมุทรแปซิฟิก ไฮไลท์ที่ทำให้ทุกคนต้องอุทานคือ <strong>'ตู้กระจกขนาดยักษ์สูงเท่าตึก 8 ชั้น'</strong> ที่จุน้ำปริมาณมหาศาล มี **ฉลามวาฬยักษ์ใหญ่สองตัว** แหวกว่ายอย่างสง่างามร่วมกับฝูงปลากระเบนและปลาฉลามตัวเล็กตัวน้อย การเดินชมที่นี่เราจะขึ้นไปเริ่มต้นจากชั้นบนสุดแล้วค่อย ๆ เดินวนเป็นลาดเกลียวลงมาสู่ใต้มหาสมุทรลึก บรรยากาศภายในมืดสลัวฉายแสงสีฟ้าคราม สวยระยิบระยับโรแมนติกเหมือนได้เดินจูงมือแฟนอยู่ก้นมหาสมุทรด้วยกันจริง ๆ เลยครับ"},
-      {title:"🚶 วิธีเดินเท้าจากสถานีรถไฟใต้ดิน Osakako", type:"text", body:"ขึ้นรถไฟใต้ดินสายสีเขียว <strong>Chuo Line</strong> ลงสถานีปลายทาง <strong>Osakako Station (C11)</strong> เดินออกจากสถานีทางออกหมายเลข 1 จากนั้นเดินตรงทอดน่องไปทางท่าเรือทิศเหนือประมาณ 5 นาที สังเกตตัวตึกสีแดง-น้ำเงินสลับกันขนาดยักษ์ที่มีรูปวาดปลาวาฬอยู่หน้าร้านอย่างโดดเด่นสะดุดตา"}
+      {title:"📖 เรื่องเล่าอัศจรรย์ 'วงแหวนแห่งไฟแปซิฟิก'", type:"text", body:"ไคยูคังออกแบบโดยจำลองโครงสร้างระบบนิเวศอันอุดมสมบูรณ์รอบมหาสมุทรแปซิฟิก ไฮไลท์ที่ทำให้ทุกคนต้องอุทานคือ <strong>'ตู้กระจกขนาดยักษ์สูงเท่าตึก 8 ชั้น'</strong> ที่จุน้ำปริมาณมหาศาล มี **ฉลามวาฬยักษ์ใหญ่สองตัว** แหวกว่ายอย่างสง่างามร่วมกับฝูงปลากระเบนและปลาฉลามตัวเล็กตัวน้อย การเดินชมที่นี่เราจะขึ้นไปเริ่มต้นจากชั้นบนสุดแล้วค่อย ๆ เดินวนเป็นลาดเกลียวลงมาสู่ใต้มหาสมุทรลึก บรรยากาศภายในมืดสลัวฉายแสงสีฟ้าคราม สวยระยิบระยับโรแมนติกเหมือนได้เดินจูงมือแฟนอยู่ก้นมหาสมุทรด้วยกันจริง ๆ เลยครับ"},
+      {title:"🚶 วิธีเดินทาง (สาย Chuo Line ยาวๆ)", type:"text", body:"จากสถานีแถวปราสาทโอซาก้า ให้เรากลับมาขึ้นรถไฟสายสีเขียว <strong>Chuo Line</strong> อีกครั้ง คราวนี้เราจะนั่งยิงยาวม้วนเดียวจบไปลงที่สถานี <strong>Osakako Station (C11)</strong> ได้เลย! เดินออกจากสถานีทางออกหมายเลข 1 เดินมุ่งตรงไปทางทะเลประมาณ 5 นาที ก็ถึงไคยูคังแล้วครับ (ตอนกลับก็นั่งสายเดิมนี้กลับลงหน้าโรงแรมเราได้เลยนะ สะดวกกว่านี้ไม่มีอีกแล้ว!)"}
     ]
   },
 
@@ -1361,12 +1338,24 @@ const POPUPS = {
     ]
   },
 
-  haruka: {
-    icon:"🚆", title:"รถไฟด่วน JR Haruka Hello Kitty", time:"Osaka → KIX · ยิงยาวไร้ความเหนื่อยล้า",
-    mapUrl:"https://www.google.com/maps/search/?api=1&query=Osaka+Station",
+  kuromon: {
+    icon:"🍣", title:"ตลาดคุโรมง (Kuromon Ichiba)", time:"09:45 - 11:30 · ครัวของโอซาก้า",
+    mapUrl:"https://www.google.com/maps/search/?api=1&query=Kuromon+Ichiba+Market",
     sections:[
-      {title:"📖 เรื่องเล่ารถไฟลวดลายคิ้วท์ ๆ ส่งท้ายทริป", type:"text", body:"ส่งท้ายการเดินทางแสนสุขด้วยรถไฟด่วนพิเศษดีไซน์เก๋ไก๋ประดับลวดลายตัวการ์ตูนยอดนิยม <strong>Hello Kitty</strong> วิ่งเร็วแรงแต่เงียบกริบ เก้าอี้เบาะนุ่มสบาย มีช่องเก็บสัมภาระกระเป๋าใบใหญ่หนาแน่น ให้เราสองคนได้นั่งอิงไหล่พักผ่อนหลับตาพักขาชมวิวบ้านเมืองชานเมืองญี่ปุ่นตลอดเส้นทางกลับสู่สนามบินอย่างสงบราบรื่นครับ"},
-      {title:"🚶 วิธีเดินไปขึ้นรถไฟ (สถานี Osaka Station)", type:"text", body:"1. เดินทางมาที่สถานีหลัก <strong>JR Osaka Station</strong><br>2. เดินตามป้ายนำทางสีม่วง/น้ำเงินที่เขียนว่า <strong>'Umekita Underground Platform' (ชานชาลาชั้นใต้ดินอุเมะคิตะ)</strong> ซึ่งเป็นส่วนก่อสร้างใหม่ล้ำยุค<br>3. เสียบตั๋วหรือแตะบัตรผ่านเข้าไปที่ชานชาลาหมายเลข 21 หรือ 22 เพื่อรอขึ้นขบวนรถไฟด่วน Haruka มุ่งตรงดิ่งสู่สนามบินเพียง 47 นาที ไม่ต้องเปลี่ยนรถเลยแม้แต่นิดเดียว สะดวกที่สุดในสามโลกครับ"}
+      {title:"📖 เรื่องเล่า 'ครัวของชาวโอซาก้า'", type:"text", body:"ตลาดเก่าแก่กว่า 190 ปีที่ได้ฉายาว่าเป็น 'ครัวของโอซาก้า' เพราะเต็มไปด้วยวัตถุดิบสดใหม่! ไฮไลท์คือการเดินทานสตรีทฟู้ดแบบพรีเมียม ทั้งซูชิ อูนิ หอยเชลล์ย่างไฟ ก้ามปู เนื้อวากิวเสียบไม้ และสตรอว์เบอร์รีหรือเมล่อนลูกโตหวานฉ่ำ ชวนแฟนเดินชิมป้อนกันไปตลอดทาง รับรองว่าอิ่มฟินสุดๆ ก่อนบินกลับครับ"},
+      {title:"🚶 การเดินทางมาตลาด", type:"text", body:"หลังจากฝากกระเป๋าที่สถานี Nankai Namba แล้ว เดินเท้าทะลุถนนมาทางทิศตะวันออกเพียงแค่ 5-8 นาที ก็จะถึงทางเข้าตลาดที่มีโคมไฟปลาหมึกและปลาทูน่ายักษ์ห้อยอยู่บนหลังคาทางเดินเลยครับ"}
+    ]
+  },
+
+  locker_namba_last: {
+    icon:"🔐", title:"ตู้ Locker สถานี Nankai Namba", time:"ฝากกระเป๋าเตรียมขึ้นรถไฟ Rapi:t",
+    mapUrl:"https://www.google.com/maps/search/?api=1&query=Nankai+Namba+Station+Coin+Lockers",
+    sections:[
+      {title:"📖 ทริคความสะดวกวันสุดท้าย", type:"text", body:"เพื่อความสบายระดับสิบดาวในวันกลับ เราจะนำกระเป๋าเดินทางทั้งหมดมาฝากไว้ที่ **สถานี Nankai Namba** (สถานีต้นทางของรถไฟ Rapi:t ที่เราจะนั่งไปสนามบิน) ฝากเสร็จปุ๊บก็เดินตัวปลิวออกไปเที่ยวต่อได้เลย พอถึงเวลาบินก็แค่กลับมาไขตู้ แล้วลากกระเป๋าขึ้นชานชาลารถไฟได้ทันที ไม่ต้องย้อนกลับไปโรงแรมอีกแล้ว!"},
+      {title:"📍 พิกัดตู้ฝากกระเป๋าในสถานี", type:"lockers", items:[
+        {name:"ชั้น 2 (Central Ticket Gate)", desc:"ตู้ขนาดใหญ่ (700-800 เยน) มีเยอะมาก แนะนำจุดนี้เพราะใกล้ทางเข้าชานชาลาที่สุด"},
+        {name:"ชั้น 1 และชั้น B1", desc:"หากชั้น 2 เต็ม สามารถลงมาหาตามบันไดเลื่อนชั้น 1 ได้ แตะจ่ายด้วยบัตร IC Card ได้เลย ไม่ต้องเตรียมเหรียญ"}
+      ]}
     ]
   }
 

@@ -444,6 +444,7 @@ body::before {
   background: var(--border); 
 }
 
+/* ========== POPUP REDESIGN ========== */
 .popup-overlay { 
   position: fixed; 
   inset: 0; 
@@ -479,16 +480,17 @@ body::before {
   -webkit-overflow-scrolling: touch;
   transform: translateY(100%); 
   transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-  padding-bottom: calc(24px + env(safe-area-inset-bottom));
-  box-shadow: 0 -10px 40px rgba(0,0,0,0.2); 
-  border: 1px solid var(--glass-border); 
+  padding-bottom: calc(30px + env(safe-area-inset-bottom));
+  box-shadow: 0 -15px 50px rgba(0, 0, 0, 0.25);
+  border: 1px solid rgba(255,255,255,0.5);
   border-bottom: none;
   will-change: transform;
 }
 
 [data-theme="dark"] .popup { 
-  background: rgba(24, 25, 31, 0.98); 
-  box-shadow: 0 -10px 50px rgba(0, 0, 0, 0.8);
+  background: rgba(20, 21, 25, 0.98); 
+  box-shadow: 0 -15px 50px rgba(0, 0, 0, 0.8);
+  border-color: rgba(255, 255, 255, 0.1);
 }
 
 .popup-overlay.open .popup { 
@@ -499,133 +501,190 @@ body::before {
   width: 40px; 
   height: 5px; 
   background: var(--ink-sub); 
-  opacity: 0.4; 
+  opacity: 0.25; 
   border-radius: 3px; 
-  margin: 12px auto 16px; 
+  margin: 14px auto 20px; 
 }
 
+/* HEADER */
 .popup-header { 
-  padding: 0 24px 20px; 
+  padding: 0 28px 24px; 
   border-bottom: 1px solid var(--border); 
   display: flex; 
-  align-items: flex-start; 
+  align-items: center; 
   gap: 16px; 
 }
 
 .popup-icon { 
-  font-size: 34px; 
+  font-size: 36px; 
   background: var(--glass-bg); 
-  width: 60px; 
-  height: 60px; 
-  border-radius: 20px;
+  width: 64px; 
+  height: 64px; 
+  border-radius: 22px;
   display: flex; 
   align-items: center; 
   justify-content: center; 
   border: 1px solid var(--glass-border); 
+  box-shadow: 0 8px 18px rgba(0,0,0,0.05);
 }
 
 .popup-title-wrap { 
   flex: 1; 
-  align-self: center; 
 }
 
 .popup-title { 
-  font-size: 20px; 
-  font-weight: 600; 
+  font-size: 22px; 
+  font-weight: 700; 
   color: var(--ink-main); 
+  line-height: 1.3;
+  letter-spacing: -0.01em;
 }
 
 .popup-time { 
   font-family: 'Outfit', 'Kanit', sans-serif; 
-  font-size: 15px; 
+  font-size: 14px; 
   color: var(--ink-sub); 
   margin-top: 4px; 
   font-weight: 500; 
+  display: flex;
+  align-items: center;
+  gap: 6px;
 }
 
 .popup-close { 
   background: var(--glass-bg); 
   border: 1px solid var(--glass-border); 
   color: var(--ink-main);
-  width: 36px; 
-  height: 36px; 
+  width: 40px; 
+  height: 40px; 
   border-radius: 50%; 
   cursor: pointer; 
-  font-size: 16px;
+  font-size: 18px;
   display: flex; 
   align-items: center; 
   justify-content: center;
-  transition: transform 0.2s, background-color 0.2s;
+  transition: all 0.2s;
+  backdrop-filter: blur(6px);
+  flex-shrink: 0;
 }
 
 .popup-close:active {
   transform: scale(0.9);
 }
 
+/* BODY */
 .popup-body { 
-  padding: 24px; 
+  padding: 24px 28px; 
   display: flex; 
   flex-direction: column; 
-  gap: 20px; 
+  gap: 24px; 
 }
 
+/* SECTION TITLE */
 .popup-section-title { 
-  font-size: 14px; 
-  font-weight: 600; 
-  color: var(--ink-sub); 
+  font-size: 13px; 
+  font-weight: 700; 
+  color: var(--jp-blue); 
   text-transform: uppercase;
-  letter-spacing: 0.06em; 
-  margin-bottom: 8px; 
+  letter-spacing: 0.08em; 
+  margin-bottom: 10px; 
+  display: flex;
+  align-items: center;
+  gap: 8px;
 }
 
+[data-theme="dark"] .popup-section-title {
+  color: #4da6ff;
+}
+
+.popup-section-title::before {
+  content: '';
+  display: inline-block;
+  width: 4px;
+  height: 18px;
+  background: var(--jp-blue);
+  border-radius: 4px;
+}
+
+/* TEXT BODY */
 .popup-section-body { 
   font-size: 15px; 
   color: var(--ink-main); 
-  line-height: 1.7; 
-  font-weight: 300; 
+  line-height: 1.8; 
+  font-weight: 400; 
 }
 
-.popup-section-body strong { 
-  font-weight: 600; 
-  color: var(--ink-main); 
+/* STORY BLOCK (สำหรับเรื่องเล่า) */
+.story-block {
+  background: var(--glass-bg);
+  border-radius: var(--radius-sm);
+  padding: 18px;
+  border: 1px solid var(--glass-border);
+  margin: 4px 0 8px;
+  font-size: 14.5px;
+  line-height: 1.8;
+  color: var(--ink-main);
+  position: relative;
 }
 
-.btn-map { 
-  display: flex; 
-  align-items: center; 
-  justify-content: center; 
-  gap: 8px;
-  background: var(--ink-main); 
-  color: var(--bg-main); 
-  text-decoration: none;
-  padding: 14px; 
-  border-radius: 16px; 
-  font-weight: 600; 
-  font-size: 15px;
-  margin-top: 8px; 
-  transition: transform 0.2s, opacity 0.2s; 
-  box-shadow: 0 4px 12px rgba(0,0,0,0.1); 
+[data-theme="dark"] .story-block {
+  background: rgba(255,255,255,0.04);
 }
 
-.btn-map:active { 
-  transform: scale(0.98); 
-  opacity: 0.9; 
+.story-block::before {
+  content: '📖';
+  position: absolute;
+  top: -12px;
+  left: 16px;
+  font-size: 20px;
+  background: var(--bg-card);
+  padding: 0 6px;
+  border-radius: 12px;
 }
 
+/* LIST ITEMS */
+.popup-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.popup-list li {
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+  font-size: 14.5px;
+  color: var(--ink-main);
+  line-height: 1.6;
+}
+
+.popup-list li::before {
+  content: '•';
+  color: var(--jp-blue);
+  font-weight: bold;
+  font-size: 1.2em;
+}
+
+/* TAGS */
 .popup-tags { 
   display: flex; 
   flex-wrap: wrap; 
   gap: 8px; 
+  margin-top: 4px;
 }
 
 .popup-tag { 
-  padding: 6px 16px; 
+  padding: 8px 18px; 
   border-radius: 24px; 
   font-size: 13px; 
-  font-weight: 500;
+  font-weight: 600;
   background: var(--glass-bg); 
   color: var(--ink-main); 
   border: 1px solid var(--glass-border); 
+  transition: transform 0.2s;
 }
 
 .popup-tag.red   { background: var(--tag-red-bg);   color: var(--tag-red-text);   border: none; }
@@ -633,26 +692,57 @@ body::before {
 .popup-tag.blue  { background: var(--tag-blue-bg);  color: var(--tag-blue-text);  border: none; }
 .popup-tag.green { background: var(--tag-green-bg); color: var(--tag-green-text); border: none; }
 
-.locker-item, .food-item, .ride-row {
-  background: var(--glass-bg); 
-  border-radius: var(--radius-sm); 
+/* CARDS (Lockers, Food) */
+.locker-item, .food-item {
+  background: var(--bg-card);
+  backdrop-filter: blur(8px);
+  border-radius: var(--radius-sm);
   padding: 16px;
-  margin-bottom: 10px; 
-  border: 1px solid var(--glass-border);
+  margin-bottom: 10px;
+  border: 1px solid var(--border);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.02);
+  transition: all 0.2s;
 }
 
+[data-theme="dark"] .locker-item,
+[data-theme="dark"] .food-item {
+  background: rgba(255,255,255,0.03);
+  border-color: rgba(255,255,255,0.08);
+}
+
+.locker-name, .food-item-name { 
+  font-size: 16px; 
+  font-weight: 600; 
+  color: var(--ink-main); 
+  margin-bottom: 6px; 
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.locker-detail, .food-item-desc { 
+  font-size: 13.5px; 
+  color: var(--ink-sub); 
+  line-height: 1.6; 
+}
+
+/* RIDE ROW */
 .ride-row { 
   display: flex; 
   align-items: flex-start; 
-  gap: 12px; 
+  gap: 14px; 
+  padding: 4px 0;
 }
 
 .ride-badge { 
   font-family: 'Outfit', sans-serif; 
   font-size: 11px; 
   font-weight: 700; 
-  padding: 4px 10px; 
+  padding: 5px 12px; 
   border-radius: 20px; 
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  white-space: nowrap;
 }
 
 .ride-badge.express { background: var(--tag-gold-bg); color: var(--tag-gold-text); }
@@ -660,9 +750,36 @@ body::before {
 .ride-badge.blue    { background: var(--tag-blue-bg); color: var(--tag-blue-text); }
 .ride-badge.red     { background: var(--tag-red-bg); color: var(--tag-red-text); }
 
-.locker-name, .food-item-name { font-size: 15px; font-weight: 600; color: var(--ink-main); margin-bottom: 4px; }
-.locker-detail, .food-item-desc { font-size: 13px; color: var(--ink-sub); line-height: 1.5; }
+/* GOOGLE MAPS BUTTON */
+.btn-map { 
+  display: flex; 
+  align-items: center; 
+  justify-content: center; 
+  gap: 10px;
+  background: linear-gradient(135deg, #1c1c1e, #2c2c2e);
+  color: #ffffff; 
+  text-decoration: none;
+  padding: 16px; 
+  border-radius: 18px; 
+  font-weight: 600; 
+  font-size: 16px;
+  margin-top: 12px; 
+  transition: all 0.2s; 
+  box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+  border: none;
+  letter-spacing: 0.02em;
+}
 
+[data-theme="dark"] .btn-map {
+  background: linear-gradient(135deg, #2c2c2e, #3a3a3c);
+}
+
+.btn-map:active { 
+  transform: scale(0.98); 
+  opacity: 0.9; 
+}
+
+/* ------- Keep other existing styles (checklist, info cards, etc.) ------- */
 .checklist-panel { 
   display: flex; 
   flex-direction: column; 
@@ -984,9 +1101,10 @@ body::before {
       <div class="sitem-left"><div class="sitem-icon">🚃</div><div class="sitem-time">14:00</div></div>
       <div class="sitem-body"><div class="sitem-main">Eizan → Kurama</div><div class="sitem-sub">เดินทางต่อเพียงไม่กี่สถานี</div></div>
     </div>
-    <div class="sitem highlight">
+    <div class="sitem highlight" onclick="openPopup('kurama_village')">
       <div class="sitem-left"><div class="sitem-icon">⛰️</div><div class="sitem-time">14:15</div></div>
       <div class="sitem-body"><div class="sitem-main">Kurama Village</div><div class="sitem-sub">เดินเล่นชมหมู่บ้านและบรรยากาศภูเขาแบบสบายๆ</div></div>
+      <div class="sitem-right"><div class="sitem-map-icon">📍</div></div>
     </div>
     <div class="sitem">
       <div class="sitem-left"><div class="sitem-icon">🚃</div><div class="sitem-time">16:15</div></div>
@@ -994,9 +1112,10 @@ body::before {
     </div>
 
     <div class="sdivider">เย็น - Gion / Shijo</div>
-    <div class="sitem highlight">
+    <div class="sitem highlight" onclick="openPopup('gion_shijo')">
       <div class="sitem-left"><div class="sitem-icon">🌆</div><div class="sitem-time">17:30</div></div>
       <div class="sitem-body"><div class="sitem-main">Gion & Shijo</div><div class="sitem-sub">เดินเล่นย่านเมืองเก่า + Yasaka + ถนน Shijo</div></div>
+      <div class="sitem-right"><div class="sitem-map-icon">📍</div></div>
     </div>
     <div class="sitem highlight">
       <div class="sitem-left"><div class="sitem-icon">🍽️</div><div class="sitem-time">18:30</div></div>
@@ -1448,6 +1567,42 @@ const POPUPS = {
       {title:"😋 เมนูชวนชิม", type:"text", body:"• หอยเชลล์ย่างเนยสด<br>• ซูชิหน้าโอโทโร่และอูนิสด<br>• เนื้อวากิว A5 เสียบไม้ย่างไฟ"}
     ]
   },
+  kurama_village: {
+    icon: "⛰️",
+    title: "หมู่บ้านคุรามะ (Kurama Village)",
+    time: "14:15 - 16:15",
+    mapUrl: "https://www.google.com/maps/search/?api=1&query=Kurama+Kyoto",
+    sections: [
+      {
+        title: "📖 เรื่องเล่า หมู่บ้านกลางขุนเขาแห่งเทพเจ้าเท็นงู",
+        type: "text",
+        body: "หมู่บ้านคุรามะตั้งอยู่ท่ามกลางหุบเขาทางตอนเหนือของเกียวโต มีชื่อเสียงจากวัดคุรามะเดระ (Kurama-dera) และตำนานเทพเจ้าประจำภูเขาที่เรียกว่า <strong>'เท็นงู' (Tengu)</strong> ซึ่งเป็นโยไคจมูกยาวที่มีพลังวิเศษ<br><br>เชื่อกันว่า มินาโมโตะ โนะ โยชิสึเนะ (Minamoto no Yoshitsune) ซามูไรในตำนาน ได้มาฝึกวิชาดาบกับราชาเท็นงู 'โซโจโบ' (Sojobo) ที่นี่ตั้งแต่ยังเด็ก ทำให้หมู่บ้านคุรามะเป็นสถานที่ศักดิ์สิทธิ์ที่เต็มไปด้วยพลังงานลี้ลับ"
+      },
+      {
+        title: "🚶 สิ่งที่น่าสนใจ",
+        type: "text",
+        body: "• วัดคุรามะเดระ (Kurama-dera Temple) เดินขึ้นบันไดหินสู่ศาลาหลัก<br>• เดินเล่นหมู่บ้านเล็กๆ ที่เต็มไปด้วยบ่อน้ำพุร้อน<br>• ชิมขนมท้องถิ่น 'Kurama Mochi' ขนมโมจิห่อใบไผ่"
+      }
+    ]
+  },
+  gion_shijo: {
+    icon: "🌆",
+    title: "ย่านกิอง & ถนนชิโจ (Gion & Shijo)",
+    time: "17:30 - 19:30",
+    mapUrl: "https://www.google.com/maps/search/?api=1&query=Gion+Kyoto",
+    sections: [
+      {
+        title: "📖 เรื่องเล่า ย่านเกอิชาและถนนสายประวัติศาสตร์",
+        type: "text",
+        body: "กิอง (Gion) เป็นย่านบันเทิงเก่าแก่ที่สุดของเกียวโต มีประวัติศาสตร์ยาวนานตั้งแต่ยุคเฮอัน (794-1185) เป็นศูนย์รวมของโรงน้ำชา (Ochaya) และบ้านเกอิชา (Geiko) และไมโกะ (Maiko) ฝึกหัด<br><br>ถนนชิโจ (Shijo-dori) เป็นถนนใหญ่ตัดผ่านกลางกิอง เรียงรายด้วยร้านค้าดั้งเดิม ร้านอาหาร และร้านขนมญี่ปุ่น นักท่องเที่ยวสามารถเดินเล่นชมความงามของบ้านไม้เก่าแก่ และหากโชคดีอาจพบเกอิชากำลังเดินไปทำงาน"
+      },
+      {
+        title: "📸 จุดถ่ายรูปห้ามพลาด",
+        type: "text",
+        body: "• สะพานชินบาชิ (Shinbashi) ถนนเลียบคลองเรียงรายด้วยต้นหลิว<br>• วัดยาซากะ (Yasaka Shrine) ประตูสีแดงสดสวยงามยามเย็น<br>• ถนนฮานามิโคจิ (Hanamikoji-dori) โอกาสพบเกอิชาระหว่างทาง"
+      }
+    ]
+  },
   locker_namba_last: {
     icon:"🔐", title:"จุดฝากกระเป๋า Nankai Namba Station", time:"08:45 - จุดยุทธศาสตร์วันกลับ",
     mapUrl:"https://www.google.com/maps/search/?api=1&query=Nankai+Namba+Station+Coin+Lockers",
@@ -1479,6 +1634,10 @@ function openPopup(key) {
     if (sec.type === 'text' || sec.type === 'text-body') {
       const p = document.createElement('div');
       p.className = 'popup-section-body';
+      // ถ้าเป็นเรื่องเล่าให้ห่อด้วย story-block
+      if (sec.title.includes('📖')) {
+        p.classList.add('story-block');
+      }
       p.innerHTML = sec.body;
       wrap.appendChild(p);
     }
@@ -1520,7 +1679,7 @@ function openPopup(key) {
     btn.target = '_blank';
     btn.rel = 'noopener noreferrer';
     btn.className = 'btn-map';
-    btn.innerHTML = '🗺️ Google Maps';
+    btn.innerHTML = '🗺️ เปิด Google Maps';
     body.appendChild(btn);
   }
 

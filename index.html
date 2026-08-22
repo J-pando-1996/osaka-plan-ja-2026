@@ -106,7 +106,8 @@ body::before {
 .hero-top-bar {
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: center;
+  gap: 10px;
   margin-bottom: 12px;
 }
 
@@ -890,6 +891,10 @@ body::before {
 }
 
 #themeBtn {
+  position: absolute;
+  top: calc(14px + env(safe-area-inset-top));
+  right: 16px;
+  z-index: 20;
   width: 40px; 
   height: 40px; 
   border-radius: 50%;
@@ -931,6 +936,7 @@ body::before {
 
 <div class="hero" id="hero">
   <div class="hero-top-bar">
+    <div class="hero-flag">🇯🇵</div>
     <div class="countdown-chip" id="countdownChip">⏳ อีก -- วัน</div>
     <button id="themeBtn" type="button" onclick="toggleTheme()" aria-label="สลับธีม">☀️</button>
   </div>

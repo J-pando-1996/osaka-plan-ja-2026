@@ -3,49 +3,53 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+<meta name="theme-color" content="#f4f5fa" id="themeColorMeta">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <title>OSAKA 2026 Trip Planning 🗾</title>
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap');
 
 :root {
-  --bg-main: #f5f5fa; 
-  --bg-card: rgba(255, 255, 255, 0.65); 
-  --bg-card-hover: rgba(255, 255, 255, 0.85);
-  --ink-main: #1c1c1e; 
-  --ink-sub: #6c6c70;
+  --bg-main: #f4f5fa; 
+  --bg-card: rgba(255, 255, 255, 0.78); 
+  --bg-card-hover: rgba(255, 255, 255, 0.95);
+  --ink-main: #111113; 
+  --ink-sub: #636366;
   --border: rgba(0, 0, 0, 0.08); 
-  --overlay: rgba(0, 0, 0, 0.4); 
-  --header-bg: rgba(245, 245, 250, 0.88);
+  --overlay: rgba(0, 0, 0, 0.45); 
+  --header-bg: rgba(244, 245, 250, 0.88);
   --jp-red: #ff3b30; --jp-blue: #007aff; --jp-green: #34c759; --jp-gold: #ff9500;
-  --tag-red-bg: rgba(255,59,48,0.12);   --tag-red-text: #c41e1a;
+  --tag-red-bg: rgba(255,59,48,0.12);    --tag-red-text: #d70015;
   --tag-gold-bg: rgba(255,149,0,0.12);  --tag-gold-text: #b25f00;
   --tag-blue-bg: rgba(0,122,255,0.12);  --tag-blue-text: #004ea8;
   --tag-green-bg: rgba(52,199,89,0.12); --tag-green-text: #1f7b3e;
-  --glass-bg: rgba(255, 255, 255, 0.55); 
-  --glass-border: rgba(255, 255, 255, 0.7);
-  --glass-blur: blur(24px) saturate(180%); 
-  --glass-shadow: 0 8px 32px -8px rgba(0, 0, 0, 0.08);
-  --radius-sm: 18px; --radius-md: 24px; --radius-lg: 32px;
+  --glass-bg: rgba(255, 255, 255, 0.68); 
+  --glass-border: rgba(255, 255, 255, 0.85);
+  --glass-blur: blur(20px) saturate(180%); 
+  --glass-shadow: 0 10px 30px -5px rgba(0, 0, 0, 0.06);
+  --radius-sm: 16px; --radius-md: 22px; --radius-lg: 32px;
+  --touch-target: 48px;
 }
 
 [data-theme="dark"] {
-  --bg-main: #0c0d10; 
-  --bg-card: rgba(36, 37, 44, 0.75); 
-  --bg-card-hover: rgba(48, 50, 60, 0.9);
+  --bg-main: #090a0f; 
+  --bg-card: rgba(28, 29, 36, 0.82); 
+  --bg-card-hover: rgba(40, 42, 52, 0.95);
   --ink-main: #ffffff; 
-  --ink-sub: #b0b0b8;
+  --ink-sub: #a0a0a8;
   --border: rgba(255, 255, 255, 0.12); 
-  --overlay: rgba(0, 0, 0, 0.8); 
-  --header-bg: rgba(20, 21, 26, 0.92);
+  --overlay: rgba(0, 0, 0, 0.75); 
+  --header-bg: rgba(14, 15, 20, 0.92);
   --jp-red: #ff453a; --jp-blue: #0a84ff; --jp-green: #30d158; --jp-gold: #ffd60a;
-  --tag-red-bg: rgba(255, 69, 58, 0.2);   --tag-red-text: #ff847c;
-  --tag-gold-bg: rgba(255, 214, 10, 0.2); --tag-gold-text: #ffe04d;
-  --tag-blue-bg: rgba(10, 132, 255, 0.2); --tag-blue-text: #80c4ff;
-  --tag-green-bg: rgba(48, 209, 88, 0.2); --tag-green-text: #80f098;
-  --glass-bg: rgba(30, 31, 37, 0.7); 
-  --glass-border: rgba(255, 255, 255, 0.15);
-  --glass-blur: blur(24px) saturate(140%); 
-  --glass-shadow: 0 12px 40px -10px rgba(0, 0, 0, 0.6);
+  --tag-red-bg: rgba(255, 69, 58, 0.22);   --tag-red-text: #ff847c;
+  --tag-gold-bg: rgba(255, 214, 10, 0.22); --tag-gold-text: #ffe04d;
+  --tag-blue-bg: rgba(10, 132, 255, 0.22); --tag-blue-text: #80c4ff;
+  --tag-green-bg: rgba(48, 209, 88, 0.22); --tag-green-text: #80f098;
+  --glass-bg: rgba(26, 27, 34, 0.78); 
+  --glass-border: rgba(255, 255, 255, 0.14);
+  --glass-blur: blur(20px) saturate(140%); 
+  --glass-shadow: 0 12px 35px -8px rgba(0, 0, 0, 0.6);
 }
 
 * { 
@@ -53,21 +57,22 @@
   margin: 0; 
   padding: 0; 
   -webkit-tap-highlight-color: transparent;
+  user-select: none;
 }
 
 html {
   scroll-behavior: smooth;
+  font-size: 15px;
 }
 
 body {
-  font-family: 'Outfit', 'Kanit', sans-serif; 
+  font-family: 'Outfit', 'Kanit', -apple-system, BlinkMacSystemFont, sans-serif; 
   background: var(--bg-main); 
   color: var(--ink-main);
   min-height: 100vh; 
-  font-size: 15px; 
   line-height: 1.5; 
   -webkit-font-smoothing: antialiased;
-  padding-bottom: env(safe-area-inset-bottom); 
+  padding-bottom: calc(80px + env(safe-area-inset-bottom)); 
   position: relative; 
   overflow-x: hidden;
   transition: background-color 0.3s ease, color 0.3s ease;
@@ -78,40 +83,59 @@ body::before {
   position: fixed; 
   inset: 0; 
   z-index: -1;
-  background: radial-gradient(circle at 30% 20%, #f0e6ff, #e2d9ff, #d9e6ff);
-  opacity: 0.7; 
+  background: radial-gradient(circle at 50% 10%, rgba(220,200,255,0.4), rgba(210,230,255,0.2), transparent 70%);
   pointer-events: none;
 }
 
 [data-theme="dark"] body::before {
-  background: radial-gradient(circle at 30% 20%, #1e1530, #0c0d12, #070914); 
-  opacity: 0.9;
+  background: radial-gradient(circle at 50% 10%, rgba(40,30,70,0.5), rgba(15,20,45,0.3), transparent 70%); 
 }
 
+/* HERO SECTION */
 .hero {
   background: var(--glass-bg); 
   backdrop-filter: var(--glass-blur); 
   -webkit-backdrop-filter: var(--glass-blur);
-  padding: calc(36px + env(safe-area-inset-top)) 24px 28px;
+  padding: calc(16px + env(safe-area-inset-top)) 20px 20px;
   border-bottom: 1px solid var(--glass-border); 
   text-align: center;
   position: relative; 
   z-index: 10;
 }
 
+.hero-top-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 12px;
+}
+
 .hero-flag { 
-  font-size: 40px; 
-  margin-bottom: 10px; 
-  filter: drop-shadow(0 4px 8px rgba(0,0,0,0.08)); 
+  font-size: 32px; 
+  filter: drop-shadow(0 2px 6px rgba(0,0,0,0.1)); 
+}
+
+.countdown-chip {
+  background: rgba(255, 59, 48, 0.1);
+  border: 1px solid rgba(255, 59, 48, 0.25);
+  color: var(--jp-red);
+  padding: 4px 12px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  letter-spacing: 0.02em;
 }
 
 .hero-title { 
   font-family: 'Outfit', 'Kanit', sans-serif; 
-  font-size: 34px; 
+  font-size: 28px; 
   font-weight: 800;
   letter-spacing: -0.02em; 
-  line-height: 1.1; 
-  margin-bottom: 8px; 
+  line-height: 1.15; 
+  margin-bottom: 4px; 
   color: var(--ink-main); 
 }
 
@@ -120,9 +144,9 @@ body::before {
 }
 
 .hero-sub { 
-  font-size: 15px; 
+  font-size: 13.5px; 
   color: var(--ink-sub); 
-  margin-bottom: 18px; 
+  margin-bottom: 14px; 
   font-weight: 500; 
 }
 
@@ -135,12 +159,12 @@ body::before {
 
 .info-chip {
   background: var(--glass-bg); 
-  backdrop-filter: blur(10px); 
-  -webkit-backdrop-filter: blur(10px);
-  border-radius: 30px; 
-  padding: 6px 16px; 
-  font-size: 13px; 
-  font-weight: 500; 
+  backdrop-filter: blur(8px); 
+  -webkit-backdrop-filter: blur(8px);
+  border-radius: 20px; 
+  padding: 5px 14px; 
+  font-size: 12px; 
+  font-weight: 600; 
   color: var(--ink-main);
   display: flex; 
   align-items: center; 
@@ -148,6 +172,7 @@ body::before {
   border: 1px solid var(--glass-border);
 }
 
+/* CENTERED TABS NAVIGATION */
 .tabs-wrap {
   background: var(--header-bg); 
   backdrop-filter: var(--glass-blur); 
@@ -156,26 +181,17 @@ body::before {
   position: sticky; 
   top: 0; 
   z-index: 100;
-  margin-bottom: 4px;
-  box-shadow: 0 4px 20px rgba(0,0,0,0.03);
-  transition: background-color 0.3s, border-color 0.3s, box-shadow 0.3s;
-}
-
-[data-theme="dark"] .tabs-wrap {
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
-}
-
-@media (min-width: 768px) {
-  .tabs-wrap { margin: 0 20px; width: auto; border-radius: 40px; }
-  .tabs { max-width: calc(100% - 20px); justify-content: center; }
-}
-
-@media (max-width: 767px) {
-  .tabs-wrap { margin: 0; border-radius: 0; }
-  .tabs { justify-content: flex-start; }
+  margin-bottom: 8px;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.03);
+  width: 100%;
+  display: flex;
+  justify-content: center;
 }
 
 .tabs-inner-wrap { 
+  width: 100%;
+  display: flex;
+  justify-content: center;
   overflow-x: auto; 
   scrollbar-width: none; 
   -webkit-overflow-scrolling: touch; 
@@ -188,63 +204,56 @@ body::before {
 .tabs { 
   display: flex; 
   width: max-content; 
-  margin: 0 auto; 
-  padding: 10px 16px; 
+  padding: 8px 12px; 
   gap: 8px; 
+  margin: 0 auto;
 }
 
 .tab {
   flex-shrink: 0; 
-  padding: 10px 20px; 
-  font-size: 14px; 
-  font-weight: 600; 
+  min-width: 64px;
+  height: 52px;
+  padding: 6px 14px; 
+  font-size: 13px; 
+  font-weight: 700; 
   color: var(--ink-main);
   cursor: pointer; 
   border: none; 
   background: var(--glass-bg); 
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px); 
-  border-radius: 30px; 
+  border-radius: 18px; 
   border: 1px solid var(--glass-border);
   display: flex; 
   flex-direction: column; 
   align-items: center;
+  justify-content: center;
   font-family: 'Outfit', 'Kanit', sans-serif; 
-  box-shadow: 0 4px 12px rgba(0,0,0,0.03);
-  transition: background-color 0.2s cubic-bezier(0.16, 1, 0.3, 1), 
-              color 0.2s cubic-bezier(0.16, 1, 0.3, 1), 
-              border-color 0.2s, 
-              transform 0.1s ease, 
-              box-shadow 0.2s;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .tab:active {
-  transform: scale(0.95);
+  transform: scale(0.92);
 }
 
 .tab.active { 
   background: var(--ink-main); 
   color: var(--bg-main); 
   border-color: transparent; 
-  box-shadow: 0 8px 18px rgba(0,0,0,0.12); 
-}
-
-[data-theme="dark"] .tab.active {
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5), inset 0 0 0 1px rgba(255, 255, 255, 0.1);
+  box-shadow: 0 6px 16px rgba(0,0,0,0.15); 
 }
 
 .tab-day { 
-  font-size: 11px; 
-  opacity: 0.9; 
-  font-weight: 400; 
+  font-size: 10.5px; 
+  opacity: 0.85; 
+  font-weight: 500; 
   margin-top: 2px; 
 }
 
 .main { 
-  max-width: 600px; 
+  max-width: 580px; 
   margin: 0 auto; 
-  padding: 16px 20px 120px; 
-  -webkit-overflow-scrolling: touch; 
+  padding: 12px 16px 100px; 
 }
 
 .day-panel { 
@@ -253,38 +262,38 @@ body::before {
 
 .day-panel.active { 
   display: block; 
-  animation: slideUp 0.35s cubic-bezier(0.16, 1, 0.3, 1) forwards; 
+  animation: slideUp 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards; 
 }
 
 @keyframes slideUp { 
-  from { opacity: 0; transform: translateY(12px); } 
+  from { opacity: 0; transform: translateY(10px); } 
   to { opacity: 1; transform: translateY(0); } 
 }
 
 .day-header { 
-  margin-bottom: 20px; 
-  padding: 4px 4px 0; 
+  margin-bottom: 16px; 
+  padding: 2px 4px; 
 }
 
 .day-num { 
   font-family: 'Outfit', sans-serif; 
-  font-size: 15px; 
+  font-size: 13px; 
   font-weight: 800; 
-  color: var(--ink-sub);
+  color: var(--jp-blue);
   text-transform: uppercase; 
-  margin-bottom: 4px; 
-  letter-spacing: 0.05em; 
+  margin-bottom: 2px; 
+  letter-spacing: 0.06em; 
 }
 
 .day-date { 
-  font-size: 22px; 
-  font-weight: 600; 
+  font-size: 20px; 
+  font-weight: 700; 
   color: var(--ink-main); 
-  line-height: 1.3; 
+  line-height: 1.25; 
 }
 
 .day-theme { 
-  font-size: 14px; 
+  font-size: 13px; 
   color: var(--ink-sub); 
   margin-top: 4px; 
 }
@@ -292,7 +301,7 @@ body::before {
 .schedule { 
   display: flex; 
   flex-direction: column; 
-  gap: 12px; 
+  gap: 10px; 
 }
 
 .sitem {
@@ -304,40 +313,25 @@ body::before {
   border-radius: var(--radius-md); 
   border: 1px solid var(--border); 
   box-shadow: var(--glass-shadow); 
-  padding: 16px; 
-  gap: 14px; 
+  padding: 14px 16px; 
+  gap: 12px; 
   cursor: pointer;
-  transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), 
-              box-shadow 0.25s, 
-              background-color 0.25s, 
-              border-color 0.25s;
-  will-change: transform, box-shadow;
+  min-height: var(--touch-target);
+  transition: transform 0.18s ease, background-color 0.2s;
 }
 
 .sitem.highlight { 
-  background: rgba(255, 255, 255, 0.85); 
-  border-color: rgba(0, 122, 255, 0.2);
+  border-color: rgba(0, 122, 255, 0.25);
+  background: rgba(255, 255, 255, 0.88);
 }
 
 [data-theme="dark"] .sitem.highlight { 
-  background: rgba(45, 48, 58, 0.95); 
+  background: rgba(38, 40, 50, 0.9); 
   border-color: rgba(10, 132, 255, 0.35); 
 }
 
-.sitem:hover {
-  transform: translateY(-2px);
-  background-color: var(--bg-card-hover);
-  box-shadow: 0 12px 24px -8px rgba(0, 0, 0, 0.15);
-}
-
-[data-theme="dark"] .sitem:hover {
-  box-shadow: 0 12px 32px -8px rgba(0, 0, 0, 0.6);
-  border-color: rgba(255, 255, 255, 0.25);
-}
-
 .sitem:active { 
-  transform: scale(0.98) translateY(0); 
-  box-shadow: var(--glass-shadow);
+  transform: scale(0.97); 
 }
 
 .sitem-left { 
@@ -345,30 +339,29 @@ body::before {
   flex-direction: column; 
   align-items: center; 
   justify-content: center; 
-  width: 52px; 
+  width: 48px; 
   flex-shrink: 0; 
 }
 
 .sitem-time { 
   font-family: 'Outfit', sans-serif; 
-  font-size: 14px; 
+  font-size: 13px; 
   font-weight: 700; 
   color: var(--ink-main); 
-  margin-bottom: 4px; 
+  margin-bottom: 3px; 
   text-align: center; 
 }
 
 .sitem-icon { 
-  font-size: 24px; 
+  font-size: 22px; 
   background: var(--glass-bg); 
-  width: 44px; 
-  height: 44px; 
+  width: 40px; 
+  height: 40px; 
   border-radius: 50%;
   display: flex; 
   align-items: center; 
   justify-content: center; 
   border: 1px solid var(--glass-border); 
-  backdrop-filter: blur(4px); 
 }
 
 .sitem-body { 
@@ -376,61 +369,62 @@ body::before {
   display: flex; 
   flex-direction: column; 
   gap: 2px; 
+  overflow: hidden;
 }
 
 .sitem-main { 
-  font-size: 16px; 
+  font-size: 15px; 
   font-weight: 600; 
   color: var(--ink-main); 
-  line-height: 1.4; 
+  line-height: 1.35; 
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .sitem-sub { 
-  font-size: 13px; 
+  font-size: 12.5px; 
   color: var(--ink-sub); 
-  line-height: 1.4; 
+  line-height: 1.35; 
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .sitem-right { 
   display: flex; 
   flex-direction: column; 
   align-items: flex-end; 
-  gap: 6px; 
+  gap: 4px; 
   flex-shrink: 0; 
 }
 
 .sitem-cost { 
-  font-size: 12px; 
-  font-weight: 600; 
+  font-size: 11px; 
+  font-weight: 700; 
   font-family: 'Outfit', sans-serif; 
   color: var(--ink-main);
   background: var(--glass-bg); 
   border: 1px solid var(--glass-border); 
-  padding: 5px 10px; 
-  border-radius: 20px; 
+  padding: 4px 8px; 
+  border-radius: 14px; 
 }
 
 .sitem-map-icon { 
-  font-size: 18px; 
-  opacity: 0.6; 
-  padding: 4px; 
-  transition: opacity 0.2s;
-}
-
-.sitem:hover .sitem-map-icon {
-  opacity: 1;
+  font-size: 16px; 
+  opacity: 0.7; 
 }
 
 .sdivider { 
   display: flex; 
   align-items: center; 
-  gap: 12px; 
-  margin: 24px 0 10px;
-  font-size: 12px; 
-  font-weight: 600; 
+  gap: 10px; 
+  margin: 18px 0 6px;
+  font-size: 11px; 
+  font-weight: 700; 
   color: var(--ink-sub); 
   text-transform: uppercase; 
-  letter-spacing: 0.06em; 
+  letter-spacing: 0.08em; 
 }
 
 .sdivider::before, .sdivider::after { 
@@ -440,7 +434,7 @@ body::before {
   background: var(--border); 
 }
 
-/* POPUP DESIGN */
+/* POPUP STYLES */
 .popup-overlay { 
   position: fixed; 
   inset: 0; 
@@ -453,9 +447,7 @@ body::before {
   pointer-events: none; 
   backdrop-filter: blur(0px);
   -webkit-backdrop-filter: blur(0px);
-  transition: opacity 0.3s cubic-bezier(0.16, 1, 0.3, 1), 
-              backdrop-filter 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-  will-change: opacity, backdrop-filter;
+  transition: opacity 0.25s ease, backdrop-filter 0.25s ease;
 }
 
 .popup-overlay.open { 
@@ -467,182 +459,163 @@ body::before {
 
 .popup {
   background: rgba(255, 255, 255, 0.98); 
-  border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+  border-radius: 28px 28px 0 0;
   width: 100%; 
   max-width: 600px; 
   max-height: 88vh;
   overflow-y: auto; 
   -webkit-overflow-scrolling: touch;
   transform: translateY(100%); 
-  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-  padding-bottom: calc(30px + env(safe-area-inset-bottom));
-  box-shadow: 0 -15px 50px rgba(0, 0, 0, 0.25);
-  border: 1px solid rgba(255,255,255,0.5);
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  padding-bottom: calc(24px + env(safe-area-inset-bottom));
+  box-shadow: 0 -10px 40px rgba(0, 0, 0, 0.2);
+  border: 1px solid rgba(255,255,255,0.6);
   border-bottom: none;
-  will-change: transform;
+  touch-action: pan-y;
 }
 
 [data-theme="dark"] .popup { 
-  background: rgba(20, 21, 25, 0.98); 
-  box-shadow: 0 -15px 50px rgba(0, 0, 0, 0.8);
-  border-color: rgba(255, 255, 255, 0.1);
+  background: rgba(22, 23, 29, 0.98); 
+  box-shadow: 0 -10px 40px rgba(0, 0, 0, 0.8);
+  border-color: rgba(255, 255, 255, 0.12);
 }
 
 .popup-overlay.open .popup { 
   transform: translateY(0); 
 }
 
+.popup-handle-area {
+  padding: 12px 0 6px;
+  display: flex;
+  justify-content: center;
+  cursor: grab;
+}
+
 .popup-handle { 
-  width: 40px; 
+  width: 36px; 
   height: 5px; 
   background: var(--ink-sub); 
-  opacity: 0.25; 
+  opacity: 0.35; 
   border-radius: 3px; 
-  margin: 14px auto 20px; 
 }
 
 .popup-header { 
-  padding: 0 28px 24px; 
+  padding: 0 20px 16px; 
   border-bottom: 1px solid var(--border); 
   display: flex; 
   align-items: center; 
-  gap: 16px; 
+  gap: 12px; 
 }
 
 .popup-icon { 
-  font-size: 36px; 
+  font-size: 32px; 
   background: var(--glass-bg); 
-  width: 64px; 
-  height: 64px; 
-  border-radius: 22px;
+  width: 54px; 
+  height: 54px; 
+  border-radius: 18px;
   display: flex; 
   align-items: center; 
   justify-content: center; 
   border: 1px solid var(--glass-border); 
-  box-shadow: 0 8px 18px rgba(0,0,0,0.05);
+  flex-shrink: 0;
 }
 
 .popup-title-wrap { 
   flex: 1; 
+  overflow: hidden;
 }
 
 .popup-title { 
-  font-size: 22px; 
+  font-size: 18px; 
   font-weight: 700; 
   color: var(--ink-main); 
   line-height: 1.3;
-  letter-spacing: -0.01em;
 }
 
 .popup-time { 
-  font-family: 'Outfit', 'Kanit', sans-serif; 
-  font-size: 14px; 
+  font-size: 12.5px; 
   color: var(--ink-sub); 
-  margin-top: 4px; 
+  margin-top: 2px; 
   font-weight: 500; 
-  display: flex;
-  align-items: center;
-  gap: 6px;
 }
 
 .popup-close { 
   background: var(--glass-bg); 
   border: 1px solid var(--glass-border); 
   color: var(--ink-main);
-  width: 40px; 
-  height: 40px; 
+  width: 36px; 
+  height: 36px; 
   border-radius: 50%; 
   cursor: pointer; 
-  font-size: 18px;
+  font-size: 16px;
   display: flex; 
   align-items: center; 
   justify-content: center;
-  transition: all 0.2s;
   backdrop-filter: blur(6px);
   flex-shrink: 0;
 }
 
-.popup-close:active {
-  transform: scale(0.9);
-}
-
 .popup-body { 
-  padding: 24px 28px; 
+  padding: 20px; 
   display: flex; 
   flex-direction: column; 
-  gap: 20px; 
+  gap: 18px; 
 }
 
 .popup-section-title { 
-  font-size: 13.5px; 
+  font-size: 12.5px; 
   font-weight: 700; 
   color: var(--jp-blue); 
   text-transform: uppercase;
   letter-spacing: 0.08em; 
-  margin-bottom: 10px; 
+  margin-bottom: 8px; 
   display: flex;
   align-items: center;
-  gap: 8px;
-}
-
-[data-theme="dark"] .popup-section-title {
-  color: #4da6ff;
+  gap: 6px;
 }
 
 .popup-section-title::before {
   content: '';
   display: inline-block;
   width: 4px;
-  height: 18px;
+  height: 14px;
   background: var(--jp-blue);
-  border-radius: 4px;
+  border-radius: 3px;
 }
 
 .popup-section-body { 
-  font-size: 15px; 
+  font-size: 14.5px; 
   color: var(--ink-main); 
-  line-height: 1.8; 
-  font-weight: 400; 
+  line-height: 1.75; 
 }
 
+/* Story Block Styling */
 .story-block {
-  background: var(--glass-bg);
+  background: linear-gradient(135deg, rgba(0,122,255,0.05), rgba(255,149,0,0.05));
   border-radius: var(--radius-sm);
-  padding: 18px;
+  padding: 16px;
   border: 1px solid var(--glass-border);
-  margin: 4px 0 8px;
-  font-size: 14.5px;
+  margin: 4px 0;
+  font-size: 14px;
   line-height: 1.8;
-  color: var(--ink-main);
   position: relative;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.02);
 }
 
 [data-theme="dark"] .story-block {
-  background: rgba(255,255,255,0.04);
-}
-
-.story-block::before {
-  content: '📖';
-  position: absolute;
-  top: -12px;
-  left: 16px;
-  font-size: 20px;
-  background: var(--bg-card);
-  padding: 0 6px;
-  border-radius: 12px;
+  background: linear-gradient(135deg, rgba(10,132,255,0.1), rgba(255,214,10,0.05));
 }
 
 .popup-tags { 
   display: flex; 
   flex-wrap: wrap; 
-  gap: 8px; 
-  margin-top: 4px;
+  gap: 6px; 
 }
 
 .popup-tag { 
-  padding: 8px 18px; 
-  border-radius: 24px; 
-  font-size: 13px; 
+  padding: 6px 14px; 
+  border-radius: 20px; 
+  font-size: 12px; 
   font-weight: 600;
   background: var(--glass-bg); 
   color: var(--ink-main); 
@@ -656,121 +629,133 @@ body::before {
 
 .locker-item {
   background: var(--bg-card);
-  backdrop-filter: blur(8px);
   border-radius: var(--radius-sm);
-  padding: 16px;
-  margin-bottom: 10px;
+  padding: 12px 14px;
+  margin-bottom: 8px;
   border: 1px solid var(--border);
-  box-shadow: 0 4px 12px rgba(0,0,0,0.02);
-}
-
-[data-theme="dark"] .locker-item {
-  background: rgba(255,255,255,0.03);
-  border-color: rgba(255,255,255,0.08);
 }
 
 .locker-name { 
-  font-size: 16px; 
+  font-size: 14.5px; 
   font-weight: 600; 
   color: var(--ink-main); 
-  margin-bottom: 6px; 
-  display: flex;
-  align-items: center;
-  gap: 8px;
+  margin-bottom: 4px; 
 }
 
 .locker-detail { 
-  font-size: 13.5px; 
+  font-size: 12.5px; 
   color: var(--ink-sub); 
-  line-height: 1.6; 
+  line-height: 1.5; 
 }
 
 .ride-row { 
   display: flex; 
   align-items: flex-start; 
-  gap: 14px; 
-  padding: 4px 0;
+  gap: 10px; 
 }
 
 .ride-badge { 
-  font-family: 'Outfit', sans-serif; 
-  font-size: 11px; 
-  font-weight: 700; 
-  padding: 5px 12px; 
-  border-radius: 20px; 
-  letter-spacing: 0.03em;
+  font-size: 10px; 
+  font-weight: 800; 
+  padding: 4px 8px; 
+  border-radius: 12px; 
   text-transform: uppercase;
   white-space: nowrap;
 }
 
 .ride-badge.express { background: var(--tag-gold-bg); color: var(--tag-gold-text); }
 .ride-badge.free    { background: var(--tag-green-bg); color: var(--tag-green-text); }
-.ride-badge.blue    { background: var(--tag-blue-bg); color: var(--tag-blue-text); }
-.ride-badge.red     { background: var(--tag-red-bg); color: var(--tag-red-text); }
 
 .btn-map { 
   display: flex; 
   align-items: center; 
   justify-content: center; 
-  gap: 10px;
-  background: linear-gradient(135deg, #1c1c1e, #2c2c2e);
-  color: #ffffff; 
+  gap: 8px;
+  background: var(--ink-main);
+  color: var(--bg-main); 
   text-decoration: none;
-  padding: 16px; 
-  border-radius: 18px; 
+  padding: 14px; 
+  border-radius: 16px; 
   font-weight: 600; 
-  font-size: 16px;
-  margin-top: 12px; 
-  transition: all 0.2s; 
-  box-shadow: 0 8px 20px rgba(0,0,0,0.15);
-  border: none;
-}
-
-[data-theme="dark"] .btn-map {
-  background: linear-gradient(135deg, #2c2c2e, #3a3a3c);
-}
-
-.btn-map:active { 
-  transform: scale(0.98); 
-  opacity: 0.9; 
+  font-size: 15px;
+  margin-top: 8px; 
+  min-height: var(--touch-target);
+  box-shadow: 0 6px 16px rgba(0,0,0,0.12);
 }
 
 .checklist-panel { 
   display: flex; 
   flex-direction: column; 
-  gap: 12px; 
+  gap: 10px; 
+}
+
+.progress-card {
+  background: var(--bg-card);
+  border-radius: var(--radius-md);
+  padding: 16px;
+  border: 1px solid var(--border);
+  margin-bottom: 6px;
+}
+
+.progress-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 13px;
+  font-weight: 700;
+  margin-bottom: 8px;
+}
+
+.progress-bar-bg {
+  height: 8px;
+  background: var(--border);
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.progress-bar-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--jp-blue), var(--jp-green));
+  width: 0%;
+  transition: width 0.3s ease;
 }
 
 .check-item { 
   display: flex; 
-  gap: 16px; 
+  gap: 12px; 
   align-items: center; 
   background: var(--bg-card);
   backdrop-filter: var(--glass-blur); 
   border-radius: var(--radius-md);
-  padding: 16px 18px; 
+  padding: 14px 16px; 
   border: 1px solid var(--border);
-  box-shadow: var(--glass-shadow); 
   cursor: pointer; 
-  transition: transform 0.2s, opacity 0.25s;
+  min-height: var(--touch-target);
+  transition: transform 0.15s, opacity 0.2s;
+}
+
+.check-item:active {
+  transform: scale(0.98);
 }
 
 .check-item.done { 
   opacity: 0.55; 
   background: var(--glass-bg); 
-  box-shadow: none; 
 }
 
 .check-box { 
-  width: 28px; 
-  height: 28px; 
-  border-radius: 10px; 
+  width: 24px; 
+  height: 24px; 
+  border-radius: 8px; 
   border: 2px solid var(--border);
   display: flex; 
   align-items: center; 
   justify-content: center; 
   background: var(--glass-bg); 
+  font-weight: bold;
+  font-size: 13px;
   color: transparent; 
+  flex-shrink: 0;
 }
 
 .check-item.done .check-box { 
@@ -780,14 +765,15 @@ body::before {
 }
 
 .check-text { 
-  font-size: 15px; 
+  font-size: 14px; 
   font-weight: 500;
   color: var(--ink-main); 
+  line-height: 1.4;
 }
 
 .info-cards { 
   display: grid; 
-  gap: 12px; 
+  gap: 10px; 
   grid-template-columns: 1fr 1fr; 
 }
 
@@ -795,9 +781,8 @@ body::before {
   background: var(--bg-card); 
   backdrop-filter: var(--glass-blur); 
   border-radius: var(--radius-md);
-  padding: 20px; 
+  padding: 16px; 
   border: 1px solid var(--border); 
-  box-shadow: var(--glass-shadow); 
 }
 
 .info-card.full { 
@@ -805,11 +790,11 @@ body::before {
 }
 
 .info-card-icon { 
-  font-size: 28px; 
-  margin-bottom: 12px; 
+  font-size: 24px; 
+  margin-bottom: 8px; 
   background: var(--glass-bg); 
-  width: 52px; 
-  height: 52px;
+  width: 44px; 
+  height: 44px;
   border-radius: 50%; 
   display: flex; 
   align-items: center; 
@@ -818,18 +803,18 @@ body::before {
 }
 
 .info-card-label { 
-  font-size: 12px; 
-  font-weight: 600; 
+  font-size: 11px; 
+  font-weight: 700; 
   color: var(--ink-sub); 
   text-transform: uppercase; 
-  margin-bottom: 4px; 
+  margin-bottom: 2px; 
 }
 
 .info-card-val { 
-  font-size: 15px; 
+  font-size: 13.5px; 
   font-weight: 500; 
   color: var(--ink-main); 
-  line-height: 1.5; 
+  line-height: 1.45; 
 }
 
 .budget-row { 
@@ -838,32 +823,82 @@ body::before {
   align-items: center;
   padding: 8px 0; 
   border-bottom: 1px dashed var(--border); 
-  font-size: 14px; 
+  font-size: 13px; 
 }
 
 .budget-row:last-child { 
   border-bottom: none; 
-  font-weight: 600; 
-  font-size: 16px; 
-  padding-top: 12px; 
-  color: var(--ink-main); 
+  font-weight: 700; 
+  font-size: 15px; 
+  padding-top: 10px; 
+}
+
+.calc-box {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 12px;
+  background: var(--glass-bg);
+  padding: 14px;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--glass-border);
+}
+
+.calc-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.calc-input {
+  width: 110px;
+  padding: 8px 12px;
+  border-radius: 12px;
+  border: 1px solid var(--border);
+  background: var(--bg-card);
+  color: var(--ink-main);
+  font-family: 'Outfit', sans-serif;
+  font-size: 16px;
+  font-weight: 700;
+  outline: none;
+  text-align: right;
+}
+
+.preset-btns {
+  display: flex;
+  gap: 6px;
+  overflow-x: auto;
+  padding-bottom: 2px;
+}
+
+.btn-preset {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  color: var(--ink-main);
+  padding: 5px 10px;
+  border-radius: 12px;
+  font-size: 11.5px;
+  font-weight: 600;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.btn-preset:active {
+  background: var(--ink-main);
+  color: var(--bg-main);
 }
 
 #themeBtn {
-  position: absolute; 
-  top: 14px; 
-  right: 14px; 
-  z-index: 300;
-  width: 44px; 
-  height: 44px; 
+  width: 40px; 
+  height: 40px; 
   border-radius: 50%;
   border: 1px solid var(--glass-border); 
   cursor: pointer; 
-  font-size: 20px;
+  font-size: 18px;
   display: flex; 
   align-items: center; 
   justify-content: center;
-  box-shadow: var(--glass-shadow); 
   background: var(--glass-bg);
   backdrop-filter: blur(12px); 
   color: var(--ink-main);
@@ -871,16 +906,16 @@ body::before {
 
 .top-btn {
   position: fixed; 
-  bottom: calc(20px + env(safe-area-inset-bottom));
+  bottom: calc(16px + env(safe-area-inset-bottom));
   left: 50%; 
   transform: translateX(-50%); 
   z-index: 200;
-  height: 44px; 
-  padding: 0 22px; 
+  height: 42px; 
+  padding: 0 18px; 
   border-radius: 30px;
   border: 1px solid var(--glass-border); 
   cursor: pointer;
-  font-size: 14px; 
+  font-size: 13px; 
   font-weight: 600;
   display: flex; 
   align-items: center; 
@@ -889,15 +924,16 @@ body::before {
   background: var(--glass-bg);
   backdrop-filter: blur(12px); 
   color: var(--ink-main);
-  white-space: nowrap;
 }
 </style>
 </head>
 <body>
 
 <div class="hero" id="hero">
-  <button id="themeBtn" type="button" onclick="toggleTheme()">☀️</button>
-  <div class="hero-flag">🇯🇵</div>
+  <div class="hero-top-bar">
+    <div class="countdown-chip" id="countdownChip">⏳ อีก -- วัน</div>
+    <button id="themeBtn" type="button" onclick="toggleTheme()" aria-label="สลับธีม">☀️</button>
+  </div>
   <div class="hero-title">OSAKA <span>2026</span></div>
   <div class="hero-sub">16 – 21 ตุลาคม 2026 (6 วัน 5 คืน)</div>
   <div class="info-strip">
@@ -909,14 +945,14 @@ body::before {
 <div class="tabs-wrap" id="tabs-wrap">
   <div class="tabs-inner-wrap">
     <div class="tabs" role="tablist">
-      <button class="tab active" type="button" role="tab" onclick="switchDay(0)"><span>Day 1</span><span class="tab-day">ศ. 16</span></button>
-      <button class="tab" type="button" role="tab" onclick="switchDay(1)"><span>Day 2</span><span class="tab-day">ส. 17</span></button>
-      <button class="tab" type="button" role="tab" onclick="switchDay(2)"><span>Day 3</span><span class="tab-day">อา. 18</span></button>
-      <button class="tab" type="button" role="tab" onclick="switchDay(3)"><span>Day 4</span><span class="tab-day">จ. 19</span></button>
-      <button class="tab" type="button" role="tab" onclick="switchDay(4)"><span>Day 5</span><span class="tab-day">อ. 20</span></button>
-      <button class="tab" type="button" role="tab" onclick="switchDay(5)"><span>Day 6</span><span class="tab-day">พ. 21</span></button>
-      <button class="tab" type="button" role="tab" onclick="switchDay(6)"><span>✓</span><span class="tab-day">Check</span></button>
-      <button class="tab" type="button" role="tab" onclick="switchDay(7)"><span>ℹ</span><span class="tab-day">Info</span></button>
+      <button class="tab active" id="tab-0" type="button" role="tab" aria-selected="true" onclick="switchDay(0)"><span>Day 1</span><span class="tab-day">ศ. 16</span></button>
+      <button class="tab" id="tab-1" type="button" role="tab" aria-selected="false" onclick="switchDay(1)"><span>Day 2</span><span class="tab-day">ส. 17</span></button>
+      <button class="tab" id="tab-2" type="button" role="tab" aria-selected="false" onclick="switchDay(2)"><span>Day 3</span><span class="tab-day">อา. 18</span></button>
+      <button class="tab" id="tab-3" type="button" role="tab" aria-selected="false" onclick="switchDay(3)"><span>Day 4</span><span class="tab-day">จ. 19</span></button>
+      <button class="tab" id="tab-4" type="button" role="tab" aria-selected="false" onclick="switchDay(4)"><span>Day 5</span><span class="tab-day">อ. 20</span></button>
+      <button class="tab" id="tab-5" type="button" role="tab" aria-selected="false" onclick="switchDay(5)"><span>Day 6</span><span class="tab-day">พ. 21</span></button>
+      <button class="tab" id="tab-6" type="button" role="tab" aria-selected="false" onclick="switchDay(6)"><span>✓</span><span class="tab-day">Check</span></button>
+      <button class="tab" id="tab-7" type="button" role="tab" aria-selected="false" onclick="switchDay(7)"><span>ℹ</span><span class="tab-day">Info</span></button>
     </div>
   </div>
 </div>
@@ -978,76 +1014,76 @@ body::before {
 <!-- ================= DAY 3 ================= -->
 <div class="day-panel" id="panel-2" role="tabpanel">
   <div class="day-header">
-    <div class="day-num">Day 3 🌉🐮</div>
+    <div class="day-num">Day 3 🍵⛩️</div>
     <div class="day-date">อาทิตย์ 18 ตุลาคม 2026</div>
-    <div class="day-theme">Kobe Day: Nunobiki → Kitano → Kobe Beef → Meriken → Harborland</div>
+    <div class="day-theme">Uji & Kyoto Day: Byodo-in → Uji Matcha → Kiyomizu-dera → Gion</div>
   </div>
 
   <div class="schedule">
-    <div class="sdivider">เช้า - เดินทางสู่โกเบ</div>
-    <div class="sitem">
-      <div class="sitem-left"><div class="sitem-icon">☕</div><div class="sitem-time">08:00</div></div>
-      <div class="sitem-body"><div class="sitem-main">อาหารเช้า + เตรียมตัว</div><div class="sitem-sub">พร้อมลุยเมืองท่าโกเบสุดโรแมนติก</div></div>
-    </div>
+    <div class="sdivider">เช้า - มุ่งหน้าสู่เมืองชาอุจิ (Uji)</div>
     <div class="sitem highlight">
-      <div class="sitem-left"><div class="sitem-icon">🚆</div><div class="sitem-time">08:45</div></div>
-      <div class="sitem-body"><div class="sitem-main">Hommachi → Shin-Kobe</div><div class="sitem-sub">Midosuji → Umeda → JR Kobe Line (Special Rapid) → Sannomiya/Shin-Kobe</div></div>
-      <div class="sitem-right"><div class="sitem-cost">~¥860</div></div>
+      <div class="sitem-left"><div class="sitem-icon">🚆</div><div class="sitem-time">08:00</div></div>
+      <div class="sitem-body"><div class="sitem-main">Hommachi → Kyoto Station</div><div class="sitem-sub">Midosuji Line → Osaka/Umeda → JR Kyoto Line (Special Rapid) (~40 นาที)</div></div>
+      <div class="sitem-right"><div class="sitem-cost">~¥580</div></div>
     </div>
-
-    <div class="sdivider">🌿 Nunobiki Herb Garden</div>
-    <div class="sitem highlight" onclick="openPopup('nunobiki')">
-      <div class="sitem-left"><div class="sitem-icon">🚡</div><div class="sitem-time">09:45</div></div>
-      <div class="sitem-body"><div class="sitem-main">Nunobiki Herb Garden & Ropeway</div><div class="sitem-sub">กระเช้าลอยฟ้าชมวิวเมืองโกเบ + สวนสมุนไพรบนยอดเขา</div></div>
-      <div class="sitem-right"><div class="sitem-map-icon">📍</div></div>
-    </div>
-
-    <div class="sdivider">🏘️ ย่าน Kitano</div>
     <div class="sitem">
-      <div class="sitem-left"><div class="sitem-icon">🚶</div><div class="sitem-time">11:45</div></div>
-      <div class="sitem-body"><div class="sitem-main">เดินลงทางลัดสู่ Kitano</div><div class="sitem-sub">ใช้ทางเดินธรรมชาติลัดลงเขา 15 นาที</div></div>
+      <div class="sitem-left"><div class="sitem-icon">🚃</div><div class="sitem-time">08:45</div></div>
+      <div class="sitem-body"><div class="sitem-main">JR Kyoto → JR Uji Station</div><div class="sitem-sub">ต่อรถไฟ JR Nara Line ตรงสู่สถานี Uji (~20 นาที) ไปเช้าอากาศดี คนน้อย</div></div>
+      <div class="sitem-right"><div class="sitem-cost">¥240</div></div>
     </div>
-    <div class="sitem highlight" onclick="openPopup('kitano')">
-      <div class="sitem-left"><div class="sitem-icon">🏘️</div><div class="sitem-time">12:15</div></div>
-      <div class="sitem-body"><div class="sitem-main">Kitano Ijinkan</div><div class="sitem-sub">เดินชมบ้านสไตล์ตะวันตก + แวะ Starbucks อาคารไม้โบราณ</div></div>
+
+    <div class="sdivider">🍵 สัมผัสเสน่ห์เมืองอุจิ (Uji)</div>
+    <div class="sitem highlight" onclick="openPopup('byodoin')">
+      <div class="sitem-left"><div class="sitem-icon">🏛️</div><div class="sitem-time">09:15</div></div>
+      <div class="sitem-body"><div class="sitem-main">วัดเบียวโดอิน (Byodo-in Temple)</div><div class="sitem-sub">วัดมรดกโลก บนเหรียญ 10 เยน ชม Phoenix Hall & สวนญี่ปุ่นสุดงดงาม</div></div>
+      <div class="sitem-right"><div class="sitem-map-icon">📍</div></div>
+    </div>
+    <div class="sitem highlight" onclick="openPopup('uji_shrine')">
+      <div class="sitem-left"><div class="sitem-icon">🌉</div><div class="sitem-time">10:15</div></div>
+      <div class="sitem-body"><div class="sitem-main">Uji Bridge & Uji-gami Shrine</div><div class="sitem-sub">เดินเลียบแม่น้ำอุจิ ข้ามสะพานโบราณ ไหว้ศาลเจ้าอุจิการามิ มรดกโลก</div></div>
+      <div class="sitem-right"><div class="sitem-map-icon">📍</div></div>
+    </div>
+    <div class="sitem highlight" onclick="openPopup('matcha_lunch')">
+      <div class="sitem-left"><div class="sitem-icon">🍜</div><div class="sitem-time">11:00</div></div>
+      <div class="sitem-body"><div class="sitem-main">มื้อเที่ยงธีมมัทฉะ @ Uji</div><div class="sitem-sub">ลิ้มลองมัทฉะโซบะ & พาเฟ่มัทฉะต้นตำรับ (Nakamura Tokichi / Itoh Kyuemon)</div></div>
+      <div class="sitem-right"><div class="sitem-map-icon">📍</div></div>
+    </div>
+    <div class="sitem highlight" onclick="openPopup('tsuen_tea')">
+      <div class="sitem-left"><div class="sitem-icon">🍵</div><div class="sitem-time">12:15</div></div>
+      <div class="sitem-body"><div class="sitem-main">ช้อปชาที่ Tsuen Tea (通圓茶屋)</div><div class="sitem-sub">ร้านชาเขียวเก่าแก่ที่สุดในญี่ปุ่น (ประวัติศาสตร์ 800+ ปี) ซื้อมัทฉะกลับบ้าน</div></div>
       <div class="sitem-right"><div class="sitem-map-icon">📍</div></div>
     </div>
 
-    <div class="sdivider">🥩 Kobe Beef Lunch</div>
-    <div class="sitem highlight" onclick="openPopup('kobe_beef')">
-      <div class="sitem-left"><div class="sitem-icon">🥩</div><div class="sitem-time">13:15</div></div>
-      <div class="sitem-body"><div class="sitem-main">Lunch @ Kobe Beef Wagyu</div><div class="sitem-sub">ลิ้มลองวากิวระดับตำนาน (จองล่วงหน้า)</div></div>
-      <div class="sitem-right"><div class="sitem-map-icon">📍</div></div>
-    </div>
-
-    <div class="sdivider">🥟 Nankinmachi & Meriken</div>
-    <div class="sitem highlight" onclick="openPopup('nankinmachi')">
-      <div class="sitem-left"><div class="sitem-icon">🥟</div><div class="sitem-time">15:15</div></div>
-      <div class="sitem-body"><div class="sitem-main">Nankinmachi (Chinatown)</div><div class="sitem-sub">เดินชิมซาลาเปาไส้ทะลัก สตรีทฟู้ดสไตล์จีน</div></div>
-      <div class="sitem-right"><div class="sitem-map-icon">📍</div></div>
-    </div>
-    <div class="sitem highlight" onclick="openPopup('meriken')">
-      <div class="sitem-left"><div class="sitem-icon">🌊</div><div class="sitem-time">16:30</div></div>
-      <div class="sitem-body"><div class="sitem-main">Meriken Park</div><div class="sitem-sub">ถ่ายรูปคู่ป้าย BE KOBE + ชมอ่าวโกเบ</div></div>
-      <div class="sitem-right"><div class="sitem-map-icon">📍</div></div>
-    </div>
-
-    <div class="sdivider">🌅 Harborland</div>
-    <div class="sitem highlight" onclick="openPopup('harborland')">
-      <div class="sitem-left"><div class="sitem-icon">🌅</div><div class="sitem-time">17:30</div></div>
-      <div class="sitem-body"><div class="sitem-main">Kobe Harborland / umie MOSAIC</div><div class="sitem-sub">เดินเล่น ช้อปปิ้ง ชมวิวพระอาทิตย์ตกริมอ่าว</div></div>
-      <div class="sitem-right"><div class="sitem-map-icon">📍</div></div>
-    </div>
-
-    <div class="sdivider">กลับโอซาก้า</div>
+    <div class="sdivider">⛩️ บ่ายถึงเย็น - ไฮไลต์เมืองเก่าเกียวโต</div>
     <div class="sitem">
-      <div class="sitem-left"><div class="sitem-icon">🚆</div><div class="sitem-time">19:30</div></div>
-      <div class="sitem-body"><div class="sitem-main">JR Kobe Station → Hommachi</div><div class="sitem-sub">JR Kobe Line → Osaka/Umeda → Midosuji → Hommachi</div></div>
-      <div class="sitem-right"><div class="sitem-cost">~¥860</div></div>
+      <div class="sitem-left"><div class="sitem-icon">🚆</div><div class="sitem-time">13:00</div></div>
+      <div class="sitem-body"><div class="sitem-main">JR Uji → Kyoto → Kiyomizu-michi</div><div class="sitem-sub">JR Nara Line กลับ Kyoto Station (~20 นาที) ต่อรถบัสสาย 206 หรือ 86 ไปวัดน้ำใส</div></div>
+      <div class="sitem-right"><div class="sitem-cost">¥470</div></div>
+    </div>
+    <div class="sitem highlight" onclick="openPopup('kiyomizudera')">
+      <div class="sitem-left"><div class="sitem-icon">🏯</div><div class="sitem-time">13:30</div></div>
+      <div class="sitem-body"><div class="sitem-main">วัดคิโยมิซุเดระ (วัดน้ำใส)</div><div class="sitem-sub">ชมระเบียงไม้สักยักษ์ไร้ตะปู ดื่มน้ำแร่ศักดิ์สิทธิ์ 3 สาย Otowa Waterfall</div></div>
+      <div class="sitem-right"><div class="sitem-map-icon">📍</div></div>
+    </div>
+    <div class="sitem highlight" onclick="openPopup('ninenzaka')">
+      <div class="sitem-left"><div class="sitem-icon">🍡</div><div class="sitem-time">15:00</div></div>
+      <div class="sitem-body"><div class="sitem-main">Sannenzaka & Ninenzaka</div><div class="sitem-sub">เดินลงเขาผ่านถนนโบราณ แวะชิมขนมญี่ปุ่น & ช้อปของที่ระลึกเกียวโต</div></div>
+      <div class="sitem-right"><div class="sitem-map-icon">📍</div></div>
+    </div>
+    <div class="sitem highlight" onclick="openPopup('gion')">
+      <div class="sitem-left"><div class="sitem-icon">🏮</div><div class="sitem-time">16:30</div></div><div class="sitem-body"><div class="sitem-main">ย่านเกอิชา กิอง (Gion) & มื้อเย็น</div><div class="sitem-sub">สัมผัสบรรยากาศย่านเมืองเก่า Hanami-koji ทานอาหารเย็นย่านกิอง/แม่น้ำคาโมะ</div></div>
+      <div class="sitem-right"><div class="sitem-map-icon">📍</div></div>
+    </div>
+
+    <div class="sdivider">กลับโอซาก้าพักผ่อน</div>
+    <div class="sitem">
+      <div class="sitem-left"><div class="sitem-icon">🚆</div><div class="sitem-time">18:00</div></div>
+      <div class="sitem-body"><div class="sitem-main">Gion / Kyoto → Hommachi</div><div class="sitem-sub">Keihan/Hankyu Line หรือ JR Kyoto Line กลับ Osaka → Midosuji → Hommachi</div></div>
+      <div class="sitem-right"><div class="sitem-cost">~¥600</div></div>
     </div>
     <div class="sitem highlight" onclick="openPopup('hotel')">
-      <div class="sitem-left"><div class="sitem-icon">🏨</div><div class="sitem-time">20:45</div></div>
-      <div class="sitem-body"><div class="sitem-main">ถึง BRACKETS HOTEL</div><div class="sitem-sub">พักผ่อนให้พร้อม ลุย Kaiyukan & Den-Den พรุ่งนี้</div></div>
+      <div class="sitem-left"><div class="sitem-icon">🏨</div><div class="sitem-time">19:15</div></div>
+      <div class="sitem-body"><div class="sitem-main">ถึง BRACKETS HOTEL Hommachi</div><div class="sitem-sub">พักผ่อนให้เต็มอิ่ม เตรียมลุย Kaiyukan & Den-Den พรุ่งนี้</div></div>
     </div>
   </div>
 </div>
@@ -1164,39 +1200,70 @@ body::before {
   </div>
 </div>
 
-<!-- ─────────── CHECKLIST ─────────── -->
 <div class="day-panel" id="panel-6" role="tabpanel">
   <div class="day-header"><div class="day-num">✓ Checklist</div><div class="day-date">เตรียมความพร้อมก่อนบิน</div></div>
+  <div class="progress-card">
+    <div class="progress-header">
+      <span>ความคืบหน้าการเตรียมตัว</span>
+      <span id="progressText">0%</span>
+    </div>
+    <div class="progress-bar-bg">
+      <div class="progress-bar-fill" id="progressFill"></div>
+    </div>
+  </div>
   <div class="checklist-panel" id="checklist">
-    <div class="check-item done" onclick="toggleCheck(this)"><div class="check-box">✓</div><div class="check-text">โหลด USJ App + สร้างบัญชีและผูกตั๋ว</div></div>
-    <div class="check-item done" onclick="toggleCheck(this)"><div class="check-box">✓</div><div class="check-text">ซื้อ USJ Express Pass (Choice A: Jurassic / Choice B: Minion)</div></div>
-    <div class="check-item" onclick="toggleCheck(this)"><div class="check-box"></div><div class="check-text">ซื้อตั๋ว Kaiyukan (รอบ 10:00) และ Nunobiki Ropeway ล่วงหน้า</div></div>
-    <div class="check-item" onclick="toggleCheck(this)"><div class="check-box"></div><div class="check-text">โหลดแอป GO Taxi ผูกบัตรเครดิตเรียบร้อย</div></div>
-    <div class="check-item" onclick="toggleCheck(this)"><div class="check-box"></div><div class="check-text">เตรียมบัตร ICOCA / PASMO (แตะจ่ายรถบัส/ใต้ดิน)</div></div>
-    <div class="check-item highlight" onclick="toggleCheck(this)"><div class="check-box"></div><div class="check-text" style="font-weight:600; color:var(--jp-blue);">สำรองที่พัก BRACKETS HOTEL Osaka Hommachi</div></div>
-    <div class="check-item" onclick="toggleCheck(this)"><div class="check-box"></div><div class="check-text">ตั๋วเครื่องบิน Peach Aviation ไป-กลับ</div></div>
-    <div class="check-item" onclick="toggleCheck(this)"><div class="check-box"></div><div class="check-text">Pocket Wi-Fi หรือ Travel eSIM ญี่ปุ่น</div></div>
+    <div class="check-item done" data-id="chk_usj_app" onclick="toggleCheck(this)"><div class="check-box">✓</div><div class="check-text">โหลด USJ App + สร้างบัญชีและผูกตั๋ว</div></div>
+    <div class="check-item done" data-id="chk_usj_express" onclick="toggleCheck(this)"><div class="check-box">✓</div><div class="check-text">ซื้อ USJ Express Pass (Choice A: Jurassic / Choice B: Minion)</div></div>
+    <div class="check-item" data-id="chk_kaiyukan_nuno" onclick="toggleCheck(this)"><div class="check-box"></div><div class="check-text">ซื้อตั๋ว Kaiyukan (รอบ 10:00) ล่วงหน้า</div></div>
+    <div class="check-item" data-id="chk_go_taxi" onclick="toggleCheck(this)"><div class="check-box"></div><div class="check-text">โหลดแอป GO Taxi ผูกบัตรเครดิตเรียบร้อย</div></div>
+    <div class="check-item" data-id="chk_icoca" onclick="toggleCheck(this)"><div class="check-box"></div><div class="check-text">เตรียมบัตร ICOCA / PASMO (แตะจ่ายรถบัส/ใต้ดิน)</div></div>
+    <div class="check-item highlight" data-id="chk_brackets_hotel" onclick="toggleCheck(this)"><div class="check-box"></div><div class="check-text" style="font-weight:600; color:var(--jp-blue);">สำรองที่พัก BRACKETS HOTEL Osaka Hommachi</div></div>
+    <div class="check-item" data-id="chk_peach_ticket" onclick="toggleCheck(this)"><div class="check-box"></div><div class="check-text">ตั๋วเครื่องบิน Peach Aviation ไป-กลับ</div></div>
+    <div class="check-item" data-id="chk_wifi_esim" onclick="toggleCheck(this)"><div class="check-box"></div><div class="check-text">Pocket Wi-Fi หรือ Travel eSIM ญี่ปุ่น</div></div>
   </div>
 </div>
 
-<!-- ─────────── INFO & BUDGET ─────────── -->
 <div class="day-panel" id="panel-7" role="tabpanel">
   <div class="day-header"><div class="day-num">ℹ Info</div><div class="day-date">ข้อมูลสำคัญ & งบประมาณ</div></div>
-  <div style="display:flex;flex-direction:column;gap:12px">
+  <div style="display:flex;flex-direction:column;gap:10px">
     <div class="info-cards">
-      <div class="info-card"><div class="info-card-icon">✈️</div><div class="info-card-label">ขาไป</div><div class="info-card-val">Peach MM092<br>ศ. 16 ต.ค.<br>01:15 → 09:20<br>KIX Terminal 2</div></div>
+      <div class="info-card"><div class="info-card-icon">✈️</div><div class="info-card-label">ขาไป</div><div class="info-card-val">Peach MM092<br>ศ. 16 ต.ค.<br>01:15 → 09:20<br>KIX T2</div></div>
       <div class="info-card"><div class="info-card-icon">✈️</div><div class="info-card-label">ขากลับ</div><div class="info-card-val">Peach MM091<br>พ. 21 ต.ค.<br>19:30 → 23:55<br>ปิดเช็คอิน 18:40</div></div>
       <div class="info-card full" onclick="openPopup('hotel')" style="cursor:pointer; border-color:var(--jp-blue);"><div class="info-card-icon">🏨</div><div class="info-card-label">โรงแรม (คลิกดูรายละเอียด)</div><div class="info-card-val"><strong>BRACKETS HOTEL Osaka Hommachi</strong><br>ศูนย์กลางความสะดวก ใกล้รถไฟใต้ดิน 3 สาย!</div></div>
     </div>
-    <div class="info-card" style="margin-top:10px;">
-      <div class="info-card-icon" style="background:var(--tag-gold-bg);border-color:transparent;font-size:32px;">💰</div>
-      <div class="info-card-label" style="font-size:14px;">งบประมาณประมาณการ (ต่อ 1 ท่าน)</div>
-      <div style="margin-top:12px;">
-        <div class="budget-row" style="font-size:12px;font-weight:700;color:var(--ink-sub);text-transform:uppercase;letter-spacing:0.05em;padding-bottom:10px;"><span>รายการ</span><span style="display:flex;gap:12px;flex-shrink:0;"><span style="min-width:58px;text-align:right;">เยน (¥)</span><span style="min-width:58px;text-align:right;">บาท (฿)</span></span></div>
-        <div class="budget-row"><span>ค่าเข้าสถานที่ / บัตรต่างๆ</span><span style="display:flex;gap:12px;flex-shrink:0;"><span style="min-width:58px;text-align:right;">~¥17,000</span><span style="min-width:58px;text-align:right;">~6,000</span></span></div>
-        <div class="budget-row"><span>ค่าเดินทาง (IC + Rap:t + Bus)</span><span style="display:flex;gap:12px;flex-shrink:0;"><span style="min-width:58px;text-align:right;">~¥10,000</span><span style="min-width:58px;text-align:right;">~3,500</span></span></div>
-        <div class="budget-row"><span>ค่ากิน / อาหาร (รวม Kobe Beef)</span><span style="display:flex;gap:12px;flex-shrink:0;"><span style="min-width:58px;text-align:right;">~¥26,000</span><span style="min-width:58px;text-align:right;">~9,000</span></span></div>
-        <div class="budget-row"><span>รวมประมาณการ</span><span style="display:flex;gap:12px;flex-shrink:0;"><span style="min-width:58px;text-align:right;">~¥53,000</span><span style="min-width:58px;text-align:right;">~18,500</span></span></div>
+
+    <!-- Currency Calculator -->
+    <div class="info-card">
+      <div class="info-card-icon" style="background:var(--tag-gold-bg);border-color:transparent;font-size:24px;">🧮</div>
+      <div class="info-card-label" style="font-size:12px;">เครื่องคำนวณเงินเร่งด่วน (JPY ➔ THB)</div>
+      
+      <div class="calc-box">
+        <div class="calc-row">
+          <span style="font-size: 13px; font-weight: 700;">จำนวนเงิน: ¥</span>
+          <input type="number" id="jpyInput" class="calc-input" value="1000" oninput="convertCurrency()">
+        </div>
+        <div class="preset-btns">
+          <button class="btn-preset" type="button" onclick="setYen(1000)">¥1,000</button>
+          <button class="btn-preset" type="button" onclick="setYen(5000)">¥5,000</button>
+          <button class="btn-preset" type="button" onclick="setYen(10000)">¥10,000</button>
+          <button class="btn-preset" type="button" onclick="setYen(30000)">¥30,000</button>
+        </div>
+        <div class="calc-row" style="margin-top:4px; padding-top:6px; border-top:1px dashed var(--border);">
+          <span style="font-size: 13px; font-weight: 600;">ประมาณ:</span>
+          <span style="font-size: 16px; font-weight: 800; color:var(--jp-blue);"><span id="thbResult">235</span> ฿</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="info-card">
+      <div class="info-card-icon" style="background:var(--tag-green-bg);border-color:transparent;font-size:24px;">💰</div>
+      <div class="info-card-label">งบประมาณประมาณการ (ต่อ 1 ท่าน)</div>
+      <div style="margin-top:8px;">
+        <div class="budget-row" style="font-size:11px;font-weight:700;color:var(--ink-sub);text-transform:uppercase;"><span>รายการ</span><span>เยน (¥) / บาท (฿)</span></div>
+        <div class="budget-row"><span>ค่าเข้าสถานที่ / บัตรต่างๆ</span><span>~¥17,000 (~6,000฿)</span></div>
+        <div class="budget-row"><span>ค่าเดินทาง (IC + Rap:t + Bus)</span><span>~¥10,000 (~3,500฿)</span></div>
+        <div class="budget-row"><span>ค่ากิน / อาหาร (มัทฉะ, ราเมน, แกงกะหรี่)</span><span>~¥26,000 (~9,000฿)</span></div>
+        <div class="budget-row"><span>รวมประมาณการ</span><span style="color:var(--jp-blue);">~¥53,000 (~18,500฿)</span></div>
       </div>
     </div>
   </div>
@@ -1207,7 +1274,9 @@ body::before {
 <!-- Modal Bottom Sheet Popup -->
 <div class="popup-overlay" id="overlay" onclick="closeOnOverlay(event)" aria-hidden="true">
   <div class="popup" id="popup" role="dialog" aria-modal="true">
-    <div class="popup-handle"></div>
+    <div class="popup-handle-area" id="popupHandleArea">
+      <div class="popup-handle"></div>
+    </div>
     <div class="popup-header">
       <div class="popup-icon" id="p-icon">🗾</div>
       <div class="popup-title-wrap">
@@ -1228,12 +1297,11 @@ const POPUPS = {
     icon:"🏛️", title:"สนามบินสุวรรณภูมิ (BKK)", time:"คืน 15 ต.ค. · ถึงก่อน 22:30 น.",
     mapUrl:"https://www.google.com/maps/search/?api=1&query=Suvarnabhumi+Airport",
     sections:[
-      {title:"📖 เรื่องเล่าจุดเริ่มต้นความทรงจำ", type:"text", body:"สนามบินสุวรรณภูมิออกแบบโดยสถาปนิกชาวอเมริกัน-เยอรมัน เฮลมุต ยาห์น (Helmut Jahn) เปิดใช้งานปี 2006 คำว่า 'สุวรรณภูมิ' เป็นชื่อพระราชทานแปลว่า <strong>'แผ่นดินทองคำ'</strong> คืนนี้เรากำลังจะออกเดินทางสู่เมืองคันไซแห่งญี่ปุ่นด้วยกันครับ"},
-      {title:"🚶 การเตรียมตัว & จุดเช็คอิน Step-by-Step", type:"text", body:"1. แนะนำมาถึงสนามบินล่วงหน้าตั้งแต่ <strong>22:00 - 22:30 น.</strong> เพื่อเผื่อเวลาต่อคิวเช็คอินและโหลดกระเป๋า<br>2. ยื่นพาสปอร์ตและรับบอร์ดดิ้งพาสที่เคาน์เตอร์<br>3. ผ่านจุดตรวจค้นความปลอดภัยและตรวจหนังสือเดินทาง (ตม.)<br>4. เดินไปรอที่ Gate ก่อนเวลา boarding 30 นาที"},
-      {title:"📍 พิกัดเคาน์เตอร์ Peach (MM092)", type:"text", body:"เคาน์เตอร์ Peach ตั้งอยู่บริเวณ <strong>'แถว G' (Row G) ชั้น 4</strong> เปิดให้เช็คอินช่วงเวลา 22:15 น. และ<strong>ปิดให้บริการเวลา 00:35 น.</strong> (40 นาทีก่อนเครื่องออก)"},
-      {title:"💡 ข้อควรเช็คก่อนขึ้นเครื่อง", type:"lockers", items:[
-        {name:"Visit Japan Web", desc:"กรอกข้อมูลตรวจคนเข้าเมืองและศุลกากรล่วงหน้าทางเว็บ แล้วแคป QR Code ไว้"},
-        {name:"กระเป๋าถือขึ้นเครื่อง (Carry-on)", desc:"สายการบิน Peach จำกัดน้ำหนักสัมภาระถือขึ้นเครื่องไม่เกิน 7.0 kg (รวม 2 ชิ้น)"}
+      {title:"📖 เรื่องเล่าจุดเริ่มต้นความทรงจำ", type:"text", body:"สนามบินสุวรรณภูมิในค่ำคืนนี้ไม่ใช่แค่สถานที่เดินทาง แต่คือจุดเริ่มต้นของการเดินทางสู่ดินแดนคันไซอันแสนงดงาม สถาปัตยกรรมกระจกและเหล็กกล้าอันกว้างใหญ่ ออกแบบโดยเฮลมุต ยาห์น (Helmut Jahn) จะเต็มไปด้วยความตื่นเต้นและรอยยิ้มของคุณ คำว่า 'สุวรรณภูมิ' เป็นชื่อพระราชทานแปลว่า **'แผ่นดินทองคำ'** บรรยากาศไฟยามค่ำคืนของโถงผู้โดยสารขาออกชั้น 4 จะเป็นความทรงจำแรกที่คุณจะประทับใจ"},
+      {title:"🚶 ขั้นตอนเช็คอิน Step-by-Step", type:"text", body:"1. มาถึงสนามบินช่วง **22:00 - 22:30 น.** เพื่อรับบอร์ดดิ้งพาสและโหลดสัมภาระแบบไม่ต้องรีบร้อน<br>2. มองหาเคาน์เตอร์ **Row G ชั้น 4** (Peach Aviation MM092)<br>3. ผ่านด่านตรวจค้นความปลอดภัยและตรวจหนังสือเดินทาง (ตม.)<br>4. เดินพักผ่อนที่ Gate และเตรียมพร้อม boarding ก่อนเวลา 30 นาที"},
+      {title:"💡 ข้อควรเช็คครั้งสุดท้าย", type:"lockers", items:[
+        {name:"Visit Japan Web", desc:"แคปรูป QR Code เข้าเมืองและศุลกากรไว้ในมือถือให้เรียบร้อย (ไม่ต้องใช้อินเทอร์เน็ตตอนสแกน)"},
+        {name:"สัมภาระถือขึ้นเครื่อง (Carry-on)", desc:"Peach จำกัดน้ำหนักสัมภาระถือขึ้นเครื่องรวมไม่เกิน 7.0 kg (รวมกระเป๋าถือ/เป้ 2 ชิ้น)"}
       ]}
     ]
   },
@@ -1241,17 +1309,17 @@ const POPUPS = {
     icon:"🛬", title:"สนามบินคันไซ (KIX) - Terminal 2", time:"09:20 - ก้าวแรกสู่โอซาก้า",
     mapUrl:"https://www.google.com/maps/search/?api=1&query=Kansai+International+Airport+Terminal+2",
     sections:[
-      {title:"📖 เรื่องเล่าเกาะเทียมมหัศจรรย์กลางทะเล", type:"text", body:"สนามบินนานาชาติคันไซเป็น <strong>'สนามบินบนเกาะเทียมแห่งแรกของโลก'</strong> ออกแบบโดยสถาปนิก เรนโซ เปียโน (Renzo Piano) โดย Terminal 2 สร้างขึ้นรองรับสายการบินราคาประหยัดอย่าง Peach โดยเฉพาะ โครงสร้างเน้นความเรียบง่ายและสะดวกรวดเร็ว"},
-      {title:"🚶 ขั้นตอนเมื่อลงเครื่อง (Step-by-Step)", type:"text", body:"1. เดินตามป้าย <strong>'Arrival' (到着)</strong> สู่ด่านตรวจคนเข้าเมือง<br>2. เปิดรูป QR Code ของ Visit Japan Web สแกนที่ตู้ตรวจอัตโนมัติ/ยื่นให้เจ้าหน้าที่<br>3. รับกระเป๋าเดินทางที่สายพาน<br>4. สแกน QR Code ศุลกากรแล้วเดินออกสู่โถงผู้โดยสารขาเข้า"},
-      {title:"💡 ข้อควรรู้", type:"text", body:"Terminal 2 ไม่มีสถานีรถไฟตั้งอยู่โดยตรง เราต้องนั่ง Shuttle Bus ฟรีไป Terminal 1 เพื่อขึ้นรถไฟด่วน Rapi:t เข้าเมือง"}
+      {title:"📖 เกาะเทียมสิ่งมหัศจรรย์กลางทะเล", type:"text", body:"ยามล้อเครื่องบินสัมผัสรันเวย์ คุณได้ก้าวสู่ **'สนามบินบนเกาะเทียมแห่งแรกของโลก'** ซึ่งออกแบบโดยสถาปนิกรางวัลพริตซ์เกอร์ เรนโซ เปียโน (Renzo Piano) สนามบินคันไซสร้างขึ้นกลางอ่าวโอซาก้าเพื่อเปิดประตูสู่ภูมิภาคคันไซ Terminal 2 ถูกออกแบบเน้นความโปร่ง สว่าง สะอาด และรวดเร็ว ทำให้คุณผ่านขั้นตอนเข้าเมืองได้อย่างราบรื่นเพื่อเริ่มวันแรกของทริปทันที"},
+      {title:"🚶 ขั้นตอนเมื่อลงเครื่อง (Step-by-Step)", type:"text", body:"1. เดินตามป้าย **'Arrival' (到着)** เดินสู่อาคารตรวจคนเข้าเมือง<br>2. เปิดรูป QR Code ของ Visit Japan Web ยื่นสแกนที่ตู้ตรวจอัตโนมัติ/เจ้าหน้าที่ ตม.<br>3. รับกระเป๋าเดินทางที่สายพาน<br>4. สแกน QR Code ศุลกากรแล้วเดินออกสู่โถงผู้โดยสารขาเข้า"},
+      {title:"💡 ข้อควรรู้เรื่องการเดินทางเข้าเมือง", type:"text", body:"Terminal 2 เป็นอาคารสำหรับสายการบิน Peach โดยเฉพาะ เมื่ออกมาแล้ว ให้เดินไปขึ้น Shuttle Bus ฟรีเพื่อข้ามไปยัง Terminal 1 และสถานีรถไฟ KIX"}
     ]
   },
   kix_shuttle_in: {
     icon:"🚌", title:"รถบัสรับส่งฟรี · T2 → T1", time:"ฟรี · ออกทุก 5-10 นาที",
     sections:[
-      {title:"📖 รถบัสเชื่อม Terminal", type:"text", body:"ออกจากประตู Terminal 2 ให้เลี้ยวขวาจะพบจุดจอดรถบัสส้ม <strong>'Shuttle Bus to T1 / Aeroplaza'</strong> นั่งฟรีประมาณ 10-15 นาที ไปลงสุดสายที่อาคาร Aeroplaza ซึ่งเชื่อมกับสถานีรถไฟ Kansai Airport Station"},
+      {title:"📖 รถบัสส้มเชื่อมต่อความสะดวก", type:"text", body:"ก้าวออกจากประตู Terminal 2 เลี้ยวขวาจะพบจุดจอดรถบัสส้ม **'Shuttle Bus to T1 / Aeroplaza'** สูดอากาศบริสุทธิ์ยามเช้าของโอซาก้าบนรถบัสที่วิ่งผ่านสะพานเชื่อมเกาะเทียม ใช้เวลาเพียง 10-15 นาที ไปลงสุดสายที่อาคาร Aeroplaza ซึ่งเชื่อมต่อตรงสู่สถานีรถไฟ Kansai Airport Station"},
       {title:"🚌 ข้อมูลการบริการ", type:"lockers", items:[
-        {name:"ค่าบริการ", desc:"ฟรี 100% ยกกระเป๋าขึ้นรถได้ทันที ไม่ต้องแลกตั๋ว"},
+        {name:"ค่าบริการ", desc:"ฟรี 100% ไม่ต้องจองตั๋ว ยกกระเป๋าขึ้นรถได้ทันที"},
         {name:"จุดลงรถ", desc:"อาคาร Aeroplaza / เดินข้ามสะพานเชื่อมเข้าสถานีรถไฟ Kansai Airport Station"}
       ]}
     ]
@@ -1259,267 +1327,305 @@ const POPUPS = {
   rapit: {
     icon:"🚆", title:"รถไฟด่วนพิเศษ Nankai Rapi:t", time:"~38 นาทีถึง Namba (¥1,490)",
     sections:[
-      {title:"📖 เรื่องเล่าดีไซน์อัศวินแห่งคันไซ", type:"text", body:"รถไฟสีน้ำเงินเข้มรูปร่างแปลกตานี้ออกแบบสไตล์ <strong>'Retro-Futurism'</strong> หัวรถไฟโค้งมนคล้ายหน้ากากอัศวิน วิ่งรวดเดียวจากสนามบินคันไซถึงสถานี Namba ในเวลาเพียง 38 นาที เบาะนุ่มสบาย มีช่องวางกระเป๋าเดินทางขนาดใหญ่"},
-      {title:"🎫 วิธีการขึ้นรถไฟ", type:"text", body:"1. ซื้อตั๋ว Rapi:t หรือแลกวอยเชอร์ที่เคาน์เตอร์ Nankai Ticket Office (สถานี T1)<br>2. สอดตั๋วเข้าช่องตรวจตั๋วอัตโนมัติ เดินไปที่ชานชาลา Nankai<br>3. ขึ้นตู้โดยสารและนั่งตามหมายเลขเบาะที่ระบุบนตั๋ว"},
-      {title:"🧳 สิ่งอำนวยความสะดวก", type:"tags", tags:[{text:"ตั๋วระบุที่นั่ง 100%", cls:"blue"},{text:"มีห่วงล็อกกระเป๋าเดินทาง", cls:"gold"},{text:"เบาะปรับหมุนได้", cls:"green"}]}
+      {title:"📖 ดีไซน์อัศวินแห่งคันไซ (Retro-Futurism)", type:"text", body:"รถไฟสีน้ำเงินเข้มเมทัลลิกรูปร่างแปลกตาอันเป็นเอกลักษณ์นี้ ได้รับการออกแบบภายใต้คอนเซปต์ **'Retro-Futurism'** โดยหัวรถไฟโค้งมนบึกบึนคล้ายหน้ากากอัศวินในหุ่นยนต์อนิเมะญี่ปุ่น หน้าต่างตู้โดยสารทรงกลมดั่งเรือดำน้ำ ภายในกว้างขวาง เบาะนุ่มสบายลักชัวรี นั่งสบายรวดเดียวจากสนามบินพุ่งตรงสู่ใจกลางเมือง Namba ในเวลาเพียง 38 นาที"},
+      {title:"🎫 วิธีการขึ้นรถไฟ", type:"text", body:"1. แลกวอยเชอร์/ซื้อตั๋ว Rapi:t ที่เคาน์เตอร์ Nankai Ticket Office (ตรงข้ามทางเข้าสถานี T1)<br>2. สอดตั๋วกระดาษเข้าช่องตรวจตั๋วอัตโนมัติ เดินลงชานชาลา Nankai Line<br>3. มองหาหมายเลขตู้โดยสาร (Car) และหมายเลขที่นั่ง (Seat) บนตั๋ว"},
+      {title:"🧳 สิ่งอำนวยความสะดวก", type:"tags", tags:[{text:"ตั๋วระบุที่นั่ง 100%", cls:"blue"},{text:"มีห่วงล็อกกระเป๋าเดินทางยักษ์", cls:"gold"},{text:"เบาะปรับหมุนได้", cls:"green"}]}
     ]
   },
   hotel: {
-    icon:"🏨", title:"BRACKETS HOTEL Osaka Hommachi", time:"ศูนย์กลางการเดินทางของทริป",
+    icon:"🏨", title:"BRACKETS HOTEL Osaka Hommachi", time:"ศูนย์กลางความสะดวกของทริป",
     mapUrl:"https://www.google.com/maps/search/?api=1&query=BRACKETS+HOTEL+Osaka+Hommachi",
     sections:[
-      {title:"📖 ย่าน Hommachi หัวใจการค้าโอซาก้า", type:"text", body:"<strong>ย่านฮมมาชิ (Hommachi)</strong> เป็นจุดตัดสำคัญของรถไฟใต้ดินถึง 3 สาย (Midosuji, Chuo, Yotsubashi) เดินทางไป USJ, ปราสาทโอซาก้า, Umeda หรือ Namba ได้รวดเร็วโดยไม่ต้องเปลี่ยนสายบ่อย"},
-      {title:"🧳 การฝากกระเป๋าล่วงหน้า", type:"text", body:"เมื่อไปถึงโรงแรมก่อนเวลาเช็กอิน (15:00 น.) สามารถแจ้งฟรอนต์ขอฝากกระเป๋าเดินทางไว้ก่อนได้ฟรี รับบัตรฝากกระเป๋า แล้วออกไปเที่ยวเมืองโอซาก้าได้ทันที"},
+      {title:"📖 ย่าน Hommachi หัวใจแห่งการเดินทาง", type:"text", body:"**ย่านฮมมาชิ (Hommachi)** ในอดีตคือย่านการค้าสายผ้าและกิโมโนอันมั่งคั่ง ปัจจุบันเป็นย่านธุรกิจอันสงบเงียบ ปลอดภัย และเป็นจุดตัดยุทธศาสตร์ของรถไฟใต้ดินโอซาก้าถึง 3 สายหลัก (Midosuji, Chuo, Yotsubashi) ช่วยให้คุณเดินทางไป Umeda, Namba, USJ, หรือปราสาทโอซาก้าได้รวดเร็วโดยไม่ต้องเปลี่ยนขบวนรถไฟหลายต่อ"},
+      {title:"🧳 บริการฝากกระเป๋าล่วงหน้า", type:"text", body:"เมื่อไปถึงโรงแรมก่อนเวลาเช็กอิน (15:00 น.) แจ้งฟรอนต์ขอฝากกระเป๋าเดินทางไว้ฟรี รับบัตรฝากกระเป๋า แล้วเดินตัวเบาออกไปลุยเมืองโอซาก้าได้ทันที"},
       {title:"🚇 การเดินทาง", type:"text", body:"เดินจากสถานี Hommachi (Midosuji Line ทางออก 1 หรือ 3) เพียง 3-5 นาที"}
-    ]
-  },
-  yodobashi: {
-    icon:"📷", title:"Yodobashi Camera & LINKS UMEDA", time:"15:00 - 17:30 · สวรรค์สายช้อป",
-    mapUrl:"https://www.google.com/maps/search/?api=1&query=Yodobashi+Camera+Multimedia+Umeda",
-    sections:[
-      {title:"📖 ศูนย์การค้าเครื่องใช้ไฟฟ้าและโมเดล", type:"text", body:"ห้างเครื่องใช้ไฟฟ้าและไอทีที่ใหญ่ที่สุดแห่งหนึ่งในญี่ปุ่น มีโซนโมเดล ฟิกเกอร์ กาชาปอง และ LINKS UMEDA ศูนย์รวมร้านค้าแฟชั่น Uniqlo, GU และร้านอาหารมากมาย"},
-      {title:"🛍️ โซนแนะนำ", type:"lockers", items:[
-        {name:"ชั้น 2-3 (IT & Camera)", desc:"กล้องถ่ายรูป เลนส์ แกดเจ็ต อุปกรณ์เกม"},
-        {name:"ชั้น 5 (Toy & Hobby)", desc:"ฟิกเกอร์ กันพลา โมเดลการ์ตูน ของเล่นเด็ก"},
-        {name:"LINKS UMEDA", desc:"Uniqlo, GU, ABC-Mart และร้านอาหารชั้น B1/ชั้น 8"}
-      ]}
     ]
   },
   gacha: {
     icon:"🎰", title:"Gachagacha no Mori (Chayamachi)", time:"14:00 - 15:00",
     mapUrl:"https://www.google.com/maps/search/?api=1&query=Gachagacha+no+Mori+Osaka+Umeda+Chayamachi",
     sections:[
-      {title:"📖 อาณาจักรตู้หมุนกาชาปอง", type:"text", body:"อาณาจักรตู้กาชาปองขนาดใหญ่ตั้งตระหง่านนับร้อยๆ ตู้ มีของสะสมน่ารักๆ อนิเมะ พวงกุญแจ และโมเดลย่อส่วนให้ลุ้นสุ่มมากมาย"},
-      {title:"💡 คำแนะนำ", type:"text", body:"ภายในร้านมีตู้แลกเหรียญ 100 เยนอัตโนมัติ สามารถแลกแบงก์เป็นเหรียญหมุนกาชาปองได้สะดวก"}
+      {title:"📖 อาณาจักรตู้หมุนกาชาปองในดงชิบูย่าแห่งโอซาก้า", type:"text", body:"ตื่นตาตื่นใจไปกับกำแพงตู้กาชาปองที่ตั้งเรียงรายนับร้อยนับพันตู้ในย่าน Chayamachi ย่านวัยรุ่นสุดเก๋ของอูเมดะ ที่นี่รวมกาชาปองคอลเลกชันใหม่ล่าสุดจากทั่วญี่ปุ่น ตั้งแต่อนิเมะดัง ฟิกเกอร์สัตว์ตัวจิ๋ว ของกินจำลอง ยันพวงกุญแจแปลกๆ ที่จะทำให้คุณเพลิดเพลินจนลืมเวลา"},
+      {title:"💡 เคล็ดลับการสุ่ม", type:"text", body:"ภายในร้านมีตู้แลกเหรียญ 100 เยนอัตโนมัติ เตรียมแบงก์เยนให้พร้อม แล้วเตรียมรับความตื่นเต้นตอนหมุนลูกกาชาปองออกมาลุ้น!"}
+    ]
+  },
+  yodobashi: {
+    icon:"📷", title:"Yodobashi Camera & LINKS UMEDA", time:"15:00 - 17:30",
+    mapUrl:"https://www.google.com/maps/search/?api=1&query=Yodobashi+Camera+Multimedia+Umeda",
+    sections:[
+      {title:"📖 เมกะสโตร์แห่งไอที และไลฟ์สไตล์ที่ใหญ่ที่สุด", type:"text", body:"ห้างสรรพสินค้าเมกะสโตร์ขนาดมหึมาตึกตระหง่านใจกลางสถานี Umeda ชั้นล่างเต็มไปด้วยกล้อง เลนส์ อุปกรณ์ไอที Gadget ล่าสุด ขณะที่ชั้น 5 คือ **สวรรค์ของสาย Toy & Hobby** รวมกันพลา ฟิกเกอร์ และการ์ดเกม และตึก LINKS UMEDA ที่เชื่อมต่อกันยังมี Uniqlo, GU, ABC-Mart แฟลกชิปสโตร์ให้ช้อปเพลิน"},
+      {title:"🛍️ ไฮไลต์แต่ละชั้น", type:"lockers", items:[
+        {name:"ชั้น 2-3 (IT & Camera)", desc:"กล้องถ่ายรูป อุปกรณ์ Gadget หูฟังระดับ Hi-Fi"},
+        {name:"ชั้น 5 (Toy & Hobby)", desc:"กันพลา Gunpla, ฟิกเกอร์อนิเมะ, ของสะสมโมเดลรถ/เครื่องบิน"},
+        {name:"LINKS UMEDA", desc:"Uniqlo, GU, ABC-Mart และร้านอาหารชั้น B1/ชั้น 8"}
+      ]}
     ]
   },
   okoppe: {
     icon:"🥛", title:"Okoppe Milk Stand (Hanshin Umeda)", time:"17:15 - 18:00",
     mapUrl:"https://www.google.com/maps/search/?api=1&query=Hanshin+Umeda+Okoppe+Milk",
     sections:[
-      {title:"📖 นมสดแท้จากเมืองโอค็อปเปะ ฮอกไกโด", type:"text", body:"เสิร์ฟซอฟต์เสิร์ฟนมสดแท้เข้มข้นจากฟาร์มในเมือง Okoppe เกาะฮอกไกโด รสชาติหอมมัน กลมกล่อม ละมุนลิ้น ไม่หวานจัด"},
-      {title:"📍 พิกัดร้าน", type:"text", body:"ชั้น B2 ห้าง Hanshin Department Store Umeda (โซนอาหารสด/ของหวาน)"}
+      {title:"📖 รสชาติความหอมนุ่มจากฟาร์มฮอกไกโดแท้", type:"text", body:"เติมความสดชื่นด้วยซอฟต์เสิร์ฟครีมนมแท้เข้มข้น ส่งตรงจากเมือง Okoppe เมืองเกษตรกรรมริมชายฝั่งทะเลโอคอตสค์ บนเกาะฮอกไกโด รสชาติของนมที่นี่หอมมัน กลมกล่อม เนื้อสัมผัสนุ่มละมุนลิ้น ไม่หวานจัด ได้รสธรรมชาติต้นตำรับแท้ๆ"},
+      {title:"📍 พิกัดความอร่อย", type:"text", body:"ชั้น B2 ห้าง Hanshin Department Store Umeda (โซน Hanshin Food Hall)"}
     ]
   },
   ramen_zen: {
-    icon:"🍜", title:"Naniwa Menjiro ZEN", time:"18:00 - 19:30 · ราเมนมิชลินไกด์",
+    icon:"🍜", title:"Naniwa Menjiro ZEN", time:"18:00 - 19:30 · Michelin Bib Gourmand",
     mapUrl:"https://www.google.com/maps/search/?api=1&query=Naniwa+Menjiro+ZEN",
     sections:[
-      {title:"📖 ราเมนซุปหอยตลับรางวัล Michelin Bib Gourmand", type:"text", body:"ใช้น้ำซุปเคี่ยวจากหอยตลับสด (Asari Clam) ผสมโชยุคุณภาพดี น้ำซุปสีทองใสสะอาดแต่เข้มข้นลึกซึ้ง ไร้สารเคมีสังเคราะห์"},
-      {title:"🍜 เมนูแนะนำ", type:"text", body:"<strong>Ogon no Shio Ramen / Shoyu Ramen</strong> ราเมนซุปหอยตลับรสกลมกล่อม เสิร์ฟพร้อมชาชูนุ่มละมุน"}
+      {title:"📖 ศิลปะซุปหอยตลับสกัดระดับการันตีมิชลิน", type:"text", body:"ลิ้มลองราเมนระดับตำนานเจ้าของรางวัล **Michelin Bib Gourmand** ไฮไลต์อยู่ที่น้ำซุปสีทองใสสะอาด เคี่ยวจากหอยตลับสด (Asari Clam) ผสมผสานกับโชยุเกรดพรีเมียมจากคันไซ ให้รสสัมผัสอูมามิหอมกลมกล่อมลึกซึ้งโดยไม่ต้องพึ่งพาสารเคมีสังเคราะห์ เสิร์ฟพร้อมหมูชาชูสไลซ์บางนุ่มละลายในปาก"},
+      {title:"🍜 เมนูแนะนำห้ามพลาด", type:"text", body:"**Ogon no Shio Ramen (ราเมนซุปเกลือหอยตลับ)** หรือ **Shoyu Ramen** จิบซุปร้อนๆ หลังเดินเที่ยวมาทั้งวัน รู้สึกสดชื่นกระปรี้กระเปร่าอย่างยิ่ง"}
     ]
   },
   katsuo_ji: {
     icon:"⛩️", title:"วัดคัตสึโอจิ (Katsuo-ji)", time:"09:50 - 11:15 · วัดดารุมะแห่งชัยชนะ",
     mapUrl:"https://www.google.com/maps/search/?api=1&query=Katsuoji+Temple",
     sections:[
-      {title:"📖 วัดแห่งชัยชนะและตุ๊กตาดารุมะ", type:"text", body:"วัดโบราณสร้างขึ้นในปี ค.ศ. 765 ขึ้นชื่อเรื่องการขอพรชัยชนะ ความสำเร็จ และความรัก ผู้คนนิยมบูชาตุ๊กตาดารุมะสีแดง แต้มตาซ้ายตั้งจิตอธิษฐาน แล้วเมื่อสำเร็จค่อยกลับมาแต้มตาขวา"},
-      {title:"🚌 การเดินทาง", type:"text", body:"นั่งรถใต้ดิน Midosuji Line สุดสายลง Minoh-Kayano ต่อ Hankyu Bus สาย 29/30 (จ่ายผ่าน IC Card ได้)"}
+      {title:"📖 มนตราขุนเขาและตุ๊กตาดารุมะนับพันตัว", type:"text", body:"ยามที่คุณก้าวผ่านประตูซานมง (Sanmon Gate) เข้าสู่เขตวัดคัตสึโอจิ ท่ามกลางหมอกบางๆ และขุนเขาแห่งมินโอ เสียงกระดิ่งลมและกลิ่นหอมอ่อนๆ ของเครื่องหอมจะต้อนรับคุณ ที่นี่คือ **'วัดแห่งชัยชนะ'** อายุเก่าแก่กว่า 1,300 ปี ยุคโบราณเหล่าจักรพรรดิและโชกุนผู้เกรียงไกรต่างเดินทางมาตั้งจิตอธิษฐานก่อนออกศึก ภาพอันน่าอัศจรรย์ที่คุณจะได้เห็นคือตุ๊กตาดารุมะสีแดงนับพันตัว (Kachi-Dama) ขนาดเล็กใหญ่ซุกซ่อนอยู่ทุกตารางนิ้ว ตั้งแต่บนบันไดหิน ซอกกำแพง ตะเกียงหิน ไปจนถึงกิ่งไม้... ทุกตัวคือตัวแทนของ **'ความเพียรพยายามที่ไม่ยอมแพ้ต่ออุปสรรค'** ของผู้คนที่เดินทางมาเติมเต็มความฝัน"},
+      {title:"✨ พิธีกรรมขอพรดารุมะ (Kachi-Dama)", type:"text", body:"1. เลือกบูชาตุ๊กตาดารุมะที่คุณรู้สึกมีชะตาผูกพัน<br>2. เขียนเป้าหมาย/ความฝันไว้ใต้ฐานตุ๊กตา<br>3. ใช้พู่กันดำ **แต้มตาข้างซ้าย** พร้อมตั้งจิตอธิษฐาน<br>4. เมื่อวันใดที่คุณทำเป้าหมายนั้นสำเร็จ ให้เดินทางกลับมาแต้มตาข้างขวาและนำมาประดิษฐานคืนวัด!"},
+      {title:"📸 จุดถ่ายรูปสวยลึกลับ", type:"text", body:"สะพานข้ามสระน้ำที่มีไอน้ำหมอกจางๆ ลอยขึ้นมาตลอดเวลา ได้ภาพถ่ายดั่งหลุดเข้าไปในโลกเทพนิยายญี่ปุ่นโบราณ"}
     ]
   },
   taxi_minoh: {
     icon:"🚕", title:"GO Taxi ไปน้ำตกมิโน", time:"11:15 - 11:30",
     sections:[
-      {title:"💡 เรียกแท็กซี่ไปส่งจุด Dainichi Parking", type:"text", body:"เปิดแอป <strong>GO Taxi</strong> เรียกแท็กซี่จากหน้าวัด Katsuo-ji ไปส่งที่ <strong>Dainichi Parking (大日駐車場)</strong> บนเขา จากจุดนั้นเดินลงเนินเบาๆ เพียง 400 เมตร (10 นาที) ก็ถึงตัวน้ำตกโดยไม่ต้องเดินขึ้นเขาเหนื่อย"}
+      {title:"💡 ทางลัดเดินสบาย ไม่ต้องขึ้นเขาเหนื่อย", type:"text", body:"เปิดแอป **GO Taxi** เรียกรถแท็กซี่จากหน้าวัด Katsuo-ji ไปส่งที่ **Dainichi Parking (大日駐車場)** บนเขา เทคนิคนี้จะช่วยให้คุณอยู่บนจุดสูงของภูเขา จากนั้นใช้เส้นทางเดินลาดลงเขาเบาๆ เพียง 400 เมตร (10 นาที) ก็ถึงตัวน้ำตกมิโนโดยไม่ต้องเดินขึ้นเขาให้เหนื่อยแรง"}
     ]
   },
   minoh_falls: {
     icon:"💦", title:"น้ำตกมิโน (Minoh Falls)", time:"11:30 - 13:00",
     mapUrl:"https://www.google.com/maps/search/?api=1&query=Minoh+Waterfall",
     sections:[
-      {title:"📖 น้ำตกธรรมชาติ & ใบเมเปิลทอด", type:"text", body:"น้ำตกความสูง 33 เมตรท่ามกลางผืนป่าธรรมชาติ เดินลงเขาเลียบลำธารระยะทาง 2.8 กม. สู่สถานี Hankyu Minoh พร้อมชิมขนมท้องถิ่นประวัติศาสตร์ 1,300 ปี <strong>'Momiji Tempura' (ใบเมเปิ้ลทอดกรอบ)</strong>"},
-      {title:"🚶 เส้นทางเดินลงเขา", type:"text", body:"ทางเดินปูนอย่างดี เดินง่าย ลาดลงเขาตลอดทาง ใช้เวลาเดินชิลๆ ประมาณ 45-50 นาที"}
+      {title:"📖 สัมผัสละอองน้ำเย็นฉ่ำและตำนาน 1,300 ปี", type:"text", body:"สายน้ำตกธรรมชาติความสูง 33 เมตร ทิ้งตัวลงสู่แอ่งน้ำเบื้องล่างท่ามกลางผืนป่าธรรมชาติอันสมบูรณ์ของวนอุทยาน Meiji no Mori Minoh ในอดีตน้ำตกแห่งนี้เป็นสถานที่ฝึกตนทางจิตวิญญาณของนักบวชชูเก็นโด (Shugendo) เดินสูดอากาศบริสุทธิ์ฟังเสียงลำธารเลาะลงเขา 2.8 กม. มุ่งหน้าสู่สถานี Hankyu Minoh พร้อมสัมผัสวัฒนธรรมอาหารประวัติศาสตร์ยาวนานกว่า 1,300 ปี"},
+      {title:"🍁 ขนมใบเมเปิลทอดกรอบ (Momiji Tempura)", type:"text", body:"ระหว่างทางเดินลงเขา จะมีร้านค้าโบราณทอด **Momiji Tempura** ให้ชิมร้อนๆ ใบเมเปิลพันธุ์พิเศษที่นำมาหมักเกลือไว้ 1 ปีเต็ม ก่อนนำไปชุบแป้งผสมงาหวานทอดจนกรอบกรุบกรับ หอมหวานอร่อยเอกลักษณ์เฉพาะมินโอ"},
+      {title:"🚶 เส้นทางเดินลงเขา", type:"text", body:"ทางปูนอย่างดี เดินง่าย ลาดลงเขาตลอดทาง ใช้เวลาเดินชิลๆ ถ่ายรูปประมาณ 45-50 นาที"}
     ]
   },
   yasaka: {
     icon:"🦁", title:"ศาลเจ้า Namba Yasaka", time:"14:15 - 15:00",
     mapUrl:"https://www.google.com/maps/search/?api=1&query=Namba+Yasaka+Shrine",
     sections:[
-      {title:"📖 หัวสิงโตยักษ์ปัดเป่าโชคร้าย", type:"text", body:"วิหารหัวสิงโตยักษ์สูง 12 เมตร อ้าปากกว้างเชื่อว่ามีพลังในการ 'กลืนกินโชคร้ายและสิ่งชั่วร้าย' พร้อมทั้งดึงดูดความสำเร็จ โชคลาภ และความโชคดีเข้ามาแทน"},
-      {title:"📸 จุดถ่ายรูป", type:"text", body:"ยืนถ่ายรูปตรงข้ามหัวสิงโตยักษ์ ได้มุมสวยอลังการติดสถาปัตยกรรมเอกลักษณ์"}
+      {title:"📖 วิหารหัวสิงโตยักษ์ผู้กลืนกินสิ่งชั่วร้าย", type:"text", body:"ซ่อนตัวอยู่ในย่านอันเงียบสงบของนัมบะ คือวิหารหัวสิงโตยักษ์ (Shishi-den) ขนาดมหึมาสูง 12 เมตร กว้าง 11 เมตร ดวงตาดุสลักด้วยกระจก และฟันทองคำที่อ้าปากกว้าง เชื่อกันว่าปากสิงโตยักษ์นี้มีพลังในการ **'กลืนกินโชคร้าย ปัดเป่าสิ่งชั่วร้าย'** และดึงดูดความโชคดี ความสำเร็จในการเรียน และการค้าขายเข้ามาเติมเต็มแทน"},
+      {title:"📸 จุดถ่ายรูปเช็กอิน", type:"text", body:"ยืนถ่ายรูปบริเวณลานหน้าศาลเจ้าโดยเว้นระยะห่าง เพื่อให้เห็นหัวสิงโตยักษ์ตระหง่านเต็มเฟรม ได้ภาพถ่ายที่ทรงพลังเอกลักษณ์ไม่เหมือนใครในโอซาก้า"}
     ]
   },
   ghibli: {
     icon:"🧸", title:"Shinsaibashi PARCO Stores", time:"15:15 - 17:30",
     mapUrl:"https://www.google.com/maps/search/?api=1&query=Shinsaibashi+PARCO",
     sections:[
-      {title:"🛍️ รวมร้านค้าอนิเมะระดับแลนด์มาร์ก ชั้น 6", type:"text", body:"• <strong>Donguri Kyowakoku:</strong> ร้านสินค้าลิขสิทธิ์แท้ Studio Ghibli มีตัวโทโทโร่ยักษ์ให้ถ่ายรูป<br>• <strong>Nintendo Osaka:</strong> ร้านอย่างเป็นทางการของนินเทนโด<br>• <strong>Capcom Store / Pop Mart:</strong> ศูนย์รวมโมเดลและสินค้าเกมชั้นนำ"}
+      {title:"📖 ศูนย์รวมวัฒนธรรมคาแรกเตอร์ระดับโลก ชั้น 6", type:"text", body:"ตื่นตาตื่นใจกับ Pop Culture Paradise บนชั้น 6 ของห้าง Shinsaibashi PARCO ที่รวมแฟลกชิปสโตร์ของอนิเมะและเกมระดับโลกไว้ในที่เดียว เดินเพลินถ่ายรูปและเลือกสะสมของแท้ลิขสิทธิ์"},
+      {title:"🛍️ ร้านไฮไลต์ห้ามพลาด", type:"lockers", items:[
+        {name:"Donguri Kyowakoku (Studio Ghibli)", desc:"ต้อนรับด้วยตัวโทโทโร่ยักษ์ รถบัสแมว Catbus และของสะสมสุดละมุนจากภาพยนตร์จิบลิ"},
+        {name:"Nintendo Osaka", desc:"ร้านนินเทนโดอย่างเป็นทางการ รวมสินค้า Super Mario, Zelda, Animal Crossing"},
+        {name:"Capcom Store & Pop Mart", desc:"โมเดลกล่องสุ่มยอดฮิต สินค้าจากเกม Monster Hunter, Street Fighter"}
+      ]}
     ]
   },
   dotonbori: {
     icon:"🐙", title:"ย่านโดทงโบริ (Dotonbori)", time:"18:00 - 20:30",
     mapUrl:"https://www.google.com/maps/search/?api=1&query=Dotonbori+Glico+Sign",
     sections:[
-      {title:"📖 สีสันแห่งค่ำคืนโอซาก้า", type:"text", body:"ย่านบันเทิงสตรีทฟู้ดริมคลองอันโด่งดัง ถ่ายรูปคู่ป้ายไฟนักวิ่ง <strong>Glico Sign</strong> และลิ้มลองทาโกะยากิ โอโคโนมิยากิ คุชิคะสึ"},
-      {title:"😋 ร้านอร่อยแนะนำ", type:"lockers", items:[
-        {name:"Kukuru Takoyaki", desc:"ทาโกะยากิลูกโตปลาหมึกยักษ์ นุ่มฉ่ำซอส"},
-        {name:"Mizuno Okonomiyaki", desc:"พิซซ่าญี่ปุ่นร้านดังรางวัลมิชลินไกด์"},
-        {name:"Kushikatsu Daruma", desc:"ของทอดเสียบไม้กรอบอร่อยสไตล์โอซาก้าแท้"}
+      {title:"📖 แสงสีแห่งค่ำคืนและวัฒนธรรม 'กินจนล้ม' (Kuidaore)", type:"text", body:"โดทงโบริคือหัวใจอันเต้นขวักไขว่ของโอซาก้า คลองโบราณที่ขุดขึ้นตั้งแต่ปี ค.ศ. 1612 บัดนี้คลาคล่ำไปด้วยป้ายไฟนีออนยักษ์และกลิ่นหอมของอาหารสตรีทฟู้ด ชาวโอซาก้ามีวิถีชีวิตที่เรียกว่า **'Kuidaore' (กินจนกว่าจะล้ม/เปรมปรีดิ์)** ถ่ายรูปคู่กับป้ายนักวิ่ง **Glico Running Man** อันเป็นตำนาน และสัมผัสความคึกคักริมคลองยามค่ำคืน"},
+      {title:"😋 สตรีทฟู้ด 3 อย่างที่ต้องชิม", type:"lockers", items:[
+        {name:"Takoyaki (ทาโกะยากิ)", desc:"ขนมครกปลาหมึกยักษ์ร้อนๆ กรอบนอกนุ่มฉ่ำใน โรยปลาโอแห้งพริ้วไหว"},
+        {name:"Okonomiyaki (โอโคโนมิยากิ)", desc:"พิซซ่าญี่ปุ่นกระทะร้อน ราดซอสเข้มข้นและมายองเนส"},
+        {name:"Kushikatsu (คุชิคะสึ)", desc:"ของทอดเสียบไม้กรอบอร่อย ชุบแป้งบางกรอบสไตล์โอซาก้าแท้"}
       ]}
     ]
   },
-  nunobiki: {
-    icon:"🚡", title:"Nunobiki Herb Garden & Ropeway", time:"09:45 - 11:45",
-    mapUrl:"https://www.google.com/maps/search/?api=1&query=Nunobiki+Herb+Garden+Kobe",
+  byodoin: {
+    icon:"🏛️", title:"วัดเบียวโดอิน (Byodo-in Temple)", time:"09:15 - 10:15",
+    mapUrl:"https://www.google.com/maps/search/?api=1&query=Byodoin+Temple+Uji",
     sections:[
-      {title:"📖 สวนสมุนไพรบนยอดเขาชมวิวเมืองโกเบ", type:"text", body:"นั่งกระเช้าลอยฟ้าชมวิวเมืองและอ่าวโกเบแบบพาโนรามา เดินเที่ยวชมสวนสมุนไพร เรือนกระจก และแช่เท้าในอ่างน้ำสมุนไพรอุ่นๆ ชมวิวสวย"},
-      {title:"🎫 บัตรกระเช้า", type:"text", body:"แนะนำซื้อตั๋ว Ropeway แบบ Round-trip รวมค่าเข้าสวนล่วงหน้าออนไลน์"}
+      {title:"📖 สุขาวดีโลกสวรรค์เหนือน้ำวิเศษ บนเหรียญ 10 เยน", type:"text", body:"จินตนาการถึงวิหารไม้สีชาดอายุเกือบ 1,000 ปีที่สะท้อนเงาอันเงียบสงบบนผิวน้ำดั่งพระราชวังบนสวรรค์... เบียวโดอินถูกสร้างขึ้นในปี ค.ศ. 1052 โดยฟูจิวาระ โนะ โยริมิจิ เพื่อเนรมิต **'สุขาวดีโลกสวรรค์' (Pure Land)** ให้มนุษย์สัมผัสได้จริงบนโลกมนุษย์ วิหารหงส์เหิน (Phoenix Hall) ตัวอาคารปีกสองข้างแผ่ออกดั่งนกฟีนิกซ์กำลังจะเหินฟ้า บนยอดหลังคาประดิษฐานนกฟีนิกซ์สำริดคู่ตำนาน ซึ่งกลายมาเป็นตราสัญลักษณ์บน **เหรียญ 10 เยน** และธนบัตร 10,000 เยนของญี่ปุ่น ซึมซับความงามระดับมรดกโลกท่ามกลางสวนสไตล์เฮอันอันร่มรื่น"},
+      {title:"✨ ไฮไลต์ห้ามพลาด", type:"text", body:"1. **ภาพถ่ายสะท้อนผิวน้ำ:** ถ่ายรูปตัววิหาร Phoenix Hall คู่กับเหรียญ 10 เยนในมือของคุณ!<br>2. **Museum Hoshokan:** พิพิธภัณฑ์ใต้ดินที่เก็บรักษาปฏิมากรรมเทวดาเหินฟ้า (26 Unkyu Kuzu) เล่นพิณและเครื่องดนตรีโบราณ ผลงานสลักไม้อันละเมียดละไมที่สุดในยุคเฮอัน"}
     ]
   },
-  kitano: {
-    icon:"🏘️", title:"Kitano Ijinkan (ย่านบ้านฝรั่ง)", time:"12:15 - 13:15",
-    mapUrl:"https://www.google.com/maps/search/?api=1&query=Kitano+Ijinkan+Kobe",
+  uji_shrine: {
+    icon:"⛩️", title:"Uji Bridge & Uji-gami Shrine", time:"10:15 - 11:00",
+    mapUrl:"https://www.google.com/maps/search/?api=1&query=Ujigami+Shrine",
     sections:[
-      {title:"📖 ย่านอาคารสไตล์ตะวันตกยุคเมจิ", type:"text", body:"เดินชมบ้านพักต่างชาติโบราณ เช่น Weathercock House และแวะถ่ายรูปที่ Starbucks สาขาอนุรักษ์อาคารไม้โบราณสไตล์คลาสสิก"},
-      {title:"🚶 ทางเดิน", type:"text", body:"เดินลงจากสวนสมุนไพร Nunobiki มาตามทางเดินธรรมชาติประมาณ 15 นาทีถึงย่าน Kitano"}
+      {title:"📖 สะพานโบราณ และศาลเจ้าไม้ที่เก่าแก่ที่สุดในญี่ปุ่น", type:"text", body:"**Uji Bridge:** สะพานไม้ข้ามแม่น้ำอุจิอันกว้างใหญ่ สร้างขึ้นครั้งแรกราวปี ค.ศ. 646 เป็นฉากสำคัญในบทสุดท้ายของวรรณกรรมระดับโลก 'ตำนานเกนจิ' (The Tale of Genji)<br><br>**Uji-gami Shrine:** เดินข้ามแม่น้ำผ่านป่าพกไพรสู่ศาลเจ้ามรดกโลก UNESCO ที่มีวิหารหลัก (Honden) สร้างจากไม้โบราณตั้งแต่ยุคเฮอัน (ค.ศ. 1060) ซึ่งได้รับการพิสูจน์ว่าเป็น **วิหารศาลเจ้าที่เก่าแก่ที่สุดในญี่ปุ่น** ที่ยังคงสมบูรณ์อยู่"},
+      {title:"🐰 เครื่องรางกระต่ายอุจิ", type:"text", body:"เมืองอุจิมีสัญลักษณ์โบราณเป็น 'กระต่ายเหลียวหลัง' (Mikaeriusagi) ซื้อเครื่องรางกระต่ายเซรามิคน่ารักๆ เพื่อขอพรให้ชี้นำทางชีวิตไปในทิศทางที่ถูกต้อง"}
     ]
   },
-  kobe_beef: {
-    icon:"🥩", title:"Kobe Beef Lunch", time:"13:15 - 15:00",
-    mapUrl:"https://www.google.com/maps/search/?api=1&query=Kobe+Beef+Restaurant+Sannomiya",
+  matcha_lunch: {
+    icon:"🍜", title:"มื้อเที่ยงธีมมัทฉะแห่งเมืองอุจิ", time:"11:00 - 12:15",
+    mapUrl:"https://www.google.com/maps/search/?api=1&query=Nakamura+Tokichi+Byodo-in",
     sections:[
-      {title:"📖 สัมผัสรสชาติเนื้อวากิวระดับโลก", type:"text", body:"ลิ้มลองเนื้อโกเบลายหินอ่อนละลายในปาก นุ่มหวานเป็นเอกลักษณ์ สเต็กเนื้อย่างบนกระทะเทปปันยากิร้อนๆ"},
-      {title:"💡 คำแนะนำ", type:"text", body:"เนื่องจากเป็นวันอาทิตย์ ร้านดังแถบ Sannomiya / Motomachi คิวยาวมาก แนะนำจองโต๊ะล่วงหน้าออนไลน์"}
+      {title:"😋 ประสบการณ์มัทฉะแท้ระดับพรีเมียมริมแม่น้ำ", type:"text", body:"เมืองอุจิคือแหล่งปลูกและบ่มชาเขียวมัทฉะที่ดีที่สุดในประเทศญี่ปุ่น มื้อเที่ยงนี้สัมผัสรสชาติอันพิถีพิถันของเมนูชาเขียวมัทฉะ"},
+      {title:"🍵 ร้านแนะนำระดับตำนาน", type:"lockers", items:[
+        {name:"Nakamura Tokichi (中村藤吉)", desc:"เมนูห้ามพลาด: Matcha Soba (เส้นโซบะนวดผสมมัทฉะเข้มข้น) และ Namacha Jelly วุ้นชาเขียวในชามไม้ไผ่"},
+        {name:"Itoh Kyuemon (伊藤久右衛門)", desc:"ลิ้มลอง Matcha Parfait ไอศกรีมมัทฉะท็อปปิ้งถั่วแดง ดังโงะ และชาเขียวร้อนรสกลมกล่อม"}
+      ]}
     ]
   },
-  nankinmachi: {
-    icon:"🥟", title:"Nankinmachi (Chinatown)", time:"15:15 - 16:15",
-    mapUrl:"https://www.google.com/maps/search/?api=1&query=Nankinmachi+Kobe+Chinatown",
+  tsuen_tea: {
+    icon:"🍵", title:"Tsuen Tea (通圓茶屋)", time:"12:15 - 12:45",
+    mapUrl:"https://www.google.com/maps/search/?api=1&query=Tsuen+Tea+Uji",
     sections:[
-      {title:"📖 ไชน่าทาวน์เมืองโกเบ", type:"text", body:"ย่านการค้าสไตล์จีนคึกคัก เดินชิมซาลาเปาไส้หมูทรงเครื่อง เกี๊ยวซ่า และสตรีทฟู้ดอร่อยๆ"},
-      {title:"🥟 เมนูชวนชิม", type:"text", body:"Roshoki Nikuman (ซาลาเปาไส้หมูร้านดัง) / กุยช่ายทอดสดๆ"}
+      {title:"📖 ร้านชาเขียวที่เปิดทำการเก่าแก่ที่สุดในโลก (ค.ศ. 1160)", type:"text", body:"ตึกไม้โบราณเชิงสะพาน Uji Bridge แห่งนี้เปิดให้บริการมานานกว่า **866 ปี** สืบทอดตระกูลมาถึงรุ่นที่ 24 ในอดีตซามูไรและโชกุนชื่อดังอย่าง โตโยโตมิ ฮิเดโยชิ และโอดะ โนบุนางะ ต่างเคยมาแวะจิบชาพักผ่อนที่ร้านนี้ ซื้อมัทฉะเกรดพิธีการและใบชาเซ็นฉะคุณภาพเยี่ยมกลับไปเป็นของฝากทรงคุณค่า"},
+      {title:"🛍️ สินค้าแนะนำ", type:"tags", tags:[{text:"ผงมัทฉะเกรดพิธีการ", cls:"green"},{text:"Uji Dango ดังโงะชาเขียว", cls:"gold"},{text:"ใบชา Gyokuro", cls:"blue"}]}
     ]
   },
-  meriken: {
-    icon:"🌊", title:"Meriken Park & BE KOBE", time:"16:30 - 17:30",
-    mapUrl:"https://www.google.com/maps/search/?api=1&query=Meriken+Park+Kobe",
+  kiyomizudera: {
+    icon:"🏯", title:"วัดคิโยมิซุเดระ (วัดน้ำใส)", time:"13:30 - 15:00",
+    mapUrl:"https://www.google.com/maps/search/?api=1&query=Kiyomizu-dera+Kyoto",
     sections:[
-      {title:"📖 สวนสาธารณะริมอ่าวโกเบ", type:"text", body:"ถ่ายรูปคู่แลนด์มาร์กป้าย <strong>BE KOBE</strong> ขนาดใหญ่ริมทะเล ชมหอคอยสีแดง Kobe Port Tower และรับลมทะเลเย็นสบาย"}
+      {title:"📖 ระเบียงไม้สักยักษ์เหนือหน้าผาไร้ตะปู และสายน้ำศักดิ์สิทธิ์", type:"text", body:"เสียงไม้กระดานสนอายุหลายร้อยปีดังแผ่วเบาใต้ฝ่าเท้าเมื่อคุณก้าวขึ้นสู่ **'ระเบียงวัดน้ำใส'** อันอลังการที่สร้างยื่นออกจากหน้าผาสูง 13 เมตร โครงสร้างมหัศจรรย์นี้สร้างขึ้นในปี ค.ศ. 778 โดย **ไม่ใช้ตะปูแม้แต่ตัวเดียว** ใช้เพียงเทคนิคการเข้าสลักไม้โบราณ (Kake-zukuri) อันแข็งแกร่ง ทอดสายตามองป่าเขียวขจีล้อมรอบเมืองเกียวโตโบราณ ด้านล่างคือสายน้ำแร่บริสุทธิ์ Otowa Waterfall ที่ไหลหลั่งจากภูเขามานานนับพันปี"},
+      {title:"✨ ไฮไลต์และการขอพร", type:"text", body:"1. **ดื่มน้ำแร่ Otowa 3 สาย:** ใช้กระบวยด้ามยาวรองรับสายน้ำศักดิ์สิทธิ์ (เลือกเพียง 1 สายที่ต้องการอธิษฐานมากที่สุด: สุขภาพยืนยาว, ความรักสมหวัง, หรือความสำเร็จในการศึกษา/งาน)<br>2. **เสาหินลองวัดดวงความรัก (ศาลเจ้า Jishu):** หลับตาแล้วเดินจากหินก้อนหนึ่งไปอีกก้อนหนึ่ง หากเดินตรงถึงฝั่ง ความรักจะสมหวังดังใจปรารถนา"}
     ]
   },
-  harborland: {
-    icon:"🌅", title:"Kobe Harborland / umie MOSAIC", time:"17:30 - 19:30",
-    mapUrl:"https://www.google.com/maps/search/?api=1&query=Kobe+Harborland",
+  ninenzaka: {
+    icon:"🍡", title:"Sannenzaka & Ninenzaka", time:"15:00 - 16:30",
+    mapUrl:"https://www.google.com/maps/search/?api=1&query=Ninenzaka+Kyoto",
     sections:[
-      {title:"📖 วิวพระอาทิตย์ตกริมอ่าว", type:"text", body:"ย่านช้อปปิ้งและศูนย์การค้า Mosaic Garden เดินเล่นรับลมทะเล ชมแสงไฟยามเย็นยามพระอาทิตย์ตกดินเหนืออ่าวโกเบ"}
+      {title:"📖 ถนนสายโบราณมนตราเสน่ห์ยุคเอโดะ", type:"text", body:"ทางเดินหินสโลปโค้งเลียบลงเนินเขา เรียงรายด้วยบ้านเรือนไม้โบราณสไตล์กิโอโตะ (Machiya) สองข้างทางเต็มไปด้วยร้านขนมญี่ปุ่นยัตสึฮาชิ (Yatsuhashi), ร้านชา, ของที่ระลึกงานฝีมือ และ **Starbucks Ninenzaka** สาขาเดียวในโลกที่อนุรักษ์บ้านไม้โบราณอายุร้อยปี พร้อมปูเสื่อทาตามิให้นั่งจิบกาแฟ"},
+      {title:"💡 ตำนานเล่าขาน", type:"text", body:"คนโบราณกุศโลบายไว้ว่าเดินบนบันได Sannenzaka ให้ระวังอย่าสะดุดล้ม (เพราะบันไดชัน) หากสะดุดอาจโชคร้าย ให้แก้เคล็ดด้วยการซื้อน้ำเต้าไม้หอมจากร้านค้าข้างทางติดตัวไว้!"}
+    ]
+  },
+  gion: {
+    icon:"🏮", title:"ย่านเกอิชา กิอง (Gion)", time:"16:30 - 18:00",
+    mapUrl:"https://www.google.com/maps/search/?api=1&query=Gion+Hanamikoji+Kyoto",
+    sections:[
+      {title:"📖 เสน่ห์ยามโพล้เพล้ในดินแดนแห่งดอกไม้และต้นหลิว", type:"text", body:"เมื่อตะวันเริ่มลับฟ้าและโคมไฟกระดาษสีส้มย้อนยุคเริ่มจุดประกายตามแนวถนน **Hanami-koji** ย่านกิองจะเผยเสน่ห์อันลึกลับและเปี่ยมด้วยมนตร์ขลังของ 'โลกแห่งดอกไม้และต้นหลิว' (Hanamachi) ลมเย็นยามเย็นพัดผ่านเรือนไม้โบราณและฉากกั้นไม้ระแนง (Koushi) หากโชคดีและเงียบสงบ คุณอาจได้เห็นไมโกะหรือเกอิชาในชุดกิโมโนหรูหราเดินทางไปปฏิบัติงานแสดงศิลปะโบราณ"},
+      {title:"📸 มารยาทในการเที่ยวชม", type:"text", body:"เดินชมความงามอย่างสงบ ไม่ขวางทางเดิน และไม่ถ่ายภาพรบกวนไมโกะอย่างใกล้ชิด เพื่อร่วมอนุรักษ์บรรยากาศอันทรงคุณค่าของเกียวโต"}
     ]
   },
   kaiyukan: {
     icon:"🐋", title:"พิพิธภัณฑ์สัตว์น้ำไคยูคัง (Kaiyukan)", time:"09:45 - 12:30",
     mapUrl:"https://www.google.com/maps/search/?api=1&query=Osaka+Aquarium+Kaiyukan",
     sections:[
-      {title:"📖 แทงก์น้ำยักษ์จำลองมหาสมุทรแปซิฟิก", type:"text", body:"ชมฉลามวาฬยักษ์และฝูงสัตว์ทะเลนานาพันธุ์ เดินวนลงตามทางลาดรอบแทงก์น้ำขนาด 5,400 ตัน"},
-      {title:"🎫 ตั๋วเข้าชม", type:"text", body:"ต้องซื้อตั๋วระบุรอบเวลาล่วงหน้าทางออนไลน์ (แนะนำจองรอบ 10:00 น.)"},
-      {title:"🚇 การเดินทาง", type:"text", body:"นั่ง Chuo Line สายสีเขียวจาก Hommachi ตรงไปลงสถานี Osakako (240 เยน)"}
+      {title:"📖 ท่องสู่ห้วงลึกแห่งมหาสมุทรแปซิฟิก", type:"text", body:"พิพิธภัณฑ์สัตว์น้ำชั้นนำระดับโลกที่จะพาคุณออกเดินทางท่องโลกใต้ท้องทะเล โดยมีจุดศูนย์กลางคือ **'Pacific Ocean Tank'** แทงก์น้ำยักษ์ความจุ 5,400 ตัน ลึกเท่าตึก 9 ชั้น ที่ที่คุณจะได้ตื่นตาตื่นใจกับ **'ฉลามวาฬ' (Whale Shark)** ยักษ์ใหญ่ใจดีสองตัวแหวกว่ายอย่างเงียบสงบพร้อมฝูงปลากระเบนราหู เส้นทางชมเดินวนลงเป็นเกลียวสไปรัลดั่งดำดิ่งสู่ใต้ทะเลลึกจริงๆ"},
+      {title:"🎫 ข้อมูลการจอง & ตั๋วเข้าชม", type:"text", body:"ต้องจองตั๋วระบุรอบเวลาออนไลน์ล่วงหน้าผ่าน Klook / Official Site (แนะนำรอบ **10:00 น.**) เมื่อไปถึงสามารถสแกน QR Code เข้าได้ทันทีไม่ต้องต่อคิวซื้อตั๋ว"},
+      {title:"💡 จุดไฮไลต์ห้ามพลาด", type:"lockers", items:[
+        {name:"Pacific Ocean Tank", desc:"ชมฉลามวาฬยักษ์ ปลากระเบน และฝูงปลาทะเลลึก"},
+        {name:"Ring of Fire & Japan Forest", desc:"นากหญ้า นากทะเล และตู้จำลองป่าญี่ปุ่นอันร่มรื่น"},
+        {name:"Interactive Zone (ชั้น 4)", desc:"สัมผัสหลังปลากระเบนและฉลามตัวจริงในอ่างสัมผัสสด"}
+      ]}
     ]
   },
   tempozan: {
     icon:"🎡", title:"Tempozan Marketplace", time:"12:30 - 13:45",
     mapUrl:"https://www.google.com/maps/search/?api=1&query=Tempozan+Marketplace+Osaka",
     sections:[
-      {title:"📖 ศูนย์การค้าริมอ่าว & Naniwa Kuishinbo Yokocho", type:"text", body:"ทานมื้อเที่ยงที่ซอยอาหารย้อนยุคปี 1960 ชิมของกินท้องถิ่นโอซาก้า หรือเลือกขึ้นชิงช้าสวรรค์ยักษ์ Tempozan ชมวิวอ่าวโอซาก้า"}
+      {title:"📖 ย่านย้อนยุคริมอ่าว & Naniwa Kuishinbo Yokocho", type:"text", body:"ศูนย์การค้าริมอ่าวโอซาก้าติดกับ Kaiyukan ไฮไลต์อยู่ที่โซนอาหาร **'Naniwa Kuishinbo Yokocho'** ที่เนรมิตตรอกอาหารย้อนยุคปี 1960 สไตล์โชวะ จำลองบรรยากาศบ้านเรือนไม้เก่า ป้ายไฟคลาสสิก อุดมไปด้วยร้านอาหารสตรีทฟู้ดชื่อดังของโอซาก้า"},
+      {title:"🎡 กิจกรรมแนะนำ", type:"lockers", items:[
+        {name:"Tempozan Giant Ferris Wheel", desc:"ชิงช้าสวรรค์ยักษ์ความสูง 112.5 เมตร ชมวิวอ่าวโอซาก้าและสะพาน Minato Bridge"},
+        {name:"Naniwa Kuishinbo Yokocho", desc:"ชิมข้าวหน้าแกงกะหรี่ไก่/เนื้อยี่ห้อดัง และขนมโบราณสไตล์โอซาก้า"}
+      ]}
     ]
   },
   denden: {
     icon:"🤖", title:"Den-Den Town (Nipponbashi)", time:"14:20 - 16:45",
     mapUrl:"https://www.google.com/maps/search/?api=1&query=Den-Den+Town+Osaka",
     sections:[
-      {title:"📖 ย่านช้อปปิ้งอนิเมะและแกดเจ็ต", type:"text", body:"ย่านเครื่องใช้ไฟฟ้า ฟิกเกอร์ โมเดล การ์ดเกม และของสะสมอนิเมะชื่อดังของโอซาก้า"},
-      {title:"🚇 การเดินทาง", type:"text", body:"นั่ง Chuo Line จาก Osakako ลง Sakaisuji-Hommachi แล้วเปลี่ยนเป็นสาย Sakaisuji Line ลงสถานี Nipponbashi"}
+      {title:"📖 สวรรค์อนิเมะ ฟิกเกอร์ และโอตาคุแห่งคันไซ", type:"text", body:"เด็นเด็นทาวน์ (Den-Den Town) หรือย่านนิปปอนบาชิ คือ 'อากิฮาบาระแห่งโอซาก้า' ถนนสองข้างทางเรียงรายไปด้วยร้านจำหน่ายฟิกเกอร์, โมเดลพลาสติกกันพลา (Gunpla), การ์ดเกม Pokémon/Yu-Gi-Oh!, ตู้เกมอาเขต, ร้านกล่องสุ่ม Pop Mart และร้านเครื่องใช้ไฟฟ้ามือสองคุณภาพพรีเมียม"},
+      {title:"🛍️ ร้านขุมทรัพย์ที่ต้องแวะ", type:"lockers", items:[
+        {name:"Animate Nipponbashi", desc:"ตึกอนิเมะยักษ์ รวมมังงะ สินค้าคาแรกเตอร์อนิเมะล่าสุด"},
+        {name:"Super Kids Land Main Store", desc:"สวรรค์ของคนรักโมเดล กันพลา รถแข่ง โมเดลเครื่องบิน"},
+        {name:"Surugaya (駿河屋)", desc:"ร้านขุมทรัพย์มือสอง ฟิกเกอร์และของสะสม rare items ราคาดี"}
+      ]}
     ]
   },
-usj_frieren_app: {
+  usj_frieren_app: {
     icon:"📱", title:"USJ Entrance & App Action", time:"08:00 - สแกนผ่านเกต",
     sections:[
-      {title:"📱 สิ่งสำคัญที่ต้องทำทันทีเมื่อเข้า Park", type:"text", body:"1. เปิดแอป USJ สแกนบัตร Studio Pass เข้าปาร์ก<br>2. กดรับ <strong>Attraction Timed Entry eTicket</strong> ของ <strong>Frieren Story Walk (Stage 18)</strong> โดยเลือกรอบแรกสุด <strong>10:00 - 10:30 น.</strong> ทันที"}
+      {title:"📱 สิ่งสำคัญที่ต้องทำทันทีเมื่อสแกนเข้า Park", type:"text", body:"1. เปิดแอป USJ สแกนตั๋ว Studio Pass เข้าสู่ระบบปาร์ก<br>2. กดรับ **Attraction Timed Entry eTicket** ของ **Frieren Story Walk (Stage 18)** โดยเลือกรอบแรกสุด **10:00 - 10:30 น.** ทันทีเพื่อการันตีรอบเข้าชมนิทรรศการ"}
+    ]
+  },
+  frieren_ride: {
+    icon:"🎢", title:"Hollywood Dream (Frieren Ride)", time:"08:15 - 09:15",
+    sections:[
+      {title:"📖 เสียงพากย์เอ็กซ์คลูซีฟทะยานฟ้า", type:"text", body:"ขึ้นเครื่องเล่น Hollywood Dream - The Ride แล้วกดเลือกรอบเสียง **Track 3** เพื่อฟังเสียงพากย์บทสนทนาสุดน่ารักและตื่นเต้นระหว่าง **ฟรีเรน, เฟิร์น และ สตาร์ค** เคล้าไปกับความตื่นเต้นดิ่งทะยานฟ้าเหนือ Universal Studios Japan"}
     ]
   },
   frieren_shop: {
     icon:"🛍️", title:"Cinema 4-D Store (Frieren Goods)", time:"09:15 - 09:50",
     sections:[
-      {title:"🛍️ ช้อปปิ้งสินค้าลิขสิทธิ์พิเศษ", type:"text", body:"แวะเลือกซื้อของสะสม เสื้อคลุม ไม้เท้าเวทมนตร์ และกู๊ดส์พิเศษของ Frieren ในร้าน Cinema 4-D Store ก่อนช่วงเวลานิทรรศการเปิด เพื่อเลี่ยงคิวจ่ายเงินที่ยาวในช่วงบ่าย"}
+      {title:"🛍️ ช้อปปิ้งสินค้าลิขสิทธิ์พิเศษ Frieren", type:"text", body:"เลือกซื้อของสะสม เสื้อคลุมจอมเวท ไม้เท้าเวทมนตร์ พวงกุญแจ และสินค้าลิขสิทธิ์พิเศษของ Frieren ในร้าน Cinema 4-D Store ก่อนช่วงเวลานิทรรศการเปิด เพื่อเลี่ยงคิวจ่ายเงินที่ยาวในตอนบ่าย"}
     ]
   },
   frieren_walk: {
     icon:"🪄", title:"Frieren Story Walk -- Echoes of Adventure", time:"10:00 - 10:45 @ Stage 18",
     sections:[
-      {title:"📖 นิทรรศการเวทมนตร์ (เปิด 10:00 น.)", type:"text", body:"เดินชมเรื่องราวการเดินทางของคณะผู้กล้า สัมผัสบรรยากาศสมจริง และร่วมทดลองร่ายเวทมนตร์ Zoltraak <em>(Event Hours เริ่มตั้งแต่ 10:00 น. เป็นต้นไป)</em>"}
+      {title:"📖 นิทรรศการร่ายเวทมนตร์ Zoltraak (เปิด 10:00 น.)", type:"text", body:"ก้าวเข้าสู่โลกของฟรีเรน สัมผัสฉากจำลองการเดินทางอันลึกซึ้ง ชมพร็อพไม้เท้าและคทาเวทมนตร์ขนาดเท่าของจริง และร่วมทดลองประสบการณ์ร่ายเวทมนตร์โจมตี **Zoltraak** ด้วยเทคโนโลยีแสงสีเสียงสุดอลังการ"}
     ]
   },
   jurassic_ride: {
     icon:"🦖", title:"Jurassic Park - The Ride (CHOICE A)", time:"10:45 - 11:30",
     sections:[
-      {title:"🦖 Express Pass - Choice A", type:"text", body:"ใช้ตั๋ว Express Pass ช่องทางพิเศษ ล่องเรือชมไดโนเสาร์และดิ่งลงน้ำความสูง 25 เมตรแบบสุดเหวี่ยง (เตรียมเสื้อกันฝนหากไม่อยากเปียก)"}
+      {title:"🦖 Express Pass - Choice A", type:"text", body:"ใช้ตั๋ว Express Pass เดินเข้าช่องทางพิเศษ ล่องเรือชมป่าไดโนเสาร์โลกล้านปี ก่อนเผชิญหน้ากับทีเร็กซ์ยักษ์และดิ่งลงน้ำความสูง 25 เมตรแบบสุดเหวี่ยง (เตรียมเสื้อกันฝนหากไม่อยากเปียก)"}
     ]
   },
   frieren_restaurant: {
     icon:"🍽️", title:"Frieren Restaurant of Memories", time:"11:30 - 12:15 @ Lost World Restaurant",
     sections:[
-      {title:"😋 เมนูพิเศษจากการเดินทางของฟรีเรน", type:"text", body:"• เซ็ตสเต๊กเนื้อของฟรีเรน<br>• ข้าวไข่ข้นทรงเครื่องของฮิมเมล<br>• พาร์เฟต์ของหวานของเฟิร์น & สตาร์ค<br><em>*ออกจาก Jurassic Park แล้วเดินเข้าโซนร้านอาหารต่อได้ทันทีก่อนเที่ยง*</em>"}
+      {title:"😋 ลิ้มลองเมนูความทรงจำจากการเดินทาง", type:"text", body:"• **เซ็ตสเต๊กเนื้อของฟรีเรน:** สเต๊กเนื้อชิ้นโตเสิร์ฟพร้อมซอสสูตรพิเศษ<br>• **ข้าวไข่ข้นทรงเครื่องของฮิมเมล:** ข้าวไข่ข้นตกแต่งสัญลักษณ์ผู้กล้า<br>• **พาร์เฟต์ของหวานของเฟิร์น & สตาร์ค:** พาร์เฟต์พุดดิ้งผลไม้หอมหวาน"}
     ]
   },
   usj_minion_blast: {
     icon:"🍌", title:"Minion Blast (EXPRESS)", time:"12:20 - 13:00",
     sections:[
-      {title:"🍌 Express Pass Time Slot: 12:00 - 12:30", type:"text", body:"Illumination's Villain-Con Minion Blast เครื่องเล่นยิงปืนโต้ตอบสุดสนุกสะสมคะแนนในโซน Minion Park"}
+      {title:"🍌 Express Pass Time Slot: 12:00 - 12:30", type:"text", body:"Illumination's Villain-Con Minion Blast เครื่องเล่นยิงปืนเลเซอร์โต้ตอบสุดสนุก สะสมคะแนนแข่งขันบนสายพานเคลื่อนที่ในโซน Minion Park"}
     ]
   },
   usj_minion_mayhem: {
     icon:"🍌", title:"Despicable Me: Minion Mayhem (CHOICE B)", time:"13:00 - 13:40",
     sections:[
-      {title:"🍌 Express Pass - Choice B", type:"text", body:"เครื่องเล่นจำลอง 4D สุดป่วน ตะลุยห้องทดลองกรูไปกับเหล่ามินเนี่ยนตัวจิ๋ว"}
+      {title:"🍌 Express Pass - Choice B", type:"text", body:"เครื่องเล่นจำลอง 4D สุดป่วน ตะลุยห้องทดลองกรูไปกับเหล่ามินเนี่ยนตัวจิ๋ว ภาพชัดสีสันสดใส"}
     ]
   },
   usj_nintendo: {
     icon:"🍄", title:"SUPER NINTENDO WORLD (EXPRESS)", time:"14:00 - 15:30",
     sections:[
-      {title:"🍄 รอบเวลา Express Pass สนุกเต็มคราบ", type:"rides", items:[
-        {name:"14:00 - 14:30", badge:"Express", desc:"Mario Kart: Koopa's Challenge (สวมแว่น AR แข่งรถ)"},
-        {name:"14:30 - 15:00", badge:"Express", desc:"Yoshi's Adventure (นั่งโยชิชมวิวโซนเห็ด)"},
-        {name:"15:00 - 15:30", badge:"Express", desc:"Mine Cart Madness (ดิ่งรถรางในป่า Donkey Kong)"}
+      {title:"🍄 ตะลุยอาณาจักรเห็ดและดองกี้คอง", type:"rides", items:[
+        {name:"14:00 - 14:30", badge:"Express", desc:"Mario Kart: Koopa's Challenge (สวมแว่น AR แข่งรถในสนามจริง)"},
+        {name:"14:30 - 15:00", badge:"Express", desc:"Yoshi's Adventure (นั่งโยชิชมวิวอาณาจักรเห็ด 360 องศา)"},
+        {name:"15:00 - 15:30", badge:"Express", desc:"Mine Cart Madness (ดิ่งรถรางสุดมันส์ในป่า Donkey Kong Country)"}
       ]}
     ]
   },
   jaws_ride: {
-    icon:"🦈", title:"JAWS (Standby / Single Rider)", time:"15:30 - 16:15",
+    icon:"🦈", title:"JAWS (Standby Lane)", time:"15:30 - 16:15",
     sections:[
-      {title:"🦈 ล่องเรือ Amity Village", type:"text", body:"แวะต่อแถวปกติหรือช่อง Single Rider ล่องเรือชมเมืองชายฝั่ง Amity และเผชิญหน้ากับฉลามยักษ์เอฟเฟกต์ไฟและน้ำจริง ทางผ่านระหว่าง Nintendo ไป Harry Potter"}
+      {title:"🦈 ล่องเรือ Amity Village", type:"text", body:"ล่องเรือชมเมืองชายฝั่ง Amity และเผชิญหน้ากับฉลามยักษ์เอฟเฟกต์ไฟและน้ำจริง ตื่นเต้นสมจริง ทางผ่านระหว่าง Nintendo ไป Harry Potter"}
     ]
   },
   usj_potter: {
     icon:"🧙‍♂️", title:"The Wizarding World of Harry Potter", time:"16:30 - 17:45",
     sections:[
-      {title:"⚡ รอบเวลา Express Pass โลกเวทมนตร์", type:"rides", items:[
-        {name:"16:30 - 17:00", badge:"Express", desc:"Flight of the Hippogriff (รถไฟเหาะฮิปโปกริฟฟ์)"},
-        {name:"Forbidden Journey", badge:"Express", desc:"Harry Potter and the Forbidden Journey บินเหนือฮอกวอตส์"},
-        {name:"Butterbeer", badge:"free", desc:"จิบบัตเตอร์เบียร์ไร้แอลกอฮอล์หน้าปราสาท"}
+      {title:"⚡ สัมผัสเวทมนตร์ ณ ปราสาทฮอกวอตส์", type:"rides", items:[
+        {name:"16:30 - 17:00", badge:"Express", desc:"Flight of the Hippogriff (รถไฟเหาะฮิปโปกริฟฟ์ผ่านกระท่อมแฮกริด)"},
+        {name:"Forbidden Journey", badge:"Express", desc:"Harry Potter and the Forbidden Journey บินเหนือปราสาทฮอกวอตส์"},
+        {name:"Butterbeer", badge:"free", desc:"จิบบัตเตอร์เบียร์ฟองนุ่มหวานหอมไร้แอลกอฮอล์หน้าปราสาท"}
       ]}
     ]
   },
   halloween: {
     icon:"🧟", title:"Halloween Horror Nights", time:"18:00 - 20:30",
     sections:[
-      {title:"📖 กองทัพซอมบี้บุกปาร์ก", type:"text", body:"เมื่อถึงเวลา 18:00 น. ซอมบี้และอสูรกายแต่งกายจัดเต็มระดับภาพยนตร์จะออกมาเพ่นพ่านตามถนน พร้อมโชว์เต้น Zombie de Dance สุดมันส์ทั่วปาร์ก"}
+      {title:"📖 กองทัพซอมบี้บุกปาร์กยามค่ำคืน", type:"text", body:"เมื่อนาฬิกาตีบอกเวลา 18:00 น. ไฟในปาร์กจะเริ่มสลัวลง เสียงไซเรนดังขึ้น กองทัพซอมบี้และอสูรกายแต่งกายจัดเต็มระดับภาพยนตร์จะออกมาเพ่นพ่านทั่วถนน ไฮไลต์อยู่ที่โชว์ **Zombie de Dance** การเต้นประกอบเพลงสุดมันส์ที่ทุกคนในปาร์กจะเต้นไปพร้อมกัน!"}
     ]
   },
   hakugintei: {
     icon:"🍛", title:"Hakugintei Curry (白銀亭)", time:"11:15 Queue · 11:45 Open",
     mapUrl:"https://www.google.com/maps/search/?api=1&query=Hakugintei+Osaka",
     sections:[
-      {title:"📖 แกงกะหรี่อันดับ 1 ในใจชาวโอซาก้า", type:"text", body:"ร้านแกงกะหรี่เคาน์เตอร์เล็กๆ แถบ Hommachi ขึ้นชื่อเรื่องน้ำแกงกะหรี่เคี่ยวเข้มข้น รสเผ็ดหอมกลมกล่อมเอกลักษณ์<br><br><strong>เมนูแนะนำ:</strong> Katsu Curry (ข้าวแกงกะหรี่หมูทอด) เพิ่มท็อปปิ้งไข่ดิบ หรือชีส <br><em>ไปต่อคิว 11:15 น. การันตีได้นั่งรอบแรกเมื่อร้านเปิด 11:45 น.</em>"},
-      {title:"🚶 การเดินทาง", type:"text", body:"เดินจากโรงแรม BRACKETS HOTEL เพียง 10-15 นาที"}
+      {title:"📖 ตำนานแกงกะหรี่อันดับ 1 ในใจชาวโอซาก้า", type:"text", body:"กลิ่นหอมฟุ้งของเครื่องเทศตลบอบอวลตั้งแต่คุณเดินเข้าใกล้ร้านเคาน์เตอร์ขนาดเล็กเพียง 16 ที่นั่งแห่งนี้... Hakugintei คือตำนานแกงกะหรี่โอซาก้าที่คนท้องถิ่นยกให้เป็นอันดับ 1 คำแรกที่สัมผัสลิ้นคือความหวานนุ่มกลมกล่อมจากหัวหอมเคี่ยวตามสไตล์โอซาก้า แต่เพียง 3 วินาทีถัดมา คลื่นความเผ็ดร้อนลึกซึ้งจากเครื่องเทศสูตรลับจะค่อยๆ ซึมซาบกระจายทั่วปากอย่างมหัศจรรย์ ทานคู่กับทงคัตสึแป้งกรอบ และไข่แดงสดเจาะแตกเยิ้มๆ รสชาติจะนัวละมุนหยุดกินไม่ได้!"},
+      {title:"🚶 การเดินทาง & การต่อคิว", type:"text", body:"เดินจากโรงแรม BRACKETS HOTEL เพียง 10-15 นาที แนะนำไปยืนต่อคิวเวลา 11:15 น. (ก่อนร้านเปิด 11:45 น.) การันตีได้นั่งรอบแรกแน่นอน"}
     ]
   },
   day6_option: {
-    icon:"☕", title:"บ่ายวันสุดท้าย (Free Style)", time:"12:30 - 14:15",
+    icon:"☕", title:"บ่ายวันสุดท้าย (Free Style Options)", time:"12:30 - 14:15",
     sections:[
-      {title:"💡 เลือกกิจกรรมบ่ายตามใจชอบ", type:"text", body:"• <strong>Option A (สายชิล):</strong> นั่งจิบกาแฟคาเฟ่เก๋ๆ ย่าน Hommachi หรือเดินช้อปปิ้งเก็บตก Shinsaibashi ฝั่งเหนือ<br>• <strong>Option B (สายแวะ):</strong> นั่ง Chuo Line (2 สถานี | 200 เยน) ไปลง Tanimachi 4-chome เดินถ่ายรูปสวนหน้าปราสาทโอซาก้า (Osaka Castle) 40 นาที"}
+      {title:"💡 กิจกรรมเลือกได้ตามใจชอบ", type:"text", body:"• **Option A (สายชิล):** นั่งจิบกาแฟคาเฟ่เก๋ๆ ย่าน Hommachi หรือเดินช้อปปิ้งเก็บตก Shinsaibashi ฝั่งเหนือ<br>• **Option B (สายแลนด์มาร์ก):** นั่ง Chuo Line (2 สถานี | 200 เยน) ไปลง Tanimachi 4-chome เดินถ่ายรูปสวนสวยหน้าปราสาทโอซาก้า (Osaka Castle)"}
     ]
   },
   rapit_return: {
     icon:"🚆", title:"Nankai Rapi:t กลับสนามบิน KIX", time:"15:30 Namba → 16:08 KIX",
     sections:[
-      {title:"📖 รถไฟด่วนกลับสนามบิน", type:"text", body:"นั่ง Midosuji Line จาก Hommachi มาลง Namba (5 นาที) เดินเข้าสถานี Nankai Namba ขึ้นรถไฟด่วน Rapi:t รอบ 15:30 น. วิ่งรวดเดียวถึง KIX Terminal 1 เวลา 16:08 น.<br>จากนั้นต่อ Shuttle Bus ฟรีข้ามไป Terminal 2 เช็กอินเคาน์เตอร์ Peach (ปิด 18:40 น.)"}
+      {title:"📖 นั่งสบายมุ่งหน้าสู่สนามบินคันไซ", type:"text", body:"นั่ง Midosuji Line จาก Hommachi ลง Namba (5 นาที) เดินเข้าสถานี Nankai Namba ขึ้นรถไฟด่วน Rapi:t รอบ 15:30 น. นั่งสบายรวดเดียวถึง KIX Terminal 1 เวลา 16:08 น. จากนั้นต่อ Shuttle Bus ฟรีข้ามไป Terminal 2 เพื่อเช็กอินเคาน์เตอร์ Peach (เคาน์เตอร์ปิด 18:40 น.)"}
     ]
   }
 };
@@ -1566,8 +1672,6 @@ function openPopup(key) {
         if (sec.type === 'rides') {
           let badgeClass = 'free';
           if (item.badge === 'Express') badgeClass = 'express';
-          else if (item.badge === 'blue') badgeClass = 'blue';
-          else if (item.badge === 'red') badgeClass = 'red';
           
           el.innerHTML = `<div class="ride-row"><span class="ride-badge ${badgeClass}">${item.badge.toUpperCase()}</span><div><div class="locker-name">${item.name}</div><div class="locker-detail">${item.desc}</div></div></div>`;
         } else {
@@ -1611,6 +1715,33 @@ document.addEventListener('keydown', (e) => {
   if (e.key === 'Escape') closePopup();
 });
 
+/* Touch Drag Gesture for Mobile Bottom Sheet */
+let touchStartY = 0;
+let touchCurrentY = 0;
+const popupEl = document.getElementById('popup');
+
+popupEl.addEventListener('touchstart', (e) => {
+  touchStartY = e.touches[0].clientY;
+}, { passive: true });
+
+popupEl.addEventListener('touchmove', (e) => {
+  touchCurrentY = e.touches[0].clientY;
+  const diffY = touchCurrentY - touchStartY;
+  if (diffY > 0 && popupEl.scrollTop === 0) {
+    popupEl.style.transform = `translateY(${diffY}px)`;
+  }
+}, { passive: true });
+
+popupEl.addEventListener('touchend', () => {
+  const diffY = touchCurrentY - touchStartY;
+  if (diffY > 100 && popupEl.scrollTop === 0) {
+    closePopup();
+  }
+  popupEl.style.transform = '';
+  touchStartY = 0;
+  touchCurrentY = 0;
+});
+
 let isDark = false;
 function toggleTheme() {
   isDark = !isDark;
@@ -1621,26 +1752,28 @@ function toggleTheme() {
 function applyTheme() {
   if (isDark) {
     document.documentElement.setAttribute('data-theme', 'dark');
+    document.getElementById('themeColorMeta').setAttribute('content', '#090a0f');
   } else {
     document.documentElement.removeAttribute('data-theme');
+    document.getElementById('themeColorMeta').setAttribute('content', '#f4f5fa');
   }
   document.getElementById('themeBtn').textContent = isDark ? '🌙' : '☀️';
 }
 
-let currentDay = 0;
 function switchDay(idx) {
   document.querySelectorAll('.day-panel').forEach((p, i) => {
     p.classList.toggle('active', i === idx);
-    if (i === idx) p.removeAttribute('aria-hidden');
-    else p.setAttribute('aria-hidden', 'true');
   });
-  document.querySelectorAll('.tab').forEach((t, i) => t.classList.toggle('active', i === idx));
+  document.querySelectorAll('.tab').forEach((t, i) => {
+    const isActive = i === idx;
+    t.classList.toggle('active', isActive);
+    t.setAttribute('aria-selected', isActive ? 'true' : 'false');
+  });
   
   const targetTab = document.querySelectorAll('.tab')[idx];
   if (targetTab) {
     targetTab.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
   }
-  currentDay = idx;
   window.scrollTo({ top: 0, behavior: 'smooth' });
   localStorage.setItem('osaka_day', idx);
 }
@@ -1648,10 +1781,82 @@ function switchDay(idx) {
 function toggleCheck(el) {
   el.classList.toggle('done');
   const checkBox = el.querySelector('.check-box');
-  if (el.classList.contains('done')) {
-    checkBox.textContent = '✓';
-  } else {
-    checkBox.textContent = '';
+  const isDone = el.classList.contains('done');
+  checkBox.textContent = isDone ? '✓' : '';
+  
+  saveChecklistState();
+  updateProgress();
+}
+
+function saveChecklistState() {
+  const state = {};
+  document.querySelectorAll('.check-item').forEach(item => {
+    const id = item.getAttribute('data-id');
+    if (id) {
+      state[id] = item.classList.contains('done');
+    }
+  });
+  localStorage.setItem('osaka_checklist', JSON.stringify(state));
+}
+
+function loadChecklistState() {
+  const saved = localStorage.getItem('osaka_checklist');
+  if (!saved) return;
+  try {
+    const state = JSON.parse(saved);
+    document.querySelectorAll('.check-item').forEach(item => {
+      const id = item.getAttribute('data-id');
+      if (id && state[id] !== undefined) {
+        if (state[id]) {
+          item.classList.add('done');
+          item.querySelector('.check-box').textContent = '✓';
+        } else {
+          item.classList.remove('done');
+          item.querySelector('.check-box').textContent = '';
+        }
+      }
+    });
+  } catch(e) {}
+  updateProgress();
+}
+
+function updateProgress() {
+  const total = document.querySelectorAll('.check-item').length;
+  const done = document.querySelectorAll('.check-item.done').length;
+  const pct = Math.round((done / total) * 100);
+  
+  const fill = document.getElementById('progressFill');
+  const text = document.getElementById('progressText');
+  if (fill) fill.style.width = pct + '%';
+  if (text) text.textContent = `${pct}% (${done}/${total})`;
+}
+
+function convertCurrency() {
+  const val = parseFloat(document.getElementById('jpyInput').value) || 0;
+  const thb = Math.round(val * 0.235);
+  document.getElementById('thbResult').textContent = thb.toLocaleString();
+}
+
+function setYen(val) {
+  document.getElementById('jpyInput').value = val;
+  convertCurrency();
+}
+
+function updateCountdown() {
+  const targetDate = new Date('2026-10-16T01:15:00');
+  const now = new Date();
+  const diffTime = targetDate - now;
+  const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+  
+  const el = document.getElementById('countdownChip');
+  if (el) {
+    if (diffDays > 0) {
+      el.textContent = `⏳ อีก ${diffDays} วัน`;
+    } else if (diffDays === 0) {
+      el.textContent = `✈️ ถึงวันเดินทางแล้ว!`;
+    } else {
+      el.textContent = `🌸 เที่ยวให้สนุกนะ!`;
+    }
   }
 }
 
@@ -1669,6 +1874,9 @@ window.addEventListener('DOMContentLoaded', () => {
   if (savedDay !== null) {
     switchDay(parseInt(savedDay, 10));
   }
+  loadChecklistState();
+  convertCurrency();
+  updateCountdown();
 });
 </script>
 </body>
